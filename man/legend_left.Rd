@@ -17,9 +17,9 @@ left alignment for both the key box and text labels. This goes beyond simple
 \details{
 This function sets three theme elements:
 \itemize{
-  \item \code{legend.position = "left"} to place the legend on the left
-  \item \code{legend.justification = "left"} to left-justify the legend box
-  \item \code{legend.box.just = "left"} to left-align multiple legend boxes
+\item \code{legend.position = "left"} to place the legend on the left
+\item \code{legend.justification = "left"} to left-justify the legend box
+\item \code{legend.box.just = "left"} to left-align multiple legend boxes
 }
 }
 \examples{

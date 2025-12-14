@@ -44,7 +44,6 @@ legend_wrap <- function(ncol = NULL, nrow = NULL, byrow = TRUE) {
 
   guides(
     colour = guide_spec,
-    color = guide_spec,
     fill = guide_spec,
     shape = guide_spec,
     size = guide_spec,

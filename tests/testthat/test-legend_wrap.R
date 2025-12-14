@@ -1,9 +1,9 @@
 library(testthat)
 library(ggplot2)
 
-test_that("legend_wrap returns a guides object", {
+test_that("legend_wrap returns a Guides object", {
   result <- legend_wrap(ncol = 2)
-  expect_s3_class(result, "guides")
+  expect_s3_class(result, "Guides")
 })
 
 test_that("legend_wrap can be added to a ggplot", {
@@ -15,12 +15,12 @@ test_that("legend_wrap can be added to a ggplot", {
 
 test_that("legend_wrap accepts nrow parameter", {
   result <- legend_wrap(nrow = 3)
-  expect_s3_class(result, "guides")
+  expect_s3_class(result, "Guides")
 })
 
 test_that("legend_wrap accepts byrow parameter", {
   result <- legend_wrap(ncol = 2, byrow = FALSE)
-  expect_s3_class(result, "guides")
+  expect_s3_class(result, "Guides")
 })
 
 test_that("legend_wrap works with fill aesthetic", {

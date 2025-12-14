@@ -6,10 +6,7 @@
 \alias{ggguides-package}
 \title{ggguides: Simplified Legend and Guide Alignment for 'ggplot2'}
 \description{
-Provides one-liner functions for common legend and guide operations
-in 'ggplot2'. Simplifies left-aligned legends, wrapped legend layouts, and
-legend collection across multi-panel plots created with 'patchwork' or
-'cowplot'.
+Provides one-liner functions for common legend and guide operations in 'ggplot2'. Simplifies left-aligned legends, wrapped legend layouts, and legend collection across multi-panel plots created with 'patchwork' or 'cowplot'.
 }
 \seealso{
 Useful links:
