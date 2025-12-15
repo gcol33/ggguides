@@ -36,8 +36,8 @@ p <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
   geom_point(size = 3) +
   labs(color = "Cylinders")
 
-p + legend_left() + ggtitle("legend_left()")
-p + legend_right() + ggtitle("legend_right()")
+p + legend_left() + ggtitle("Left")
+p + legend_right() + ggtitle("Right")
 ```
 
 ### Top and Bottom
@@ -46,8 +46,8 @@ When placing legends at the top or bottom, the legend is automatically
 oriented horizontally:
 
 ```{r top-bottom, fig.show='hold', out.width='48%'}
-p + legend_top() + ggtitle("legend_top()")
-p + legend_bottom() + ggtitle("legend_bottom()")
+p + legend_top() + ggtitle("Top")
+p + legend_bottom() + ggtitle("Bottom")
 ```
 
 ### Alignment with Titles
@@ -58,10 +58,10 @@ Use the `align_to` parameter to control how the legend aligns with the plot:
 p_titled <- p + labs(title = "Fuel Economy by Weight")
 
 # Default: align to panel
-p_titled + legend_top() + ggtitle("align_to = 'panel' (default)")
+p_titled + legend_top() + ggtitle("Panel alignment (default)")
 
 # Align to full plot (useful with titles)
-p_titled + legend_top(align_to = "plot") + ggtitle("align_to = 'plot'")
+p_titled + legend_top(align_to = "plot") + ggtitle("Plot alignment")
 ```
 
 ## Inside Positioning
@@ -74,8 +74,8 @@ either coordinate values or named shortcuts.
 Available shortcuts: `"topright"`, `"topleft"`, `"bottomright"`, `"bottomleft"`, `"center"`
 
 ```{r inside-shortcuts, fig.show='hold', out.width='48%'}
-p + legend_inside(position = "topright") + ggtitle("topright")
-p + legend_inside(position = "bottomleft") + ggtitle("bottomleft")
+p + legend_inside(position = "topright") + ggtitle("Top right")
+p + legend_inside(position = "bottomleft") + ggtitle("Bottom left")
 ```
 
 ### Using Coordinates
@@ -105,8 +105,8 @@ p + legend_inside(
 Control legend entry direction independently of position:
 
 ```{r direction, fig.show='hold', out.width='48%'}
-p + legend_horizontal() + ggtitle("legend_horizontal()")
-p + legend_vertical() + ggtitle("legend_vertical()")
+p + legend_horizontal() + ggtitle("Horizontal")
+p + legend_vertical() + ggtitle("Vertical")
 ```
 
 ### Combining Direction and Position

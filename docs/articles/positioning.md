@@ -17,8 +17,8 @@ p <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
   geom_point(size = 3) +
   labs(color = "Cylinders")
 
-p + legend_left() + ggtitle("legend_left()")
-p + legend_right() + ggtitle("legend_right()")
+p + legend_left() + ggtitle("Left")
+p + legend_right() + ggtitle("Right")
 ```
 
 ![](positioning_files/figure-html/left-right-1.svg)![](positioning_files/figure-html/left-right-2.svg)
@@ -30,8 +30,8 @@ oriented horizontally:
 
 ``` r
 
-p + legend_top() + ggtitle("legend_top()")
-p + legend_bottom() + ggtitle("legend_bottom()")
+p + legend_top() + ggtitle("Top")
+p + legend_bottom() + ggtitle("Bottom")
 ```
 
 ![](positioning_files/figure-html/top-bottom-1.svg)![](positioning_files/figure-html/top-bottom-2.svg)
@@ -46,10 +46,10 @@ plot:
 p_titled <- p + labs(title = "Fuel Economy by Weight")
 
 # Default: align to panel
-p_titled + legend_top() + ggtitle("align_to = 'panel' (default)")
+p_titled + legend_top() + ggtitle("Panel alignment (default)")
 
 # Align to full plot (useful with titles)
-p_titled + legend_top(align_to = "plot") + ggtitle("align_to = 'plot'")
+p_titled + legend_top(align_to = "plot") + ggtitle("Plot alignment")
 ```
 
 ![](positioning_files/figure-html/align-to-1.svg)![](positioning_files/figure-html/align-to-2.svg)
@@ -67,8 +67,8 @@ Available shortcuts: `"topright"`, `"topleft"`, `"bottomright"`,
 
 ``` r
 
-p + legend_inside(position = "topright") + ggtitle("topright")
-p + legend_inside(position = "bottomleft") + ggtitle("bottomleft")
+p + legend_inside(position = "topright") + ggtitle("Top right")
+p + legend_inside(position = "bottomleft") + ggtitle("Bottom left")
 ```
 
 ![](positioning_files/figure-html/inside-shortcuts-1.svg)![](positioning_files/figure-html/inside-shortcuts-2.svg)
@@ -108,8 +108,8 @@ Control legend entry direction independently of position:
 
 ``` r
 
-p + legend_horizontal() + ggtitle("legend_horizontal()")
-p + legend_vertical() + ggtitle("legend_vertical()")
+p + legend_horizontal() + ggtitle("Horizontal")
+p + legend_vertical() + ggtitle("Vertical")
 ```
 
 ![](positioning_files/figure-html/direction-1.svg)![](positioning_files/figure-html/direction-2.svg)

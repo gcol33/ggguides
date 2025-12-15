@@ -1,0 +1,96 @@
+/* Plot styling - match code block borders */
+/* Bootstrap 5 Sandstone uses --bs-border-radius: .375rem for pre/code */
+img.r-plt,
+.figure img,
+figure img,
+img.figure-img,
+svg.inline-svg {
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  border: 1px solid #DFD7CA;
+  border-radius: .375rem;
+  overflow: hidden;
+  display: block;
+}
+
+/* Dark mode border */
+[data-bs-theme="dark"] img.r-plt,
+[data-bs-theme="dark"] .figure img,
+[data-bs-theme="dark"] figure img,
+[data-bs-theme="dark"] img.figure-img,
+[data-bs-theme="dark"] svg.inline-svg {
+  border-color: #495057;
+}
+
+/* Dark mode colors for inline SVG elements (base R svg format) */
+/* Use !important to override embedded SVG <style> blocks */
+[data-bs-theme="dark"] .theme-bg {
+  fill: #343739 !important;
+}
+
+[data-bs-theme="dark"] .theme-text {
+  fill: #DFD7CA !important;
+}
+
+/* Hide clipPath rects - they should not be visible */
+svg.inline-svg clipPath rect,
+svg.inline-svg defs rect {
+  stroke: none !important;
+  fill: none !important;
+}
+
+/* Dark mode colors for svglite format */
+/* Override the embedded styles in inline SVGs */
+/* No stroke on svg-bg - the outer CSS border handles rounding */
+[data-bs-theme="dark"] svg.inline-svg .svg-bg {
+  fill: #343739 !important;
+  stroke: none !important;
+}
+
+/* Light mode - ensure svg-bg has no stroke */
+svg.inline-svg .svg-bg {
+  stroke: none !important;
+}
+
+[data-bs-theme="dark"] svg.inline-svg .svglite line,
+[data-bs-theme="dark"] svg.inline-svg .svglite polyline,
+[data-bs-theme="dark"] svg.inline-svg .svglite polygon,
+[data-bs-theme="dark"] svg.inline-svg .svglite path,
+[data-bs-theme="dark"] svg.inline-svg .svglite circle {
+  stroke: #DFD7CA !important;
+}
+
+[data-bs-theme="dark"] svg.inline-svg .svglite text {
+  fill: #DFD7CA !important;
+}
+
+/* Rect strokes (histogram bars, etc.) - match text color */
+/* Use > g > rect to exclude clipPath rects; exclude stroke: none (empty legend keys) */
+[data-bs-theme="dark"] svg.inline-svg .svglite > g > rect:not([style*="stroke: none"]) {
+  stroke: #DFD7CA !important;
+}
+
+/* Legend box backgrounds - override inline fill: #F5F6F8 */
+/* Exclude svg-bg which also has fill: #F5F6F8 but should NOT have a stroke */
+[data-bs-theme="dark"] svg.inline-svg .svglite rect[style*="fill: #F5F6F8"]:not(.svg-bg) {
+  fill: #343739 !important;
+  stroke: #495057 !important;
+}
+
+/* ggplot2 theme_minimal() gridlines - light grey in light mode, adapt to dark mode */
+/* Gridlines from theme_minimal() have specific grey colors */
+[data-bs-theme="dark"] svg.inline-svg .svglite line[style*="stroke: #EBEBEB"],
+[data-bs-theme="dark"] svg.inline-svg .svglite line[style*="stroke: #ebebeb"],
+[data-bs-theme="dark"] svg.inline-svg .svglite polyline[style*="stroke: #EBEBEB"],
+[data-bs-theme="dark"] svg.inline-svg .svglite polyline[style*="stroke: #ebebeb"] {
+  stroke: #495057 !important;
+}
+
+/* Base R and other grey gridline variants */
+[data-bs-theme="dark"] svg.inline-svg line[style*="stroke: #EBEBEB"],
+[data-bs-theme="dark"] svg.inline-svg line[style*="stroke: #ebebeb"],
+[data-bs-theme="dark"] svg.inline-svg line[style*="stroke: grey"],
+[data-bs-theme="dark"] svg.inline-svg line[style*="stroke: gray"] {
+  stroke: #495057 !important;
+}
