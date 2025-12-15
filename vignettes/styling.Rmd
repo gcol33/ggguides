@@ -83,7 +83,7 @@ p_long + legend_style(angle = 45)
 
 ### Vertical Labels
 
-Use 90 degrees for fully vertical text. Key height is automatically increased to prevent overlap:
+Use 90 degrees for fully vertical text. Key height is automatically increased:
 
 ```{r rotation-vertical, fig.width=7}
 p_long + legend_style(angle = 90)

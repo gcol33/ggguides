@@ -243,11 +243,9 @@ legend_style <- function(
   }
   if (!is.null(key_height)) {
     args$legend.key.height <- as_unit(key_height, "cm")
-  } else if (!is.null(angle) && abs(angle) >= 45) {
-    # Auto-increase key height for rotated labels to prevent overlap
-    # Use ~1.5cm as default which fits most label lengths
-    base_height <- if (!is.null(size)) size * 0.12 else 1.5
-    args$legend.key.height <- unit(base_height, "cm")
+  } else if (!is.null(angle) && abs(angle) == 90) {
+    # Auto-increase key height for 90° rotation to prevent overlap
+    args$legend.key.height <- unit(1.8, "cm")
   }
   if (!is.null(key_fill)) {
     args$legend.key <- element_rect(fill = key_fill, color = NA)
@@ -393,9 +391,8 @@ build_guide_with_style <- function(
   }
   if (!is.null(key_height)) {
     theme_args$legend.key.height <- as_unit(key_height, "cm")
-  } else if (!is.null(angle) && abs(angle) >= 45) {
-    base_height <- if (!is.null(size)) size * 0.12 else 1.5
-    theme_args$legend.key.height <- unit(base_height, "cm")
+  } else if (!is.null(angle) && abs(angle) == 90) {
+    theme_args$legend.key.height <- unit(1.8, "cm")
   }
   if (!is.null(key_fill)) {
     theme_args$legend.key <- element_rect(fill = key_fill, color = NA)
