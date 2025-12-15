@@ -55,18 +55,14 @@ p <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
 # Specify exact order
 p + legend_order(c("8", "6", "4"))
 
-
 # Reverse the order
 p + legend_order(rev)
 
-
 # Sort alphabetically/numerically
 p + legend_order(sort)
-
 
 # Reorder fill aesthetic
 ggplot(mtcars, aes(factor(cyl), fill = factor(cyl))) +
   geom_bar() +
   legend_order(c("8", "4", "6"), aesthetic = "fill")
-
 ```

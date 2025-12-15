@@ -31,7 +31,7 @@ p2 <- ggplot(mtcars, aes(mpg, hp, color = factor(cyl))) +
 p1 | p2
 ```
 
-![](patchwork_files/figure-html/problem-1.png)
+![](patchwork_files/figure-html/problem-1.svg)
 
 ## Basic Legend Collection
 
@@ -44,7 +44,7 @@ to gather legends from all plots in a composition:
 collect_legends(p1 | p2)
 ```
 
-![](patchwork_files/figure-html/collect-basic-1.png)
+![](patchwork_files/figure-html/collect-basic-1.svg)
 
 ### Position Options
 
@@ -55,14 +55,14 @@ Control where the collected legend appears:
 collect_legends(p1 | p2, position = "bottom")
 ```
 
-![](patchwork_files/figure-html/collect-bottom-1.png)
+![](patchwork_files/figure-html/collect-bottom-1.svg)
 
 ``` r
 
 collect_legends(p1 | p2, position = "left")
 ```
 
-![](patchwork_files/figure-html/collect-left-1.png)
+![](patchwork_files/figure-html/collect-left-1.svg)
 
 ## Stacked Plots
 
@@ -83,7 +83,7 @@ stacked <- (p1 / p2 / p3) + plot_layout(heights = c(4, 2, 1))
 collect_legends(stacked, position = "right")
 ```
 
-![](patchwork_files/figure-html/stacked-default-1.png)
+![](patchwork_files/figure-html/stacked-default-1.svg)
 
 ### Spanning Full Height
 
@@ -95,7 +95,7 @@ gt <- collect_legends(stacked, position = "right", span = TRUE)
 grid::grid.draw(gt)
 ```
 
-![](patchwork_files/figure-html/stacked-span-1.png)
+![](patchwork_files/figure-html/stacked-span-1.svg)
 
 ### Attaching to Specific Rows
 
@@ -108,7 +108,7 @@ gt <- collect_legends(stacked, position = "right", span = 1)
 grid::grid.draw(gt)
 ```
 
-![](patchwork_files/figure-html/span-row1-1.png)
+![](patchwork_files/figure-html/span-row1-1.svg)
 
 ``` r
 
@@ -117,7 +117,7 @@ gt <- collect_legends(stacked, position = "right", span = 1:2)
 grid::grid.draw(gt)
 ```
 
-![](patchwork_files/figure-html/span-row12-1.png)
+![](patchwork_files/figure-html/span-row12-1.svg)
 
 ## Horizontal Guide Alignment
 
@@ -138,7 +138,7 @@ p_long <- ggplot(mtcars, aes(mpg, disp)) +
 p_short / p_long
 ```
 
-![](patchwork_files/figure-html/align-guides-1.png)
+![](patchwork_files/figure-html/align-guides-1.svg)
 
 ``` r
 
@@ -146,7 +146,7 @@ p_short / p_long
 align_guides_h(p_short / p_long)
 ```
 
-![](patchwork_files/figure-html/align-guides-fixed-1.png)
+![](patchwork_files/figure-html/align-guides-fixed-1.svg)
 
 ## Combining with Styling
 
@@ -160,7 +160,7 @@ p2_styled <- p2 + legend_style(size = 11, title_face = "bold")
 collect_legends(p1_styled | p2_styled, position = "right")
 ```
 
-![](patchwork_files/figure-html/combined-1.png)
+![](patchwork_files/figure-html/combined-1.svg)
 
 ## Complex Layouts
 
@@ -176,7 +176,7 @@ layout <- (p1 | p2) / (p3 | p4)
 collect_legends(layout, position = "right")
 ```
 
-![](patchwork_files/figure-html/complex-1.png)
+![](patchwork_files/figure-html/complex-1.svg)
 
 ## cowplot Users
 

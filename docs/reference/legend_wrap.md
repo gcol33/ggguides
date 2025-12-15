@@ -54,17 +54,14 @@ ggplot(mpg, aes(displ, hwy, color = class)) +
   geom_point() +
   legend_wrap(ncol = 2)
 
-
 # Wrap into 3 rows, filling by column
 ggplot(mpg, aes(displ, hwy, color = class)) +
   geom_point() +
   legend_wrap(nrow = 3, byrow = FALSE)
-
 
 # Combine with legend_left for left-aligned wrapped legends
 ggplot(mpg, aes(displ, hwy, color = class)) +
   geom_point() +
   legend_wrap(ncol = 2) +
   legend_left()
-
 ```

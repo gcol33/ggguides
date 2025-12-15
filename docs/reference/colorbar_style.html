@@ -171,32 +171,26 @@ approach in ggplot2 3.5.0+.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">faithfuld</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">waiting</span>, <span class="va">eruptions</span>, fill <span class="op">=</span> <span class="va">density</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_tile.html" class="external-link">geom_tile</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Default appearance</span></span></span>
-<span class="r-in"><span><span class="va">p</span></span></span>
-<span class="r-plt img"><img src="colorbar_style-1.png" alt="" width="2188" height="1352"></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Taller, thinner bar</span></span></span>
-<span class="r-in"><span><span class="va">p</span> <span class="op">+</span> <span class="fu">colorbar_style</span><span class="op">(</span>width <span class="op">=</span> <span class="fl">0.5</span>, height <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="colorbar_style-2.png" alt="" width="2188" height="1352"></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Wide horizontal bar</span></span></span>
-<span class="r-in"><span><span class="va">p</span> <span class="op">+</span> <span class="fu">colorbar_style</span><span class="op">(</span>width <span class="op">=</span> <span class="fl">10</span>, height <span class="op">=</span> <span class="fl">0.5</span>, direction <span class="op">=</span> <span class="st">"horizontal"</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="colorbar_style-3.png" alt="" width="2188" height="1352"></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># With frame and no ticks</span></span></span>
-<span class="r-in"><span><span class="va">p</span> <span class="op">+</span> <span class="fu">colorbar_style</span><span class="op">(</span>frame <span class="op">=</span> <span class="st">"grey50"</span>, ticks <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="colorbar_style-4.png" alt="" width="2188" height="1352"></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Thin bar with frame</span></span></span>
-<span class="r-in"><span><span class="va">p</span> <span class="op">+</span> <span class="fu">colorbar_style</span><span class="op">(</span>width <span class="op">=</span> <span class="fl">0.5</span>, height <span class="op">=</span> <span class="fl">8</span>, frame <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="colorbar_style-5.png" alt="" width="2188" height="1352"></span>
-<span class="r-in"><span></span></span>
-</code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">faithfuld</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">waiting</span>, <span class="va">eruptions</span>, fill <span class="op">=</span> <span class="va">density</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_tile.html" class="external-link">geom_tile</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Default appearance</span></span>
+<span><span class="va">p</span></span>
+<span></span>
+<span><span class="co"># Taller, thinner bar</span></span>
+<span><span class="va">p</span> <span class="op">+</span> <span class="fu">colorbar_style</span><span class="op">(</span>width <span class="op">=</span> <span class="fl">0.5</span>, height <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Wide horizontal bar</span></span>
+<span><span class="va">p</span> <span class="op">+</span> <span class="fu">colorbar_style</span><span class="op">(</span>width <span class="op">=</span> <span class="fl">10</span>, height <span class="op">=</span> <span class="fl">0.5</span>, direction <span class="op">=</span> <span class="st">"horizontal"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># With frame and no ticks</span></span>
+<span><span class="va">p</span> <span class="op">+</span> <span class="fu">colorbar_style</span><span class="op">(</span>frame <span class="op">=</span> <span class="st">"grey50"</span>, ticks <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Thin bar with frame</span></span>
+<span><span class="va">p</span> <span class="op">+</span> <span class="fu">colorbar_style</span><span class="op">(</span>width <span class="op">=</span> <span class="fl">0.5</span>, height <span class="op">=</span> <span class="fl">8</span>, frame <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span></code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>

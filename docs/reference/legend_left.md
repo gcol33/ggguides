@@ -43,10 +43,8 @@ ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
   geom_point() +
   legend_left()
 
-
 # Works with multiple legends
 ggplot(mtcars, aes(mpg, wt, color = factor(cyl), shape = factor(am))) +
   geom_point(size = 3) +
   legend_left()
-
 ```

@@ -139,20 +139,15 @@ p <- ggplot(faithfuld, aes(waiting, eruptions, fill = density)) +
 # Default appearance
 p
 
-
 # Taller, thinner bar
 p + colorbar_style(width = 0.5, height = 10)
-
 
 # Wide horizontal bar
 p + colorbar_style(width = 10, height = 0.5, direction = "horizontal")
 
-
 # With frame and no ticks
 p + colorbar_style(frame = "grey50", ticks = FALSE)
 
-
 # Thin bar with frame
 p + colorbar_style(width = 0.5, height = 8, frame = TRUE)
-
 ```

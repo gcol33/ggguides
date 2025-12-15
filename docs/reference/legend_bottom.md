@@ -39,11 +39,9 @@ ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
   geom_point() +
   legend_bottom()
 
-
 # Aligned to full plot
 ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
   geom_point() +
   labs(title = "My Plot Title") +
   legend_bottom(align_to = "plot")
-
 ```

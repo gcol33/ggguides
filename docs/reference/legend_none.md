@@ -27,5 +27,4 @@ library(ggplot2)
 ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
   geom_point() +
   legend_none()
-
 ```

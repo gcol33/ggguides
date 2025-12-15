@@ -143,7 +143,6 @@ ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
   geom_point() +
   legend_style(size = 12, family = "serif")
 
-
 # Styled title and keys
 ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
   geom_point() +
@@ -153,7 +152,6 @@ ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
     title_face = "bold",
     key_width = 1.5
   )
-
 
 # Full styling with background
 ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
@@ -167,5 +165,4 @@ ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
     background_color = "grey80",
     margin = 0.3
   )
-
 ```

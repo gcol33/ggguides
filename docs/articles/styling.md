@@ -35,7 +35,7 @@ p + ggtitle("Default size")
 p + legend_style(size = 14) + ggtitle("size = 14")
 ```
 
-![](styling_files/figure-html/style-size-1.png)![](styling_files/figure-html/style-size-2.png)
+![](styling_files/figure-html/style-size-1.svg)![](styling_files/figure-html/style-size-2.svg)
 
 ### Font Family
 
@@ -47,7 +47,7 @@ p + legend_style(family = "serif") + ggtitle("serif")
 p + legend_style(family = "mono") + ggtitle("mono")
 ```
 
-![](styling_files/figure-html/style-family-1.png)![](styling_files/figure-html/style-family-2.png)
+![](styling_files/figure-html/style-family-1.svg)![](styling_files/figure-html/style-family-2.svg)
 
 ### Title Emphasis
 
@@ -62,7 +62,7 @@ p + legend_style(
 )
 ```
 
-![](styling_files/figure-html/style-title-1.png)
+![](styling_files/figure-html/style-title-1.svg)
 
 ## Background and Border
 
@@ -75,7 +75,7 @@ p + legend_style(
 )
 ```
 
-![](styling_files/figure-html/style-background-1.png)
+![](styling_files/figure-html/style-background-1.svg)
 
 ``` r
 
@@ -85,7 +85,7 @@ p + legend_style(
 )
 ```
 
-![](styling_files/figure-html/style-border-1.png)
+![](styling_files/figure-html/style-border-1.svg)
 
 ## Key Size
 
@@ -99,7 +99,7 @@ p + legend_style(
 )
 ```
 
-![](styling_files/figure-html/style-key-1.png)
+![](styling_files/figure-html/style-key-1.svg)
 
 ## Margin
 
@@ -113,7 +113,7 @@ p + legend_style(
 )
 ```
 
-![](styling_files/figure-html/style-margin-1.png)
+![](styling_files/figure-html/style-margin-1.svg)
 
 ## Full Styling Example
 
@@ -133,7 +133,7 @@ p + legend_style(
 )
 ```
 
-![](styling_files/figure-html/style-full-1.png)
+![](styling_files/figure-html/style-full-1.svg)
 
 ## Wrapping Legend Entries
 
@@ -150,7 +150,7 @@ ggplot(mpg, aes(displ, hwy, color = class)) +
   legend_wrap(ncol = 2)
 ```
 
-![](styling_files/figure-html/wrap-ncol-1.png)
+![](styling_files/figure-html/wrap-ncol-1.svg)
 
 ### By Rows
 
@@ -161,7 +161,7 @@ ggplot(mpg, aes(displ, hwy, color = class)) +
   legend_wrap(nrow = 2)
 ```
 
-![](styling_files/figure-html/wrap-nrow-1.png)
+![](styling_files/figure-html/wrap-nrow-1.svg)
 
 ### With Bottom Position
 
@@ -175,7 +175,7 @@ ggplot(mpg, aes(displ, hwy, color = class)) +
   legend_bottom()
 ```
 
-![](styling_files/figure-html/wrap-bottom-1.png)
+![](styling_files/figure-html/wrap-bottom-1.svg)
 
 ## Customizing Legend Keys
 
@@ -196,7 +196,7 @@ p_small + ggtitle("Small points in legend")
 p_small + legend_keys(size = 4) + ggtitle("Enlarged legend keys")
 ```
 
-![](styling_files/figure-html/keys-size-1.png)![](styling_files/figure-html/keys-size-2.png)
+![](styling_files/figure-html/keys-size-1.svg)![](styling_files/figure-html/keys-size-2.svg)
 
 ### Removing Transparency
 
@@ -210,7 +210,7 @@ p_alpha + ggtitle("Transparent legend keys")
 p_alpha + legend_keys(alpha = 1) + ggtitle("Opaque legend keys")
 ```
 
-![](styling_files/figure-html/keys-alpha-1.png)![](styling_files/figure-html/keys-alpha-2.png)
+![](styling_files/figure-html/keys-alpha-1.svg)![](styling_files/figure-html/keys-alpha-2.svg)
 
 ### Combining Overrides
 
@@ -221,7 +221,7 @@ ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
   legend_keys(size = 4, alpha = 1)
 ```
 
-![](styling_files/figure-html/keys-combined-1.png)
+![](styling_files/figure-html/keys-combined-1.svg)
 
 ### Targeting Specific Aesthetics
 
@@ -237,7 +237,7 @@ ggplot(mtcars, aes(factor(cyl), mpg, fill = factor(cyl))) +
   legend_keys(alpha = 1, aesthetic = "fill")
 ```
 
-![](styling_files/figure-html/keys-fill-1.png)
+![](styling_files/figure-html/keys-fill-1.svg)
 
 ## Reordering Legend Entries
 
@@ -254,7 +254,7 @@ Specify the exact order you want:
 p + legend_order(c("8", "6", "4"))
 ```
 
-![](styling_files/figure-html/order-explicit-1.png)
+![](styling_files/figure-html/order-explicit-1.svg)
 
 ### Using Functions
 
@@ -266,7 +266,7 @@ p + legend_order(rev) + ggtitle("Reversed")
 p + legend_order(sort) + ggtitle("Sorted")
 ```
 
-![](styling_files/figure-html/order-rev-1.png)![](styling_files/figure-html/order-rev-2.png)
+![](styling_files/figure-html/order-rev-1.svg)![](styling_files/figure-html/order-rev-2.svg)
 
 ### Other Aesthetics
 
@@ -279,7 +279,7 @@ ggplot(mtcars, aes(factor(cyl), fill = factor(cyl))) +
   legend_order(c("8", "4", "6"), aesthetic = "fill")
 ```
 
-![](styling_files/figure-html/order-fill-1.png)
+![](styling_files/figure-html/order-fill-1.svg)
 
 ## Reversing Legend Order
 
@@ -292,7 +292,7 @@ is a convenient shorthand:
 p + legend_reverse()
 ```
 
-![](styling_files/figure-html/reverse-1.png)
+![](styling_files/figure-html/reverse-1.svg)
 
 ## Combining Style Functions
 
@@ -310,7 +310,7 @@ ggplot(mpg, aes(displ, hwy, color = class)) +
   )
 ```
 
-![](styling_files/figure-html/combined-styling-1.png)
+![](styling_files/figure-html/combined-styling-1.svg)
 
 ``` r
 
@@ -321,7 +321,7 @@ ggplot(mpg, aes(displ, hwy, color = class)) +
   legend_style(size = 10, title_face = "bold")
 ```
 
-![](styling_files/figure-html/combined-wrap-style-1.png)
+![](styling_files/figure-html/combined-wrap-style-1.svg)
 
 ## Styling Continuous Color Bars
 
@@ -339,7 +339,7 @@ p_cont <- ggplot(faithfuld, aes(waiting, eruptions, fill = density)) +
 p_cont
 ```
 
-![](styling_files/figure-html/colorbar-basic-1.png)
+![](styling_files/figure-html/colorbar-basic-1.svg)
 
 ### Size Adjustments
 
@@ -350,7 +350,7 @@ Create taller, thinner bars:
 p_cont + colorbar_style(width = 0.5, height = 10)
 ```
 
-![](styling_files/figure-html/colorbar-size-1.png)
+![](styling_files/figure-html/colorbar-size-1.svg)
 
 ### Horizontal Orientation
 
@@ -360,7 +360,7 @@ p_cont + colorbar_style(width = 10, height = 0.5, direction = "horizontal") +
   legend_bottom()
 ```
 
-![](styling_files/figure-html/colorbar-horizontal-1.png) \### Adding a
+![](styling_files/figure-html/colorbar-horizontal-1.svg) \### Adding a
 Frame
 
 ``` r
@@ -369,7 +369,7 @@ p_cont + colorbar_style(frame = TRUE) + ggtitle("Black frame")
 p_cont + colorbar_style(frame = "grey50") + ggtitle("Grey frame")
 ```
 
-![](styling_files/figure-html/colorbar-frame-1.png)![](styling_files/figure-html/colorbar-frame-2.png)
+![](styling_files/figure-html/colorbar-frame-1.svg)![](styling_files/figure-html/colorbar-frame-2.svg)
 
 ### Removing Ticks
 
@@ -378,7 +378,7 @@ p_cont + colorbar_style(frame = "grey50") + ggtitle("Grey frame")
 p_cont + colorbar_style(ticks = FALSE, frame = "grey50")
 ```
 
-![](styling_files/figure-html/colorbar-noticks-1.png)
+![](styling_files/figure-html/colorbar-noticks-1.svg)
 
 ### Combined Customization
 
@@ -392,7 +392,7 @@ p_cont + colorbar_style(
 )
 ```
 
-![](styling_files/figure-html/colorbar-full-1.png)
+![](styling_files/figure-html/colorbar-full-1.svg)
 
 ## Summary
 

@@ -576,7 +576,9 @@ inline_all_svgs <- function(docs_dir = "docs", verbose = TRUE) {
 # Main execution
 if (!interactive() || TRUE) {
   cat("=== Building pkgdown site ===\n\n")
-  pkgdown::build_site()
+  # Note: examples = FALSE due to svglite/pkgdown interaction issue
+  # Article examples still render properly
+  pkgdown::build_site(examples = FALSE)
 
   cat("\n=== Making SVG files theme-aware ===\n")
   process_pkgdown_svgs("docs")

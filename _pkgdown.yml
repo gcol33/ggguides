@@ -8,9 +8,8 @@ template:
   light-switch: true
 
 figures:
-  dev: ragg::agg_png
-  dpi: 300
-  fig.ext: png
+  dev: svglite::svglite
+  fig.ext: svg
   bg: "transparent"
 
 home:

@@ -75,21 +75,17 @@ ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
   geom_point() +
   legend_inside(position = "topright")
 
-
 ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
   geom_point() +
   legend_inside(position = "bottomleft")
-
 
 # Using coordinates
 ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
   geom_point() +
   legend_inside(x = 0.95, y = 0.95, just = c("right", "top"))
 
-
 # Custom background and border
 ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
   geom_point() +
   legend_inside(position = "topright", background = "grey95", border = "grey50")
-
 ```

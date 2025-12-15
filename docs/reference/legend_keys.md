@@ -97,22 +97,18 @@ ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
   geom_point(size = 1) +
   legend_keys(size = 4)
 
-
 # Remove transparency from legend
 ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
   geom_point(alpha = 0.3, size = 3) +
   legend_keys(alpha = 1)
-
 
 # Combine modifications
 ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
   geom_point(alpha = 0.3, size = 1) +
   legend_keys(size = 4, alpha = 1)
 
-
 # Apply to fill aesthetic (e.g., for boxplots)
 ggplot(mtcars, aes(factor(cyl), mpg, fill = factor(cyl))) +
   geom_boxplot(alpha = 0.5) +
   legend_keys(alpha = 1, aesthetic = "fill")
-
 ```
