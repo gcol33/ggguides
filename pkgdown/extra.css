@@ -78,15 +78,28 @@ svg.inline-svg .svglite > g > rect[rx] {
 }
 
 /* Legend box backgrounds - override inline fill: #F5F6F8 */
-/* Exclude svg-bg which also has fill: #F5F6F8 but should NOT have a stroke */
-/* No stroke on legend boxes - only the outer CSS border frames the plot */
-[data-bs-theme="dark"] svg.inline-svg .svglite rect[style*="fill: #F5F6F8"]:not(.svg-bg) {
+/* Exclude svg-bg which is the main plot background */
+[data-bs-theme="dark"] svg.inline-svg .svglite rect[style*="fill: #F5F6F8"]:not(.svg-bg),
+[data-bs-theme="dark"] svg.inline-svg .svglite rect.legend-bg {
   fill: #343739 !important;
-  stroke: none !important;
 }
 
-/* ggplot2 theme_minimal() gridlines - light grey in light mode, adapt to dark mode */
-/* Gridlines from theme_minimal() have specific grey colors */
+/* Grid lines */
+/* White grid lines need to become dark in light mode, stay light in dark mode */
+/* Light mode: dark grid (#3E3F3A) on light bg (#F5F6F8) */
+svg.inline-svg .svglite polyline[style*="stroke: #FFFFFF"],
+svg.inline-svg .svglite polyline[style*="stroke: #ffffff"] {
+  stroke: #3E3F3A !important;
+}
+/* Dark mode: light grid (#DFD7CA) on dark bg (#343739) */
+[data-bs-theme="dark"] svg.inline-svg .svglite polyline[style*="stroke: #FFFFFF"],
+[data-bs-theme="dark"] svg.inline-svg .svglite polyline[style*="stroke: #ffffff"],
+[data-bs-theme="dark"] svg.inline-svg .svglite polyline[style*="stroke: #3E3F3A"],
+[data-bs-theme="dark"] svg.inline-svg .svglite polyline[style*="stroke: #3e3f3a"] {
+  stroke: #DFD7CA !important;
+}
+
+/* ggplot2 theme_minimal() gridlines - light grey, adapt to dark mode */
 [data-bs-theme="dark"] svg.inline-svg .svglite line[style*="stroke: #EBEBEB"],
 [data-bs-theme="dark"] svg.inline-svg .svglite line[style*="stroke: #ebebeb"],
 [data-bs-theme="dark"] svg.inline-svg .svglite polyline[style*="stroke: #EBEBEB"],

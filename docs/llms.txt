@@ -443,6 +443,10 @@ Customize legend appearance
   : Reorder Legend Entries
 - [`legend_keys()`](https://gcol33.github.io/ggguides/reference/legend_keys.md)
   : Customize Legend Key Appearance
+- [`legend_auto_fit()`](https://gcol33.github.io/ggguides/reference/legend_auto_fit.md)
+  : Auto-fit Legend to Plot Height
+- [`center_legend_title()`](https://gcol33.github.io/ggguides/reference/center_legend_title.md)
+  : Center Legend Title Over Keys
 - [`colorbar_style()`](https://gcol33.github.io/ggguides/reference/colorbar_style.md)
   [`colourbar_style()`](https://gcol33.github.io/ggguides/reference/colorbar_style.md)
   : Style Continuous Color Bar Legends

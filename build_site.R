@@ -168,33 +168,42 @@ make_svg_theme_aware <- function(svg_path,
       fixed = TRUE
     )
 
-    # 2) Replace legend/other rect backgrounds with fill: #FFFFFF
-    # Only replace in rect elements, not text (which might be white on dark cells)
-    # Add explicit stroke (border color) for legend boxes - matches red.R approach
-    # Pattern: rects with stroke-width but no stroke: in their style get a stroke added
-    # This handles the legend box which svglite renders as:
-    #   style='stroke-width: 0.75; fill: #FFFFFF;'
-    # Add rx='4' for rounded corners (matches .375rem at typical SVG scale)
+    # 2) Replace legend/other rect backgrounds
+    # Handle multiple patterns svglite produces for legend boxes:
+
+    # 2a) Rects with fill: #FFFFFF - change to theme color
     svg_content <- gsub(
       "(<rect )([^>]*style='stroke-width: [0-9.]+; )(fill: #FFFFFF;)(' />)",
       sprintf("\\1rx='4' \\2stroke: %s; fill: %s;\\4", light_border, light_bg),
       svg_content
     )
     # Handle rects that already have an explicit stroke - just change the fill
-    # Also add rx for rounded corners if not present
     svg_content <- gsub(
       "(<rect )([^>]*style='[^']*stroke: [^;]+;[^']*)(fill: #FFFFFF;)(' />)",
       sprintf("\\1rx='4' \\2fill: %s;\\4", light_bg),
       svg_content
     )
 
-    # 3) Replace white strokes (histogram bars, legend keys) with text color
+    # 2b) Legend box rects WITHOUT fill (transparent bg case)
+    # Pattern: <rect x='...' y='...' width='...' height='...' style='stroke-width: 0.75; stroke: none;' />
+    # These are legend backgrounds that need a fill added
     svg_content <- gsub(
-      "stroke: #FFFFFF;",
-      sprintf("stroke: %s;", light_text),
-      svg_content,
-      fixed = TRUE
+      "(<rect x='[^']+' y='[^']+' width='[^']+' height='[^']+' style='stroke-width: [0-9.]+; )(stroke: none;' />)",
+      sprintf("\\1\\2 fill: %s;' />", light_bg),
+      svg_content
     )
+
+    # 2c) Legend box rects that already have fill: #F5F6F8 (when bg is set in pkgdown.yml)
+    # Just add the legend-bg class for CSS targeting
+    svg_content <- gsub(
+      "(<rect )(x='[^']+' y='[^']+' width='[^']+' height='[^']+' style='[^']*fill: #F5F6F8;[^']*' />)",
+      "\\1class='legend-bg' \\2",
+      svg_content
+    )
+
+    # 3) White strokes - keep as white for grid lines (CSS handles dark mode)
+    # Don't replace white strokes globally - they're grid lines that need to stay white
+    # in light mode and become darker in dark mode via CSS
 
     # 3b) Replace ggplot2 theme_minimal() gridline color (#EBEBEB) with text color
     # Gridlines have inline styles that override CSS, so we must replace directly

@@ -88,6 +88,7 @@ adjusted to prevent label overlap:
 ``` r
 
 p_long + legend_style(angle = 90)
+#> legend_auto_fit: Legend (16.3cm) exceeds 95% of panel (11.4cm). Wrapping to 4 rows.
 ```
 
 ![](styling_files/figure-html/rotation-vertical-1.svg)

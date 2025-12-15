@@ -10,7 +10,7 @@ template:
 figures:
   dev: svglite::svglite
   fig.ext: svg
-  bg: "transparent"
+  bg: "#F5F6F8"
 
 home:
   title: "ggguides: Simplified Legend and Guide Alignment for ggplot2"
