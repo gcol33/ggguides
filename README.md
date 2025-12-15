@@ -94,10 +94,21 @@ p + legend_none()
 Comprehensive styling in one call:
 
 ```r
-# Basic: font and size
-p + legend_style(size = 14, family = "serif")
+# Change font size - affects both title and labels
+p + legend_style(size = 14)
 
-# Full styling
+# Change font family
+p + legend_style(family = "serif")
+p + legend_style(family = "mono")
+
+# Combine size and family
+p + legend_style(size = 14, family = "serif")
+```
+
+<img src="man/figures/legend_style_size.png" width="45%"> <img src="man/figures/legend_style_font.png" width="45%">
+
+```r
+# Full styling with title emphasis
 p + legend_style(
   size = 12,
   title_size = 14,
@@ -109,7 +120,7 @@ p + legend_style(
 )
 ```
 
-<img src="man/figures/legend_style_basic.png" width="45%"> <img src="man/figures/legend_style_full.png" width="45%">
+<img src="man/figures/legend_style_full.png" width="60%">
 
 #### `legend_wrap()`
 
@@ -185,6 +196,22 @@ grid::grid.draw(gt)
 ```
 
 <img src="man/figures/patchwork_stacked_default.png" width="45%"> <img src="man/figures/patchwork_stacked_span.png" width="45%">
+
+#### Row-Specific Attachment
+
+Attach the legend to specific rows instead of spanning all:
+
+```r
+# Attach legend to row 1 only
+gt <- collect_legends(p1 / p2 / p3, position = "right", span = 1)
+grid::grid.draw(gt)
+
+# Attach legend to rows 1 and 2
+gt <- collect_legends(p1 / p2 / p3, position = "right", span = 1:2)
+grid::grid.draw(gt)
+```
+
+<img src="man/figures/patchwork_span_row1.png" width="45%"> <img src="man/figures/patchwork_span_row12.png" width="45%">
 
 ---
 

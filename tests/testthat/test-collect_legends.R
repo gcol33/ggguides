@@ -65,3 +65,47 @@ test_that("collect_legends rejects invalid position", {
     "'arg' should be one of"
   )
 })
+
+test_that("collect_legends with span = TRUE returns gtable", {
+  skip_if_not_installed("patchwork")
+  library(patchwork)
+
+  p1 <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) + geom_point()
+  p2 <- ggplot(mtcars, aes(mpg, hp, color = factor(cyl))) + geom_point()
+  combined <- p1 / p2
+
+  result <- collect_legends(combined, span = TRUE)
+  expect_s3_class(result, "gtable")
+})
+
+test_that("collect_legends with numeric span returns gtable", {
+  skip_if_not_installed("patchwork")
+  library(patchwork)
+
+  p1 <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) + geom_point()
+  p2 <- ggplot(mtcars, aes(mpg, hp, color = factor(cyl))) + geom_point()
+  p3 <- ggplot(mtcars, aes(mpg, disp, color = factor(cyl))) + geom_point()
+  combined <- p1 / p2 / p3
+
+  # Span single row
+  result <- collect_legends(combined, span = 1)
+  expect_s3_class(result, "gtable")
+
+  # Span multiple rows
+  result <- collect_legends(combined, span = 1:2)
+  expect_s3_class(result, "gtable")
+})
+
+test_that("collect_legends errors on invalid span indices", {
+  skip_if_not_installed("patchwork")
+  library(patchwork)
+
+  p1 <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) + geom_point()
+  p2 <- ggplot(mtcars, aes(mpg, hp, color = factor(cyl))) + geom_point()
+  combined <- p1 / p2
+
+  expect_error(
+    collect_legends(combined, span = 5),
+    "span indices must be between"
+  )
+})

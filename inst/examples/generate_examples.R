@@ -100,7 +100,19 @@ save_example(
 # Style Examples
 # =============================================================================
 
-# legend_style - basic
+# legend_style - size only
+save_example(
+  base_plot + legend_style(size = 14),
+  "legend_style_size"
+)
+
+# legend_style - font family
+save_example(
+  base_plot + legend_style(family = "serif"),
+  "legend_style_font"
+)
+
+# legend_style - basic (size + family)
 save_example(
   base_plot + legend_style(size = 14, family = "serif"),
   "legend_style_basic"
@@ -224,6 +236,22 @@ if (requireNamespace("patchwork", quietly = TRUE)) {
   grid::grid.draw(gt)
   dev.off()
   message("Saved: patchwork_stacked_span.png")
+
+  # Stacked plots - span row 1 only
+  gt <- collect_legends(p1 / p2 / p3, position = "right", span = 1)
+  png(file.path(out_dir, "patchwork_span_row1.png"),
+      width = 6, height = 8, units = "in", res = 150, bg = "white")
+  grid::grid.draw(gt)
+  dev.off()
+  message("Saved: patchwork_span_row1.png")
+
+  # Stacked plots - span rows 1:2
+  gt <- collect_legends(p1 / p2 / p3, position = "right", span = 1:2)
+  png(file.path(out_dir, "patchwork_span_row12.png"),
+      width = 6, height = 8, units = "in", res = 150, bg = "white")
+  grid::grid.draw(gt)
+  dev.off()
+  message("Saved: patchwork_span_row12.png")
 }
 
 message("\nAll examples generated in: ", out_dir)

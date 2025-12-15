@@ -17,14 +17,15 @@ operators like \code{|}, \code{/}, or \code{+}.}
 \item{position}{Where to place the collected legends. One of \code{"right"}
 (default), \code{"left"}, \code{"bottom"}, or \code{"top"}.}
 
-\item{span}{Logical. If \code{TRUE}, the legend will span the full
-height (for left/right) or width (for top/bottom) of the composition.
-Default is \code{FALSE}. When \code{TRUE}, returns a gtable instead of
-a patchwork object.}
+\item{span}{Logical or integer vector. If \code{TRUE}, the legend will span
+the full height (for left/right) or width (for top/bottom). If an integer
+vector (e.g., \code{c(1, 2)} or \code{1:2}), the legend spans only those
+rows/columns. Default is \code{FALSE}. When not \code{FALSE}, returns a
+gtable instead of a patchwork object.}
 }
 \value{
 A patchwork object with legends collected, or a gtable if
-\code{span = TRUE}.
+\code{span} is not \code{FALSE}.
 }
 \description{
 Collects legends from multiple plots in a patchwork composition into a single
@@ -39,6 +40,12 @@ When \code{span = TRUE}, the function converts the patchwork to a gtable
 and modifies the legend cell to span all rows (for right/left positions) or
 all columns (for top/bottom positions). This addresses the common issue where
 collected legends are centered rather than spanning the full composition.
+
+When \code{span} is an integer vector (e.g., \code{c(1, 2)}), the legend
+aligns with only those specific rows (for right/left) or columns (for
+top/bottom). This is useful for attaching a legend to specific plots in a
+stacked layout. Row/column numbers refer to the panel positions in the
+patchwork (1-indexed).
 
 For cowplot users: cowplot does not have a built-in legend collection
 mechanism. Consider using the lemon package for manual legend extraction
@@ -65,6 +72,16 @@ collect_legends(p1 | p2, position = "bottom")
 
 # Legend spanning full height (returns gtable, draw with grid.draw)
 gt <- collect_legends(p1 / p2, position = "right", span = TRUE)
+grid::grid.draw(gt)
+
+# Attach legend to specific rows (e.g., align with row 1 only)
+p3 <- ggplot(mtcars, aes(mpg, disp, color = factor(cyl))) +
+  geom_point() + labs(title = "Plot 3")
+gt <- collect_legends(p1 / p2 / p3, position = "right", span = 1)
+grid::grid.draw(gt)
+
+# Attach legend to rows 1 and 2
+gt <- collect_legends(p1 / p2 / p3, position = "right", span = 1:2)
 grid::grid.draw(gt)
 }
 
