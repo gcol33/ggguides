@@ -22,17 +22,29 @@ legend_keys(
 
 \item{alpha}{Numeric. Alpha (transparency) of keys, between 0 and 1.}
 
-\item{shape}{Numeric or character. Shape of point keys.}
+\item{shape}{Shape of point keys. Can be:
+\itemize{
+\item Numeric (0-25): Standard ggplot2 shape codes
+\item Character name: \code{"circle"}, \code{"square"}, \code{"diamond"},
+\code{"triangle"}, \code{"triangle_down"}, \code{"plus"}, \code{"cross"},
+\code{"asterisk"}, \code{"circle_open"}, \code{"square_open"},
+\code{"diamond_open"}, \code{"triangle_open"}, \code{"circle_filled"},
+\code{"square_filled"}, \code{"diamond_filled"}, \code{"triangle_filled"}
+}
+Shapes 21-25 (or names ending in \code{"_filled"}) support both outline
+(\code{colour}) and fill (\code{fill}) colors.}
 
 \item{linewidth}{Numeric. Width of line keys.}
 
 \item{linetype}{Character or numeric. Line type for line keys.}
 
-\item{fill}{Character. Fill color for keys (e.g., bar charts).}
+\item{fill}{Character. Fill color for filled shapes (shapes 21-25). For
+shapes 0-20, use \code{colour} instead.}
 
-\item{colour, color}{Character. Outline/stroke color for keys.}
+\item{colour, color}{Character. Outline/stroke color for keys. For shapes
+21-25, this controls the outline; for shapes 0-20, this is the main color.}
 
-\item{stroke}{Numeric. Stroke width for point keys.}
+\item{stroke}{Numeric. Stroke width for point outlines (shapes 21-25).}
 
 \item{aesthetic}{Character vector specifying which aesthetic(s) to modify.
 Default is \code{c("colour", "fill")} which covers most common cases.
@@ -49,10 +61,20 @@ without affecting the plot itself. This is a simpler alternative to using
 \details{
 This function wraps \code{guide_legend(override.aes = ...)} to provide a cleaner
 interface for common legend key modifications. It's particularly useful for:
+
 \itemize{
 \item Making small points more visible in the legend
 \item Removing transparency from legend keys
-\item Standardizing key appearance across different geoms
+\item Changing symbol shapes to improve clarity
+\item Adding outlines to filled shapes for better visibility
+}
+
+\strong{Shape types:}
+\itemize{
+\item Shapes 0-14: Outline only (color from \code{colour})
+\item Shapes 15-20: Filled solid (color from \code{colour})
+\item Shapes 21-25: Outline + fill (outline from \code{colour}, interior
+from \code{fill})
 }
 
 Only non-NULL arguments are applied, so you can selectively modify specific
@@ -71,10 +93,15 @@ ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
   geom_point(alpha = 0.3, size = 3) +
   legend_keys(alpha = 1)
 
-# Combine modifications
+# Change shape using name
 ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
-  geom_point(alpha = 0.3, size = 1) +
-  legend_keys(size = 4, alpha = 1)
+  geom_point(size = 3) +
+  legend_keys(shape = "square")
+
+# Filled shape with outline (shapes 21-25)
+ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
+  geom_point(size = 3) +
+  legend_keys(shape = "circle_filled", fill = "white", stroke = 1.5)
 
 # Apply to fill aesthetic (e.g., for boxplots)
 ggplot(mtcars, aes(factor(cyl), mpg, fill = factor(cyl))) +

@@ -85,7 +85,14 @@ without affecting the plot itself. This is a simpler alternative to using
 
 
 <dt id="arg-shape">shape<a class="anchor" aria-label="anchor" href="#arg-shape"></a></dt>
-<dd><p>Numeric or character. Shape of point keys.</p></dd>
+<dd><p>Shape of point keys. Can be:</p><ul><li><p>Numeric (0-25): Standard ggplot2 shape codes</p></li>
+<li><p>Character name: <code>"circle"</code>, <code>"square"</code>, <code>"diamond"</code>,
+<code>"triangle"</code>, <code>"triangle_down"</code>, <code>"plus"</code>, <code>"cross"</code>,
+<code>"asterisk"</code>, <code>"circle_open"</code>, <code>"square_open"</code>,
+<code>"diamond_open"</code>, <code>"triangle_open"</code>, <code>"circle_filled"</code>,
+<code>"square_filled"</code>, <code>"diamond_filled"</code>, <code>"triangle_filled"</code></p></li>
+</ul><p>Shapes 21-25 (or names ending in <code>"_filled"</code>) support both outline
+(<code>colour</code>) and fill (<code>fill</code>) colors.</p></dd>
 
 
 <dt id="arg-linewidth">linewidth<a class="anchor" aria-label="anchor" href="#arg-linewidth"></a></dt>
@@ -97,15 +104,17 @@ without affecting the plot itself. This is a simpler alternative to using
 
 
 <dt id="arg-fill">fill<a class="anchor" aria-label="anchor" href="#arg-fill"></a></dt>
-<dd><p>Character. Fill color for keys (e.g., bar charts).</p></dd>
+<dd><p>Character. Fill color for filled shapes (shapes 21-25). For
+shapes 0-20, use <code>colour</code> instead.</p></dd>
 
 
 <dt id="arg-colour-color">colour, color<a class="anchor" aria-label="anchor" href="#arg-colour-color"></a></dt>
-<dd><p>Character. Outline/stroke color for keys.</p></dd>
+<dd><p>Character. Outline/stroke color for keys. For shapes
+21-25, this controls the outline; for shapes 0-20, this is the main color.</p></dd>
 
 
 <dt id="arg-stroke">stroke<a class="anchor" aria-label="anchor" href="#arg-stroke"></a></dt>
-<dd><p>Numeric. Stroke width for point keys.</p></dd>
+<dd><p>Numeric. Stroke width for point outlines (shapes 21-25).</p></dd>
 
 
 <dt id="arg-aesthetic">aesthetic<a class="anchor" aria-label="anchor" href="#arg-aesthetic"></a></dt>
@@ -121,9 +130,15 @@ Use <code>"all"</code> to apply to all legends.</p></dd>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>This function wraps <code>guide_legend(override.aes = ...)</code> to provide a cleaner
-interface for common legend key modifications. It's particularly useful for:</p><ul><li><p>Making small points more visible in the legend</p></li>
+interface for common legend key modifications. It's particularly useful for:</p>
+<ul><li><p>Making small points more visible in the legend</p></li>
 <li><p>Removing transparency from legend keys</p></li>
-<li><p>Standardizing key appearance across different geoms</p></li>
+<li><p>Changing symbol shapes to improve clarity</p></li>
+<li><p>Adding outlines to filled shapes for better visibility</p></li>
+</ul><p><strong>Shape types:</strong></p><ul><li><p>Shapes 0-14: Outline only (color from <code>colour</code>)</p></li>
+<li><p>Shapes 15-20: Filled solid (color from <code>colour</code>)</p></li>
+<li><p>Shapes 21-25: Outline + fill (outline from <code>colour</code>, interior
+from <code>fill</code>)</p></li>
 </ul><p>Only non-NULL arguments are applied, so you can selectively modify specific
 properties.</p>
     </div>
@@ -147,10 +162,15 @@ properties.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.3</span>, size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">legend_keys</span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Combine modifications</span></span>
+<span><span class="co"># Change shape using name</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="va">wt</span>, color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.3</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">legend_keys</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">4</span>, alpha <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">legend_keys</span><span class="op">(</span>shape <span class="op">=</span> <span class="st">"square"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Filled shape with outline (shapes 21-25)</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="va">wt</span>, color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">legend_keys</span><span class="op">(</span>shape <span class="op">=</span> <span class="st">"circle_filled"</span>, fill <span class="op">=</span> <span class="st">"white"</span>, stroke <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Apply to fill aesthetic (e.g., for boxplots)</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span>, <span class="va">mpg</span>, fill <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>

@@ -127,22 +127,74 @@ collect_legends <- function(x, position = c("right", "left", "bottom", "top"),
       gt$layout$t[guide_idx] <- 1
       gt$layout$b[guide_idx] <- nrow(gt)
     } else if (is.numeric(span)) {
-      # Span specific rows - center legend between specified panels
+      # Span specific rows - center legend at visual boundary between plots
       span <- as.integer(span)
       if (any(span < 1) || any(span > length(panel_rows_t))) {
         stop("span indices must be between 1 and ", length(panel_rows_t),
              " (number of panel rows).", call. = FALSE)
       }
       # Set the layout to span from top of first panel to bottom of last panel
-      gt$layout$t[guide_idx] <- panel_rows_t[min(span)]
-      gt$layout$b[guide_idx] <- panel_rows_b[max(span)]
+      first_panel_t <- panel_rows_t[min(span)]
+      last_panel_b <- panel_rows_b[max(span)]
+      gt$layout$t[guide_idx] <- first_panel_t
+      gt$layout$b[guide_idx] <- last_panel_b
 
-      # Wrap the guide grob in a viewport that centers it vertically
-      guide_grob <- gt$grobs[[guide_idx]]
-      gt$grobs[[guide_idx]] <- grid::gTree(
-        children = grid::gList(guide_grob),
-        vp = grid::viewport(y = 0.5, just = "center")
-      )
+      # Find background elements to determine visual boundary between plots
+      # The boundary is where background-N ends and background-(N+1) begins
+      bg_idx <- grep("^background-[0-9]+$", gt$layout$name)
+
+      if (length(bg_idx) >= 2 && length(span) > 1) {
+        # Sort backgrounds by their top position
+        bg_layout <- gt$layout[bg_idx, ]
+        bg_layout <- bg_layout[order(bg_layout$t), ]
+
+        # Find the boundary between the last plot in span and any plots after it
+        # or between middle plots in the span
+        # For span = 1:2, find boundary between background-1 and background-2
+        min_span <- min(span)
+        max_span <- max(span)
+
+        # Get heights of all rows to calculate positions
+        all_heights_abs <- grid::convertHeight(gt$heights, "mm", valueOnly = TRUE)
+        cum_heights <- c(0, cumsum(all_heights_abs))
+
+        # Find boundary: bottom of background for plot min_span, top of background for plot max_span
+        # (when span covers multiple plots, center between first and last)
+        if (min_span <= nrow(bg_layout) && max_span <= nrow(bg_layout)) {
+          bg_first_b <- bg_layout$b[min_span]
+          bg_last_t <- bg_layout$t[max_span]
+
+          # Boundary is midpoint between bottom of first plot's background
+          # and top of last plot's background
+          pos_first_bg_bottom <- cum_heights[bg_first_b + 1]
+          pos_last_bg_top <- cum_heights[bg_last_t]
+
+          # Center at the visual boundary
+          boundary_from_top <- (pos_first_bg_bottom + pos_last_bg_top) / 2
+
+          # Calculate relative to spanned region
+          spanned_top <- cum_heights[first_panel_t]
+          spanned_bottom <- cum_heights[last_panel_b + 1]
+          spanned_height <- spanned_bottom - spanned_top
+
+          boundary_in_span <- boundary_from_top - spanned_top
+          center_y_npc <- 1 - (boundary_in_span / spanned_height)
+
+          # Wrap the guide grob in a viewport centered at the boundary
+          guide_grob <- gt$grobs[[guide_idx]]
+          gt$grobs[[guide_idx]] <- grid::gTree(
+            children = grid::gList(guide_grob),
+            vp = grid::viewport(y = center_y_npc, just = "center")
+          )
+        }
+      } else {
+        # Single plot or no background elements found - center at 0.5
+        guide_grob <- gt$grobs[[guide_idx]]
+        gt$grobs[[guide_idx]] <- grid::gTree(
+          children = grid::gList(guide_grob),
+          vp = grid::viewport(y = 0.5, just = "center")
+        )
+      }
     }
   } else {
     if (isTRUE(span)) {
@@ -150,22 +202,69 @@ collect_legends <- function(x, position = c("right", "left", "bottom", "top"),
       gt$layout$l[guide_idx] <- 1
       gt$layout$r[guide_idx] <- ncol(gt)
     } else if (is.numeric(span)) {
-      # Span specific columns - center legend between specified panels
+      # Span specific columns - center legend at visual boundary between plots
       span <- as.integer(span)
       if (any(span < 1) || any(span > length(panel_cols_l))) {
         stop("span indices must be between 1 and ", length(panel_cols_l),
              " (number of panel columns).", call. = FALSE)
       }
       # Set the layout to span from left of first panel to right of last panel
-      gt$layout$l[guide_idx] <- panel_cols_l[min(span)]
-      gt$layout$r[guide_idx] <- panel_cols_r[max(span)]
+      first_panel_l <- panel_cols_l[min(span)]
+      last_panel_r <- panel_cols_r[max(span)]
+      gt$layout$l[guide_idx] <- first_panel_l
+      gt$layout$r[guide_idx] <- last_panel_r
 
-      # Wrap the guide grob in a viewport that centers it horizontally
-      guide_grob <- gt$grobs[[guide_idx]]
-      gt$grobs[[guide_idx]] <- grid::gTree(
-        children = grid::gList(guide_grob),
-        vp = grid::viewport(x = 0.5, just = "center")
-      )
+      # Find background elements to determine visual boundary between plots
+      bg_idx <- grep("^background-[0-9]+$", gt$layout$name)
+
+      if (length(bg_idx) >= 2 && length(span) > 1) {
+        # Sort backgrounds by their left position
+        bg_layout <- gt$layout[bg_idx, ]
+        bg_layout <- bg_layout[order(bg_layout$l), ]
+
+        min_span <- min(span)
+        max_span <- max(span)
+
+        # Get widths of all columns to calculate positions
+        all_widths_abs <- grid::convertWidth(gt$widths, "mm", valueOnly = TRUE)
+        cum_widths <- c(0, cumsum(all_widths_abs))
+
+        # Find boundary between backgrounds
+        if (min_span <= nrow(bg_layout) && max_span <= nrow(bg_layout)) {
+          bg_first_r <- bg_layout$r[min_span]
+          bg_last_l <- bg_layout$l[max_span]
+
+          # Boundary is midpoint between right of first plot's background
+          # and left of last plot's background
+          pos_first_bg_right <- cum_widths[bg_first_r + 1]
+          pos_last_bg_left <- cum_widths[bg_last_l]
+
+          # Center at the visual boundary
+          boundary_from_left <- (pos_first_bg_right + pos_last_bg_left) / 2
+
+          # Calculate relative to spanned region
+          spanned_left <- cum_widths[first_panel_l]
+          spanned_right <- cum_widths[last_panel_r + 1]
+          spanned_width <- spanned_right - spanned_left
+
+          boundary_in_span <- boundary_from_left - spanned_left
+          center_x_npc <- boundary_in_span / spanned_width
+
+          # Wrap the guide grob in a viewport centered at the boundary
+          guide_grob <- gt$grobs[[guide_idx]]
+          gt$grobs[[guide_idx]] <- grid::gTree(
+            children = grid::gList(guide_grob),
+            vp = grid::viewport(x = center_x_npc, just = "center")
+          )
+        }
+      } else {
+        # Single plot or no background elements found - center at 0.5
+        guide_grob <- gt$grobs[[guide_idx]]
+        gt$grobs[[guide_idx]] <- grid::gTree(
+          children = grid::gList(guide_grob),
+          vp = grid::viewport(x = 0.5, just = "center")
+        )
+      }
     }
   }
 

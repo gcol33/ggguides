@@ -32,7 +32,7 @@ diving into ggplot2's theme element hierarchy. The main functions are:
 - `legend_reverse()` - Reverse entry order
 - `colorbar_style()` - Customize continuous color bar legends
 
-## Font Styling with legend_style()
+## Font Styling
 
 ### Font Size
 
@@ -66,6 +66,36 @@ p + legend_style(
   title_size = 14,
   title_face = "bold"
 )
+```
+
+## Text Rotation
+
+For legends with long category names, rotate the labels to save space:
+
+### Basic Rotation
+
+```{r rotation-basic, fig.width=7}
+p_long <- ggplot(mpg, aes(displ, hwy, color = class)) +
+  geom_point()
+
+p_long + legend_style(angle = 45, hjust = 1)
+```
+
+### Vertical Labels
+
+Use 90 degrees for fully vertical text:
+
+```{r rotation-vertical, fig.width=7}
+p_long + legend_style(angle = 90, hjust = 0.5)
+```
+
+### Title Rotation
+
+Rotate the legend title independently:
+
+```{r rotation-title, fig.show='hold', out.width='48%'}
+p_long + legend_style(title_angle = 90, title_hjust = 0.5) + ggtitle("Rotated title only")
+p_long + legend_style(angle = 45, hjust = 1, title_angle = 90) + ggtitle("Both rotated")
 ```
 
 ## Background and Border
@@ -203,6 +233,41 @@ ggplot(mtcars, aes(factor(cyl), mpg, fill = factor(cyl))) +
   legend_keys(alpha = 1, aesthetic = "fill")
 ```
 
+### Changing Symbol Shapes
+
+Use named shapes for clarity instead of numeric codes:
+
+```{r keys-shape, fig.show='hold', out.width='48%'}
+p + legend_keys(shape = "square") + ggtitle("Square")
+p + legend_keys(shape = "diamond") + ggtitle("Diamond")
+```
+
+Available shape names include: `"circle"`, `"square"`, `"diamond"`, `"triangle"`,
+`"plus"`, `"cross"`, `"asterisk"`.
+
+### Filled Shapes with Outlines
+
+Shapes 21-25 (or names ending in `_filled`) support both outline and fill colors,
+making legends more visible against any background:
+
+```{r keys-outline, fig.show='hold', out.width='48%'}
+# White fill with colored outline
+p + legend_keys(shape = "circle_filled", fill = "white", stroke = 1.5) +
+  ggtitle("White fill, colored outline")
+
+# Colored fill with black outline
+p + legend_keys(shape = "square_filled", colour = "black", stroke = 1) +
+  ggtitle("Colored fill, black outline")
+```
+
+Shape types:
+
+| Type | Shapes | Fill from | Outline from |
+|------|--------|-----------|--------------|
+| Outline only | `"circle_open"`, `"square_open"`, `"diamond_open"` | N/A | `colour` |
+| Solid filled | `"circle"`, `"square"`, `"diamond"` | `colour` | N/A |
+| Fill + outline | `"circle_filled"`, `"square_filled"`, `"diamond_filled"` | `fill` | `colour` |
+
 ## Reordering Legend Entries
 
 `legend_order()` changes the order of legend entries without modifying
@@ -322,8 +387,8 @@ p_cont + colorbar_style(
 
 | Function | Purpose | Key Parameters |
 |----------|---------|----------------|
-| `legend_style()` | Comprehensive styling | `size`, `title_size`, `title_face`, `family`, `background`, `background_color`, `margin` |
-| `legend_keys()` | Override key appearance | `size`, `alpha`, `shape`, `linewidth`, `aesthetic` |
+| `legend_style()` | Comprehensive styling | `size`, `title_size`, `title_face`, `family`, `angle`, `hjust`, `background`, `margin` |
+| `legend_keys()` | Override key appearance | `size`, `alpha`, `shape`, `fill`, `colour`, `stroke`, `aesthetic` |
 | `legend_order()` | Reorder entries | `order` (vector or function), `aesthetic` |
 | `legend_wrap()` | Multi-column layout | `ncol`, `nrow` |
 | `legend_reverse()` | Reverse entry order | None |

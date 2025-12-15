@@ -19,7 +19,7 @@ functions are:
 - [`colorbar_style()`](https://gcol33.github.io/ggguides/reference/colorbar_style.md) -
   Customize continuous color bar legends
 
-## Font Styling with legend_style()
+## Font Styling
 
 ### Font Size
 
@@ -277,6 +277,47 @@ ggplot(mtcars, aes(factor(cyl), mpg, fill = factor(cyl))) +
 ```
 
 ![](styling_files/figure-html/keys-fill-1.svg)
+
+### Changing Symbol Shapes
+
+Use named shapes for clarity instead of numeric codes:
+
+``` r
+
+p + legend_keys(shape = "square") + ggtitle("Square")
+p + legend_keys(shape = "diamond") + ggtitle("Diamond")
+```
+
+![](styling_files/figure-html/keys-shape-1.svg)![](styling_files/figure-html/keys-shape-2.svg)
+
+Available shape names include: `"circle"`, `"square"`, `"diamond"`,
+`"triangle"`, `"plus"`, `"cross"`, `"asterisk"`.
+
+### Filled Shapes with Outlines
+
+Shapes 21-25 (or names ending in `_filled`) support both outline and
+fill colors, making legends more visible against any background:
+
+``` r
+
+# White fill with colored outline
+p + legend_keys(shape = "circle_filled", fill = "white", stroke = 1.5) +
+  ggtitle("White fill, colored outline")
+
+# Colored fill with black outline
+p + legend_keys(shape = "square_filled", colour = "black", stroke = 1) +
+  ggtitle("Colored fill, black outline")
+```
+
+![](styling_files/figure-html/keys-outline-1.svg)![](styling_files/figure-html/keys-outline-2.svg)
+
+Shape types:
+
+| Type | Shapes | Fill from | Outline from |
+|----|----|----|----|
+| Outline only | `"circle_open"`, `"square_open"`, `"diamond_open"` | N/A | `colour` |
+| Solid filled | `"circle"`, `"square"`, `"diamond"` | `colour` | N/A |
+| Fill + outline | `"circle_filled"`, `"square_filled"`, `"diamond_filled"` | `fill` | `colour` |
 
 ## Reordering Legend Entries
 
