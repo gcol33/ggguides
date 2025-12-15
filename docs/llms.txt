@@ -6,9 +6,8 @@ Simplified legend and guide alignment for ggplot2.
 
 ``` r
 
-# Install from GitHub
-# install.packages("pak")
-pak::pak("gcol33/ggguides")
+# install.packages("remotes")
+remotes::install_github("gcol33/ggguides")
 ```
 
 ## Overview
@@ -208,18 +207,24 @@ collect_legends(p1 | p2, position = "bottom")
 #### Height Spanning
 
 For stacked plots, use `span = TRUE` to make the legend span the full
-height:
+height. Using different plot heights makes the spanning behavior more
+visible:
 
 ``` r
+
+library(patchwork)
 
 p3 <- ggplot(mtcars, aes(mpg, disp, color = factor(cyl))) +
   geom_point() + labs(title = "Plot 3")
 
+# Stack with different heights: 4, 2, 1
+stacked <- (p1 / p2 / p3) + plot_layout(heights = c(4, 2, 1))
+
 # Default: legend centered
-collect_legends(p1 / p2 / p3, position = "right")
+collect_legends(stacked, position = "right")
 
 # With spanning: legend fills full height
-gt <- collect_legends(p1 / p2 / p3, position = "right", span = TRUE)
+gt <- collect_legends(stacked, position = "right", span = TRUE)
 grid::grid.draw(gt)
 ```
 
@@ -231,12 +236,12 @@ Attach the legend to specific rows instead of spanning all:
 
 ``` r
 
-# Attach legend to row 1 only
-gt <- collect_legends(p1 / p2 / p3, position = "right", span = 1)
+# Attach legend to row 1 only (the tallest plot)
+gt <- collect_legends(stacked, position = "right", span = 1)
 grid::grid.draw(gt)
 
 # Attach legend to rows 1 and 2
-gt <- collect_legends(p1 / p2 / p3, position = "right", span = 1:2)
+gt <- collect_legends(stacked, position = "right", span = 1:2)
 grid::grid.draw(gt)
 ```
 
