@@ -11,6 +11,7 @@
 #' @param plot A ggplot object
 #' @param object_name Name of the object being added
 #' @importFrom ggplot2 ggplot_add
+#' @keywords internal
 #' @export
 ggplot_add.legend_style_centered <- function(object, plot, object_name) {
   # Apply the theme to the plot
@@ -29,6 +30,7 @@ ggplot_add.legend_style_centered <- function(object, plot, object_name) {
 #' Print method for centered title plots
 #' @param x A gg_centered_title object
 #' @param ... Additional arguments (ignored)
+#' @keywords internal
 #' @export
 print.gg_centered_title <- function(x, ...) {
   # Apply title centering and render
@@ -41,6 +43,7 @@ print.gg_centered_title <- function(x, ...) {
 #' Plot method for centered title plots
 #' @param x A gg_centered_title object
 #' @param ... Additional arguments (ignored)
+#' @keywords internal
 #' @export
 plot.gg_centered_title <- function(x, ...) {
   print.gg_centered_title(x, ...)
@@ -49,6 +52,7 @@ plot.gg_centered_title <- function(x, ...) {
 #' Convert centered title plot to gtable
 #' @param x A gg_centered_title object
 #' @method ggplotGrob gg_centered_title
+#' @keywords internal
 #' @export
 ggplotGrob.gg_centered_title <- function(x) {
   # Remove our class temporarily to avoid recursion
@@ -60,6 +64,7 @@ ggplotGrob.gg_centered_title <- function(x) {
 #' @param x A gg_autofit_legend object
 #' @param ... Additional arguments (ignored)
 #' @method print gg_autofit_legend
+#' @keywords internal
 #' @export
 print.gg_autofit_legend <- function(x, ...) {
   # Remove our class to avoid recursion
@@ -76,6 +81,7 @@ print.gg_autofit_legend <- function(x, ...) {
 #' @param x A gg_autofit_legend object
 #' @param ... Additional arguments (ignored)
 #' @method plot gg_autofit_legend
+#' @keywords internal
 #' @export
 plot.gg_autofit_legend <- function(x, ...) {
   print.gg_autofit_legend(x, ...)
@@ -84,6 +90,7 @@ plot.gg_autofit_legend <- function(x, ...) {
 #' Convert auto-fit legend plot to gtable
 #' @param x A gg_autofit_legend object
 #' @method ggplotGrob gg_autofit_legend
+#' @keywords internal
 #' @export
 ggplotGrob.gg_autofit_legend <- function(x) {
   # Remove our class to avoid recursion
@@ -723,8 +730,11 @@ build_guide_with_style <- function(
 #'   labs(color = "Vehicle Class")
 #'
 #' # Center title over keys only (long titles wrap automatically)
+#' # Returns a gtable - use grid::grid.draw() to render
+#' \dontrun{
 #' g <- center_legend_title(p)
 #' grid::grid.draw(g)
+#' }
 #'
 #' @seealso \code{\link{legend_style}}
 #' @export

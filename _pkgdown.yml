@@ -73,6 +73,8 @@ reference:
       - legend_reverse
       - legend_order
       - legend_keys
+      - legend_auto_fit
+      - center_legend_title
       - colorbar_style
 
   - title: "Multiple Legends"

@@ -40,8 +40,11 @@ p <- ggplot(mpg, aes(displ, hwy, color = class)) +
   labs(color = "Vehicle Class")
 
 # Center title over keys only (long titles wrap automatically)
+# Returns a gtable - use grid::grid.draw() to render
+\dontrun{
 g <- center_legend_title(p)
 grid::grid.draw(g)
+}
 
 }
 \seealso{

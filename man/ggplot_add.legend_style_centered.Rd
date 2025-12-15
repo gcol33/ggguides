@@ -16,3 +16,4 @@
 \description{
 Add legend_style_centered to ggplot
 }
+\keyword{internal}

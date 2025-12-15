@@ -18,6 +18,18 @@ knitr::opts_chunk$set(
 )
 library(ggguides)
 library(ggplot2)
+
+# Theme with transparent backgrounds for pkgdown light/dark mode
+theme_set(
+  theme_grey() +
+    theme(
+      plot.background = element_rect(fill = "transparent", color = NA),
+      panel.background = element_rect(fill = "transparent", color = NA),
+      legend.background = element_rect(fill = "transparent", color = NA),
+      legend.key = element_rect(fill = "transparent", color = NA),
+      legend.box.background = element_rect(fill = "transparent", color = NA)
+    )
+)
 ```
 
 ## Overview

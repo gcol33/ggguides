@@ -12,3 +12,4 @@
 \description{
 Convert auto-fit legend plot to gtable
 }
+\keyword{internal}

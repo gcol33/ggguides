@@ -14,3 +14,4 @@
 \description{
 Print method for centered title plots
 }
+\keyword{internal}

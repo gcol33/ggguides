@@ -14,3 +14,4 @@
 \description{
 Plot method for auto-fit legend plots
 }
+\keyword{internal}

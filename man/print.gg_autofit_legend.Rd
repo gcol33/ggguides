@@ -14,3 +14,4 @@
 \description{
 Print method for auto-fit legend plots (90° rotation)
 }
+\keyword{internal}

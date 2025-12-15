@@ -12,3 +12,4 @@
 \description{
 Convert centered title plot to gtable
 }
+\keyword{internal}
