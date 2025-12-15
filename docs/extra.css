@@ -67,8 +67,14 @@ svg.inline-svg .svg-bg {
 
 /* Rect strokes (histogram bars, etc.) - match text color */
 /* Use > g > rect to exclude clipPath rects; exclude stroke: none (empty legend keys) */
-[data-bs-theme="dark"] svg.inline-svg .svglite > g > rect:not([style*="stroke: none"]) {
+/* Exclude rects with rx attribute (rounded corners = plot frame rects handled by CSS border) */
+[data-bs-theme="dark"] svg.inline-svg .svglite > g > rect:not([style*="stroke: none"]):not([rx]) {
   stroke: #DFD7CA !important;
+}
+
+/* Plot frame rects (with rx for rounded corners) - remove stroke, CSS border handles the frame */
+svg.inline-svg .svglite > g > rect[rx] {
+  stroke: none !important;
 }
 
 /* Legend box backgrounds - override inline fill: #F5F6F8 */
