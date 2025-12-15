@@ -52,7 +52,7 @@ legend_reverse <- function() {
 #' @param angle Rotation angle for legend labels (in degrees). Useful for long
 #'   category names. Common values: 45 for diagonal, 90 for vertical.
 #' @param hjust Horizontal justification for rotated text (0 = left, 0.5 = center,
-#'   1 = right). Often needed when using \code{angle}.
+#'   1 = right). Defaults to 0 when \code{angle} is specified.
 #' @param vjust Vertical justification for rotated text (0 = bottom, 0.5 = middle,
 #'   1 = top). Often needed when using \code{angle}.
 #' @param title_size Text size for legend title (in points). If \code{NULL},
@@ -120,7 +120,7 @@ legend_reverse <- function() {
 #' # Rotated labels for long category names
 #' ggplot(mpg, aes(displ, hwy, color = class)) +
 #'   geom_point() +
-#'   legend_style(angle = 45, hjust = 1)
+#'   legend_style(angle = 45)
 #'
 #' @seealso \code{\link{legend_left}}, \code{\link{legend_wrap}},
 #'   \code{\link{legend_reverse}}
@@ -162,7 +162,11 @@ legend_style <- function(
   if (!is.null(family)) text_args$family <- family
   if (!is.null(face)) text_args$face <- face
   if (!is.null(color)) text_args$colour <- color
-  if (!is.null(angle)) text_args$angle <- angle
+  if (!is.null(angle)) {
+    text_args$angle <- angle
+    # Default hjust = 0 for rotated text (better alignment with keys)
+    if (is.null(hjust)) hjust <- 0
+  }
   if (!is.null(hjust)) text_args$hjust <- hjust
   if (!is.null(vjust)) text_args$vjust <- vjust
 

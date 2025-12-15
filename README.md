@@ -5,13 +5,8 @@ Simplified legend and guide alignment for ggplot2.
 ## Installation
 
 ```r
-# Install from GitHub
 # install.packages("pak")
 pak::pak("gcol33/ggguides")
-
-# Or manually
-# install.packages("remotes")
-remotes::install_github("gcol33/ggguides")
 ```
 
 ## Overview

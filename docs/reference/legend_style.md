@@ -66,7 +66,7 @@ legend_style(
 - hjust:
 
   Horizontal justification for rotated text (0 = left, 0.5 = center, 1 =
-  right). Often needed when using `angle`.
+  right). Defaults to 0 when `angle` is specified.
 
 - vjust:
 
@@ -202,5 +202,5 @@ ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
 # Rotated labels for long category names
 ggplot(mpg, aes(displ, hwy, color = class)) +
   geom_point() +
-  legend_style(angle = 45, hjust = 1)
+  legend_style(angle = 45)
 ```

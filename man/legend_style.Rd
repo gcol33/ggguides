@@ -48,7 +48,7 @@ legend_style(
 category names. Common values: 45 for diagonal, 90 for vertical.}
 
 \item{hjust}{Horizontal justification for rotated text (0 = left, 0.5 = center,
-1 = right). Often needed when using \code{angle}.}
+1 = right). Defaults to 0 when \code{angle} is specified.}
 
 \item{vjust}{Vertical justification for rotated text (0 = bottom, 0.5 = middle,
 1 = top). Often needed when using \code{angle}.}
@@ -143,7 +143,7 @@ ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
 # Rotated labels for long category names
 ggplot(mpg, aes(displ, hwy, color = class)) +
   geom_point() +
-  legend_style(angle = 45, hjust = 1)
+  legend_style(angle = 45)
 
 }
 \seealso{

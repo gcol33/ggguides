@@ -75,7 +75,7 @@ For legends with long category names, rotate the labels to save space:
 p_long <- ggplot(mpg, aes(displ, hwy, color = class)) +
   geom_point()
 
-p_long + legend_style(angle = 45, hjust = 1)
+p_long + legend_style(angle = 45)
 ```
 
 ![](styling_files/figure-html/rotation-basic-1.svg)
@@ -98,7 +98,7 @@ Rotate the legend title independently:
 ``` r
 
 p_long + legend_style(title_angle = 90, title_hjust = 0.5) + ggtitle("Rotated title only")
-p_long + legend_style(angle = 45, hjust = 1, title_angle = 90) + ggtitle("Both rotated")
+p_long + legend_style(angle = 45, title_angle = 90) + ggtitle("Both rotated")
 ```
 
 ![](styling_files/figure-html/rotation-title-1.svg)![](styling_files/figure-html/rotation-title-2.svg)

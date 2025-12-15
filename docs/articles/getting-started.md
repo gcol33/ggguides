@@ -27,13 +27,8 @@ intuitive one-liner functions to position, style, and manage legends.
 
 ``` r
 
-# Install from GitHub
 # install.packages("pak")
 pak::pak("gcol33/ggguides")
-
-# Or manually
-# install.packages("remotes")
-remotes::install_github("gcol33/ggguides")
 ```
 
 ## Basic Usage
