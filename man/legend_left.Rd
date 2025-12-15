@@ -37,5 +37,7 @@ ggplot(mtcars, aes(mpg, wt, color = factor(cyl), shape = factor(am))) +
 
 }
 \seealso{
-\code{\link{legend_wrap}}, \code{\link{collect_legends}}
+\code{\link{legend_right}}, \code{\link{legend_top}},
+\code{\link{legend_bottom}}, \code{\link{legend_inside}},
+\code{\link{legend_none}}
 }

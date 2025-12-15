@@ -4,7 +4,11 @@
 \alias{collect_legends}
 \title{Collect Legends from Patchwork Compositions}
 \usage{
-collect_legends(x, position = c("right", "left", "bottom", "top"))
+collect_legends(
+  x,
+  position = c("right", "left", "bottom", "top"),
+  span = FALSE
+)
 }
 \arguments{
 \item{x}{A patchwork object created by combining ggplot2 plots with
@@ -12,9 +16,15 @@ operators like \code{|}, \code{/}, or \code{+}.}
 
 \item{position}{Where to place the collected legends. One of \code{"right"}
 (default), \code{"left"}, \code{"bottom"}, or \code{"top"}.}
+
+\item{span}{Logical. If \code{TRUE}, the legend will span the full
+height (for left/right) or width (for top/bottom) of the composition.
+Default is \code{FALSE}. When \code{TRUE}, returns a gtable instead of
+a patchwork object.}
 }
 \value{
-A patchwork object with legends collected.
+A patchwork object with legends collected, or a gtable if
+\code{span = TRUE}.
 }
 \description{
 Collects legends from multiple plots in a patchwork composition into a single
@@ -25,10 +35,14 @@ collection functionality.
 This function requires the patchwork package. If patchwork is not installed,
 an informative error is raised.
 
+When \code{span = TRUE}, the function converts the patchwork to a gtable
+and modifies the legend cell to span all rows (for right/left positions) or
+all columns (for top/bottom positions). This addresses the common issue where
+collected legends are centered rather than spanning the full composition.
+
 For cowplot users: cowplot does not have a built-in legend collection
-mechanism. Consider using \code{\link[cowplot]{get_legend}} to extract legends
-manually and \code{\link[cowplot]{plot_grid}} to arrange them. Alternatively,
-use patchwork for automatic legend collection.
+mechanism. Consider using the lemon package for manual legend extraction
+and positioning.
 }
 \examples{
 \dontrun{
@@ -48,6 +62,10 @@ collect_legends(p1 | p2)
 
 # Place collected legend on the bottom
 collect_legends(p1 | p2, position = "bottom")
+
+# Legend spanning full height (returns gtable, draw with grid.draw)
+gt <- collect_legends(p1 / p2, position = "right", span = TRUE)
+grid::grid.draw(gt)
 }
 
 }

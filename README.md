@@ -12,145 +12,215 @@ pak::pak("gcol33/ggguides")
 
 ## Overview
 
-ggguides provides one-liner functions for common legend and guide operations in ggplot2, with special focus on multi-panel plots created with patchwork or cowplot.
+ggguides provides one-liner functions for common legend operations in ggplot2:
 
-## Functions
-
-| Function | Description |
-|----------|-------------|
-| `legend_left()` | Position legend on the left with proper alignment |
-| `legend_wrap()` | Wrap legend entries into columns or rows |
-| `collect_legends()` | Collect legends from patchwork compositions |
-| `align_guides_h()` | Horizontally align guides across plots |
+- **Position**: `legend_left()`, `legend_right()`, `legend_top()`, `legend_bottom()`, `legend_inside()`, `legend_none()`
+- **Direction**: `legend_horizontal()`, `legend_vertical()`
+- **Style**: `legend_style()`, `legend_wrap()`, `legend_reverse()`
+- **Patchwork**: `collect_legends()`, `align_guides_h()`
 
 ## Examples
 
-### 1. Left Legend with True Left Alignment
-
-**Before:** Using `theme(legend.position = "left")` alone doesn't properly align the legend content.
-
-```r
-library(ggplot2)
-
-# Default left positioning - legend keys may not align
-ggplot(mtcars, aes(mpg, wt, color = factor(cyl), shape = factor(am))) +
-  geom_point(size = 3) +
-  theme(legend.position = "left")
-```
-
-**After:** `legend_left()` sets position, justification, and box alignment together.
+### Position Helpers
 
 ```r
 library(ggplot2)
 library(ggguides)
 
-# True left alignment for both key boxes and text
-ggplot(mtcars, aes(mpg, wt, color = factor(cyl), shape = factor(am))) +
+p <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
   geom_point(size = 3) +
-  legend_left()
+  labs(color = "Cylinders")
 ```
 
-### 2. Wrapped Legend Columns
+#### `legend_left()` / `legend_right()`
 
-**Before:** Long legends stretch vertically, wasting space.
+Position with proper alignment (sets justification and box.just together):
 
 ```r
-library(ggplot2)
-
-# All 7 classes in a single column
-ggplot(mpg, aes(displ, hwy, color = class)) +
-  geom_point()
+p + legend_left()
+p + legend_right()
 ```
 
-**After:** `legend_wrap()` arranges entries in a grid.
+<img src="man/figures/legend_left.png" width="45%"> <img src="man/figures/legend_right.png" width="45%">
+
+#### `legend_top()` / `legend_bottom()`
+
+Horizontal layout with optional plot alignment:
 
 ```r
-library(ggplot2)
-library(ggguides)
+p + legend_top()
+p + legend_bottom()
 
-# Compact 2-column layout
+# Align to full plot (useful with titles)
+p + labs(title = "My Title") + legend_top(align_to = "plot")
+```
+
+<img src="man/figures/legend_top.png" width="45%"> <img src="man/figures/legend_bottom.png" width="45%">
+
+#### `legend_inside()`
+
+Position inside the plot using coordinates or shortcuts:
+
+```r
+# Using shortcuts
+p + legend_inside(position = "topright")
+p + legend_inside(position = "bottomleft")
+
+# Using coordinates
+p + legend_inside(x = 0.95, y = 0.95, just = c("right", "top"))
+
+# With custom styling
+p + legend_inside(position = "center", background = "grey95", border = "grey50")
+```
+
+<img src="man/figures/legend_inside_topright.png" width="45%"> <img src="man/figures/legend_inside_bottomleft.png" width="45%">
+
+#### `legend_none()`
+
+Remove the legend entirely:
+
+```r
+p + legend_none()
+```
+
+<img src="man/figures/legend_none.png" width="45%">
+
+---
+
+### Style Helpers
+
+#### `legend_style()`
+
+Comprehensive styling in one call:
+
+```r
+# Basic: font and size
+p + legend_style(size = 14, family = "serif")
+
+# Full styling
+p + legend_style(
+  size = 12,
+  title_size = 14,
+  title_face = "bold",
+  key_width = 1.5,
+  background = "grey95",
+  background_color = "grey70",
+  margin = 0.3
+)
+```
+
+<img src="man/figures/legend_style_basic.png" width="45%"> <img src="man/figures/legend_style_full.png" width="45%">
+
+#### `legend_wrap()`
+
+Wrap legend entries into columns or rows:
+
+```r
 ggplot(mpg, aes(displ, hwy, color = class)) +
   geom_point() +
   legend_wrap(ncol = 2)
+
+# Or by rows
+ggplot(mpg, aes(displ, hwy, color = class)) +
+  geom_point() +
+  legend_wrap(nrow = 2)
 ```
 
-### 3. Collecting Legends in Patchwork
+<img src="man/figures/legend_wrap_ncol2.png" width="45%"> <img src="man/figures/legend_wrap_nrow2.png" width="45%">
 
-**Before:** Each plot in a patchwork composition has its own redundant legend.
+#### `legend_reverse()`
+
+Reverse legend entry order:
 
 ```r
-library(ggplot2)
+p + legend_reverse()
+```
+
+<img src="man/figures/legend_reverse.png" width="45%">
+
+---
+
+### Patchwork Integration
+
+#### `collect_legends()`
+
+Collect legends from patchwork compositions:
+
+```r
 library(patchwork)
 
 p1 <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
-  geom_point() +
-  labs(title = "Weight vs MPG")
-
+  geom_point() + labs(title = "Plot 1")
 p2 <- ggplot(mtcars, aes(mpg, hp, color = factor(cyl))) +
-  geom_point() +
-  labs(title = "HP vs MPG")
+  geom_point() + labs(title = "Plot 2")
 
-# Duplicate legends
+# Without collection (duplicate legends)
 p1 | p2
-```
 
-**After:** `collect_legends()` merges them into one.
-```r
-library(ggplot2)
-library(patchwork)
-library(ggguides)
-
-p1 <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
-  geom_point() +
-  labs(title = "Weight vs MPG")
-
-p2 <- ggplot(mtcars, aes(mpg, hp, color = factor(cyl))) +
-  geom_point() +
-  labs(title = "HP vs MPG")
-
-# Single shared legend
+# With collection
 collect_legends(p1 | p2)
 
-# Or place it at the bottom
+# Position at bottom
 collect_legends(p1 | p2, position = "bottom")
 ```
 
-## Combining Functions
+<img src="man/figures/patchwork_no_collect.png" width="80%">
 
-Functions can be combined for maximum control:
+<img src="man/figures/patchwork_collect.png" width="80%">
+
+#### Height Spanning
+
+For stacked plots, use `span = TRUE` to make the legend span the full height:
 
 ```r
-library(ggplot2)
-library(patchwork)
-library(ggguides)
+p3 <- ggplot(mtcars, aes(mpg, disp, color = factor(cyl))) +
+  geom_point() + labs(title = "Plot 3")
 
-p1 <- ggplot(mpg, aes(displ, hwy, color = class)) +
-  geom_point()
+# Default: legend centered
+collect_legends(p1 / p2 / p3, position = "right")
 
-p2 <- ggplot(mpg, aes(displ, cty, color = class)) +
-  geom_point()
-
-# Combine plots, collect legends, wrap into 2 columns, position on left
-(p1 / p2) |>
-  collect_legends(position = "left") &
-  legend_wrap(ncol = 2)
+# With spanning: legend fills full height
+gt <- collect_legends(p1 / p2 / p3, position = "right", span = TRUE)
+grid::grid.draw(gt)
 ```
+
+<img src="man/figures/patchwork_stacked_default.png" width="45%"> <img src="man/figures/patchwork_stacked_span.png" width="45%">
+
+---
+
+### Combining Functions
+
+Functions compose naturally:
+
+```r
+ggplot(mpg, aes(displ, hwy, color = class)) +
+  geom_point() +
+  legend_left() +
+  legend_style(size = 12, title_face = "bold", background = "grey95")
+```
+
+<img src="man/figures/combined_left_styled.png" width="60%">
+
+```r
+ggplot(mpg, aes(displ, hwy, color = class)) +
+  geom_point() +
+  legend_wrap(ncol = 2) +
+  legend_bottom()
+```
+
+<img src="man/figures/combined_wrap_bottom.png" width="60%">
+
+---
 
 ## cowplot Users
 
-While ggguides focuses on patchwork integration, cowplot users can still use `legend_left()` and `legend_wrap()` on individual plots. For legend collection with cowplot, use:
+For cowplot, we recommend the [lemon](https://github.com/stefanedwards/lemon) package which provides:
 
-```r
-library(cowplot)
+- `g_legend()` - extract legend as grob
+- `grid_arrange_shared_legend()` - combine plots with shared legend
+- `reposition_legend()` - place legend inside panels
 
-legend <- get_legend(p1)
-plot_grid(
-  plot_grid(p1 + theme(legend.position = "none"),
-            p2 + theme(legend.position = "none")),
-  legend,
-  rel_widths = c(3, 1)
-)
-```
+ggguides functions like `legend_style()`, `legend_wrap()`, and position helpers work on individual plots regardless of layout package.
 
 ## License
 
