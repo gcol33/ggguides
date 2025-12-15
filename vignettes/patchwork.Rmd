@@ -28,7 +28,7 @@ When combining multiple plots with patchwork, legends often need special handlin
 - **Alignment issues** - Legends may not align properly across panels
 - **Spanning** - Legends should sometimes span multiple rows
 
-ggguides provides `collect_legends()` and `align_guides_h()` to address these challenges.
+ggguides provides `collect_legends()` and `collect_axes()` to address these challenges.
 
 ## The Problem: Duplicate Legends
 
@@ -105,26 +105,26 @@ gt <- collect_legends(stacked, position = "right", span = 1:2)
 grid::grid.draw(gt)
 ```
 
-## Horizontal Guide Alignment
+## Collecting Duplicate Axes
 
-When plots have different widths due to axis labels, use `align_guides_h()` to
-align them horizontally:
+When stacking plots vertically, the x-axis may be duplicated. Use `collect_axes()`
+to remove redundant axes:
 
-```{r align-guides, fig.height=5}
-# Plots with different y-axis label widths
-p_short <- ggplot(mtcars, aes(mpg, wt)) +
-  geom_point() + labs(y = "wt")
+```{r collect-axes, fig.height=5}
+# Plots stacked vertically - x-axis is duplicated
+p_top <- ggplot(mtcars, aes(mpg, wt)) +
+  geom_point() + labs(y = "Weight")
 
-p_long <- ggplot(mtcars, aes(mpg, disp)) +
-  geom_point() + labs(y = "Displacement (cu.in.)")
+p_bottom <- ggplot(mtcars, aes(mpg, disp)) +
+  geom_point() + labs(y = "Displacement")
 
-# Without alignment
-p_short / p_long
+# Without axis collection (both have x-axis)
+p_top / p_bottom
 ```
 
-```{r align-guides-fixed, fig.height=5}
-# With horizontal alignment
-align_guides_h(p_short / p_long)
+```{r collect-axes-fixed, fig.height=5}
+# With axis collection (removes redundant x-axis from top)
+collect_axes(p_top / p_bottom)
 ```
 
 ## Combining with Styling
@@ -167,7 +167,7 @@ work on individual plots regardless of layout package.
 | Function | Purpose | Key Parameters |
 |----------|---------|----------------|
 | `collect_legends()` | Gather legends from patchwork | `position`, `span` |
-| `align_guides_h()` | Align plots horizontally | None |
+| `collect_axes()` | Remove duplicate axes | `guides` |
 
 **Learn more:**
 

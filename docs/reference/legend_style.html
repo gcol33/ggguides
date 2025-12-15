@@ -63,9 +63,15 @@ text, title, keys, spacing, background, and direction in one call.</p>
 <span>  family <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  face <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  color <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  angle <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  hjust <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  vjust <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  title_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  title_face <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  title_color <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  title_angle <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  title_hjust <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  title_vjust <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  title_position <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  key_width <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  key_height <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -104,6 +110,21 @@ text, title, keys, spacing, background, and direction in one call.</p>
 <dd><p>Text color for legend labels.</p></dd>
 
 
+<dt id="arg-angle">angle<a class="anchor" aria-label="anchor" href="#arg-angle"></a></dt>
+<dd><p>Rotation angle for legend labels (in degrees). Useful for long
+category names. Common values: 45 for diagonal, 90 for vertical.</p></dd>
+
+
+<dt id="arg-hjust">hjust<a class="anchor" aria-label="anchor" href="#arg-hjust"></a></dt>
+<dd><p>Horizontal justification for rotated text (0 = left, 0.5 = center,
+1 = right). Often needed when using <code>angle</code>.</p></dd>
+
+
+<dt id="arg-vjust">vjust<a class="anchor" aria-label="anchor" href="#arg-vjust"></a></dt>
+<dd><p>Vertical justification for rotated text (0 = bottom, 0.5 = middle,
+1 = top). Often needed when using <code>angle</code>.</p></dd>
+
+
 <dt id="arg-title-size">title_size<a class="anchor" aria-label="anchor" href="#arg-title-size"></a></dt>
 <dd><p>Text size for legend title (in points). If <code>NULL</code>,
 inherits from <code>size</code>.</p></dd>
@@ -117,6 +138,18 @@ inherits from <code>size</code>.</p></dd>
 <dt id="arg-title-color">title_color<a class="anchor" aria-label="anchor" href="#arg-title-color"></a></dt>
 <dd><p>Text color for legend title. If <code>NULL</code>, inherits from
 <code>color</code>.</p></dd>
+
+
+<dt id="arg-title-angle">title_angle<a class="anchor" aria-label="anchor" href="#arg-title-angle"></a></dt>
+<dd><p>Rotation angle for legend title (in degrees).</p></dd>
+
+
+<dt id="arg-title-hjust">title_hjust<a class="anchor" aria-label="anchor" href="#arg-title-hjust"></a></dt>
+<dd><p>Horizontal justification for rotated title.</p></dd>
+
+
+<dt id="arg-title-vjust">title_vjust<a class="anchor" aria-label="anchor" href="#arg-title-vjust"></a></dt>
+<dd><p>Vertical justification for rotated title.</p></dd>
 
 
 <dt id="arg-title-position">title_position<a class="anchor" aria-label="anchor" href="#arg-title-position"></a></dt>
@@ -221,6 +254,11 @@ border.</p></dd>
 <span>    background_color <span class="op">=</span> <span class="st">"grey80"</span>,</span>
 <span>    margin <span class="op">=</span> <span class="fl">0.3</span></span>
 <span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Rotated labels for long category names</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">displ</span>, <span class="va">hwy</span>, color <span class="op">=</span> <span class="va">class</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">legend_style</span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">45</span>, hjust <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span></span></code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

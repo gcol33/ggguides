@@ -13,9 +13,15 @@ legend_style(
   family = NULL,
   face = NULL,
   color = NULL,
+  angle = NULL,
+  hjust = NULL,
+  vjust = NULL,
   title_size = NULL,
   title_face = NULL,
   title_color = NULL,
+  title_angle = NULL,
+  title_hjust = NULL,
+  title_vjust = NULL,
   title_position = NULL,
   key_width = NULL,
   key_height = NULL,
@@ -52,6 +58,21 @@ legend_style(
 
   Text color for legend labels.
 
+- angle:
+
+  Rotation angle for legend labels (in degrees). Useful for long
+  category names. Common values: 45 for diagonal, 90 for vertical.
+
+- hjust:
+
+  Horizontal justification for rotated text (0 = left, 0.5 = center, 1 =
+  right). Often needed when using `angle`.
+
+- vjust:
+
+  Vertical justification for rotated text (0 = bottom, 0.5 = middle, 1 =
+  top). Often needed when using `angle`.
+
 - title_size:
 
   Text size for legend title (in points). If `NULL`, inherits from
@@ -64,6 +85,18 @@ legend_style(
 - title_color:
 
   Text color for legend title. If `NULL`, inherits from `color`.
+
+- title_angle:
+
+  Rotation angle for legend title (in degrees).
+
+- title_hjust:
+
+  Horizontal justification for rotated title.
+
+- title_vjust:
+
+  Vertical justification for rotated title.
 
 - title_position:
 
@@ -165,4 +198,9 @@ ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
     background_color = "grey80",
     margin = 0.3
   )
+
+# Rotated labels for long category names
+ggplot(mpg, aes(displ, hwy, color = class)) +
+  geom_point() +
+  legend_style(angle = 45, hjust = 1)
 ```

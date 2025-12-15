@@ -42,7 +42,7 @@ all columns (for top/bottom positions). This addresses the common issue where
 collected legends are centered rather than spanning the full composition.
 
 When \code{span} is an integer vector (e.g., \code{c(1, 2)}), the legend
-aligns with only those specific rows (for right/left) or columns (for
+is centered between those specific rows (for right/left) or columns (for
 top/bottom). This is useful for attaching a legend to specific plots in a
 stacked layout. Row/column numbers refer to the panel positions in the
 patchwork (1-indexed).
@@ -87,5 +87,5 @@ grid::grid.draw(gt)
 
 }
 \seealso{
-\code{\link{align_guides_h}}, \code{\link{legend_left}}, \code{\link{legend_wrap}}
+\code{\link{collect_axes}}, \code{\link{legend_left}}, \code{\link{legend_wrap}}
 }

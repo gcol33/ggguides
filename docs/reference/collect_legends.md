@@ -50,8 +50,8 @@ all columns (for top/bottom positions). This addresses the common issue
 where collected legends are centered rather than spanning the full
 composition.
 
-When `span` is an integer vector (e.g., `c(1, 2)`), the legend aligns
-with only those specific rows (for right/left) or columns (for
+When `span` is an integer vector (e.g., `c(1, 2)`), the legend is
+centered between those specific rows (for right/left) or columns (for
 top/bottom). This is useful for attaching a legend to specific plots in
 a stacked layout. Row/column numbers refer to the panel positions in the
 patchwork (1-indexed).
@@ -62,7 +62,7 @@ and positioning.
 
 ## See also
 
-[`align_guides_h`](https://gcol33.github.io/ggguides/reference/align_guides_h.md),
+[`collect_axes`](https://gcol33.github.io/ggguides/reference/collect_axes.md),
 [`legend_left`](https://gcol33.github.io/ggguides/reference/legend_left.md),
 [`legend_wrap`](https://gcol33.github.io/ggguides/reference/legend_wrap.md)
 

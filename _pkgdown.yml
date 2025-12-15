@@ -77,7 +77,7 @@ reference:
     desc: "Collect and align legends across multi-panel plots (patchwork or cowplot)"
     contents:
       - collect_legends
-      - align_guides_h
+      - collect_axes
       - get_legend
       - shared_legend
 

@@ -27,7 +27,7 @@
 #' collected legends are centered rather than spanning the full composition.
 #'
 #' When \code{span} is an integer vector (e.g., \code{c(1, 2)}), the legend
-#' aligns with only those specific rows (for right/left) or columns (for
+#' is centered between those specific rows (for right/left) or columns (for
 #' top/bottom). This is useful for attaching a legend to specific plots in a
 #' stacked layout. Row/column numbers refer to the panel positions in the
 #' patchwork (1-indexed).
@@ -70,7 +70,7 @@
 #' grid::grid.draw(gt)
 #' }
 #'
-#' @seealso \code{\link{align_guides_h}}, \code{\link{legend_left}}, \code{\link{legend_wrap}}
+#' @seealso \code{\link{collect_axes}}, \code{\link{legend_left}}, \code{\link{legend_wrap}}
 #' @export
 collect_legends <- function(x, position = c("right", "left", "bottom", "top"),
                             span = FALSE) {
@@ -107,9 +107,19 @@ collect_legends <- function(x, position = c("right", "left", "bottom", "top"),
   }
 
   # Find panel positions to map row/column indices
+  # We need both top (t) and bottom (b) positions for rows,
+
+  # and left (l) and right (r) positions for columns
   panel_idx <- grep("^panel", gt$layout$name)
-  panel_rows <- sort(unique(gt$layout$t[panel_idx]))
-  panel_cols <- sort(unique(gt$layout$l[panel_idx]))
+  panel_layout <- gt$layout[panel_idx, ]
+
+  # Get unique panel row positions (top and bottom of each panel row)
+  panel_rows_t <- sort(unique(panel_layout$t))
+  panel_rows_b <- sort(unique(panel_layout$b))
+
+  # Get unique panel column positions (left and right of each panel column)
+  panel_cols_l <- sort(unique(panel_layout$l))
+  panel_cols_r <- sort(unique(panel_layout$r))
 
   if (position %in% c("right", "left")) {
     if (isTRUE(span)) {
@@ -117,14 +127,22 @@ collect_legends <- function(x, position = c("right", "left", "bottom", "top"),
       gt$layout$t[guide_idx] <- 1
       gt$layout$b[guide_idx] <- nrow(gt)
     } else if (is.numeric(span)) {
-      # Span specific rows
+      # Span specific rows - center legend between specified panels
       span <- as.integer(span)
-      if (any(span < 1) || any(span > length(panel_rows))) {
-        stop("span indices must be between 1 and ", length(panel_rows),
+      if (any(span < 1) || any(span > length(panel_rows_t))) {
+        stop("span indices must be between 1 and ", length(panel_rows_t),
              " (number of panel rows).", call. = FALSE)
       }
-      gt$layout$t[guide_idx] <- panel_rows[min(span)]
-      gt$layout$b[guide_idx] <- panel_rows[max(span)]
+      # Set the layout to span from top of first panel to bottom of last panel
+      gt$layout$t[guide_idx] <- panel_rows_t[min(span)]
+      gt$layout$b[guide_idx] <- panel_rows_b[max(span)]
+
+      # Wrap the guide grob in a viewport that centers it vertically
+      guide_grob <- gt$grobs[[guide_idx]]
+      gt$grobs[[guide_idx]] <- grid::gTree(
+        children = grid::gList(guide_grob),
+        vp = grid::viewport(y = 0.5, just = "center")
+      )
     }
   } else {
     if (isTRUE(span)) {
@@ -132,14 +150,22 @@ collect_legends <- function(x, position = c("right", "left", "bottom", "top"),
       gt$layout$l[guide_idx] <- 1
       gt$layout$r[guide_idx] <- ncol(gt)
     } else if (is.numeric(span)) {
-      # Span specific columns
+      # Span specific columns - center legend between specified panels
       span <- as.integer(span)
-      if (any(span < 1) || any(span > length(panel_cols))) {
-        stop("span indices must be between 1 and ", length(panel_cols),
+      if (any(span < 1) || any(span > length(panel_cols_l))) {
+        stop("span indices must be between 1 and ", length(panel_cols_l),
              " (number of panel columns).", call. = FALSE)
       }
-      gt$layout$l[guide_idx] <- panel_cols[min(span)]
-      gt$layout$r[guide_idx] <- panel_cols[max(span)]
+      # Set the layout to span from left of first panel to right of last panel
+      gt$layout$l[guide_idx] <- panel_cols_l[min(span)]
+      gt$layout$r[guide_idx] <- panel_cols_r[max(span)]
+
+      # Wrap the guide grob in a viewport that centers it horizontally
+      guide_grob <- gt$grobs[[guide_idx]]
+      gt$grobs[[guide_idx]] <- grid::gTree(
+        children = grid::gList(guide_grob),
+        vp = grid::viewport(x = 0.5, just = "center")
+      )
     }
   }
 

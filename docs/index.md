@@ -34,7 +34,7 @@ ggplot2:
   [`colorbar_style()`](https://gcol33.github.io/ggguides/reference/colorbar_style.md)
 - **Multi-Panel**:
   [`collect_legends()`](https://gcol33.github.io/ggguides/reference/collect_legends.md),
-  [`align_guides_h()`](https://gcol33.github.io/ggguides/reference/align_guides_h.md)
+  [`collect_axes()`](https://gcol33.github.io/ggguides/reference/collect_axes.md)
   (patchwork),
   [`shared_legend()`](https://gcol33.github.io/ggguides/reference/shared_legend.md),
   [`get_legend()`](https://gcol33.github.io/ggguides/reference/get_legend.md)

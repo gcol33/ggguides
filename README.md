@@ -16,7 +16,7 @@ ggguides provides one-liner functions for common legend operations in ggplot2:
 - **Position**: `legend_left()`, `legend_right()`, `legend_top()`, `legend_bottom()`, `legend_inside()`, `legend_none()`
 - **Direction**: `legend_horizontal()`, `legend_vertical()`
 - **Style**: `legend_style()`, `legend_wrap()`, `legend_reverse()`, `legend_order()`, `legend_keys()`, `colorbar_style()`
-- **Multi-Panel**: `collect_legends()`, `align_guides_h()` (patchwork), `shared_legend()`, `get_legend()` (cowplot/grid)
+- **Multi-Panel**: `collect_legends()`, `collect_axes()` (patchwork), `shared_legend()`, `get_legend()` (cowplot/grid)
 
 ## Examples
 

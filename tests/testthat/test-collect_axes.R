@@ -1,31 +1,31 @@
 library(testthat)
 library(ggplot2)
 
-test_that("align_guides_h errors without patchwork installed", {
+test_that("collect_axes errors without patchwork installed", {
   skip_if(rlang::is_installed("patchwork"))
   expect_error(
-    align_guides_h(list()),
+    collect_axes(list()),
     "patchwork"
   )
 })
 
-test_that("align_guides_h errors if x is not a patchwork object", {
+test_that("collect_axes errors if x is not a patchwork object", {
   skip_if_not_installed("patchwork")
   expect_error(
-    align_guides_h(ggplot()),
+    collect_axes(ggplot()),
     "`x` must be a patchwork object."
   )
 })
 
-test_that("align_guides_h errors if x is a list", {
+test_that("collect_axes errors if x is a list", {
   skip_if_not_installed("patchwork")
   expect_error(
-    align_guides_h(list(a = 1)),
+    collect_axes(list(a = 1)),
     "`x` must be a patchwork object."
   )
 })
 
-test_that("align_guides_h works with valid patchwork object", {
+test_that("collect_axes works with valid patchwork object", {
   skip_if_not_installed("patchwork")
   library(patchwork)
 
@@ -33,11 +33,11 @@ test_that("align_guides_h works with valid patchwork object", {
   p2 <- ggplot(mtcars, aes(mpg, hp, color = factor(cyl))) + geom_point()
   combined <- p1 / p2
 
-  result <- align_guides_h(combined)
+  result <- collect_axes(combined)
   expect_s3_class(result, "patchwork")
 })
 
-test_that("align_guides_h accepts guides = 'keep'", {
+test_that("collect_axes accepts guides = 'keep'", {
   skip_if_not_installed("patchwork")
   library(patchwork)
 
@@ -45,11 +45,11 @@ test_that("align_guides_h accepts guides = 'keep'", {
   p2 <- ggplot(mtcars, aes(mpg, hp, color = factor(cyl))) + geom_point()
   combined <- p1 / p2
 
-  result <- align_guides_h(combined, guides = "keep")
+  result <- collect_axes(combined, guides = "keep")
   expect_s3_class(result, "patchwork")
 })
 
-test_that("align_guides_h rejects invalid guides parameter", {
+test_that("collect_axes rejects invalid guides parameter", {
   skip_if_not_installed("patchwork")
   library(patchwork)
 
@@ -58,7 +58,22 @@ test_that("align_guides_h rejects invalid guides parameter", {
   combined <- p1 / p2
 
   expect_error(
-    align_guides_h(combined, guides = "invalid"),
+    collect_axes(combined, guides = "invalid"),
     "'arg' should be one of"
   )
+})
+
+test_that("align_guides_h is deprecated alias for collect_axes", {
+  skip_if_not_installed("patchwork")
+  library(patchwork)
+
+  p1 <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) + geom_point()
+  p2 <- ggplot(mtcars, aes(mpg, hp, color = factor(cyl))) + geom_point()
+  combined <- p1 / p2
+
+  expect_warning(
+    result <- align_guides_h(combined),
+    "deprecated"
+  )
+  expect_s3_class(result, "patchwork")
 })

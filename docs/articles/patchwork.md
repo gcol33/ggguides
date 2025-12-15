@@ -13,7 +13,7 @@ handling:
 ggguides provides
 [`collect_legends()`](https://gcol33.github.io/ggguides/reference/collect_legends.md)
 and
-[`align_guides_h()`](https://gcol33.github.io/ggguides/reference/align_guides_h.md)
+[`collect_axes()`](https://gcol33.github.io/ggguides/reference/collect_axes.md)
 to address these challenges.
 
 ## The Problem: Duplicate Legends
@@ -119,34 +119,34 @@ grid::grid.draw(gt)
 
 ![](patchwork_files/figure-html/span-row12-1.svg)
 
-## Horizontal Guide Alignment
+## Collecting Duplicate Axes
 
-When plots have different widths due to axis labels, use
-[`align_guides_h()`](https://gcol33.github.io/ggguides/reference/align_guides_h.md)
-to align them horizontally:
-
-``` r
-
-# Plots with different y-axis label widths
-p_short <- ggplot(mtcars, aes(mpg, wt)) +
-  geom_point() + labs(y = "wt")
-
-p_long <- ggplot(mtcars, aes(mpg, disp)) +
-  geom_point() + labs(y = "Displacement (cu.in.)")
-
-# Without alignment
-p_short / p_long
-```
-
-![](patchwork_files/figure-html/align-guides-1.svg)
+When stacking plots vertically, the x-axis may be duplicated. Use
+[`collect_axes()`](https://gcol33.github.io/ggguides/reference/collect_axes.md)
+to remove redundant axes:
 
 ``` r
 
-# With horizontal alignment
-align_guides_h(p_short / p_long)
+# Plots stacked vertically - x-axis is duplicated
+p_top <- ggplot(mtcars, aes(mpg, wt)) +
+  geom_point() + labs(y = "Weight")
+
+p_bottom <- ggplot(mtcars, aes(mpg, disp)) +
+  geom_point() + labs(y = "Displacement")
+
+# Without axis collection (both have x-axis)
+p_top / p_bottom
 ```
 
-![](patchwork_files/figure-html/align-guides-fixed-1.svg)
+![](patchwork_files/figure-html/collect-axes-1.svg)
+
+``` r
+
+# With axis collection (removes redundant x-axis from top)
+collect_axes(p_top / p_bottom)
+```
+
+![](patchwork_files/figure-html/collect-axes-fixed-1.svg)
 
 ## Combining with Styling
 
@@ -198,7 +198,7 @@ package.
 | Function | Purpose | Key Parameters |
 |----|----|----|
 | [`collect_legends()`](https://gcol33.github.io/ggguides/reference/collect_legends.md) | Gather legends from patchwork | `position`, `span` |
-| [`align_guides_h()`](https://gcol33.github.io/ggguides/reference/align_guides_h.md) | Align plots horizontally | None |
+| [`collect_axes()`](https://gcol33.github.io/ggguides/reference/collect_axes.md) | Remove duplicate axes | `guides` |
 
 **Learn more:**
 

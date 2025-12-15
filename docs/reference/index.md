@@ -51,8 +51,9 @@ cowplot)
 
 - [`collect_legends()`](https://gcol33.github.io/ggguides/reference/collect_legends.md)
   : Collect Legends from Patchwork Compositions
-- [`align_guides_h()`](https://gcol33.github.io/ggguides/reference/align_guides_h.md)
-  : Horizontally Align Guides Across Plots
+- [`collect_axes()`](https://gcol33.github.io/ggguides/reference/collect_axes.md)
+  [`align_guides_h()`](https://gcol33.github.io/ggguides/reference/collect_axes.md)
+  : Collect Axes from Patchwork Compositions
 - [`get_legend()`](https://gcol33.github.io/ggguides/reference/get_legend.md)
   : Extract Legend from a ggplot
 - [`shared_legend()`](https://gcol33.github.io/ggguides/reference/shared_legend.md)
