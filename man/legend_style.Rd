@@ -9,9 +9,15 @@ legend_style(
   family = NULL,
   face = NULL,
   color = NULL,
+  angle = NULL,
+  hjust = NULL,
+  vjust = NULL,
   title_size = NULL,
   title_face = NULL,
   title_color = NULL,
+  title_angle = NULL,
+  title_hjust = NULL,
+  title_vjust = NULL,
   title_position = NULL,
   key_width = NULL,
   key_height = NULL,
@@ -38,6 +44,15 @@ legend_style(
 
 \item{color}{Text color for legend labels.}
 
+\item{angle}{Rotation angle for legend labels (in degrees). Useful for long
+category names. Common values: 45 for diagonal, 90 for vertical.}
+
+\item{hjust}{Horizontal justification for rotated text (0 = left, 0.5 = center,
+1 = right). Often needed when using \code{angle}.}
+
+\item{vjust}{Vertical justification for rotated text (0 = bottom, 0.5 = middle,
+1 = top). Often needed when using \code{angle}.}
+
 \item{title_size}{Text size for legend title (in points). If \code{NULL},
 inherits from \code{size}.}
 
@@ -46,6 +61,12 @@ inherits from \code{size}.}
 
 \item{title_color}{Text color for legend title. If \code{NULL}, inherits from
 \code{color}.}
+
+\item{title_angle}{Rotation angle for legend title (in degrees).}
+
+\item{title_hjust}{Horizontal justification for rotated title.}
+
+\item{title_vjust}{Vertical justification for rotated title.}
 
 \item{title_position}{Position of legend title relative to keys. One of
 \code{"top"}, \code{"bottom"}, \code{"left"}, \code{"right"}.}
@@ -118,6 +139,11 @@ ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
     background_color = "grey80",
     margin = 0.3
   )
+
+# Rotated labels for long category names
+ggplot(mpg, aes(displ, hwy, color = class)) +
+  geom_point() +
+  legend_style(angle = 45, hjust = 1)
 
 }
 \seealso{

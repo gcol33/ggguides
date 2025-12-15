@@ -49,12 +49,21 @@ legend_reverse <- function() {
 #' @param face Font face for legend text (\code{"plain"}, \code{"bold"},
 #'   \code{"italic"}, \code{"bold.italic"}).
 #' @param color Text color for legend labels.
+#' @param angle Rotation angle for legend labels (in degrees). Useful for long
+#'   category names. Common values: 45 for diagonal, 90 for vertical.
+#' @param hjust Horizontal justification for rotated text (0 = left, 0.5 = center,
+#'   1 = right). Often needed when using \code{angle}.
+#' @param vjust Vertical justification for rotated text (0 = bottom, 0.5 = middle,
+#'   1 = top). Often needed when using \code{angle}.
 #' @param title_size Text size for legend title (in points). If \code{NULL},
 #'   inherits from \code{size}.
 #' @param title_face Font face for legend title. If \code{NULL}, inherits from
 #'   \code{face}.
 #' @param title_color Text color for legend title. If \code{NULL}, inherits from
 #'   \code{color}.
+#' @param title_angle Rotation angle for legend title (in degrees).
+#' @param title_hjust Horizontal justification for rotated title.
+#' @param title_vjust Vertical justification for rotated title.
 #' @param title_position Position of legend title relative to keys. One of
 #'   \code{"top"}, \code{"bottom"}, \code{"left"}, \code{"right"}.
 #' @param key_width Width of legend keys. Numeric (in cm) or a \code{unit} object.
@@ -108,6 +117,11 @@ legend_reverse <- function() {
 #'     margin = 0.3
 #'   )
 #'
+#' # Rotated labels for long category names
+#' ggplot(mpg, aes(displ, hwy, color = class)) +
+#'   geom_point() +
+#'   legend_style(angle = 45, hjust = 1)
+#'
 #' @seealso \code{\link{legend_left}}, \code{\link{legend_wrap}},
 #'   \code{\link{legend_reverse}}
 #' @export
@@ -116,9 +130,15 @@ legend_style <- function(
     family = NULL,
     face = NULL,
     color = NULL,
+    angle = NULL,
+    hjust = NULL,
+    vjust = NULL,
     title_size = NULL,
     title_face = NULL,
     title_color = NULL,
+    title_angle = NULL,
+    title_hjust = NULL,
+    title_vjust = NULL,
     title_position = NULL,
     key_width = NULL,
     key_height = NULL,
@@ -142,6 +162,9 @@ legend_style <- function(
   if (!is.null(family)) text_args$family <- family
   if (!is.null(face)) text_args$face <- face
   if (!is.null(color)) text_args$colour <- color
+  if (!is.null(angle)) text_args$angle <- angle
+  if (!is.null(hjust)) text_args$hjust <- hjust
+  if (!is.null(vjust)) text_args$vjust <- vjust
 
   if (length(text_args) > 0) {
     args$legend.text <- do.call(element_text, text_args)
@@ -152,6 +175,9 @@ legend_style <- function(
   if (!is.null(title_size)) title_args$size <- title_size
   if (!is.null(title_face)) title_args$face <- title_face
   if (!is.null(title_color)) title_args$colour <- title_color
+  if (!is.null(title_angle)) title_args$angle <- title_angle
+  if (!is.null(title_hjust)) title_args$hjust <- title_hjust
+  if (!is.null(title_vjust)) title_args$vjust <- title_vjust
 
   if (length(title_args) > 0) {
     args$legend.title <- do.call(element_text, title_args)

@@ -178,20 +178,65 @@ collect_legends(layout, position = "right")
 
 ![](patchwork_files/figure-html/complex-1.svg)
 
-## cowplot Users
+## cowplot / Grid Users
 
-For cowplot workflows, consider the
-[lemon](https://github.com/stefanedwards/lemon) package which provides:
+ggguides provides cowplot-compatible functions that work without
+patchwork:
 
-- `g_legend()` - Extract legend as grob
-- `grid_arrange_shared_legend()` - Combine plots with shared legend
-- `reposition_legend()` - Place legend inside panels
+### `get_legend()` - Extract Legend
 
-ggguides functions like
-[`legend_style()`](https://gcol33.github.io/ggguides/reference/legend_style.md),
+``` r
+
+# Extract legend from a plot
+leg <- get_legend(p1)
+
+# Use with cowplot::plot_grid() or grid::grid.draw()
+grid::grid.newpage()
+grid::grid.draw(leg)
+```
+
+### `shared_legend()` - Combine Plots with Shared Legend
+
+``` r
+
+# Side-by-side with shared legend on right
+gt <- shared_legend(p1, p2, ncol = 2, position = "right")
+#> Warning: No legend found in the source plot. Returning plots without shared
+#> legend.
+grid::grid.newpage()
+grid::grid.draw(gt)
+```
+
+![](patchwork_files/figure-html/shared-legend-side-1.svg)
+
+``` r
+
+# Stacked with legend at bottom
+gt <- shared_legend(p1, p2, p3, ncol = 1, position = "bottom")
+#> Warning: No legend found in the source plot. Returning plots without shared
+#> legend.
+grid::grid.newpage()
+grid::grid.draw(gt)
+```
+
+![](patchwork_files/figure-html/shared-legend-stacked-1.svg)
+
+``` r
+
+# 2x2 grid
+gt <- shared_legend(p1, p2, p3, p4, ncol = 2, nrow = 2, position = "right")
+#> Warning: No legend found in the source plot. Returning plots without shared
+#> legend.
+grid::grid.newpage()
+grid::grid.draw(gt)
+```
+
+![](patchwork_files/figure-html/shared-legend-grid-1.svg)
+
+All ggguides styling functions
+([`legend_style()`](https://gcol33.github.io/ggguides/reference/legend_style.md),
 [`legend_wrap()`](https://gcol33.github.io/ggguides/reference/legend_wrap.md),
-and position helpers work on individual plots regardless of layout
-package.
+etc.) work on individual plots regardless of layout package.
 
 ## Summary
 
@@ -199,6 +244,8 @@ package.
 |----|----|----|
 | [`collect_legends()`](https://gcol33.github.io/ggguides/reference/collect_legends.md) | Gather legends from patchwork | `position`, `span` |
 | [`collect_axes()`](https://gcol33.github.io/ggguides/reference/collect_axes.md) | Remove duplicate axes | `guides` |
+| [`get_legend()`](https://gcol33.github.io/ggguides/reference/get_legend.md) | Extract legend as grob | \- |
+| [`shared_legend()`](https://gcol33.github.io/ggguides/reference/shared_legend.md) | Combine plots with shared legend | `ncol`, `nrow`, `position` |
 
 **Learn more:**
 

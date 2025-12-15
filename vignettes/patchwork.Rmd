@@ -151,16 +151,46 @@ layout <- (p1 | p2) / (p3 | p4)
 collect_legends(layout, position = "right")
 ```
 
-## cowplot Users
+## cowplot / Grid Users
 
-For cowplot workflows, consider the [lemon](https://github.com/stefanedwards/lemon) package which provides:
+ggguides provides cowplot-compatible functions that work without patchwork:
 
-- `g_legend()` - Extract legend as grob
-- `grid_arrange_shared_legend()` - Combine plots with shared legend
-- `reposition_legend()` - Place legend inside panels
+### `get_legend()` - Extract Legend
 
-ggguides functions like `legend_style()`, `legend_wrap()`, and position helpers
-work on individual plots regardless of layout package.
+```{r get-legend}
+# Extract legend from a plot
+leg <- get_legend(p1)
+
+# Use with cowplot::plot_grid() or grid::grid.draw()
+grid::grid.newpage()
+grid::grid.draw(leg)
+```
+
+### `shared_legend()` - Combine Plots with Shared Legend
+
+```{r shared-legend-side, fig.height=4}
+# Side-by-side with shared legend on right
+gt <- shared_legend(p1, p2, ncol = 2, position = "right")
+grid::grid.newpage()
+grid::grid.draw(gt)
+```
+
+```{r shared-legend-stacked, fig.height=6}
+# Stacked with legend at bottom
+gt <- shared_legend(p1, p2, p3, ncol = 1, position = "bottom")
+grid::grid.newpage()
+grid::grid.draw(gt)
+```
+
+```{r shared-legend-grid, fig.height=5}
+# 2x2 grid
+gt <- shared_legend(p1, p2, p3, p4, ncol = 2, nrow = 2, position = "right")
+grid::grid.newpage()
+grid::grid.draw(gt)
+```
+
+All ggguides styling functions (`legend_style()`, `legend_wrap()`, etc.) work
+on individual plots regardless of layout package.
 
 ## Summary
 
@@ -168,6 +198,8 @@ work on individual plots regardless of layout package.
 |----------|---------|----------------|
 | `collect_legends()` | Gather legends from patchwork | `position`, `span` |
 | `collect_axes()` | Remove duplicate axes | `guides` |
+| `get_legend()` | Extract legend as grob | - |
+| `shared_legend()` | Combine plots with shared legend | `ncol`, `nrow`, `position` |
 
 **Learn more:**
 
