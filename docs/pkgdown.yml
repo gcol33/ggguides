@@ -1,0 +1,12 @@
+pandoc: 3.8.2.1
+pkgdown: 2.2.0
+pkgdown_sha: ~
+articles:
+  getting-started: getting-started.html
+  patchwork: patchwork.html
+  positioning: positioning.html
+  styling: styling.html
+last_built: 2025-12-15T08:54Z
+urls:
+  reference: https://gcol33.github.io/ggguides/reference
+  article: https://gcol33.github.io/ggguides/articles
