@@ -209,6 +209,15 @@ legend_style <- function(
     }
   }
 
+  # For 90/-90 rotation, auto-set key_height based on text size if not specified
+  # At 90°, text width becomes height, so key_height needs to accommodate longest label
+  if (!is.null(angle) && abs(angle) == 90 && is.null(key_height)) {
+    # Scale by text size if specified (default ~11pt)
+    text_size <- if (!is.null(size)) size else 11
+    # Base: 1.5cm accommodates typical labels (~10 chars), scale with text size
+    key_height <- 1.5 * (text_size / 11)
+  }
+
   if (length(text_args) > 0) {
     args$legend.text <- do.call(element_text, text_args)
   }
@@ -219,9 +228,11 @@ legend_style <- function(
   if (!is.null(family)) title_args$family <- family
   if (!is.null(face)) title_args$face <- face
   if (!is.null(color)) title_args$colour <- color
-  # Title gets hjust = 0.5 for rotated labels (centered above keys)
+  # For rotated labels: center title and add bottom margin to clear angled text
   if (!is.null(angle)) {
     title_args$hjust <- 0.5
+    # Add bottom margin to push title above the tallest rotated label
+    title_args$margin <- margin(b = 0.3, unit = "cm")
   }
   if (!is.null(title_size)) title_args$size <- title_size
   if (!is.null(title_face)) title_args$face <- title_face
@@ -357,6 +368,12 @@ build_guide_with_style <- function(
     }
   }
 
+  # For 90/-90 rotation, auto-set key_height based on text size if not specified
+  if (!is.null(angle) && abs(angle) == 90 && is.null(key_height)) {
+    text_size <- if (!is.null(size)) size else 11
+    key_height <- 1.5 * (text_size / 11)
+  }
+
   if (length(text_args) > 0) {
     theme_args$legend.text <- do.call(element_text, text_args)
   }
@@ -367,7 +384,10 @@ build_guide_with_style <- function(
   if (!is.null(family)) title_args$family <- family
   if (!is.null(face)) title_args$face <- face
   if (!is.null(color)) title_args$colour <- color
-  if (!is.null(angle)) title_args$hjust <- 0.5
+  if (!is.null(angle)) {
+    title_args$hjust <- 0.5
+    title_args$margin <- margin(b = 0.3, unit = "cm")
+  }
   if (!is.null(title_size)) title_args$size <- title_size
   if (!is.null(title_face)) title_args$face <- title_face
   if (!is.null(title_color)) title_args$colour <- title_color
