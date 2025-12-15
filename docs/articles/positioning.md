@@ -21,7 +21,7 @@ p + legend_left() + ggtitle("legend_left()")
 p + legend_right() + ggtitle("legend_right()")
 ```
 
-![](positioning_files/figure-html/left-right-1.svg)![](positioning_files/figure-html/left-right-2.svg)
+![](positioning_files/figure-html/left-right-1.png)![](positioning_files/figure-html/left-right-2.png)
 
 ### Top and Bottom
 
@@ -34,7 +34,7 @@ p + legend_top() + ggtitle("legend_top()")
 p + legend_bottom() + ggtitle("legend_bottom()")
 ```
 
-![](positioning_files/figure-html/top-bottom-1.svg)![](positioning_files/figure-html/top-bottom-2.svg)
+![](positioning_files/figure-html/top-bottom-1.png)![](positioning_files/figure-html/top-bottom-2.png)
 
 ### Alignment with Titles
 
@@ -52,7 +52,7 @@ p_titled + legend_top() + ggtitle("align_to = 'panel' (default)")
 p_titled + legend_top(align_to = "plot") + ggtitle("align_to = 'plot'")
 ```
 
-![](positioning_files/figure-html/align-to-1.svg)![](positioning_files/figure-html/align-to-2.svg)
+![](positioning_files/figure-html/align-to-1.png)![](positioning_files/figure-html/align-to-2.png)
 
 ## Inside Positioning
 
@@ -71,7 +71,7 @@ p + legend_inside(position = "topright") + ggtitle("topright")
 p + legend_inside(position = "bottomleft") + ggtitle("bottomleft")
 ```
 
-![](positioning_files/figure-html/inside-shortcuts-1.svg)![](positioning_files/figure-html/inside-shortcuts-2.svg)
+![](positioning_files/figure-html/inside-shortcuts-1.png)![](positioning_files/figure-html/inside-shortcuts-2.png)
 
 ### Using Coordinates
 
@@ -83,7 +83,7 @@ justification:
 p + legend_inside(x = 0.95, y = 0.95, just = c("right", "top"))
 ```
 
-![](positioning_files/figure-html/inside-coords-1.svg)
+![](positioning_files/figure-html/inside-coords-1.png)
 
 ### Adding Background
 
@@ -98,7 +98,7 @@ p + legend_inside(
 )
 ```
 
-![](positioning_files/figure-html/inside-background-1.svg)
+![](positioning_files/figure-html/inside-background-1.png)
 
 ## Direction Control
 
@@ -112,7 +112,7 @@ p + legend_horizontal() + ggtitle("legend_horizontal()")
 p + legend_vertical() + ggtitle("legend_vertical()")
 ```
 
-![](positioning_files/figure-html/direction-1.svg)![](positioning_files/figure-html/direction-2.svg)
+![](positioning_files/figure-html/direction-1.png)![](positioning_files/figure-html/direction-2.png)
 
 ### Combining Direction and Position
 
@@ -121,7 +121,7 @@ p + legend_vertical() + ggtitle("legend_vertical()")
 p + legend_right() + legend_horizontal()
 ```
 
-![](positioning_files/figure-html/direction-position-1.svg)
+![](positioning_files/figure-html/direction-position-1.png)
 
 ## Removing the Legend
 
@@ -130,7 +130,7 @@ p + legend_right() + legend_horizontal()
 p + legend_none()
 ```
 
-![](positioning_files/figure-html/legend-none-1.svg)
+![](positioning_files/figure-html/legend-none-1.png)
 
 ## Summary
 

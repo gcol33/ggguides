@@ -44,11 +44,16 @@ Customize legend appearance
   [`colourbar_style()`](https://gcol33.github.io/ggguides/reference/colorbar_style.md)
   : Style Continuous Color Bar Legends
 
-## Patchwork Integration
+## Multi-Panel Layouts
 
-Collect and align legends across multi-panel plots
+Collect and align legends across multi-panel plots (patchwork or
+cowplot)
 
 - [`collect_legends()`](https://gcol33.github.io/ggguides/reference/collect_legends.md)
   : Collect Legends from Patchwork Compositions
 - [`align_guides_h()`](https://gcol33.github.io/ggguides/reference/align_guides_h.md)
   : Horizontally Align Guides Across Plots
+- [`get_legend()`](https://gcol33.github.io/ggguides/reference/get_legend.md)
+  : Extract Legend from a ggplot
+- [`shared_legend()`](https://gcol33.github.io/ggguides/reference/shared_legend.md)
+  : Combine Plots with a Shared Legend

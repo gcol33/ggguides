@@ -2,11 +2,14 @@
 
 Provides one-liner functions for common legend and guide operations in
 'ggplot2'. Simplifies legend positioning, styling, wrapping, and
-collection across multi-panel plots created with 'patchwork'.
+collection across multi-panel plots created with 'patchwork' or
+'cowplot'.
 
 ## See also
 
 Useful links:
+
+- <https://gcol33.github.io/ggguides/>
 
 - <https://github.com/gcol33/ggguides>
 

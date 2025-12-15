@@ -15,8 +15,8 @@ ggguides provides one-liner functions for common legend operations in ggplot2:
 
 - **Position**: `legend_left()`, `legend_right()`, `legend_top()`, `legend_bottom()`, `legend_inside()`, `legend_none()`
 - **Direction**: `legend_horizontal()`, `legend_vertical()`
-- **Style**: `legend_style()`, `legend_wrap()`, `legend_reverse()`
-- **Patchwork**: `collect_legends()`, `align_guides_h()`
+- **Style**: `legend_style()`, `legend_wrap()`, `legend_reverse()`, `legend_order()`, `legend_keys()`, `colorbar_style()`
+- **Multi-Panel**: `collect_legends()`, `align_guides_h()` (patchwork), `shared_legend()`, `get_legend()` (cowplot/grid)
 
 ## Examples
 
@@ -244,15 +244,51 @@ ggplot(mpg, aes(displ, hwy, color = class)) +
 
 ---
 
-## cowplot Users
+### cowplot / Base Grid Support
 
-For cowplot, we recommend the [lemon](https://github.com/stefanedwards/lemon) package which provides:
+ggguides also works without patchwork for cowplot users or anyone using base grid:
 
-- `g_legend()` - extract legend as grob
-- `grid_arrange_shared_legend()` - combine plots with shared legend
-- `reposition_legend()` - place legend inside panels
+#### `get_legend()`
 
-ggguides functions like `legend_style()`, `legend_wrap()`, and position helpers work on individual plots regardless of layout package.
+Extract a legend as a standalone grob:
+
+```r
+p <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
+  geom_point() + labs(color = "Cylinders")
+
+# Extract the legend
+leg <- get_legend(p)
+
+# Use with cowplot::plot_grid() or grid::grid.draw()
+grid::grid.draw(leg)
+```
+
+#### `shared_legend()`
+
+Combine plots with a shared legend (no patchwork required):
+
+```r
+p1 <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
+  geom_point() + labs(title = "Plot 1", color = "Cylinders")
+p2 <- ggplot(mtcars, aes(mpg, hp, color = factor(cyl))) +
+  geom_point() + labs(title = "Plot 2", color = "Cylinders")
+p3 <- ggplot(mtcars, aes(mpg, disp, color = factor(cyl))) +
+  geom_point() + labs(title = "Plot 3", color = "Cylinders")
+
+# Side-by-side with shared legend
+gt <- shared_legend(p1, p2, ncol = 2, position = "right")
+grid::grid.draw(gt)
+
+# Stacked with legend at bottom
+gt <- shared_legend(p1, p2, p3, ncol = 1, position = "bottom")
+grid::grid.draw(gt)
+
+# 2x2 grid
+gt <- shared_legend(p1, p2, p3, p1, ncol = 2, nrow = 2, position = "right")
+grid::grid.draw(gt)
+```
+
+All ggguides styling functions (`legend_style()`, `legend_wrap()`, etc.) work on individual plots regardless of layout package.
 
 ## License
 

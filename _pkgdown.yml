@@ -8,9 +8,10 @@ template:
   light-switch: true
 
 figures:
-  dev: svg
-  fig.ext: svg
-  bg: NA
+  dev: ragg::agg_png
+  dpi: 300
+  fig.ext: png
+  bg: "transparent"
 
 home:
   title: "ggguides: Simplified Legend and Guide Alignment for ggplot2"
@@ -73,11 +74,13 @@ reference:
       - legend_keys
       - colorbar_style
 
-  - title: "Patchwork Integration"
-    desc: "Collect and align legends across multi-panel plots"
+  - title: "Multi-Panel Layouts"
+    desc: "Collect and align legends across multi-panel plots (patchwork or cowplot)"
     contents:
       - collect_legends
       - align_guides_h
+      - get_legend
+      - shared_legend
 
 articles:
   - title: "Getting Started"

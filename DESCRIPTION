@@ -5,13 +5,15 @@ Authors@R:
     person("Gilles", "Colling", email = "gilles.colling051@gmail.com", role = c("aut", "cre"))
 Description: Provides one-liner functions for common legend and guide operations
     in 'ggplot2'. Simplifies legend positioning, styling, wrapping, and
-    collection across multi-panel plots created with 'patchwork'.
+    collection across multi-panel plots created with 'patchwork' or 'cowplot'.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
 Imports:
     ggplot2 (>= 3.5.0),
+    grid,
+    gridExtra,
     gtable,
     rlang
 Suggests:

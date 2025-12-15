@@ -45,7 +45,7 @@ p <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
 p
 ```
 
-![](getting-started_files/figure-html/base-plot-1.svg)
+![](getting-started_files/figure-html/base-plot-1.png)
 
 ### Moving the Legend
 
@@ -56,14 +56,14 @@ Position the legend on any side with a single function call:
 p + legend_left()
 ```
 
-![](getting-started_files/figure-html/position-left-1.svg)
+![](getting-started_files/figure-html/position-left-1.png)
 
 ``` r
 
 p + legend_bottom()
 ```
 
-![](getting-started_files/figure-html/position-bottom-1.svg)
+![](getting-started_files/figure-html/position-bottom-1.png)
 
 ### Inside Positioning
 
@@ -74,14 +74,14 @@ Place the legend inside the plot area using coordinates or shortcuts:
 p + legend_inside(position = "topright")
 ```
 
-![](getting-started_files/figure-html/inside-topright-1.svg)
+![](getting-started_files/figure-html/inside-topright-1.png)
 
 ``` r
 
 p + legend_inside(x = 0.02, y = 0.98, just = c("left", "top"))
 ```
 
-![](getting-started_files/figure-html/inside-coords-1.svg)
+![](getting-started_files/figure-html/inside-coords-1.png)
 
 ### Removing the Legend
 
@@ -90,7 +90,7 @@ p + legend_inside(x = 0.02, y = 0.98, just = c("left", "top"))
 p + legend_none()
 ```
 
-![](getting-started_files/figure-html/legend-none-1.svg)
+![](getting-started_files/figure-html/legend-none-1.png)
 
 ## Styling Legends
 
@@ -103,7 +103,7 @@ to customize the legend appearance:
 p + legend_style(size = 14)
 ```
 
-![](getting-started_files/figure-html/style-size-1.svg)
+![](getting-started_files/figure-html/style-size-1.png)
 
 ``` r
 
@@ -116,7 +116,7 @@ p + legend_style(
 )
 ```
 
-![](getting-started_files/figure-html/style-full-1.svg)
+![](getting-started_files/figure-html/style-full-1.png)
 
 ## Wrapping Legend Entries
 
@@ -131,7 +131,7 @@ ggplot(mpg, aes(displ, hwy, color = class)) +
   legend_wrap(ncol = 2)
 ```
 
-![](getting-started_files/figure-html/wrap-example-1.svg)
+![](getting-started_files/figure-html/wrap-example-1.png)
 
 ## Combining Functions
 
@@ -145,7 +145,7 @@ ggplot(mpg, aes(displ, hwy, color = class)) +
   legend_style(size = 12, title_face = "bold", background = "grey95")
 ```
 
-![](getting-started_files/figure-html/combined-1.svg)
+![](getting-started_files/figure-html/combined-1.png)
 
 ``` r
 
@@ -155,7 +155,7 @@ ggplot(mpg, aes(displ, hwy, color = class)) +
   legend_bottom()
 ```
 
-![](getting-started_files/figure-html/combined-wrap-1.svg)
+![](getting-started_files/figure-html/combined-wrap-1.png)
 
 ## What’s Next
 

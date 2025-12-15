@@ -6,11 +6,12 @@
 \alias{ggguides-package}
 \title{ggguides: Simplified Legend and Guide Alignment for 'ggplot2'}
 \description{
-Provides one-liner functions for common legend and guide operations in 'ggplot2'. Simplifies legend positioning, styling, wrapping, and collection across multi-panel plots created with 'patchwork'.
+Provides one-liner functions for common legend and guide operations in 'ggplot2'. Simplifies legend positioning, styling, wrapping, and collection across multi-panel plots created with 'patchwork' or 'cowplot'.
 }
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://gcol33.github.io/ggguides/}
   \item \url{https://github.com/gcol33/ggguides}
   \item Report bugs at \url{https://github.com/gcol33/ggguides/issues}
 }
