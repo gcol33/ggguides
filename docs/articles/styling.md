@@ -82,11 +82,11 @@ p_long + legend_style(angle = 45, hjust = 1)
 
 ### Vertical Labels
 
-Use 90 degrees for fully vertical text:
+Use 90 degrees for fully vertical text. Add spacing to prevent overlap:
 
 ``` r
 
-p_long + legend_style(angle = 90, hjust = 0.5)
+p_long + legend_style(angle = 90, hjust = 0.5, spacing_y = 0.8)
 ```
 
 ![](styling_files/figure-html/rotation-vertical-1.svg)
