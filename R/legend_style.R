@@ -166,6 +166,7 @@ legend_style <- function(
     text_args$angle <- angle
     # Default hjust = 0 for rotated text (better alignment with keys)
     if (is.null(hjust)) hjust <- 0
+    if (is.null(vjust) && angle == 90) vjust <- 0.5
   }
   if (!is.null(hjust)) text_args$hjust <- hjust
   if (!is.null(vjust)) text_args$vjust <- vjust
@@ -196,6 +197,11 @@ legend_style <- function(
   }
   if (!is.null(key_height)) {
     args$legend.key.height <- as_unit(key_height, "cm")
+  } else if (!is.null(angle) && abs(angle) >= 45) {
+    # Auto-increase key height for rotated labels to prevent overlap
+    # Use ~1.5cm as default which fits most label lengths
+    base_height <- if (!is.null(size)) size * 0.12 else 1.5
+    args$legend.key.height <- unit(base_height, "cm")
   }
   if (!is.null(key_fill)) {
     args$legend.key <- element_rect(fill = key_fill, color = NA)
