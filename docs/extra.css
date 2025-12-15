@@ -61,8 +61,14 @@ svg.inline-svg .svg-bg {
   stroke: #DFD7CA !important;
 }
 
-[data-bs-theme="dark"] svg.inline-svg .svglite text {
+/* Dark mode text color - but NOT for text on custom legend backgrounds */
+[data-bs-theme="dark"] svg.inline-svg .svglite text:not(.preserve-color) {
   fill: #DFD7CA !important;
+}
+
+/* Text on custom legend backgrounds keeps dark color for contrast */
+svg.inline-svg .svglite text.preserve-color {
+  fill: #3E3F3A !important;
 }
 
 /* Rect strokes (histogram bars, etc.) - match text color */

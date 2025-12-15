@@ -122,16 +122,16 @@
 <text transform='translate(13.36,130.99) rotate(-90)' text-anchor='middle' style='font-size: 11.00px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='11.00px' lengthAdjust='spacingAndGlyphs'>wt</text>
 <rect x='350.26' y='87.81' width='76.26' height='86.37' style='stroke-width: 0.75; stroke: none;' /> fill: #F5F6F8;' />
 <rect x='350.26' y='87.81' width='76.26' height='86.37' style='stroke-width: 1.07; stroke: #FF9800; fill: #FFF3E0;' />
-<text x='358.77' y='106.99' style='font-size: 13.00px; font-weight: bold; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='59.25px' lengthAdjust='spacingAndGlyphs'>Cylinders</text>
+<text class='preserve-color' x='358.77' y='106.99' style='font-size: 13.00px; font-weight: bold; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='59.25px' lengthAdjust='spacingAndGlyphs'>Cylinders</text>
 <rect x='358.77' y='113.83' width='34.02' height='17.28' style='stroke-width: 1.07; stroke: none;' /> fill: #F5F6F8;' />
 <circle cx='375.77' cy='122.47' r='3.56' style='stroke-width: 0.71; stroke: #F8766D; fill: #F8766D;' />
 <rect x='358.77' y='131.11' width='34.02' height='17.28' style='stroke-width: 1.07; stroke: none;' /> fill: #F5F6F8;' />
 <circle cx='375.77' cy='139.75' r='3.56' style='stroke-width: 0.71; stroke: #00BA38; fill: #00BA38;' />
 <rect x='358.77' y='148.39' width='34.02' height='17.28' style='stroke-width: 1.07; stroke: none;' /> fill: #F5F6F8;' />
 <circle cx='375.77' cy='157.03' r='3.56' style='stroke-width: 0.71; stroke: #619CFF; fill: #619CFF;' />
-<text x='398.26' y='126.41' style='font-size: 11.00px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='6.12px' lengthAdjust='spacingAndGlyphs'>4</text>
-<text x='398.26' y='143.69' style='font-size: 11.00px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='6.12px' lengthAdjust='spacingAndGlyphs'>6</text>
-<text x='398.26' y='160.97' style='font-size: 11.00px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='6.12px' lengthAdjust='spacingAndGlyphs'>8</text>
+<text class='preserve-color' x='398.26' y='126.41' style='font-size: 11.00px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='6.12px' lengthAdjust='spacingAndGlyphs'>4</text>
+<text class='preserve-color' x='398.26' y='143.69' style='font-size: 11.00px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='6.12px' lengthAdjust='spacingAndGlyphs'>6</text>
+<text class='preserve-color' x='398.26' y='160.97' style='font-size: 11.00px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='6.12px' lengthAdjust='spacingAndGlyphs'>8</text>
 </g>
 </g>
 </svg>

@@ -201,6 +201,51 @@ make_svg_theme_aware <- function(svg_path,
       svg_content
     )
 
+    # 2d) Handle custom legend backgrounds (from legend_style with background/border)
+    # These have fills that are NOT #F5F6F8, #FFFFFF, or none
+    # Find custom legend rects and mark text within their bounds
+    custom_rect_pattern <- "<rect x='([^']+)' y='([^']+)' width='([^']+)' height='([^']+)' style='[^']*fill: #(?!F5F6F8|FFFFFF|f5f6f8|ffffff|343739)[A-Fa-f0-9]{6};[^']*' />"
+    custom_matches <- gregexpr(custom_rect_pattern, svg_content, perl = TRUE)
+
+    if (custom_matches[[1]][1] != -1) {
+      # Extract bounding boxes of custom legend rects
+      match_data <- regmatches(svg_content, custom_matches)[[1]]
+      for (rect_match in match_data) {
+        # Parse coordinates
+        coords <- regmatches(rect_match, regexec(custom_rect_pattern, rect_match, perl = TRUE))[[1]]
+        if (length(coords) >= 5) {
+          x_min <- as.numeric(coords[2])
+          y_min <- as.numeric(coords[3])
+          x_max <- x_min + as.numeric(coords[4])
+          y_max <- y_min + as.numeric(coords[5])
+
+          # Find and mark text elements within this bounding box
+          # Pattern: <text x='N' y='N' ...> where N is within bounds
+          text_pattern <- "<text x='([0-9.]+)' y='([0-9.]+)'"
+          text_matches <- gregexpr(text_pattern, svg_content, perl = TRUE)
+
+          if (text_matches[[1]][1] != -1) {
+            # Process each text match
+            text_data <- regmatches(svg_content, text_matches)[[1]]
+            for (text_match in text_data) {
+              text_coords <- regmatches(text_match, regexec(text_pattern, text_match, perl = TRUE))[[1]]
+              if (length(text_coords) >= 3) {
+                tx <- as.numeric(text_coords[2])
+                ty <- as.numeric(text_coords[3])
+                # Check if text is within legend bounds (with small margin)
+                if (tx >= x_min - 5 && tx <= x_max + 5 && ty >= y_min - 5 && ty <= y_max + 5) {
+                  # Add preserve-color class to this text element
+                  old_text <- sprintf("<text x='%s' y='%s'", text_coords[2], text_coords[3])
+                  new_text <- sprintf("<text class='preserve-color' x='%s' y='%s'", text_coords[2], text_coords[3])
+                  svg_content <- sub(old_text, new_text, svg_content, fixed = TRUE)
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
     # 3) White strokes - keep as white for grid lines (CSS handles dark mode)
     # Don't replace white strokes globally - they're grid lines that need to stay white
     # in light mode and become darker in dark mode via CSS
