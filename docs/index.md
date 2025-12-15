@@ -6,13 +6,8 @@ Simplified legend and guide alignment for ggplot2.
 
 ``` r
 
-# Install from GitHub
 # install.packages("pak")
 pak::pak("gcol33/ggguides")
-
-# Or manually
-# install.packages("remotes")
-remotes::install_github("gcol33/ggguides")
 ```
 
 ## Overview
@@ -37,6 +32,12 @@ ggplot2:
   [`legend_order()`](https://gcol33.github.io/ggguides/reference/legend_order.md),
   [`legend_keys()`](https://gcol33.github.io/ggguides/reference/legend_keys.md),
   [`colorbar_style()`](https://gcol33.github.io/ggguides/reference/colorbar_style.md)
+- **Multiple Legends**:
+  [`legend_hide()`](https://gcol33.github.io/ggguides/reference/legend_hide.md),
+  [`legend_select()`](https://gcol33.github.io/ggguides/reference/legend_select.md),
+  [`legend_order_guides()`](https://gcol33.github.io/ggguides/reference/legend_order_guides.md),
+  [`legend_merge()`](https://gcol33.github.io/ggguides/reference/legend_merge.md),
+  [`legend_split()`](https://gcol33.github.io/ggguides/reference/legend_split.md)
 - **Multi-Panel**:
   [`collect_legends()`](https://gcol33.github.io/ggguides/reference/collect_legends.md),
   [`collect_axes()`](https://gcol33.github.io/ggguides/reference/collect_axes.md)
@@ -184,6 +185,63 @@ p + legend_reverse()
 ```
 
 ![](reference/figures/legend_reverse.png)
+
+------------------------------------------------------------------------
+
+### Multiple Legends
+
+When a plot has multiple aesthetics, control each legend separately:
+
+#### `legend_hide()` / `legend_select()`
+
+Hide specific legends or keep only certain ones:
+
+``` r
+
+# Plot with multiple aesthetics
+p <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl), size = hp)) +
+  geom_point() +
+  labs(color = "Cylinders", size = "Horsepower")
+
+# Hide the size legend
+p + legend_hide(size)
+
+# Keep only the colour legend
+p + legend_select(colour)
+```
+
+#### Position legends separately
+
+Use the `by` parameter to position legends independently:
+
+``` r
+
+# Colour legend on left, size legend at bottom
+p +
+  legend_left(by = "colour") +
+  legend_bottom(by = "size")
+```
+
+#### Style legends separately
+
+Apply different styles to different legends:
+
+``` r
+
+p +
+  legend_style(title_face = "bold", by = "colour") +
+  legend_style(size = 10, by = "size")
+```
+
+#### `legend_order_guides()`
+
+Control the display order of multiple legends:
+
+``` r
+
+# Size legend first, then colour
+p + legend_order_guides(size = 1, colour = 2)
+```
 
 ------------------------------------------------------------------------
 

@@ -11,7 +11,7 @@ text, title, keys, spacing, background, and direction in one call."></head><body
 
     <a class="navbar-brand me-2" href="../index.html">ggguides</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,6 +26,7 @@ text, title, keys, spacing, background, and direction in one call."></head><body
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/getting-started.html">Getting Started</a></li>
     <li><a class="dropdown-item" href="../articles/positioning.html">Legend Positioning</a></li>
     <li><a class="dropdown-item" href="../articles/styling.html">Styling &amp; Customization</a></li>
+    <li><a class="dropdown-item" href="../articles/multiple-legends.html">Multiple Legends</a></li>
     <li><a class="dropdown-item" href="../articles/patchwork.html">Patchwork Integration</a></li>
   </ul></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
@@ -64,8 +65,6 @@ text, title, keys, spacing, background, and direction in one call.</p>
 <span>  face <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  color <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  angle <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  hjust <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  vjust <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  title_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  title_face <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  title_color <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -85,7 +84,8 @@ text, title, keys, spacing, background, and direction in one call.</p>
 <span>  box_background <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  box_margin <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  direction <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  byrow <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  byrow <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  by <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -111,18 +111,9 @@ text, title, keys, spacing, background, and direction in one call.</p>
 
 
 <dt id="arg-angle">angle<a class="anchor" aria-label="anchor" href="#arg-angle"></a></dt>
-<dd><p>Rotation angle for legend labels (in degrees). Useful for long
-category names. Common values: 45 for diagonal, 90 for vertical.</p></dd>
-
-
-<dt id="arg-hjust">hjust<a class="anchor" aria-label="anchor" href="#arg-hjust"></a></dt>
-<dd><p>Horizontal justification for rotated text (0 = left, 0.5 = center,
-1 = right). Defaults to 0 when <code>angle</code> is specified.</p></dd>
-
-
-<dt id="arg-vjust">vjust<a class="anchor" aria-label="anchor" href="#arg-vjust"></a></dt>
-<dd><p>Vertical justification for rotated text (0 = bottom, 0.5 = middle,
-1 = top). Often needed when using <code>angle</code>.</p></dd>
+<dd><p>Rotation angle for legend labels (in degrees). Supported values:
+45, -45, 90, -90. Text justification is set automatically for optimal
+alignment with legend keys.</p></dd>
 
 
 <dt id="arg-title-size">title_size<a class="anchor" aria-label="anchor" href="#arg-title-size"></a></dt>
@@ -197,11 +188,13 @@ border.</p></dd>
 
 
 <dt id="arg-box-background">box_background<a class="anchor" aria-label="anchor" href="#arg-box-background"></a></dt>
-<dd><p>Background fill for the box containing multiple legends.</p></dd>
+<dd><p>Background fill for the box containing multiple legends.
+Ignored when <code>by</code> is specified.</p></dd>
 
 
 <dt id="arg-box-margin">box_margin<a class="anchor" aria-label="anchor" href="#arg-box-margin"></a></dt>
-<dd><p>Margin around the legend box. Single value or 4-vector in cm.</p></dd>
+<dd><p>Margin around the legend box. Single value or 4-vector in cm.
+Ignored when <code>by</code> is specified.</p></dd>
 
 
 <dt id="arg-direction">direction<a class="anchor" aria-label="anchor" href="#arg-direction"></a></dt>
@@ -212,10 +205,18 @@ border.</p></dd>
 <dd><p>For multi-column legends, fill by row (<code>TRUE</code>) or by column
 (<code>FALSE</code>).</p></dd>
 
+
+<dt id="arg-by">by<a class="anchor" aria-label="anchor" href="#arg-by"></a></dt>
+<dd><p>Optional aesthetic name (character) to style only a specific legend.
+When specified, uses per-guide theming via <code>guide_legend(theme = ...)</code>.
+Requires ggplot2 &gt;= 3.5.0. Common values: <code>"colour"</code>, <code>"fill"</code>,
+<code>"size"</code>.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A ggplot2 theme object that can be added to a plot.</p>
+    <p>A ggplot2 theme object (when <code>by</code> is NULL) or a guides
+specification (when <code>by</code> is specified).</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -259,6 +260,12 @@ border.</p></dd>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">displ</span>, <span class="va">hwy</span>, color <span class="op">=</span> <span class="va">class</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">legend_style</span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">45</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Style only the colour legend</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="va">wt</span>, color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span>, size <span class="op">=</span> <span class="va">hp</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">legend_style</span><span class="op">(</span>title_face <span class="op">=</span> <span class="st">"bold"</span>, background <span class="op">=</span> <span class="st">"grey95"</span>, by <span class="op">=</span> <span class="st">"colour"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">legend_style</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span>, by <span class="op">=</span> <span class="st">"size"</span><span class="op">)</span></span>
 <span></span></code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

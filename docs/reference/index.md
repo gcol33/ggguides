@@ -44,6 +44,21 @@ Customize legend appearance
   [`colourbar_style()`](https://gcol33.github.io/ggguides/reference/colorbar_style.md)
   : Style Continuous Color Bar Legends
 
+## Multiple Legends
+
+Control individual legends when a plot has multiple aesthetics
+
+- [`legend_hide()`](https://gcol33.github.io/ggguides/reference/legend_hide.md)
+  : Hide Specific Legends
+- [`legend_select()`](https://gcol33.github.io/ggguides/reference/legend_select.md)
+  : Keep Only Specific Legends
+- [`legend_order_guides()`](https://gcol33.github.io/ggguides/reference/legend_order_guides.md)
+  : Control Legend Display Order
+- [`legend_merge()`](https://gcol33.github.io/ggguides/reference/legend_merge.md)
+  : Force Legends to Merge
+- [`legend_split()`](https://gcol33.github.io/ggguides/reference/legend_split.md)
+  : Force Legends to Stay Separate
+
 ## Multi-Panel Layouts
 
 Collect and align legends across multi-panel plots (patchwork or

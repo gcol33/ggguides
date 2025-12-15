@@ -46,16 +46,17 @@
 #' p
 #'
 #' # Taller, thinner bar
-#' p + colorbar_style(width = 0.5, height = 10)
+#' p + colorbar_style(width = 0.5, height = 10, aesthetic = "fill")
 #'
 #' # Wide horizontal bar
-#' p + colorbar_style(width = 10, height = 0.5, direction = "horizontal")
+#' p + colorbar_style(width = 10, height = 0.5, direction = "horizontal",
+#'                    aesthetic = "fill")
 #'
 #' # With frame and no ticks
-#' p + colorbar_style(frame = "grey50", ticks = FALSE)
+#' p + colorbar_style(frame = "grey50", ticks = FALSE, aesthetic = "fill")
 #'
 #' # Thin bar with frame
-#' p + colorbar_style(width = 0.5, height = 8, frame = TRUE)
+#' p + colorbar_style(width = 0.5, height = 8, frame = TRUE, aesthetic = "fill")
 #'
 #' @seealso
 #' \code{\link{legend_style}} for styling discrete legends,

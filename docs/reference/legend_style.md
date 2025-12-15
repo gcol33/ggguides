@@ -14,8 +14,6 @@ legend_style(
   face = NULL,
   color = NULL,
   angle = NULL,
-  hjust = NULL,
-  vjust = NULL,
   title_size = NULL,
   title_face = NULL,
   title_color = NULL,
@@ -35,7 +33,8 @@ legend_style(
   box_background = NULL,
   box_margin = NULL,
   direction = NULL,
-  byrow = NULL
+  byrow = NULL,
+  by = NULL
 )
 ```
 
@@ -60,18 +59,9 @@ legend_style(
 
 - angle:
 
-  Rotation angle for legend labels (in degrees). Useful for long
-  category names. Common values: 45 for diagonal, 90 for vertical.
-
-- hjust:
-
-  Horizontal justification for rotated text (0 = left, 0.5 = center, 1 =
-  right). Defaults to 0 when `angle` is specified.
-
-- vjust:
-
-  Vertical justification for rotated text (0 = bottom, 0.5 = middle, 1 =
-  top). Often needed when using `angle`.
+  Rotation angle for legend labels (in degrees). Supported values: 45,
+  -45, 90, -90. Text justification is set automatically for optimal
+  alignment with legend keys.
 
 - title_size:
 
@@ -142,11 +132,13 @@ legend_style(
 
 - box_background:
 
-  Background fill for the box containing multiple legends.
+  Background fill for the box containing multiple legends. Ignored when
+  `by` is specified.
 
 - box_margin:
 
-  Margin around the legend box. Single value or 4-vector in cm.
+  Margin around the legend box. Single value or 4-vector in cm. Ignored
+  when `by` is specified.
 
 - direction:
 
@@ -156,9 +148,17 @@ legend_style(
 
   For multi-column legends, fill by row (`TRUE`) or by column (`FALSE`).
 
+- by:
+
+  Optional aesthetic name (character) to style only a specific legend.
+  When specified, uses per-guide theming via
+  `guide_legend(theme = ...)`. Requires ggplot2 \>= 3.5.0. Common
+  values: `"colour"`, `"fill"`, `"size"`.
+
 ## Value
 
-A ggplot2 theme object that can be added to a plot.
+A ggplot2 theme object (when `by` is NULL) or a guides specification
+(when `by` is specified).
 
 ## See also
 
@@ -203,4 +203,10 @@ ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
 ggplot(mpg, aes(displ, hwy, color = class)) +
   geom_point() +
   legend_style(angle = 45)
+
+# Style only the colour legend
+ggplot(mtcars, aes(mpg, wt, color = factor(cyl), size = hp)) +
+  geom_point() +
+  legend_style(title_face = "bold", background = "grey95", by = "colour") +
+  legend_style(size = 10, by = "size")
 ```

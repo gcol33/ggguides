@@ -82,11 +82,12 @@ p_long + legend_style(angle = 45)
 
 ### Vertical Labels
 
-Use 90 degrees for fully vertical text. Add spacing to prevent overlap:
+Use 90 degrees for fully vertical text. Key height is automatically
+adjusted to prevent label overlap:
 
 ``` r
 
-p_long + legend_style(angle = 90, hjust = 0.5, spacing_y = 0.8)
+p_long + legend_style(angle = 90)
 ```
 
 ![](styling_files/figure-html/rotation-vertical-1.svg)
@@ -479,7 +480,7 @@ p_cont + colorbar_style(
 
 | Function | Purpose | Key Parameters |
 |----|----|----|
-| [`legend_style()`](https://gcol33.github.io/ggguides/reference/legend_style.md) | Comprehensive styling | `size`, `title_size`, `title_face`, `family`, `angle`, `hjust`, `background`, `margin` |
+| [`legend_style()`](https://gcol33.github.io/ggguides/reference/legend_style.md) | Comprehensive styling | `size`, `title_size`, `title_face`, `family`, `angle`, `background`, `margin` |
 | [`legend_keys()`](https://gcol33.github.io/ggguides/reference/legend_keys.md) | Override key appearance | `size`, `alpha`, `shape`, `fill`, `colour`, `stroke`, `aesthetic` |
 | [`legend_order()`](https://gcol33.github.io/ggguides/reference/legend_order.md) | Reorder entries | `order` (vector or function), `aesthetic` |
 | [`legend_wrap()`](https://gcol33.github.io/ggguides/reference/legend_wrap.md) | Multi-column layout | `ncol`, `nrow` |

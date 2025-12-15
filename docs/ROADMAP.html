@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="index.html">ggguides</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,6 +22,7 @@
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="articles/getting-started.html">Getting Started</a></li>
     <li><a class="dropdown-item" href="articles/positioning.html">Legend Positioning</a></li>
     <li><a class="dropdown-item" href="articles/styling.html">Styling &amp; Customization</a></li>
+    <li><a class="dropdown-item" href="articles/multiple-legends.html">Multiple Legends</a></li>
     <li><a class="dropdown-item" href="articles/patchwork.html">Patchwork Integration</a></li>
   </ul></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
@@ -81,8 +82,8 @@
 <p><strong>Pain point:</strong> Legends split unexpectedly when modifying aesthetics</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Force legends to merge by syncing names</span></span>
-<span><span class="fu">legend_merge</span><span class="op">(</span><span class="va">color</span>, <span class="va">fill</span><span class="op">)</span>  <span class="co"># uses NSE</span></span>
-<span><span class="fu">legend_merge</span><span class="op">(</span><span class="st">"color"</span>, <span class="st">"fill"</span>, <span class="st">"shape"</span><span class="op">)</span>  <span class="co"># or strings</span></span></code></pre></div>
+<span><span class="fu"><a href="reference/legend_merge.html">legend_merge</a></span><span class="op">(</span><span class="va">color</span>, <span class="va">fill</span><span class="op">)</span>  <span class="co"># uses NSE</span></span>
+<span><span class="fu"><a href="reference/legend_merge.html">legend_merge</a></span><span class="op">(</span><span class="st">"color"</span>, <span class="st">"fill"</span>, <span class="st">"shape"</span><span class="op">)</span>  <span class="co"># or strings</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -175,7 +176,7 @@
 </ul></div>
 <div class="section level3">
 <h3 id="batch-4-polish">Batch 4 (Polish)<a class="anchor" aria-label="anchor" href="#batch-4-polish"></a></h3>
-<ul class="task-list"><li><label><input type="checkbox"><code>legend_merge()</code> - complex, may require careful design</label></li>
+<ul class="task-list"><li><label><input type="checkbox"><code><a href="reference/legend_merge.html">legend_merge()</a></code> - complex, may require careful design</label></li>
 <li><label><input type="checkbox">Comprehensive testing</label></li>
 <li><label><input type="checkbox">Update all documentation</label></li>
 </ul></div>

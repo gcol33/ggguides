@@ -163,7 +163,8 @@ Add axes vignette
 
 ### Batch 4 (Polish)
 
-`legend_merge()` - complex, may require careful design
+[`legend_merge()`](https://gcol33.github.io/ggguides/reference/legend_merge.md) -
+complex, may require careful design
 
 Comprehensive testing
 

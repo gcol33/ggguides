@@ -2,6 +2,7 @@
 <url><loc>https://gcol33.github.io/ggguides/404.html</loc></url>
 <url><loc>https://gcol33.github.io/ggguides/articles/getting-started.html</loc></url>
 <url><loc>https://gcol33.github.io/ggguides/articles/index.html</loc></url>
+<url><loc>https://gcol33.github.io/ggguides/articles/multiple-legends.html</loc></url>
 <url><loc>https://gcol33.github.io/ggguides/articles/patchwork.html</loc></url>
 <url><loc>https://gcol33.github.io/ggguides/articles/positioning.html</loc></url>
 <url><loc>https://gcol33.github.io/ggguides/articles/styling.html</loc></url>
@@ -18,14 +19,19 @@
 <url><loc>https://gcol33.github.io/ggguides/reference/ggguides-package.html</loc></url>
 <url><loc>https://gcol33.github.io/ggguides/reference/index.html</loc></url>
 <url><loc>https://gcol33.github.io/ggguides/reference/legend_bottom.html</loc></url>
+<url><loc>https://gcol33.github.io/ggguides/reference/legend_hide.html</loc></url>
 <url><loc>https://gcol33.github.io/ggguides/reference/legend_horizontal.html</loc></url>
 <url><loc>https://gcol33.github.io/ggguides/reference/legend_inside.html</loc></url>
 <url><loc>https://gcol33.github.io/ggguides/reference/legend_keys.html</loc></url>
 <url><loc>https://gcol33.github.io/ggguides/reference/legend_left.html</loc></url>
+<url><loc>https://gcol33.github.io/ggguides/reference/legend_merge.html</loc></url>
 <url><loc>https://gcol33.github.io/ggguides/reference/legend_none.html</loc></url>
 <url><loc>https://gcol33.github.io/ggguides/reference/legend_order.html</loc></url>
+<url><loc>https://gcol33.github.io/ggguides/reference/legend_order_guides.html</loc></url>
 <url><loc>https://gcol33.github.io/ggguides/reference/legend_reverse.html</loc></url>
 <url><loc>https://gcol33.github.io/ggguides/reference/legend_right.html</loc></url>
+<url><loc>https://gcol33.github.io/ggguides/reference/legend_select.html</loc></url>
+<url><loc>https://gcol33.github.io/ggguides/reference/legend_split.html</loc></url>
 <url><loc>https://gcol33.github.io/ggguides/reference/legend_style.html</loc></url>
 <url><loc>https://gcol33.github.io/ggguides/reference/legend_top.html</loc></url>
 <url><loc>https://gcol33.github.io/ggguides/reference/legend_vertical.html</loc></url>

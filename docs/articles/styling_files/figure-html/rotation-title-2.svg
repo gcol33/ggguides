@@ -310,29 +310,29 @@
 <text x='328.47' y='267.74' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Arial";' textLength='4.89px' lengthAdjust='spacingAndGlyphs'>7</text>
 <text x='187.83' y='280.20' text-anchor='middle' style='font-size: 11.00px; font-family: "Arial";' textLength='22.62px' lengthAdjust='spacingAndGlyphs'>displ</text>
 <text transform='translate(13.36,139.84) rotate(-90)' text-anchor='middle' style='font-size: 11.00px; font-family: "Arial";' textLength='19.56px' lengthAdjust='spacingAndGlyphs'>hwy</text>
-<rect x='353.50' y='-29.73' width='73.02' height='339.14' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<text transform='translate(393.95,-11.72) rotate(-90)' text-anchor='middle' style='font-size: 11.00px; font-family: "Arial";' textLength='25.06px' lengthAdjust='spacingAndGlyphs'>class</text>
-<rect x='358.98' y='6.29' width='17.28' height='42.52' style='stroke-width: 1.07; stroke: none; fill: #EBEBEB;' />
-<circle cx='367.62' cy='27.55' r='1.95' style='stroke-width: 0.71; stroke: #F8766D; fill: #F8766D;' />
-<rect x='358.98' y='48.81' width='17.28' height='42.52' style='stroke-width: 1.07; stroke: none; fill: #EBEBEB;' />
-<circle cx='367.62' cy='70.07' r='1.95' style='stroke-width: 0.71; stroke: #C49A00; fill: #C49A00;' />
-<rect x='358.98' y='91.33' width='17.28' height='42.52' style='stroke-width: 1.07; stroke: none; fill: #EBEBEB;' />
-<circle cx='367.62' cy='112.59' r='1.95' style='stroke-width: 0.71; stroke: #53B400; fill: #53B400;' />
-<rect x='358.98' y='133.85' width='17.28' height='42.52' style='stroke-width: 1.07; stroke: none; fill: #EBEBEB;' />
-<circle cx='367.62' cy='155.11' r='1.95' style='stroke-width: 0.71; stroke: #00C094; fill: #00C094;' />
-<rect x='358.98' y='176.37' width='17.28' height='42.52' style='stroke-width: 1.07; stroke: none; fill: #EBEBEB;' />
-<circle cx='367.62' cy='197.63' r='1.95' style='stroke-width: 0.71; stroke: #00B6EB; fill: #00B6EB;' />
-<rect x='358.98' y='218.89' width='17.28' height='42.52' style='stroke-width: 1.07; stroke: none; fill: #EBEBEB;' />
-<circle cx='367.62' cy='240.15' r='1.95' style='stroke-width: 0.71; stroke: #A58AFF; fill: #A58AFF;' />
-<rect x='358.98' y='261.41' width='17.28' height='42.52' style='stroke-width: 1.07; stroke: none; fill: #EBEBEB;' />
-<circle cx='367.62' cy='282.67' r='1.95' style='stroke-width: 0.71; stroke: #FB61D7; fill: #FB61D7;' />
-<text transform='translate(383.96,29.78) rotate(-45)' style='font-size: 8.80px; font-family: "Arial";' textLength='29.33px' lengthAdjust='spacingAndGlyphs'>2seater</text>
-<text transform='translate(383.96,72.30) rotate(-45)' style='font-size: 8.80px; font-family: "Arial";' textLength='33.25px' lengthAdjust='spacingAndGlyphs'>compact</text>
-<text transform='translate(383.96,114.82) rotate(-45)' style='font-size: 8.80px; font-family: "Arial";' textLength='29.83px' lengthAdjust='spacingAndGlyphs'>midsize</text>
-<text transform='translate(383.96,157.34) rotate(-45)' style='font-size: 8.80px; font-family: "Arial";' textLength='30.31px' lengthAdjust='spacingAndGlyphs'>minivan</text>
-<text transform='translate(383.96,199.86) rotate(-45)' style='font-size: 8.80px; font-family: "Arial";' textLength='25.44px' lengthAdjust='spacingAndGlyphs'>pickup</text>
-<text transform='translate(383.96,242.38) rotate(-45)' style='font-size: 8.80px; font-family: "Arial";' textLength='47.44px' lengthAdjust='spacingAndGlyphs'>subcompact</text>
-<text transform='translate(383.96,284.90) rotate(-45)' style='font-size: 8.80px; font-family: "Arial";' textLength='13.70px' lengthAdjust='spacingAndGlyphs'>suv</text>
+<rect x='353.50' y='22.50' width='73.02' height='234.69' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<text transform='translate(393.95,40.51) rotate(-90)' text-anchor='middle' style='font-size: 11.00px; font-family: "Arial";' textLength='25.06px' lengthAdjust='spacingAndGlyphs'>class</text>
+<rect x='358.98' y='61.54' width='17.28' height='26.50' style='stroke-width: 1.07; stroke: none; fill: #EBEBEB;' />
+<circle cx='367.62' cy='74.79' r='1.95' style='stroke-width: 0.71; stroke: #F8766D; fill: #F8766D;' />
+<rect x='358.98' y='88.04' width='17.28' height='29.27' style='stroke-width: 1.07; stroke: none; fill: #EBEBEB;' />
+<circle cx='367.62' cy='102.68' r='1.95' style='stroke-width: 0.71; stroke: #C49A00; fill: #C49A00;' />
+<rect x='358.98' y='117.32' width='17.28' height='26.85' style='stroke-width: 1.07; stroke: none; fill: #EBEBEB;' />
+<circle cx='367.62' cy='130.74' r='1.95' style='stroke-width: 0.71; stroke: #53B400; fill: #53B400;' />
+<rect x='358.98' y='144.17' width='17.28' height='27.20' style='stroke-width: 1.07; stroke: none; fill: #EBEBEB;' />
+<circle cx='367.62' cy='157.77' r='1.95' style='stroke-width: 0.71; stroke: #00C094; fill: #00C094;' />
+<rect x='358.98' y='171.37' width='17.28' height='23.75' style='stroke-width: 1.07; stroke: none; fill: #EBEBEB;' />
+<circle cx='367.62' cy='183.24' r='1.95' style='stroke-width: 0.71; stroke: #00B6EB; fill: #00B6EB;' />
+<rect x='358.98' y='195.12' width='17.28' height='39.31' style='stroke-width: 1.07; stroke: none; fill: #EBEBEB;' />
+<circle cx='367.62' cy='214.77' r='1.95' style='stroke-width: 0.71; stroke: #A58AFF; fill: #A58AFF;' />
+<rect x='358.98' y='234.43' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #EBEBEB;' />
+<circle cx='367.62' cy='243.07' r='1.95' style='stroke-width: 0.71; stroke: #FB61D7; fill: #FB61D7;' />
+<text transform='translate(383.96,77.02) rotate(-45)' style='font-size: 8.80px; font-family: "Arial";' textLength='29.33px' lengthAdjust='spacingAndGlyphs'>2seater</text>
+<text transform='translate(383.96,104.91) rotate(-45)' style='font-size: 8.80px; font-family: "Arial";' textLength='33.25px' lengthAdjust='spacingAndGlyphs'>compact</text>
+<text transform='translate(383.96,132.97) rotate(-45)' style='font-size: 8.80px; font-family: "Arial";' textLength='29.83px' lengthAdjust='spacingAndGlyphs'>midsize</text>
+<text transform='translate(383.96,160.00) rotate(-45)' style='font-size: 8.80px; font-family: "Arial";' textLength='30.31px' lengthAdjust='spacingAndGlyphs'>minivan</text>
+<text transform='translate(383.96,185.47) rotate(-45)' style='font-size: 8.80px; font-family: "Arial";' textLength='25.44px' lengthAdjust='spacingAndGlyphs'>pickup</text>
+<text transform='translate(383.96,217.00) rotate(-45)' style='font-size: 8.80px; font-family: "Arial";' textLength='47.44px' lengthAdjust='spacingAndGlyphs'>subcompact</text>
+<text transform='translate(383.96,245.29) rotate(-45)' style='font-size: 8.80px; font-family: "Arial";' textLength='13.70px' lengthAdjust='spacingAndGlyphs'>suv</text>
 <text x='33.13' y='14.93' style='font-size: 13.20px; font-family: "Arial";' textLength='71.78px' lengthAdjust='spacingAndGlyphs'>Both rotated</text>
 </g>
 </g>

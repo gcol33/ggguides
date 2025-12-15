@@ -25,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="index.html">ggguides</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,6 +42,7 @@
 <li><a class="dropdown-item" href="articles/getting-started.html">Getting Started</a></li>
     <li><a class="dropdown-item" href="articles/positioning.html">Legend Positioning</a></li>
     <li><a class="dropdown-item" href="articles/styling.html">Styling &amp; Customization</a></li>
+    <li><a class="dropdown-item" href="articles/multiple-legends.html">Multiple Legends</a></li>
     <li><a class="dropdown-item" href="articles/patchwork.html">Patchwork Integration</a></li>
   </ul>
 </li>
@@ -74,13 +75,8 @@
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Install from GitHub</span></span>
-<span><span class="co"># install.packages("pak")</span></span>
-<span><span class="fu">pak</span><span class="fu">::</span><span class="fu">pak</span><span class="op">(</span><span class="st">"gcol33/ggguides"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Or manually</span></span>
-<span><span class="co"># install.packages("remotes")</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"gcol33/ggguides"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu">pak</span><span class="op">(</span><span class="st">"gcol33/ggguides"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
@@ -95,6 +91,9 @@
 </li>
 <li>
 <strong>Style</strong>: <code><a href="reference/legend_style.html">legend_style()</a></code>, <code><a href="reference/legend_wrap.html">legend_wrap()</a></code>, <code><a href="reference/legend_reverse.html">legend_reverse()</a></code>, <code><a href="reference/legend_order.html">legend_order()</a></code>, <code><a href="reference/legend_keys.html">legend_keys()</a></code>, <code><a href="reference/colorbar_style.html">colorbar_style()</a></code>
+</li>
+<li>
+<strong>Multiple Legends</strong>: <code><a href="reference/legend_hide.html">legend_hide()</a></code>, <code><a href="reference/legend_select.html">legend_select()</a></code>, <code><a href="reference/legend_order_guides.html">legend_order_guides()</a></code>, <code><a href="reference/legend_merge.html">legend_merge()</a></code>, <code><a href="reference/legend_split.html">legend_split()</a></code>
 </li>
 <li>
 <strong>Multi-Panel</strong>: <code><a href="reference/collect_legends.html">collect_legends()</a></code>, <code><a href="reference/collect_axes.html">collect_axes()</a></code> (patchwork), <code><a href="reference/shared_legend.html">shared_legend()</a></code>, <code><a href="reference/get_legend.html">get_legend()</a></code> (cowplot/grid)</li>
@@ -226,6 +225,58 @@
 </div>
 </div>
 <div class="section level3">
+<h3 id="multiple-legends">Multiple Legends<a class="anchor" aria-label="anchor" href="#multiple-legends"></a>
+</h3>
+<p>When a plot has multiple aesthetics, control each legend separately:</p>
+<div class="section level4">
+<h4 id="legend_hide--legend_select">
+<code>legend_hide()</code> / <code>legend_select()</code>
+<a class="anchor" aria-label="anchor" href="#legend_hide--legend_select"></a>
+</h4>
+<p>Hide specific legends or keep only certain ones:</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Plot with multiple aesthetics</span></span>
+<span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="va">wt</span>, color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span>, size <span class="op">=</span> <span class="va">hp</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"Cylinders"</span>, size <span class="op">=</span> <span class="st">"Horsepower"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Hide the size legend</span></span>
+<span><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="reference/legend_hide.html">legend_hide</a></span><span class="op">(</span><span class="va">size</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Keep only the colour legend</span></span>
+<span><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="reference/legend_select.html">legend_select</a></span><span class="op">(</span><span class="va">colour</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level4">
+<h4 id="position-legends-separately">Position legends separately<a class="anchor" aria-label="anchor" href="#position-legends-separately"></a>
+</h4>
+<p>Use the <code>by</code> parameter to position legends independently:</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Colour legend on left, size legend at bottom</span></span>
+<span><span class="va">p</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="reference/legend_left.html">legend_left</a></span><span class="op">(</span>by <span class="op">=</span> <span class="st">"colour"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="reference/legend_bottom.html">legend_bottom</a></span><span class="op">(</span>by <span class="op">=</span> <span class="st">"size"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level4">
+<h4 id="style-legends-separately">Style legends separately<a class="anchor" aria-label="anchor" href="#style-legends-separately"></a>
+</h4>
+<p>Apply different styles to different legends:</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">p</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="reference/legend_style.html">legend_style</a></span><span class="op">(</span>title_face <span class="op">=</span> <span class="st">"bold"</span>, by <span class="op">=</span> <span class="st">"colour"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="reference/legend_style.html">legend_style</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span>, by <span class="op">=</span> <span class="st">"size"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level4">
+<h4 id="legend_order_guides">
+<code>legend_order_guides()</code><a class="anchor" aria-label="anchor" href="#legend_order_guides"></a>
+</h4>
+<p>Control the display order of multiple legends:</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Size legend first, then colour</span></span>
+<span><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="reference/legend_order_guides.html">legend_order_guides</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span>, colour <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<hr>
+</div>
+</div>
+<div class="section level3">
 <h3 id="patchwork-integration">Patchwork Integration<a class="anchor" aria-label="anchor" href="#patchwork-integration"></a>
 </h3>
 <div class="section level4">
@@ -233,7 +284,7 @@
 <code>collect_legends()</code><a class="anchor" aria-label="anchor" href="#collect_legends"></a>
 </h4>
 <p>Collect legends from patchwork compositions:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com" class="external-link">patchwork</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="va">wt</span>, color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -256,7 +307,7 @@
 <h4 id="height-spanning">Height Spanning<a class="anchor" aria-label="anchor" href="#height-spanning"></a>
 </h4>
 <p>For stacked plots, use <code>span = TRUE</code> to make the legend span the full height. Using different plot heights makes the spanning behavior more visible:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com" class="external-link">patchwork</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">p3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="va">disp</span>, color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -277,7 +328,7 @@
 <h4 id="row-specific-attachment">Row-Specific Attachment<a class="anchor" aria-label="anchor" href="#row-specific-attachment"></a>
 </h4>
 <p>Attach the legend to specific rows instead of spanning all:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Attach legend to row 1 only (the tallest plot)</span></span>
 <span><span class="va">gt</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/collect_legends.html">collect_legends</a></span><span class="op">(</span><span class="va">stacked</span>, position <span class="op">=</span> <span class="st">"right"</span>, span <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/grid.draw.html" class="external-link">grid.draw</a></span><span class="op">(</span><span class="va">gt</span><span class="op">)</span></span>
@@ -293,13 +344,13 @@
 <h3 id="combining-functions">Combining Functions<a class="anchor" aria-label="anchor" href="#combining-functions"></a>
 </h3>
 <p>Functions compose naturally:</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">displ</span>, <span class="va">hwy</span>, color <span class="op">=</span> <span class="va">class</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="reference/legend_left.html">legend_left</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="reference/legend_style.html">legend_style</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">12</span>, title_face <span class="op">=</span> <span class="st">"bold"</span>, background <span class="op">=</span> <span class="st">"grey95"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/combined_left_styled.png" width="60%"></p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">displ</span>, <span class="va">hwy</span>, color <span class="op">=</span> <span class="va">class</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="reference/legend_wrap.html">legend_wrap</a></span><span class="op">(</span>ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span></span>
@@ -316,7 +367,7 @@
 <code>get_legend()</code><a class="anchor" aria-label="anchor" href="#get_legend"></a>
 </h4>
 <p>Extract a legend as a standalone grob:</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="va">wt</span>, color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"Cylinders"</span><span class="op">)</span></span>
 <span></span>
@@ -331,7 +382,7 @@
 <code>shared_legend()</code><a class="anchor" aria-label="anchor" href="#shared_legend"></a>
 </h4>
 <p>Combine plots with a shared legend (no patchwork required):</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="va">wt</span>, color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Plot 1"</span>, color <span class="op">=</span> <span class="st">"Cylinders"</span><span class="op">)</span></span>
 <span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="va">hp</span>, color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>

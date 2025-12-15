@@ -7,7 +7,7 @@ panel.
 ## Usage
 
 ``` r
-legend_bottom(align_to = c("panel", "plot"))
+legend_bottom(align_to = c("panel", "plot"), by = NULL)
 ```
 
 ## Arguments
@@ -16,11 +16,20 @@ legend_bottom(align_to = c("panel", "plot"))
 
   Where to align the legend. Either `"panel"` (default, aligns to plot
   panel) or `"plot"` (aligns to full plot including title). Requires
-  ggplot2 \>= 3.5.0 for `"plot"` alignment.
+  ggplot2 \>= 3.5.0 for `"plot"` alignment. Ignored when `by` is
+  specified.
+
+- by:
+
+  Optional aesthetic name (character) to position only a specific
+  legend. When specified, uses per-guide positioning via
+  `guide_legend(position = "bottom")`. Requires ggplot2 \>= 3.5.0.
+  Common values: `"colour"`, `"fill"`, `"size"`.
 
 ## Value
 
-A ggplot2 theme object that can be added to a plot.
+A ggplot2 theme object (when `by` is NULL) or a guides specification
+(when `by` is specified).
 
 ## See also
 
@@ -44,4 +53,10 @@ ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
   geom_point() +
   labs(title = "My Plot Title") +
   legend_bottom(align_to = "plot")
+
+# Position only the colour legend at bottom
+ggplot(mtcars, aes(mpg, wt, color = factor(cyl), size = hp)) +
+  geom_point() +
+  legend_bottom(by = "colour") +
+  legend_right(by = "size")
 ```
