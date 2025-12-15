@@ -4,14 +4,14 @@
 \alias{ggplot_add.legend_style_centered}
 \title{Add legend_style_centered to ggplot}
 \usage{
-\method{ggplot_add}{legend_style_centered}(object, plot, object_name)
+\method{ggplot_add}{legend_style_centered}(object, plot, ...)
 }
 \arguments{
 \item{object}{A legend_style_centered object}
 
 \item{plot}{A ggplot object}
 
-\item{object_name}{Name of the object being added}
+\item{...}{Additional arguments (ignored)}
 }
 \description{
 Add legend_style_centered to ggplot

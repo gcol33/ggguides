@@ -10,7 +10,7 @@ legend_auto_fit(plot, max_ratio = 0.95)
 \item{plot}{A ggplot object.}
 
 \item{max_ratio}{Maximum ratio of legend height to panel height before
-wrapping is triggered. Default is 0.95 (95\\% of panel height).}
+wrapping is triggered. Default is 0.95 (95 percent of panel height).}
 }
 \value{
 A modified ggplot object with adjusted legend layout.

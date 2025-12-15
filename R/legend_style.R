@@ -9,11 +9,11 @@
 #' Add legend_style_centered to ggplot
 #' @param object A legend_style_centered object
 #' @param plot A ggplot object
-#' @param object_name Name of the object being added
+#' @param ... Additional arguments (ignored)
 #' @importFrom ggplot2 ggplot_add
 #' @keywords internal
 #' @export
-ggplot_add.legend_style_centered <- function(object, plot, object_name) {
+ggplot_add.legend_style_centered <- function(object, plot, ...) {
   # Apply the theme to the plot
   plot <- plot + object$theme
 
@@ -414,7 +414,7 @@ legend_style <- function(
 #'
 #' @param plot A ggplot object.
 #' @param max_ratio Maximum ratio of legend height to panel height before
-#'   wrapping is triggered. Default is 0.95 (95\% of panel height).
+#'   wrapping is triggered. Default is 0.95 (95 percent of panel height).
 #'
 #' @return A modified ggplot object with adjusted legend layout.
 #'
