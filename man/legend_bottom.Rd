@@ -4,15 +4,22 @@
 \alias{legend_bottom}
 \title{Place Legend on Bottom with Horizontal Layout}
 \usage{
-legend_bottom(align_to = c("panel", "plot"))
+legend_bottom(align_to = c("panel", "plot"), by = NULL)
 }
 \arguments{
 \item{align_to}{Where to align the legend. Either \code{"panel"} (default,
 aligns to plot panel) or \code{"plot"} (aligns to full plot including title).
-Requires ggplot2 >= 3.5.0 for \code{"plot"} alignment.}
+Requires ggplot2 >= 3.5.0 for \code{"plot"} alignment. Ignored when
+\code{by} is specified.}
+
+\item{by}{Optional aesthetic name (character) to position only a specific
+legend. When specified, uses per-guide positioning via
+\code{guide_legend(position = "bottom")}. Requires ggplot2 >= 3.5.0.
+Common values: \code{"colour"}, \code{"fill"}, \code{"size"}.}
 }
 \value{
-A ggplot2 theme object that can be added to a plot.
+A ggplot2 theme object (when \code{by} is NULL) or a guides
+specification (when \code{by} is specified).
 }
 \description{
 A one-liner to position the legend below the plot with horizontal layout.
@@ -31,6 +38,12 @@ ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
   geom_point() +
   labs(title = "My Plot Title") +
   legend_bottom(align_to = "plot")
+
+# Position only the colour legend at bottom
+ggplot(mtcars, aes(mpg, wt, color = factor(cyl), size = hp)) +
+  geom_point() +
+  legend_bottom(by = "colour") +
+  legend_right(by = "size")
 
 }
 \seealso{

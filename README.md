@@ -16,6 +16,7 @@ ggguides provides one-liner functions for common legend operations in ggplot2:
 - **Position**: `legend_left()`, `legend_right()`, `legend_top()`, `legend_bottom()`, `legend_inside()`, `legend_none()`
 - **Direction**: `legend_horizontal()`, `legend_vertical()`
 - **Style**: `legend_style()`, `legend_wrap()`, `legend_reverse()`, `legend_order()`, `legend_keys()`, `colorbar_style()`
+- **Multiple Legends**: `legend_hide()`, `legend_select()`, `legend_order_guides()`, `legend_merge()`, `legend_split()`
 - **Multi-Panel**: `collect_legends()`, `collect_axes()` (patchwork), `shared_legend()`, `get_legend()` (cowplot/grid)
 
 ## Examples
@@ -147,6 +148,59 @@ p + legend_reverse()
 ```
 
 <img src="man/figures/legend_reverse.png" width="45%">
+
+---
+
+### Multiple Legends
+
+When a plot has multiple aesthetics, control each legend separately:
+
+#### `legend_hide()` / `legend_select()`
+
+Hide specific legends or keep only certain ones:
+
+```r
+# Plot with multiple aesthetics
+p <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl), size = hp)) +
+  geom_point() +
+  labs(color = "Cylinders", size = "Horsepower")
+
+# Hide the size legend
+p + legend_hide(size)
+
+# Keep only the colour legend
+p + legend_select(colour)
+```
+
+#### Position legends separately
+
+Use the `by` parameter to position legends independently:
+
+```r
+# Colour legend on left, size legend at bottom
+p +
+  legend_left(by = "colour") +
+  legend_bottom(by = "size")
+```
+
+#### Style legends separately
+
+Apply different styles to different legends:
+
+```r
+p +
+  legend_style(title_face = "bold", by = "colour") +
+  legend_style(size = 10, by = "size")
+```
+
+#### `legend_order_guides()`
+
+Control the display order of multiple legends:
+
+```r
+# Size legend first, then colour
+p + legend_order_guides(size = 1, colour = 2)
+```
 
 ---
 

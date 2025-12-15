@@ -49,12 +49,9 @@ legend_reverse <- function() {
 #' @param face Font face for legend text (\code{"plain"}, \code{"bold"},
 #'   \code{"italic"}, \code{"bold.italic"}).
 #' @param color Text color for legend labels.
-#' @param angle Rotation angle for legend labels (in degrees). Useful for long
-#'   category names. Common values: 45 for diagonal, 90 for vertical.
-#' @param hjust Horizontal justification for rotated text (0 = left, 0.5 = center,
-#'   1 = right). Defaults to 0 when \code{angle} is specified.
-#' @param vjust Vertical justification for rotated text (0 = bottom, 0.5 = middle,
-#'   1 = top). Often needed when using \code{angle}.
+#' @param angle Rotation angle for legend labels (in degrees). Supported values:
+#'   45, -45, 90, -90. Text justification is set automatically for optimal
+#'   alignment with legend keys.
 #' @param title_size Text size for legend title (in points). If \code{NULL},
 #'   inherits from \code{size}.
 #' @param title_face Font face for legend title. If \code{NULL}, inherits from
@@ -79,12 +76,19 @@ legend_reverse <- function() {
 #' @param background_color Legend background border color. Use \code{NA} for no
 #'   border.
 #' @param box_background Background fill for the box containing multiple legends.
+#'   Ignored when \code{by} is specified.
 #' @param box_margin Margin around the legend box. Single value or 4-vector in cm.
+#'   Ignored when \code{by} is specified.
 #' @param direction Legend direction: \code{"horizontal"} or \code{"vertical"}.
 #' @param byrow For multi-column legends, fill by row (\code{TRUE}) or by column
 #'   (\code{FALSE}).
+#' @param by Optional aesthetic name (character) to style only a specific legend.
+#'   When specified, uses per-guide theming via \code{guide_legend(theme = ...)}.
+#'   Requires ggplot2 >= 3.5.0. Common values: \code{"colour"}, \code{"fill"},
+#'   \code{"size"}.
 #'
-#' @return A ggplot2 theme object that can be added to a plot.
+#' @return A ggplot2 theme object (when \code{by} is NULL) or a guides
+#'   specification (when \code{by} is specified).
 #'
 #' @examples
 #' library(ggplot2)
@@ -122,6 +126,12 @@ legend_reverse <- function() {
 #'   geom_point() +
 #'   legend_style(angle = 45)
 #'
+#' # Style only the colour legend
+#' ggplot(mtcars, aes(mpg, wt, color = factor(cyl), size = hp)) +
+#'   geom_point() +
+#'   legend_style(title_face = "bold", background = "grey95", by = "colour") +
+#'   legend_style(size = 10, by = "size")
+#'
 #' @seealso \code{\link{legend_left}}, \code{\link{legend_wrap}},
 #'   \code{\link{legend_reverse}}
 #' @export
@@ -131,8 +141,6 @@ legend_style <- function(
     face = NULL,
     color = NULL,
     angle = NULL,
-    hjust = NULL,
-    vjust = NULL,
     title_size = NULL,
     title_face = NULL,
     title_color = NULL,
@@ -152,8 +160,24 @@ legend_style <- function(
     box_background = NULL,
     box_margin = NULL,
     direction = NULL,
-    byrow = NULL
+    byrow = NULL,
+    by = NULL
 ) {
+  # --- Per-guide styling when `by` is specified ---
+  if (!is.null(by)) {
+    by <- normalize_aesthetic(by)
+    return(build_guide_with_style(
+      by = by,
+      size = size, family = family, face = face, color = color, angle = angle,
+      title_size = title_size, title_face = title_face, title_color = title_color,
+      title_angle = title_angle, title_hjust = title_hjust, title_vjust = title_vjust,
+      title_position = title_position, key_width = key_width, key_height = key_height,
+      key_fill = key_fill, spacing = spacing, spacing_x = spacing_x,
+      spacing_y = spacing_y, margin = margin, background = background,
+      background_color = background_color, direction = direction, byrow = byrow
+    ))
+  }
+
   args <- list()
 
   # --- Text styling ---
@@ -162,21 +186,43 @@ legend_style <- function(
   if (!is.null(family)) text_args$family <- family
   if (!is.null(face)) text_args$face <- face
   if (!is.null(color)) text_args$colour <- color
+
+  # Handle angle with automatic justification
   if (!is.null(angle)) {
+    if (!angle %in% c(45, -45, 90, -90)) {
+      stop("angle must be one of: 45, -45, 90, -90.", call. = FALSE)
+    }
     text_args$angle <- angle
-    # Default hjust = 0 for rotated text (better alignment with keys)
-    if (is.null(hjust)) hjust <- 0
-    if (is.null(vjust) && angle == 90) vjust <- 0.5
+    # Set optimal hjust/vjust for each angle
+    if (angle == 45) {
+      text_args$hjust <- 0
+      text_args$vjust <- 0.5
+    } else if (angle == -45) {
+      text_args$hjust <- 1
+      text_args$vjust <- 0.5
+    } else if (angle == 90) {
+      text_args$hjust <- 0
+      text_args$vjust <- 0.5
+    } else if (angle == -90) {
+      text_args$hjust <- 1
+      text_args$vjust <- 0.5
+    }
   }
-  if (!is.null(hjust)) text_args$hjust <- hjust
-  if (!is.null(vjust)) text_args$vjust <- vjust
 
   if (length(text_args) > 0) {
     args$legend.text <- do.call(element_text, text_args)
   }
 
-  # --- Title styling (inherits from text by default) ---
-  title_args <- text_args
+  # --- Title styling (inherits from text by default, but not angle/hjust/vjust) ---
+  title_args <- list()
+  if (!is.null(size)) title_args$size <- size
+  if (!is.null(family)) title_args$family <- family
+  if (!is.null(face)) title_args$face <- face
+  if (!is.null(color)) title_args$colour <- color
+  # Title gets hjust = 0.5 for rotated labels (centered above keys)
+  if (!is.null(angle)) {
+    title_args$hjust <- 0.5
+  }
   if (!is.null(title_size)) title_args$size <- title_size
   if (!is.null(title_face)) title_args$face <- title_face
   if (!is.null(title_color)) title_args$colour <- title_color
@@ -273,4 +319,129 @@ as_margin <- function(x, default_unit = "cm") {
   } else {
     stop("margin must be a single value or a vector of 4 values.", call. = FALSE)
   }
+}
+
+#' Build guide_legend with embedded theme for per-legend styling
+#' @noRd
+build_guide_with_style <- function(
+    by,
+    size = NULL, family = NULL, face = NULL, color = NULL, angle = NULL,
+    title_size = NULL, title_face = NULL, title_color = NULL,
+    title_angle = NULL, title_hjust = NULL, title_vjust = NULL,
+    title_position = NULL, key_width = NULL, key_height = NULL,
+    key_fill = NULL, spacing = NULL, spacing_x = NULL, spacing_y = NULL,
+    margin = NULL, background = NULL, background_color = NULL,
+    direction = NULL, byrow = NULL
+) {
+  theme_args <- list()
+
+  # --- Text styling ---
+  text_args <- list()
+  if (!is.null(size)) text_args$size <- size
+  if (!is.null(family)) text_args$family <- family
+  if (!is.null(face)) text_args$face <- face
+  if (!is.null(color)) text_args$colour <- color
+
+  if (!is.null(angle)) {
+    if (!angle %in% c(45, -45, 90, -90)) {
+      stop("angle must be one of: 45, -45, 90, -90.", call. = FALSE)
+    }
+    text_args$angle <- angle
+    if (angle == 45) {
+      text_args$hjust <- 0
+      text_args$vjust <- 0.5
+    } else if (angle == -45) {
+      text_args$hjust <- 1
+      text_args$vjust <- 0.5
+    } else if (angle == 90) {
+      text_args$hjust <- 0
+      text_args$vjust <- 0.5
+    } else if (angle == -90) {
+      text_args$hjust <- 1
+      text_args$vjust <- 0.5
+    }
+  }
+
+  if (length(text_args) > 0) {
+    theme_args$legend.text <- do.call(element_text, text_args)
+  }
+
+  # --- Title styling ---
+  title_args <- list()
+  if (!is.null(size)) title_args$size <- size
+  if (!is.null(family)) title_args$family <- family
+  if (!is.null(face)) title_args$face <- face
+  if (!is.null(color)) title_args$colour <- color
+  if (!is.null(angle)) title_args$hjust <- 0.5
+  if (!is.null(title_size)) title_args$size <- title_size
+  if (!is.null(title_face)) title_args$face <- title_face
+  if (!is.null(title_color)) title_args$colour <- title_color
+  if (!is.null(title_angle)) title_args$angle <- title_angle
+  if (!is.null(title_hjust)) title_args$hjust <- title_hjust
+  if (!is.null(title_vjust)) title_args$vjust <- title_vjust
+
+  if (length(title_args) > 0) {
+    theme_args$legend.title <- do.call(element_text, title_args)
+  }
+  if (!is.null(title_position)) {
+    theme_args$legend.title.position <- title_position
+  }
+
+  # --- Key styling ---
+  if (!is.null(key_width)) {
+    theme_args$legend.key.width <- as_unit(key_width, "cm")
+  }
+  if (!is.null(key_height)) {
+    theme_args$legend.key.height <- as_unit(key_height, "cm")
+  } else if (!is.null(angle) && abs(angle) >= 45) {
+    base_height <- if (!is.null(size)) size * 0.12 else 1.5
+    theme_args$legend.key.height <- unit(base_height, "cm")
+  }
+  if (!is.null(key_fill)) {
+    theme_args$legend.key <- element_rect(fill = key_fill, color = NA)
+  }
+
+  # --- Spacing ---
+  if (!is.null(spacing)) {
+    theme_args$legend.spacing <- as_unit(spacing, "cm")
+  }
+  if (!is.null(spacing_x)) {
+    theme_args$legend.spacing.x <- as_unit(spacing_x, "cm")
+  }
+  if (!is.null(spacing_y)) {
+    theme_args$legend.spacing.y <- as_unit(spacing_y, "cm")
+  }
+
+  # --- Margin ---
+  if (!is.null(margin)) {
+    theme_args$legend.margin <- as_margin(margin)
+  }
+
+  # --- Background ---
+  if (!is.null(background) || !is.null(background_color)) {
+    bg_fill <- if (!is.null(background)) background else NA
+    bg_color <- if (!is.null(background_color)) background_color else NA
+    theme_args$legend.background <- element_rect(fill = bg_fill, color = bg_color)
+  }
+
+  # --- Direction ---
+  if (!is.null(direction)) {
+    theme_args$legend.direction <- match.arg(direction, c("horizontal", "vertical"))
+  }
+  if (!is.null(byrow)) {
+    theme_args$legend.byrow <- byrow
+  }
+
+  # Build embedded theme
+  embedded_theme <- if (length(theme_args) > 0) {
+    do.call(theme, theme_args)
+  } else {
+    NULL
+  }
+
+  # Create guide with embedded theme
+  guide <- guide_legend(theme = embedded_theme)
+
+  guides_args <- stats::setNames(list(guide), by)
+  do.call(guides, guides_args)
 }

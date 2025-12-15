@@ -4,10 +4,17 @@
 \alias{legend_left}
 \title{Place Legend on the Left with Proper Alignment}
 \usage{
-legend_left()
+legend_left(by = NULL)
+}
+\arguments{
+\item{by}{Optional aesthetic name (character) to position only a specific
+legend. When specified, uses per-guide positioning via
+\code{guide_legend(position = "left")}. Requires ggplot2 >= 3.5.0.
+Common values: \code{"colour"}, \code{"fill"}, \code{"size"}.}
 }
 \value{
-A ggplot2 theme object that can be added to a plot.
+A ggplot2 theme object (when \code{by} is NULL) or a guides
+specification (when \code{by} is specified).
 }
 \description{
 A one-liner to position the legend on the left side of the plot with correct
@@ -15,12 +22,15 @@ left alignment for both the key box and text labels. This goes beyond simple
 \code{legend.position = "left"} by also setting justification and box alignment.
 }
 \details{
-This function sets three theme elements:
+When \code{by} is NULL (default), this function sets three theme elements:
 \itemize{
 \item \code{legend.position = "left"} to place the legend on the left
 \item \code{legend.justification = "left"} to left-justify the legend box
 \item \code{legend.box.just = "left"} to left-align multiple legend boxes
 }
+
+When \code{by} is specified, only the legend for that aesthetic is moved,
+allowing different legends to be placed in different positions.
 }
 \examples{
 library(ggplot2)
@@ -34,6 +44,12 @@ ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
 ggplot(mtcars, aes(mpg, wt, color = factor(cyl), shape = factor(am))) +
   geom_point(size = 3) +
   legend_left()
+
+# Position only the colour legend on the left
+ggplot(mtcars, aes(mpg, wt, color = factor(cyl), size = hp)) +
+  geom_point() +
+  legend_left(by = "colour") +
+  legend_bottom(by = "size")
 
 }
 \seealso{

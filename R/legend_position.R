@@ -8,15 +8,24 @@
 #' left alignment for both the key box and text labels. This goes beyond simple
 #' \code{legend.position = "left"} by also setting justification and box alignment.
 #'
-#' @return A ggplot2 theme object that can be added to a plot.
+#' @param by Optional aesthetic name (character) to position only a specific
+#'   legend. When specified, uses per-guide positioning via
+#'   \code{guide_legend(position = "left")}. Requires ggplot2 >= 3.5.0.
+#'   Common values: \code{"colour"}, \code{"fill"}, \code{"size"}.
+#'
+#' @return A ggplot2 theme object (when \code{by} is NULL) or a guides
+#'   specification (when \code{by} is specified).
 #'
 #' @details
-#' This function sets three theme elements:
+#' When \code{by} is NULL (default), this function sets three theme elements:
 #' \itemize{
 #'   \item \code{legend.position = "left"} to place the legend on the left
 #'   \item \code{legend.justification = "left"} to left-justify the legend box
 #'   \item \code{legend.box.just = "left"} to left-align multiple legend boxes
 #' }
+#'
+#' When \code{by} is specified, only the legend for that aesthetic is moved,
+#' allowing different legends to be placed in different positions.
 #'
 #' @examples
 #' library(ggplot2)
@@ -31,16 +40,31 @@
 #'   geom_point(size = 3) +
 #'   legend_left()
 #'
+#' # Position only the colour legend on the left
+#' ggplot(mtcars, aes(mpg, wt, color = factor(cyl), size = hp)) +
+#'   geom_point() +
+#'   legend_left(by = "colour") +
+#'   legend_bottom(by = "size")
+#'
 #' @seealso \code{\link{legend_right}}, \code{\link{legend_top}},
 #'   \code{\link{legend_bottom}}, \code{\link{legend_inside}},
 #'   \code{\link{legend_none}}
 #' @export
-legend_left <- function() {
-  theme(
-    legend.position = "left",
-    legend.justification = "left",
-    legend.box.just = "left"
-  )
+legend_left <- function(by = NULL) {
+  if (is.null(by)) {
+    theme(
+      legend.position = "left",
+      legend.justification = "left",
+      legend.box.just = "left"
+    )
+  } else {
+    by <- normalize_aesthetic(by)
+    guides_args <- stats::setNames(
+      list(guide_legend(position = "left")),
+      by
+    )
+    do.call(guides, guides_args)
+  }
 }
 
 #' Place Legend on the Right with Proper Alignment
@@ -48,15 +72,24 @@ legend_left <- function() {
 #' A one-liner to position the legend on the right side of the plot with correct
 #' right alignment for both the key box and text labels.
 #'
-#' @return A ggplot2 theme object that can be added to a plot.
+#' @param by Optional aesthetic name (character) to position only a specific
+#'   legend. When specified, uses per-guide positioning via
+#'   \code{guide_legend(position = "right")}. Requires ggplot2 >= 3.5.0.
+#'   Common values: \code{"colour"}, \code{"fill"}, \code{"size"}.
+#'
+#' @return A ggplot2 theme object (when \code{by} is NULL) or a guides
+#'   specification (when \code{by} is specified).
 #'
 #' @details
-#' This function sets three theme elements:
+#' When \code{by} is NULL (default), this function sets three theme elements:
 #' \itemize{
 #'   \item \code{legend.position = "right"} to place the legend on the right
 #'   \item \code{legend.justification = "right"} to right-justify the legend box
 #'   \item \code{legend.box.just = "right"} to right-align multiple legend boxes
 #' }
+#'
+#' When \code{by} is specified, only the legend for that aesthetic is moved,
+#' allowing different legends to be placed in different positions.
 #'
 #' @examples
 #' library(ggplot2)
@@ -66,15 +99,30 @@ legend_left <- function() {
 #'   geom_point() +
 #'   legend_right()
 #'
+#' # Position only the size legend on the right
+#' ggplot(mtcars, aes(mpg, wt, color = factor(cyl), size = hp)) +
+#'   geom_point() +
+#'   legend_bottom(by = "colour") +
+#'   legend_right(by = "size")
+#'
 #' @seealso \code{\link{legend_left}}, \code{\link{legend_top}},
 #'   \code{\link{legend_bottom}}, \code{\link{legend_inside}}
 #' @export
-legend_right <- function() {
-  theme(
-    legend.position = "right",
-    legend.justification = "right",
-    legend.box.just = "right"
-  )
+legend_right <- function(by = NULL) {
+  if (is.null(by)) {
+    theme(
+      legend.position = "right",
+      legend.justification = "right",
+      legend.box.just = "right"
+    )
+  } else {
+    by <- normalize_aesthetic(by)
+    guides_args <- stats::setNames(
+      list(guide_legend(position = "right")),
+      by
+    )
+    do.call(guides, guides_args)
+  }
 }
 
 #' Place Legend on Top with Horizontal Layout
@@ -85,9 +133,15 @@ legend_right <- function() {
 #'
 #' @param align_to Where to align the legend. Either \code{"panel"} (default,
 #'   aligns to plot panel) or \code{"plot"} (aligns to full plot including title).
-#'   Requires ggplot2 >= 3.5.0 for \code{"plot"} alignment.
+#'   Requires ggplot2 >= 3.5.0 for \code{"plot"} alignment. Ignored when
+#'   \code{by} is specified.
+#' @param by Optional aesthetic name (character) to position only a specific
+#'   legend. When specified, uses per-guide positioning via
+#'   \code{guide_legend(position = "top")}. Requires ggplot2 >= 3.5.0.
+#'   Common values: \code{"colour"}, \code{"fill"}, \code{"size"}.
 #'
-#' @return A ggplot2 theme object that can be added to a plot.
+#' @return A ggplot2 theme object (when \code{by} is NULL) or a guides
+#'   specification (when \code{by} is specified).
 #'
 #' @examples
 #' library(ggplot2)
@@ -103,10 +157,25 @@ legend_right <- function() {
 #'   labs(title = "My Plot Title") +
 #'   legend_top(align_to = "plot")
 #'
+#' # Position only the colour legend on top
+#' ggplot(mtcars, aes(mpg, wt, color = factor(cyl), size = hp)) +
+#'   geom_point() +
+#'   legend_top(by = "colour") +
+#'   legend_right(by = "size")
+#'
 #' @seealso \code{\link{legend_bottom}}, \code{\link{legend_left}},
 #'   \code{\link{legend_right}}, \code{\link{legend_horizontal}}
 #' @export
-legend_top <- function(align_to = c("panel", "plot")) {
+legend_top <- function(align_to = c("panel", "plot"), by = NULL) {
+  if (!is.null(by)) {
+    by <- normalize_aesthetic(by)
+    guides_args <- stats::setNames(
+      list(guide_legend(position = "top", direction = "horizontal")),
+      by
+    )
+    return(do.call(guides, guides_args))
+  }
+
   align_to <- match.arg(align_to)
 
   theme_args <- list(
@@ -117,7 +186,7 @@ legend_top <- function(align_to = c("panel", "plot")) {
   )
 
   # legend.location requires ggplot2 >= 3.5.0
- if (align_to == "plot") {
+  if (align_to == "plot") {
     theme_args$legend.location <- "plot"
   }
 
@@ -131,9 +200,15 @@ legend_top <- function(align_to = c("panel", "plot")) {
 #'
 #' @param align_to Where to align the legend. Either \code{"panel"} (default,
 #'   aligns to plot panel) or \code{"plot"} (aligns to full plot including title).
-#'   Requires ggplot2 >= 3.5.0 for \code{"plot"} alignment.
+#'   Requires ggplot2 >= 3.5.0 for \code{"plot"} alignment. Ignored when
+#'   \code{by} is specified.
+#' @param by Optional aesthetic name (character) to position only a specific
+#'   legend. When specified, uses per-guide positioning via
+#'   \code{guide_legend(position = "bottom")}. Requires ggplot2 >= 3.5.0.
+#'   Common values: \code{"colour"}, \code{"fill"}, \code{"size"}.
 #'
-#' @return A ggplot2 theme object that can be added to a plot.
+#' @return A ggplot2 theme object (when \code{by} is NULL) or a guides
+#'   specification (when \code{by} is specified).
 #'
 #' @examples
 #' library(ggplot2)
@@ -149,10 +224,25 @@ legend_top <- function(align_to = c("panel", "plot")) {
 #'   labs(title = "My Plot Title") +
 #'   legend_bottom(align_to = "plot")
 #'
+#' # Position only the colour legend at bottom
+#' ggplot(mtcars, aes(mpg, wt, color = factor(cyl), size = hp)) +
+#'   geom_point() +
+#'   legend_bottom(by = "colour") +
+#'   legend_right(by = "size")
+#'
 #' @seealso \code{\link{legend_top}}, \code{\link{legend_left}},
 #'   \code{\link{legend_right}}, \code{\link{legend_horizontal}}
 #' @export
-legend_bottom <- function(align_to = c("panel", "plot")) {
+legend_bottom <- function(align_to = c("panel", "plot"), by = NULL) {
+  if (!is.null(by)) {
+    by <- normalize_aesthetic(by)
+    guides_args <- stats::setNames(
+      list(guide_legend(position = "bottom", direction = "horizontal")),
+      by
+    )
+    return(do.call(guides, guides_args))
+  }
+
   align_to <- match.arg(align_to)
 
   theme_args <- list(

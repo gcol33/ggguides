@@ -39,6 +39,8 @@ navbar:
           href: articles/positioning.html
         - text: "Styling & Customization"
           href: articles/styling.html
+        - text: "Multiple Legends"
+          href: articles/multiple-legends.html
         - text: "Patchwork Integration"
           href: articles/patchwork.html
     github:
@@ -73,6 +75,15 @@ reference:
       - legend_keys
       - colorbar_style
 
+  - title: "Multiple Legends"
+    desc: "Control individual legends when a plot has multiple aesthetics"
+    contents:
+      - legend_hide
+      - legend_select
+      - legend_order_guides
+      - legend_merge
+      - legend_split
+
   - title: "Multi-Panel Layouts"
     desc: "Collect and align legends across multi-panel plots (patchwork or cowplot)"
     contents:
@@ -92,6 +103,7 @@ articles:
     contents:
       - positioning
       - styling
+      - multiple-legends
       - patchwork
 
 footer:

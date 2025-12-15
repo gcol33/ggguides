@@ -83,10 +83,10 @@ p_long + legend_style(angle = 45)
 
 ### Vertical Labels
 
-Use 90 degrees for fully vertical text. Add spacing to prevent overlap:
+Use 90 degrees for fully vertical text. Key height is automatically increased to prevent overlap:
 
 ```{r rotation-vertical, fig.width=7}
-p_long + legend_style(angle = 90, hjust = 0.5, spacing_y = 0.8)
+p_long + legend_style(angle = 90)
 ```
 
 ### Title Rotation
@@ -387,7 +387,7 @@ p_cont + colorbar_style(
 
 | Function | Purpose | Key Parameters |
 |----------|---------|----------------|
-| `legend_style()` | Comprehensive styling | `size`, `title_size`, `title_face`, `family`, `angle`, `hjust`, `background`, `margin` |
+| `legend_style()` | Comprehensive styling | `size`, `title_size`, `title_face`, `family`, `angle`, `background`, `margin` |
 | `legend_keys()` | Override key appearance | `size`, `alpha`, `shape`, `fill`, `colour`, `stroke`, `aesthetic` |
 | `legend_order()` | Reorder entries | `order` (vector or function), `aesthetic` |
 | `legend_wrap()` | Multi-column layout | `ncol`, `nrow` |

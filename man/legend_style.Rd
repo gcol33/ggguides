@@ -10,8 +10,6 @@ legend_style(
   face = NULL,
   color = NULL,
   angle = NULL,
-  hjust = NULL,
-  vjust = NULL,
   title_size = NULL,
   title_face = NULL,
   title_color = NULL,
@@ -31,7 +29,8 @@ legend_style(
   box_background = NULL,
   box_margin = NULL,
   direction = NULL,
-  byrow = NULL
+  byrow = NULL,
+  by = NULL
 )
 }
 \arguments{
@@ -44,14 +43,9 @@ legend_style(
 
 \item{color}{Text color for legend labels.}
 
-\item{angle}{Rotation angle for legend labels (in degrees). Useful for long
-category names. Common values: 45 for diagonal, 90 for vertical.}
-
-\item{hjust}{Horizontal justification for rotated text (0 = left, 0.5 = center,
-1 = right). Defaults to 0 when \code{angle} is specified.}
-
-\item{vjust}{Vertical justification for rotated text (0 = bottom, 0.5 = middle,
-1 = top). Often needed when using \code{angle}.}
+\item{angle}{Rotation angle for legend labels (in degrees). Supported values:
+45, -45, 90, -90. Text justification is set automatically for optimal
+alignment with legend keys.}
 
 \item{title_size}{Text size for legend title (in points). If \code{NULL},
 inherits from \code{size}.}
@@ -92,17 +86,25 @@ of 4 values (top, right, bottom, left) in cm.}
 \item{background_color}{Legend background border color. Use \code{NA} for no
 border.}
 
-\item{box_background}{Background fill for the box containing multiple legends.}
+\item{box_background}{Background fill for the box containing multiple legends.
+Ignored when \code{by} is specified.}
 
-\item{box_margin}{Margin around the legend box. Single value or 4-vector in cm.}
+\item{box_margin}{Margin around the legend box. Single value or 4-vector in cm.
+Ignored when \code{by} is specified.}
 
 \item{direction}{Legend direction: \code{"horizontal"} or \code{"vertical"}.}
 
 \item{byrow}{For multi-column legends, fill by row (\code{TRUE}) or by column
 (\code{FALSE}).}
+
+\item{by}{Optional aesthetic name (character) to style only a specific legend.
+When specified, uses per-guide theming via \code{guide_legend(theme = ...)}.
+Requires ggplot2 >= 3.5.0. Common values: \code{"colour"}, \code{"fill"},
+\code{"size"}.}
 }
 \value{
-A ggplot2 theme object that can be added to a plot.
+A ggplot2 theme object (when \code{by} is NULL) or a guides
+specification (when \code{by} is specified).
 }
 \description{
 A comprehensive one-liner to style all legend elements consistently. Instead
@@ -144,6 +146,12 @@ ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
 ggplot(mpg, aes(displ, hwy, color = class)) +
   geom_point() +
   legend_style(angle = 45)
+
+# Style only the colour legend
+ggplot(mtcars, aes(mpg, wt, color = factor(cyl), size = hp)) +
+  geom_point() +
+  legend_style(title_face = "bold", background = "grey95", by = "colour") +
+  legend_style(size = 10, by = "size")
 
 }
 \seealso{

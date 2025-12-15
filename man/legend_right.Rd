@@ -4,22 +4,32 @@
 \alias{legend_right}
 \title{Place Legend on the Right with Proper Alignment}
 \usage{
-legend_right()
+legend_right(by = NULL)
+}
+\arguments{
+\item{by}{Optional aesthetic name (character) to position only a specific
+legend. When specified, uses per-guide positioning via
+\code{guide_legend(position = "right")}. Requires ggplot2 >= 3.5.0.
+Common values: \code{"colour"}, \code{"fill"}, \code{"size"}.}
 }
 \value{
-A ggplot2 theme object that can be added to a plot.
+A ggplot2 theme object (when \code{by} is NULL) or a guides
+specification (when \code{by} is specified).
 }
 \description{
 A one-liner to position the legend on the right side of the plot with correct
 right alignment for both the key box and text labels.
 }
 \details{
-This function sets three theme elements:
+When \code{by} is NULL (default), this function sets three theme elements:
 \itemize{
 \item \code{legend.position = "right"} to place the legend on the right
 \item \code{legend.justification = "right"} to right-justify the legend box
 \item \code{legend.box.just = "right"} to right-align multiple legend boxes
 }
+
+When \code{by} is specified, only the legend for that aesthetic is moved,
+allowing different legends to be placed in different positions.
 }
 \examples{
 library(ggplot2)
@@ -28,6 +38,12 @@ library(ggplot2)
 ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
   geom_point() +
   legend_right()
+
+# Position only the size legend on the right
+ggplot(mtcars, aes(mpg, wt, color = factor(cyl), size = hp)) +
+  geom_point() +
+  legend_bottom(by = "colour") +
+  legend_right(by = "size")
 
 }
 \seealso{
