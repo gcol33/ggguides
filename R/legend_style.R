@@ -209,13 +209,13 @@ legend_style <- function(
     }
   }
 
-  # For 90/-90 rotation, auto-set key_height based on text size if not specified
-  # At 90°, text width becomes height, so key_height needs to accommodate longest label
-  if (!is.null(angle) && abs(angle) == 90 && is.null(key_height)) {
-    # Scale by text size if specified (default ~11pt)
+  # For 90/-90 rotation, auto-set key_width based on text size if not specified
+
+  # At 90°, text extends horizontally from the key, so key_width needs expansion
+  if (!is.null(angle) && abs(angle) == 90 && is.null(key_width)) {
     text_size <- if (!is.null(size)) size else 11
-    # Base: 1.5cm accommodates typical labels (~10 chars), scale with text size
-    key_height <- 1.5 * (text_size / 11)
+    # Base: 2cm accommodates typical labels (~10 chars), scale with text size
+    key_width <- 2 * (text_size / 11)
   }
 
   if (length(text_args) > 0) {
@@ -232,7 +232,9 @@ legend_style <- function(
   if (!is.null(angle)) {
     title_args$hjust <- 0.5
     # Add bottom margin to push title above the tallest rotated label
-    title_args$margin <- margin(b = 0.3, unit = "cm")
+    # Use larger margin for 45° angles where text extends diagonally
+    margin_b <- if (abs(angle) == 45) 0.5 else 0.3
+    title_args$margin <- margin(b = margin_b, unit = "cm")
   }
   if (!is.null(title_size)) title_args$size <- title_size
   if (!is.null(title_face)) title_args$face <- title_face
@@ -368,10 +370,10 @@ build_guide_with_style <- function(
     }
   }
 
-  # For 90/-90 rotation, auto-set key_height based on text size if not specified
-  if (!is.null(angle) && abs(angle) == 90 && is.null(key_height)) {
+  # For 90/-90 rotation, auto-set key_width based on text size if not specified
+  if (!is.null(angle) && abs(angle) == 90 && is.null(key_width)) {
     text_size <- if (!is.null(size)) size else 11
-    key_height <- 1.5 * (text_size / 11)
+    key_width <- 2 * (text_size / 11)
   }
 
   if (length(text_args) > 0) {
@@ -386,7 +388,8 @@ build_guide_with_style <- function(
   if (!is.null(color)) title_args$colour <- color
   if (!is.null(angle)) {
     title_args$hjust <- 0.5
-    title_args$margin <- margin(b = 0.3, unit = "cm")
+    margin_b <- if (abs(angle) == 45) 0.5 else 0.3
+    title_args$margin <- margin(b = margin_b, unit = "cm")
   }
   if (!is.null(title_size)) title_args$size <- title_size
   if (!is.null(title_face)) title_args$face <- title_face
