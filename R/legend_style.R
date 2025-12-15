@@ -243,9 +243,6 @@ legend_style <- function(
   }
   if (!is.null(key_height)) {
     args$legend.key.height <- as_unit(key_height, "cm")
-  } else if (!is.null(angle) && abs(angle) == 90) {
-    # Auto-increase key height for 90° rotation to prevent overlap
-    args$legend.key.height <- unit(1.8, "cm")
   }
   if (!is.null(key_fill)) {
     args$legend.key <- element_rect(fill = key_fill, color = NA)
@@ -391,8 +388,6 @@ build_guide_with_style <- function(
   }
   if (!is.null(key_height)) {
     theme_args$legend.key.height <- as_unit(key_height, "cm")
-  } else if (!is.null(angle) && abs(angle) == 90) {
-    theme_args$legend.key.height <- unit(1.8, "cm")
   }
   if (!is.null(key_fill)) {
     theme_args$legend.key <- element_rect(fill = key_fill, color = NA)
