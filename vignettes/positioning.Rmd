@@ -1,0 +1,138 @@
+---
+title: "Legend Positioning"
+author: "Gilles Colling"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Legend Positioning}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 6,
+  fig.height = 4
+)
+library(ggguides)
+library(ggplot2)
+```
+
+## Overview
+
+ggguides provides position helpers that handle legend placement without
+requiring knowledge of ggplot2's theme system. Each function sets the
+appropriate combination of `legend.position`, `legend.justification`,
+and `legend.box.just` to achieve proper alignment.
+
+## Basic Positioning
+
+### Left and Right
+
+```{r left-right, fig.show='hold', out.width='48%'}
+p <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
+  geom_point(size = 3) +
+  labs(color = "Cylinders")
+
+p + legend_left() + ggtitle("legend_left()")
+p + legend_right() + ggtitle("legend_right()")
+```
+
+### Top and Bottom
+
+When placing legends at the top or bottom, the legend is automatically
+oriented horizontally:
+
+```{r top-bottom, fig.show='hold', out.width='48%'}
+p + legend_top() + ggtitle("legend_top()")
+p + legend_bottom() + ggtitle("legend_bottom()")
+```
+
+### Alignment with Titles
+
+Use the `align_to` parameter to control how the legend aligns with the plot:
+
+```{r align-to, fig.show='hold', out.width='48%'}
+p_titled <- p + labs(title = "Fuel Economy by Weight")
+
+# Default: align to panel
+p_titled + legend_top() + ggtitle("align_to = 'panel' (default)")
+
+# Align to full plot (useful with titles)
+p_titled + legend_top(align_to = "plot") + ggtitle("align_to = 'plot'")
+```
+
+## Inside Positioning
+
+`legend_inside()` places the legend within the plot panel. You can use
+either coordinate values or named shortcuts.
+
+### Using Shortcuts
+
+Available shortcuts: `"topright"`, `"topleft"`, `"bottomright"`, `"bottomleft"`, `"center"`
+
+```{r inside-shortcuts, fig.show='hold', out.width='48%'}
+p + legend_inside(position = "topright") + ggtitle("topright")
+p + legend_inside(position = "bottomleft") + ggtitle("bottomleft")
+```
+
+### Using Coordinates
+
+For precise control, specify x/y coordinates (0-1 scale) and justification:
+
+```{r inside-coords}
+p + legend_inside(x = 0.95, y = 0.95, just = c("right", "top"))
+```
+
+### Adding Background
+
+Inside legends often need a background for readability:
+
+```{r inside-background}
+p + legend_inside(
+  position = "topright",
+  background = "grey95",
+  border = "grey50"
+)
+```
+
+## Direction Control
+
+### Horizontal and Vertical
+
+Control legend entry direction independently of position:
+
+```{r direction, fig.show='hold', out.width='48%'}
+p + legend_horizontal() + ggtitle("legend_horizontal()")
+p + legend_vertical() + ggtitle("legend_vertical()")
+```
+
+### Combining Direction and Position
+
+```{r direction-position}
+p + legend_right() + legend_horizontal()
+```
+
+## Removing the Legend
+
+```{r legend-none}
+p + legend_none()
+```
+
+## Summary
+
+| Function | Position | Auto-Direction |
+|----------|----------|----------------|
+| `legend_left()` | Left of panel | Vertical |
+| `legend_right()` | Right of panel | Vertical |
+| `legend_top()` | Above panel | Horizontal |
+| `legend_bottom()` | Below panel | Horizontal |
+| `legend_inside()` | Inside panel | Unchanged |
+| `legend_none()` | Hidden | N/A |
+
+**Learn more:**
+
+- [Styling & Customization](styling.html) for font, background, and border options
+- [Patchwork Integration](patchwork.html) for multi-panel workflows

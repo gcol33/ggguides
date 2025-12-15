@@ -1,0 +1,175 @@
+---
+title: "Patchwork Integration"
+author: "Gilles Colling"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Patchwork Integration}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 7,
+  fig.height = 5
+)
+library(ggguides)
+library(ggplot2)
+```
+
+## Overview
+
+When combining multiple plots with patchwork, legends often need special handling:
+
+- **Duplicate legends** - Same aesthetic mapped in multiple plots creates redundancy
+- **Alignment issues** - Legends may not align properly across panels
+- **Spanning** - Legends should sometimes span multiple rows
+
+ggguides provides `collect_legends()` and `align_guides_h()` to address these challenges.
+
+## The Problem: Duplicate Legends
+
+```{r problem, fig.height=4}
+library(patchwork)
+
+p1 <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
+  geom_point() + labs(title = "Plot 1", color = "Cylinders")
+p2 <- ggplot(mtcars, aes(mpg, hp, color = factor(cyl))) +
+  geom_point() + labs(title = "Plot 2", color = "Cylinders")
+
+# Default patchwork: duplicate legends
+p1 | p2
+```
+
+## Basic Legend Collection
+
+Use `collect_legends()` to gather legends from all plots in a composition:
+
+```{r collect-basic, fig.height=4}
+collect_legends(p1 | p2)
+```
+
+### Position Options
+
+Control where the collected legend appears:
+
+```{r collect-bottom, fig.height=5}
+collect_legends(p1 | p2, position = "bottom")
+```
+
+```{r collect-left, fig.height=4}
+collect_legends(p1 | p2, position = "left")
+```
+
+## Stacked Plots
+
+For vertically stacked plots, legends can be centered or span the full height.
+Using different plot heights makes the spanning behavior more visible.
+
+### Default: Centered
+
+```{r stacked-default, fig.height=7}
+# Create plots with different heights using plot_layout
+p3 <- ggplot(mtcars, aes(mpg, disp, color = factor(cyl))) +
+  geom_point() + labs(title = "Plot 3", color = "Cylinders")
+
+# Stack with different heights: 1, 1/2, 1/4
+stacked <- (p1 / p2 / p3) + plot_layout(heights = c(4, 2, 1))
+collect_legends(stacked, position = "right")
+```
+
+### Spanning Full Height
+
+Use `span = TRUE` to make the legend fill the full height:
+
+```{r stacked-span, fig.height=7}
+gt <- collect_legends(stacked, position = "right", span = TRUE)
+grid::grid.draw(gt)
+```
+
+### Attaching to Specific Rows
+
+Attach the legend to specific row(s) instead of spanning all:
+
+```{r span-row1, fig.height=7}
+# Legend attached to row 1 only (the tallest plot)
+gt <- collect_legends(stacked, position = "right", span = 1)
+grid::grid.draw(gt)
+```
+```{r span-row12, fig.height=7}
+# Legend attached to rows 1 and 2
+gt <- collect_legends(stacked, position = "right", span = 1:2)
+grid::grid.draw(gt)
+```
+
+## Horizontal Guide Alignment
+
+When plots have different widths due to axis labels, use `align_guides_h()` to
+align them horizontally:
+
+```{r align-guides, fig.height=5}
+# Plots with different y-axis label widths
+p_short <- ggplot(mtcars, aes(mpg, wt)) +
+  geom_point() + labs(y = "wt")
+
+p_long <- ggplot(mtcars, aes(mpg, disp)) +
+  geom_point() + labs(y = "Displacement (cu.in.)")
+
+# Without alignment
+p_short / p_long
+```
+
+```{r align-guides-fixed, fig.height=5}
+# With horizontal alignment
+align_guides_h(p_short / p_long)
+```
+
+## Combining with Styling
+
+ggguides functions work together:
+
+```{r combined, fig.height=5}
+p1_styled <- p1 + legend_style(size = 11, title_face = "bold")
+p2_styled <- p2 + legend_style(size = 11, title_face = "bold")
+
+collect_legends(p1_styled | p2_styled, position = "right")
+```
+
+## Complex Layouts
+
+Handle more complex patchwork layouts:
+
+```{r complex, fig.height=6}
+p4 <- ggplot(mtcars, aes(qsec, wt, color = factor(cyl))) +
+  geom_point() + labs(title = "Plot 4", color = "Cylinders")
+
+# 2x2 grid
+layout <- (p1 | p2) / (p3 | p4)
+collect_legends(layout, position = "right")
+```
+
+## cowplot Users
+
+For cowplot workflows, consider the [lemon](https://github.com/stefanedwards/lemon) package which provides:
+
+- `g_legend()` - Extract legend as grob
+- `grid_arrange_shared_legend()` - Combine plots with shared legend
+- `reposition_legend()` - Place legend inside panels
+
+ggguides functions like `legend_style()`, `legend_wrap()`, and position helpers
+work on individual plots regardless of layout package.
+
+## Summary
+
+| Function | Purpose | Key Parameters |
+|----------|---------|----------------|
+| `collect_legends()` | Gather legends from patchwork | `position`, `span` |
+| `align_guides_h()` | Align plots horizontally | None |
+
+**Learn more:**
+
+- [Legend Positioning](positioning.html) for single-plot placement
+- [Styling & Customization](styling.html) for legend appearance

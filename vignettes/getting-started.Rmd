@@ -1,0 +1,135 @@
+---
+title: "Getting Started with ggguides"
+author: "Gilles Colling"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting Started with ggguides}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 6,
+  fig.height = 4
+)
+library(ggguides)
+library(ggplot2)
+```
+
+## Overview
+
+**ggguides** simplifies common legend operations in ggplot2. Instead of memorizing
+theme element names and their nested structure, you can use intuitive one-liner
+functions to position, style, and manage legends.
+
+**Key features:**
+
+- Position legends with `legend_left()`, `legend_right()`, `legend_top()`, `legend_bottom()`, `legend_inside()`
+- Style legends with `legend_style()` for fonts, backgrounds, and borders
+- Wrap legend entries with `legend_wrap()` for multi-column layouts
+- Collect legends from patchwork compositions with `collect_legends()`
+
+## Installation
+
+```{r eval=FALSE}
+# Install from GitHub
+# install.packages("pak")
+pak::pak("gcol33/ggguides")
+```
+
+## Basic Usage
+
+Let's create a simple plot to demonstrate the legend helpers:
+```{r base-plot}
+p <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
+  geom_point(size = 3) +
+  labs(color = "Cylinders")
+
+p
+```
+
+### Moving the Legend
+
+Position the legend on any side with a single function call:
+
+```{r position-left}
+p + legend_left()
+```
+
+```{r position-bottom}
+p + legend_bottom()
+```
+
+### Inside Positioning
+
+Place the legend inside the plot area using coordinates or shortcuts:
+
+```{r inside-topright}
+p + legend_inside(position = "topright")
+```
+
+```{r inside-coords}
+p + legend_inside(x = 0.02, y = 0.98, just = c("left", "top"))
+```
+
+### Removing the Legend
+
+```{r legend-none}
+p + legend_none()
+```
+
+## Styling Legends
+
+Use `legend_style()` to customize the legend appearance:
+
+```{r style-size}
+p + legend_style(size = 14)
+```
+
+```{r style-full}
+p + legend_style(
+  size = 12,
+  title_size = 14,
+  title_face = "bold",
+  background = "grey95",
+  background_color = "grey70"
+)
+```
+
+## Wrapping Legend Entries
+
+For legends with many entries, use `legend_wrap()` to create multi-column layouts:
+
+```{r wrap-example}
+ggplot(mpg, aes(displ, hwy, color = class)) +
+  geom_point() +
+  legend_wrap(ncol = 2)
+```
+
+## Combining Functions
+
+ggguides functions compose naturally with the `+` operator:
+
+```{r combined}
+ggplot(mpg, aes(displ, hwy, color = class)) +
+  geom_point() +
+  legend_left() +
+  legend_style(size = 12, title_face = "bold", background = "grey95")
+```
+
+```{r combined-wrap}
+ggplot(mpg, aes(displ, hwy, color = class)) +
+  geom_point() +
+  legend_wrap(ncol = 2) +
+  legend_bottom()
+```
+
+## What's Next
+
+- See the [Legend Positioning](positioning.html) article for detailed position control
+- See the [Styling & Customization](styling.html) article for advanced styling options
+- See the [Patchwork Integration](patchwork.html) article for multi-panel workflows

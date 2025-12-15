@@ -1,0 +1,95 @@
+url: https://gcol33.github.io/ggguides/
+
+destination: docs
+
+template:
+  bootstrap: 5
+  bootswatch: sandstone
+  light-switch: true
+
+figures:
+  dev: svg
+  fig.ext: svg
+  bg: NA
+
+home:
+  title: "ggguides: Simplified Legend and Guide Alignment for ggplot2"
+  description: >
+    One-liner functions for common legend operations in ggplot2 - positioning,
+    styling, wrapping, and collection across multi-panel plots.
+
+authors:
+  Gilles Colling:
+    href: https://github.com/gcol33
+
+navbar:
+  structure:
+    left:  [intro, reference, articles, news]
+    right: [search, lightswitch, github]
+  components:
+    intro:
+      text: Get Started
+      href: articles/getting-started.html
+    articles:
+      text: Articles
+      menu:
+        - text: "Getting Started"
+          href: articles/getting-started.html
+        - text: "Legend Positioning"
+          href: articles/positioning.html
+        - text: "Styling & Customization"
+          href: articles/styling.html
+        - text: "Patchwork Integration"
+          href: articles/patchwork.html
+    github:
+      icon: fab fa-github
+      href: https://github.com/gcol33/ggguides
+      aria-label: GitHub
+
+reference:
+  - title: "Position Helpers"
+    desc: "Control legend placement"
+    contents:
+      - legend_left
+      - legend_right
+      - legend_top
+      - legend_bottom
+      - legend_inside
+      - legend_none
+
+  - title: "Direction Helpers"
+    desc: "Control legend orientation"
+    contents:
+      - legend_horizontal
+      - legend_vertical
+
+  - title: "Style Helpers"
+    desc: "Customize legend appearance"
+    contents:
+      - legend_style
+      - legend_wrap
+      - legend_reverse
+
+  - title: "Patchwork Integration"
+    desc: "Collect and align legends across multi-panel plots"
+    contents:
+      - collect_legends
+      - align_guides_h
+
+articles:
+  - title: "Getting Started"
+    navbar: ~
+    contents:
+      - getting-started
+
+  - title: "Guides"
+    navbar: ~
+    contents:
+      - positioning
+      - styling
+      - patchwork
+
+footer:
+  structure:
+    left: developed_by
+    right: built_with

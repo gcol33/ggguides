@@ -1,0 +1,11 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^LICENSE\.md$
+^FEATURES\.md$
+^ROADMAP\.md$
+^Rplots\.pdf$
+^_pkgdown\.yml$
+^build_site\.R$
+^claude\.md$
+^\.github$
+^docs$
