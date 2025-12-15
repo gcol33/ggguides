@@ -69,6 +69,9 @@ reference:
       - legend_style
       - legend_wrap
       - legend_reverse
+      - legend_order
+      - legend_keys
+      - colorbar_style
 
   - title: "Patchwork Integration"
     desc: "Collect and align legends across multi-panel plots"
