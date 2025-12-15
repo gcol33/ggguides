@@ -120,7 +120,7 @@
 <text x='357.80' y='267.74' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='9.78px' lengthAdjust='spacingAndGlyphs'>35</text>
 <text x='193.50' y='280.20' text-anchor='middle' style='font-size: 11.00px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='21.41px' lengthAdjust='spacingAndGlyphs'>mpg</text>
 <text transform='translate(13.36,130.99) rotate(-90)' text-anchor='middle' style='font-size: 11.00px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='11.00px' lengthAdjust='spacingAndGlyphs'>wt</text>
-<rect x='369.72' y='91.75' width='56.80' height='78.47' style='stroke-width: 1.07; stroke: none; fill: #F2F2F2;' />
+<rect x='369.72' y='91.75' width='56.80' height='78.47' style='stroke-width: 1.07; stroke: none; fill: #FFF3E0;' />
 <text x='375.20' y='106.27' style='font-size: 11.00px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='45.84px' lengthAdjust='spacingAndGlyphs'>Cylinders</text>
 <rect x='375.20' y='112.91' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #EBEBEB;' />
 <circle cx='383.84' cy='121.55' r='3.56' style='stroke-width: 0.71; stroke: #F8766D; fill: #F8766D;' />

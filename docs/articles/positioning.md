@@ -93,8 +93,8 @@ Inside legends often need a background for readability:
 
 p + legend_inside(
   position = "topright",
-  background = "grey95",
-  border = "grey50"
+  background = "#FFF3E0",
+  border = "#FF9800"
 )
 ```
 

@@ -7,7 +7,7 @@
 shared_legend(
   ...,
   ncol = NULL,
-  nrow = 1,
+  nrow = NULL,
   position = c("right", "left", "bottom", "top"),
   legend_from = 1,
   rel_legend_size = 0.2
@@ -18,7 +18,8 @@ shared_legend(
 
 \item{ncol}{Number of columns in the plot grid.}
 
-\item{nrow}{Number of rows in the plot grid.}
+\item{nrow}{Number of rows in the plot grid. If NULL (default), computed
+from ncol and number of plots.}
 
 \item{position}{Where to place the shared legend. One of \code{"right"}
 (default), \code{"left"}, \code{"bottom"}, or \code{"top"}.}
@@ -27,7 +28,7 @@ shared_legend(
 (first plot). Can be an integer index or a ggplot object.}
 
 \item{rel_legend_size}{Relative size of the legend compared to the plot
-area. Default is 0.2 (20\\%).}
+area. Default is 0.2 (20 percent).}
 }
 \value{
 A gtable that can be drawn with \code{grid::grid.draw()} or used
@@ -59,6 +60,7 @@ p2 <- ggplot(mtcars, aes(mpg, hp, color = factor(cyl))) +
 p3 <- ggplot(mtcars, aes(mpg, disp, color = factor(cyl))) +
   geom_point() + labs(title = "Plot 3", color = "Cylinders")
 
+\donttest{
 # Side-by-side with shared legend on right
 gt <- shared_legend(p1, p2, ncol = 2, position = "right")
 grid::grid.newpage()
@@ -73,6 +75,7 @@ grid::grid.draw(gt)
 gt <- shared_legend(p1, p2, p3, ncol = 1, position = "left")
 grid::grid.newpage()
 grid::grid.draw(gt)
+}
 
 }
 \seealso{

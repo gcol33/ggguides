@@ -74,14 +74,14 @@ Add visual containers around the legend:
 
 ```{r style-background}
 p + legend_style(
-  background = "grey95"
+  background = "#FFF3E0"
 )
 ```
 
 ```{r style-border}
 p + legend_style(
-  background = "grey95",
-  background_color = "grey70"
+  background = "#FFF3E0",
+  background_color = "#FF9800"
 )
 ```
 
@@ -102,7 +102,7 @@ Control spacing around the legend:
 
 ```{r style-margin}
 p + legend_style(
-  background = "grey95",
+  background = "#FFF3E0",
   margin = 0.5
 )
 ```
@@ -118,8 +118,8 @@ p + legend_style(
   title_face = "bold",
   family = "sans",
   key_width = 1.2,
-  background = "grey95",
-  background_color = "grey70",
+  background = "#FFF3E0",
+  background_color = "#FF9800",
   margin = 0.3
 )
 ```
@@ -254,7 +254,7 @@ ggplot(mpg, aes(displ, hwy, color = class)) +
   legend_style(
     size = 11,
     title_face = "bold",
-    background = "grey95"
+    background = "#FFF3E0"
   )
 ```
 
@@ -284,26 +284,26 @@ p_cont
 Create taller, thinner bars:
 
 ```{r colorbar-size}
-p_cont + colorbar_style(width = 0.5, height = 10)
+p_cont + colorbar_style(width = 0.5, height = 10, aesthetic = "fill")
 ```
 
 ### Horizontal Orientation
 
 ```{r colorbar-horizontal}
-p_cont + colorbar_style(width = 10, height = 0.5, direction = "horizontal") +
+p_cont + colorbar_style(width = 10, height = 0.5, direction = "horizontal", aesthetic = "fill") +
   legend_bottom()
 ```
 ### Adding a Frame
 
 ```{r colorbar-frame, fig.show='hold', out.width='48%'}
-p_cont + colorbar_style(frame = TRUE) + ggtitle("Black frame")
-p_cont + colorbar_style(frame = "grey50") + ggtitle("Grey frame")
+p_cont + colorbar_style(frame = TRUE, aesthetic = "fill") + ggtitle("Black frame")
+p_cont + colorbar_style(frame = "#FF9800", aesthetic = "fill") + ggtitle("Orange frame")
 ```
 
 ### Removing Ticks
 
 ```{r colorbar-noticks}
-p_cont + colorbar_style(ticks = FALSE, frame = "grey50")
+p_cont + colorbar_style(ticks = FALSE, frame = "#FF9800", aesthetic = "fill")
 ```
 
 ### Combined Customization
@@ -312,8 +312,9 @@ p_cont + colorbar_style(ticks = FALSE, frame = "grey50")
 p_cont + colorbar_style(
   width = 0.5,
   height = 8,
-  frame = "grey30",
-  ticks_length = 0.3
+  frame = "#E65100",
+  ticks_length = 0.3,
+  aesthetic = "fill"
 )
 ```
 

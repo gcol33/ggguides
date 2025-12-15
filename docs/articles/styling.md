@@ -71,7 +71,7 @@ Add visual containers around the legend:
 ``` r
 
 p + legend_style(
-  background = "grey95"
+  background = "#FFF3E0"
 )
 ```
 
@@ -80,8 +80,8 @@ p + legend_style(
 ``` r
 
 p + legend_style(
-  background = "grey95",
-  background_color = "grey70"
+  background = "#FFF3E0",
+  background_color = "#FF9800"
 )
 ```
 
@@ -108,7 +108,7 @@ Control spacing around the legend:
 ``` r
 
 p + legend_style(
-  background = "grey95",
+  background = "#FFF3E0",
   margin = 0.5
 )
 ```
@@ -127,8 +127,8 @@ p + legend_style(
   title_face = "bold",
   family = "sans",
   key_width = 1.2,
-  background = "grey95",
-  background_color = "grey70",
+  background = "#FFF3E0",
+  background_color = "#FF9800",
   margin = 0.3
 )
 ```
@@ -306,7 +306,7 @@ ggplot(mpg, aes(displ, hwy, color = class)) +
   legend_style(
     size = 11,
     title_face = "bold",
-    background = "grey95"
+    background = "#FFF3E0"
   )
 ```
 
@@ -347,7 +347,7 @@ Create taller, thinner bars:
 
 ``` r
 
-p_cont + colorbar_style(width = 0.5, height = 10)
+p_cont + colorbar_style(width = 0.5, height = 10, aesthetic = "fill")
 ```
 
 ![](styling_files/figure-html/colorbar-size-1.svg)
@@ -356,7 +356,7 @@ p_cont + colorbar_style(width = 0.5, height = 10)
 
 ``` r
 
-p_cont + colorbar_style(width = 10, height = 0.5, direction = "horizontal") +
+p_cont + colorbar_style(width = 10, height = 0.5, direction = "horizontal", aesthetic = "fill") +
   legend_bottom()
 ```
 
@@ -365,8 +365,8 @@ Frame
 
 ``` r
 
-p_cont + colorbar_style(frame = TRUE) + ggtitle("Black frame")
-p_cont + colorbar_style(frame = "grey50") + ggtitle("Grey frame")
+p_cont + colorbar_style(frame = TRUE, aesthetic = "fill") + ggtitle("Black frame")
+p_cont + colorbar_style(frame = "#FF9800", aesthetic = "fill") + ggtitle("Orange frame")
 ```
 
 ![](styling_files/figure-html/colorbar-frame-1.svg)![](styling_files/figure-html/colorbar-frame-2.svg)
@@ -375,7 +375,7 @@ p_cont + colorbar_style(frame = "grey50") + ggtitle("Grey frame")
 
 ``` r
 
-p_cont + colorbar_style(ticks = FALSE, frame = "grey50")
+p_cont + colorbar_style(ticks = FALSE, frame = "#FF9800", aesthetic = "fill")
 ```
 
 ![](styling_files/figure-html/colorbar-noticks-1.svg)
@@ -387,8 +387,9 @@ p_cont + colorbar_style(ticks = FALSE, frame = "grey50")
 p_cont + colorbar_style(
   width = 0.5,
   height = 8,
-  frame = "grey30",
-  ticks_length = 0.3
+  frame = "#E65100",
+  ticks_length = 0.3,
+  aesthetic = "fill"
 )
 ```
 

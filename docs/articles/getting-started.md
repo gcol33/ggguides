@@ -111,8 +111,8 @@ p + legend_style(
   size = 12,
   title_size = 14,
   title_face = "bold",
-  background = "grey95",
-  background_color = "grey70"
+  background = "#FFF3E0",
+  background_color = "#FF9800"
 )
 ```
 
@@ -142,7 +142,7 @@ ggguides functions compose naturally with the `+` operator:
 ggplot(mpg, aes(displ, hwy, color = class)) +
   geom_point() +
   legend_left() +
-  legend_style(size = 12, title_face = "bold", background = "grey95")
+  legend_style(size = 12, title_face = "bold", background = "#FFF3E0")
 ```
 
 ![](getting-started_files/figure-html/combined-1.svg)
