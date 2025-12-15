@@ -155,11 +155,23 @@ collect_legends(layout, position = "right")
 
 ggguides provides cowplot-compatible functions that work without patchwork:
 
+```{r cowplot-setup, include=FALSE}
+# Fresh plots for cowplot examples (not modified by patchwork)
+cp1 <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
+  geom_point() + labs(title = "Plot 1", color = "Cylinders")
+cp2 <- ggplot(mtcars, aes(mpg, hp, color = factor(cyl))) +
+  geom_point() + labs(title = "Plot 2", color = "Cylinders")
+cp3 <- ggplot(mtcars, aes(mpg, disp, color = factor(cyl))) +
+  geom_point() + labs(title = "Plot 3", color = "Cylinders")
+cp4 <- ggplot(mtcars, aes(qsec, wt, color = factor(cyl))) +
+  geom_point() + labs(title = "Plot 4", color = "Cylinders")
+```
+
 ### `get_legend()` - Extract Legend
 
 ```{r get-legend}
 # Extract legend from a plot
-leg <- get_legend(p1)
+leg <- get_legend(cp1)
 
 # Use with cowplot::plot_grid() or grid::grid.draw()
 grid::grid.newpage()
@@ -170,21 +182,21 @@ grid::grid.draw(leg)
 
 ```{r shared-legend-side, fig.height=4}
 # Side-by-side with shared legend on right
-gt <- shared_legend(p1, p2, ncol = 2, position = "right")
+gt <- shared_legend(cp1, cp2, ncol = 2, position = "right")
 grid::grid.newpage()
 grid::grid.draw(gt)
 ```
 
 ```{r shared-legend-stacked, fig.height=6}
 # Stacked with legend at bottom
-gt <- shared_legend(p1, p2, p3, ncol = 1, position = "bottom")
+gt <- shared_legend(cp1, cp2, cp3, ncol = 1, position = "bottom")
 grid::grid.newpage()
 grid::grid.draw(gt)
 ```
 
 ```{r shared-legend-grid, fig.height=5}
 # 2x2 grid
-gt <- shared_legend(p1, p2, p3, p4, ncol = 2, nrow = 2, position = "right")
+gt <- shared_legend(cp1, cp2, cp3, cp4, ncol = 2, nrow = 2, position = "right")
 grid::grid.newpage()
 grid::grid.draw(gt)
 ```

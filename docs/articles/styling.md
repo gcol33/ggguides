@@ -64,6 +64,45 @@ p + legend_style(
 
 ![](styling_files/figure-html/style-title-1.svg)
 
+## Text Rotation
+
+For legends with long category names, rotate the labels to save space:
+
+### Basic Rotation
+
+``` r
+
+p_long <- ggplot(mpg, aes(displ, hwy, color = class)) +
+  geom_point()
+
+p_long + legend_style(angle = 45, hjust = 1)
+```
+
+![](styling_files/figure-html/rotation-basic-1.svg)
+
+### Vertical Labels
+
+Use 90 degrees for fully vertical text:
+
+``` r
+
+p_long + legend_style(angle = 90, hjust = 0.5)
+```
+
+![](styling_files/figure-html/rotation-vertical-1.svg)
+
+### Title Rotation
+
+Rotate the legend title independently:
+
+``` r
+
+p_long + legend_style(title_angle = 90, title_hjust = 0.5) + ggtitle("Rotated title only")
+p_long + legend_style(angle = 45, hjust = 1, title_angle = 90) + ggtitle("Both rotated")
+```
+
+![](styling_files/figure-html/rotation-title-1.svg)![](styling_files/figure-html/rotation-title-2.svg)
+
 ## Background and Border
 
 Add visual containers around the legend:
@@ -399,7 +438,7 @@ p_cont + colorbar_style(
 
 | Function | Purpose | Key Parameters |
 |----|----|----|
-| [`legend_style()`](https://gcol33.github.io/ggguides/reference/legend_style.md) | Comprehensive styling | `size`, `title_size`, `title_face`, `family`, `background`, `background_color`, `margin` |
+| [`legend_style()`](https://gcol33.github.io/ggguides/reference/legend_style.md) | Comprehensive styling | `size`, `title_size`, `title_face`, `family`, `angle`, `hjust`, `background`, `margin` |
 | [`legend_keys()`](https://gcol33.github.io/ggguides/reference/legend_keys.md) | Override key appearance | `size`, `alpha`, `shape`, `linewidth`, `aesthetic` |
 | [`legend_order()`](https://gcol33.github.io/ggguides/reference/legend_order.md) | Reorder entries | `order` (vector or function), `aesthetic` |
 | [`legend_wrap()`](https://gcol33.github.io/ggguides/reference/legend_wrap.md) | Multi-column layout | `ncol`, `nrow` |

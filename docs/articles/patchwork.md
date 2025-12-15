@@ -188,7 +188,7 @@ patchwork:
 ``` r
 
 # Extract legend from a plot
-leg <- get_legend(p1)
+leg <- get_legend(cp1)
 
 # Use with cowplot::plot_grid() or grid::grid.draw()
 grid::grid.newpage()
@@ -200,7 +200,7 @@ grid::grid.draw(leg)
 ``` r
 
 # Side-by-side with shared legend on right
-gt <- shared_legend(p1, p2, ncol = 2, position = "right")
+gt <- shared_legend(cp1, cp2, ncol = 2, position = "right")
 #> Warning: No legend found in the source plot. Returning plots without shared
 #> legend.
 grid::grid.newpage()
@@ -212,7 +212,7 @@ grid::grid.draw(gt)
 ``` r
 
 # Stacked with legend at bottom
-gt <- shared_legend(p1, p2, p3, ncol = 1, position = "bottom")
+gt <- shared_legend(cp1, cp2, cp3, ncol = 1, position = "bottom")
 #> Warning: No legend found in the source plot. Returning plots without shared
 #> legend.
 grid::grid.newpage()
@@ -224,7 +224,7 @@ grid::grid.draw(gt)
 ``` r
 
 # 2x2 grid
-gt <- shared_legend(p1, p2, p3, p4, ncol = 2, nrow = 2, position = "right")
+gt <- shared_legend(cp1, cp2, cp3, cp4, ncol = 2, nrow = 2, position = "right")
 #> Warning: No legend found in the source plot. Returning plots without shared
 #> legend.
 grid::grid.newpage()
