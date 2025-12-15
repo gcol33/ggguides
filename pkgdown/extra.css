@@ -79,9 +79,10 @@ svg.inline-svg .svglite > g > rect[rx] {
 
 /* Legend box backgrounds - override inline fill: #F5F6F8 */
 /* Exclude svg-bg which also has fill: #F5F6F8 but should NOT have a stroke */
+/* No stroke on legend boxes - only the outer CSS border frames the plot */
 [data-bs-theme="dark"] svg.inline-svg .svglite rect[style*="fill: #F5F6F8"]:not(.svg-bg) {
   fill: #343739 !important;
-  stroke: #495057 !important;
+  stroke: none !important;
 }
 
 /* ggplot2 theme_minimal() gridlines - light grey in light mode, adapt to dark mode */
