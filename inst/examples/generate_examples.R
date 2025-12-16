@@ -5,6 +5,10 @@
 
 library(ggplot2)
 library(ggguides)
+library(svglite)
+
+# Theme colors for SVG (matching pkgdown Sandstone theme)
+LIGHT_BG <- "#F5F6F8"
 
 # Output directory
 out_dir <- "man/figures"
@@ -18,14 +22,14 @@ labs(color = "Cylinders", title = "Example Plot")
 # Helper to save plots
 save_example <- function(p, name, width = 6, height = 4) {
   ggsave(
-    filename = file.path(out_dir, paste0(name, ".png")),
+    filename = file.path(out_dir, paste0(name, ".svg")),
     plot = p,
     width = width,
     height = height,
-    dpi = 150,
-    bg = "white"
+    device = svglite,
+    bg = LIGHT_BG
   )
-  message("Saved: ", name, ".png")
+  message("Saved: ", name, ".svg")
 }
 
 # =============================================================================
@@ -231,27 +235,27 @@ if (requireNamespace("patchwork", quietly = TRUE)) {
 
   # Stacked plots - spanning legend
   gt <- collect_legends(p1 / p2 / p3, position = "right", span = TRUE)
-  png(file.path(out_dir, "patchwork_stacked_span.png"),
-      width = 6, height = 8, units = "in", res = 150, bg = "white")
+  svglite(file.path(out_dir, "patchwork_stacked_span.svg"),
+      width = 6, height = 8, bg = LIGHT_BG)
   grid::grid.draw(gt)
   dev.off()
-  message("Saved: patchwork_stacked_span.png")
+  message("Saved: patchwork_stacked_span.svg")
 
   # Stacked plots - span row 1 only
   gt <- collect_legends(p1 / p2 / p3, position = "right", span = 1)
-  png(file.path(out_dir, "patchwork_span_row1.png"),
-      width = 6, height = 8, units = "in", res = 150, bg = "white")
+  svglite(file.path(out_dir, "patchwork_span_row1.svg"),
+      width = 6, height = 8, bg = LIGHT_BG)
   grid::grid.draw(gt)
   dev.off()
-  message("Saved: patchwork_span_row1.png")
+  message("Saved: patchwork_span_row1.svg")
 
   # Stacked plots - span rows 1:2
   gt <- collect_legends(p1 / p2 / p3, position = "right", span = 1:2)
-  png(file.path(out_dir, "patchwork_span_row12.png"),
-      width = 6, height = 8, units = "in", res = 150, bg = "white")
+  svglite(file.path(out_dir, "patchwork_span_row12.svg"),
+      width = 6, height = 8, bg = LIGHT_BG)
   grid::grid.draw(gt)
   dev.off()
-  message("Saved: patchwork_span_row12.png")
+  message("Saved: patchwork_span_row12.svg")
 }
 
 message("\nAll examples generated in: ", out_dir)

@@ -71,7 +71,7 @@ p + legend_left()
 p + legend_right()
 ```
 
-![](reference/figures/legend_left.png)![](reference/figures/legend_right.png)
+![](reference/figures/legend_left.svg)![](reference/figures/legend_right.svg)
 
 #### `legend_top()` / `legend_bottom()`
 
@@ -86,7 +86,7 @@ p + legend_bottom()
 p + labs(title = "My Title") + legend_top(align_to = "plot")
 ```
 
-![](reference/figures/legend_top.png)![](reference/figures/legend_bottom.png)
+![](reference/figures/legend_top.svg)![](reference/figures/legend_bottom.svg)
 
 #### `legend_inside()`
 
@@ -105,7 +105,7 @@ p + legend_inside(x = 0.95, y = 0.95, just = c("right", "top"))
 p + legend_inside(position = "center", background = "grey95", border = "grey50")
 ```
 
-![](reference/figures/legend_inside_topright.png)![](reference/figures/legend_inside_bottomleft.png)
+![](reference/figures/legend_inside_topright.svg)![](reference/figures/legend_inside_bottomleft.svg)
 
 #### `legend_none()`
 
@@ -116,7 +116,7 @@ Remove the legend entirely:
 p + legend_none()
 ```
 
-![](reference/figures/legend_none.png)
+![](reference/figures/legend_none.svg)
 
 ------------------------------------------------------------------------
 
@@ -139,7 +139,7 @@ p + legend_style(family = "mono")
 p + legend_style(size = 14, family = "serif")
 ```
 
-![](reference/figures/legend_style_size.png)![](reference/figures/legend_style_font.png)
+![](reference/figures/legend_style_size.svg)![](reference/figures/legend_style_font.svg)
 
 ``` r
 
@@ -155,7 +155,7 @@ p + legend_style(
 )
 ```
 
-![](reference/figures/legend_style_full.png)
+![](reference/figures/legend_style_full.svg)
 
 #### `legend_wrap()`
 
@@ -173,7 +173,7 @@ ggplot(mpg, aes(displ, hwy, color = class)) +
   legend_wrap(nrow = 2)
 ```
 
-![](reference/figures/legend_wrap_ncol2.png)![](reference/figures/legend_wrap_nrow2.png)
+![](reference/figures/legend_wrap_ncol2.svg)![](reference/figures/legend_wrap_nrow2.svg)
 
 #### `legend_reverse()`
 
@@ -184,7 +184,7 @@ Reverse legend entry order:
 p + legend_reverse()
 ```
 
-![](reference/figures/legend_reverse.png)
+![](reference/figures/legend_reverse.svg)
 
 ------------------------------------------------------------------------
 
@@ -270,9 +270,9 @@ collect_legends(p1 | p2)
 collect_legends(p1 | p2, position = "bottom")
 ```
 
-![](reference/figures/patchwork_no_collect.png)
+![](reference/figures/patchwork_no_collect.svg)
 
-![](reference/figures/patchwork_collect.png)
+![](reference/figures/patchwork_collect.svg)
 
 #### Height Spanning
 
@@ -298,7 +298,7 @@ gt <- collect_legends(stacked, position = "right", span = TRUE)
 grid::grid.draw(gt)
 ```
 
-![](reference/figures/patchwork_stacked_default.png)![](reference/figures/patchwork_stacked_span.png)
+![](reference/figures/patchwork_stacked_default.svg)![](reference/figures/patchwork_stacked_span.svg)
 
 #### Row-Specific Attachment
 
@@ -315,7 +315,7 @@ gt <- collect_legends(stacked, position = "right", span = 1:2)
 grid::grid.draw(gt)
 ```
 
-![](reference/figures/patchwork_span_row1.png)![](reference/figures/patchwork_span_row12.png)
+![](reference/figures/patchwork_span_row1.svg)![](reference/figures/patchwork_span_row12.svg)
 
 ------------------------------------------------------------------------
 
@@ -331,7 +331,7 @@ ggplot(mpg, aes(displ, hwy, color = class)) +
   legend_style(size = 12, title_face = "bold", background = "grey95")
 ```
 
-![](reference/figures/combined_left_styled.png)
+![](reference/figures/combined_left_styled.svg)
 
 ``` r
 
@@ -341,7 +341,7 @@ ggplot(mpg, aes(displ, hwy, color = class)) +
   legend_bottom()
 ```
 
-![](reference/figures/combined_wrap_bottom.png)
+![](reference/figures/combined_wrap_bottom.svg)
 
 ------------------------------------------------------------------------
 

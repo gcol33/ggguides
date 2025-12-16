@@ -41,7 +41,7 @@ p + legend_left()
 p + legend_right()
 ```
 
-<img src="man/figures/legend_left.png" width="45%"> <img src="man/figures/legend_right.png" width="45%">
+<img src="man/figures/legend_left.svg" width="45%"> <img src="man/figures/legend_right.svg" width="45%">
 
 #### `legend_top()` / `legend_bottom()`
 
@@ -55,7 +55,7 @@ p + legend_bottom()
 p + labs(title = "My Title") + legend_top(align_to = "plot")
 ```
 
-<img src="man/figures/legend_top.png" width="45%"> <img src="man/figures/legend_bottom.png" width="45%">
+<img src="man/figures/legend_top.svg" width="45%"> <img src="man/figures/legend_bottom.svg" width="45%">
 
 #### `legend_inside()`
 
@@ -73,7 +73,7 @@ p + legend_inside(x = 0.95, y = 0.95, just = c("right", "top"))
 p + legend_inside(position = "center", background = "grey95", border = "grey50")
 ```
 
-<img src="man/figures/legend_inside_topright.png" width="45%"> <img src="man/figures/legend_inside_bottomleft.png" width="45%">
+<img src="man/figures/legend_inside_topright.svg" width="45%"> <img src="man/figures/legend_inside_bottomleft.svg" width="45%">
 
 #### `legend_none()`
 
@@ -83,7 +83,7 @@ Remove the legend entirely:
 p + legend_none()
 ```
 
-<img src="man/figures/legend_none.png" width="45%">
+<img src="man/figures/legend_none.svg" width="45%">
 
 ---
 
@@ -105,7 +105,7 @@ p + legend_style(family = "mono")
 p + legend_style(size = 14, family = "serif")
 ```
 
-<img src="man/figures/legend_style_size.png" width="45%"> <img src="man/figures/legend_style_font.png" width="45%">
+<img src="man/figures/legend_style_size.svg" width="45%"> <img src="man/figures/legend_style_font.svg" width="45%">
 
 ```r
 # Full styling with title emphasis
@@ -120,7 +120,7 @@ p + legend_style(
 )
 ```
 
-<img src="man/figures/legend_style_full.png" width="60%">
+<img src="man/figures/legend_style_full.svg" width="60%">
 
 #### `legend_wrap()`
 
@@ -137,7 +137,7 @@ ggplot(mpg, aes(displ, hwy, color = class)) +
   legend_wrap(nrow = 2)
 ```
 
-<img src="man/figures/legend_wrap_ncol2.png" width="45%"> <img src="man/figures/legend_wrap_nrow2.png" width="45%">
+<img src="man/figures/legend_wrap_ncol2.svg" width="45%"> <img src="man/figures/legend_wrap_nrow2.svg" width="45%">
 
 #### `legend_reverse()`
 
@@ -147,7 +147,7 @@ Reverse legend entry order:
 p + legend_reverse()
 ```
 
-<img src="man/figures/legend_reverse.png" width="45%">
+<img src="man/figures/legend_reverse.svg" width="45%">
 
 ---
 
@@ -228,9 +228,9 @@ collect_legends(p1 | p2)
 collect_legends(p1 | p2, position = "bottom")
 ```
 
-<img src="man/figures/patchwork_no_collect.png" width="80%">
+<img src="man/figures/patchwork_no_collect.svg" width="80%">
 
-<img src="man/figures/patchwork_collect.png" width="80%">
+<img src="man/figures/patchwork_collect.svg" width="80%">
 
 #### Height Spanning
 
@@ -254,7 +254,7 @@ gt <- collect_legends(stacked, position = "right", span = TRUE)
 grid::grid.draw(gt)
 ```
 
-<img src="man/figures/patchwork_stacked_default.png" width="45%"> <img src="man/figures/patchwork_stacked_span.png" width="45%">
+<img src="man/figures/patchwork_stacked_default.svg" width="45%"> <img src="man/figures/patchwork_stacked_span.svg" width="45%">
 
 #### Row-Specific Attachment
 
@@ -270,7 +270,7 @@ gt <- collect_legends(stacked, position = "right", span = 1:2)
 grid::grid.draw(gt)
 ```
 
-<img src="man/figures/patchwork_span_row1.png" width="45%"> <img src="man/figures/patchwork_span_row12.png" width="45%">
+<img src="man/figures/patchwork_span_row1.svg" width="45%"> <img src="man/figures/patchwork_span_row12.svg" width="45%">
 
 ---
 
@@ -285,7 +285,7 @@ ggplot(mpg, aes(displ, hwy, color = class)) +
   legend_style(size = 12, title_face = "bold", background = "grey95")
 ```
 
-<img src="man/figures/combined_left_styled.png" width="60%">
+<img src="man/figures/combined_left_styled.svg" width="60%">
 
 ```r
 ggplot(mpg, aes(displ, hwy, color = class)) +
@@ -294,7 +294,7 @@ ggplot(mpg, aes(displ, hwy, color = class)) +
   legend_bottom()
 ```
 
-<img src="man/figures/combined_wrap_bottom.png" width="60%">
+<img src="man/figures/combined_wrap_bottom.svg" width="60%">
 
 ---
 
