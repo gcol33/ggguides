@@ -9,3 +9,4 @@
 ^claude\.md$
 ^\.github$
 ^docs$
+^pkgdown$
