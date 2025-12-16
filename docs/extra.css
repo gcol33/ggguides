@@ -55,10 +55,10 @@ svg.inline-svg {
     width: 100% !important;
     max-width: none !important;
   }
-  /* Dark mode mobile border */
+  /* Dark mode mobile border - must use full border shorthand to override */
   [data-bs-theme="dark"] p > svg.inline-svg,
   [data-bs-theme="dark"] p > img.r-plt {
-    border-color: #495057 !important;
+    border: 1px solid #495057 !important;
   }
   /* Figure elements */
   .section .figure,
