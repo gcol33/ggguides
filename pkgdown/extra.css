@@ -14,6 +14,18 @@ svg.inline-svg {
   display: block;
 }
 
+/* Mobile: code block text wrapping */
+@media (max-width: 575.98px) {
+  pre.sourceCode,
+  pre.sourceCode code,
+  .sourceCode pre,
+  .sourceCode pre code {
+    white-space: pre-wrap !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+}
+
 /* Mobile: match code block full-width behavior */
 /* Code blocks use negative margins to expand on mobile - plots should too */
 /* Use :has() to target the parent <p> that contains an SVG/img */
