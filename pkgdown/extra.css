@@ -55,6 +55,11 @@ svg.inline-svg {
     width: 100% !important;
     max-width: none !important;
   }
+  /* Dark mode mobile border */
+  [data-bs-theme="dark"] p > svg.inline-svg,
+  [data-bs-theme="dark"] p > img.r-plt {
+    border-color: #495057 !important;
+  }
   /* Figure elements */
   .section .figure,
   .section figure,
