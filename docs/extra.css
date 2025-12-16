@@ -14,15 +14,23 @@ svg.inline-svg {
   display: block;
 }
 
-/* Mobile: code block text wrapping */
+/* Mobile: code block text wrapping (LaTeX-style) */
+/* Wrap at spaces, break long tokens only when necessary, no horizontal scroll */
 @media (max-width: 575.98px) {
   pre.sourceCode,
+  .sourceCode pre {
+    white-space: pre-wrap !important;
+    word-break: break-all !important;
+    overflow-x: hidden !important;
+    hyphens: auto !important;
+    -webkit-hyphens: auto !important;
+  }
   pre.sourceCode code,
-  .sourceCode pre,
   .sourceCode pre code {
     white-space: pre-wrap !important;
-    word-wrap: break-word !important;
-    overflow-wrap: break-word !important;
+    word-break: break-all !important;
+    hyphens: auto !important;
+    -webkit-hyphens: auto !important;
   }
 }
 
