@@ -6,7 +6,7 @@ Add legend_style_centered to ggplot
 
 ``` r
 # S3 method for class 'legend_style_centered'
-ggplot_add(object, plot, object_name)
+ggplot_add(object, plot, ...)
 ```
 
 ## Arguments
@@ -19,6 +19,6 @@ ggplot_add(object, plot, object_name)
 
   A ggplot object
 
-- object_name:
+- ...:
 
-  Name of the object being added
+  Additional arguments (ignored)
