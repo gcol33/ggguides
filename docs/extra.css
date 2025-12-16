@@ -46,12 +46,10 @@ svg.inline-svg {
     width: calc(100% + var(--bs-gutter-x, 1.5rem)) !important;
     max-width: none !important;
   }
-  /* SVGs/imgs inside the expanded p - remove borders on sides */
+  /* SVGs/imgs inside the expanded p */
   p > svg.inline-svg,
   p > img.r-plt {
     border-radius: 0 !important;
-    border-left: none !important;
-    border-right: none !important;
     width: 100% !important;
     max-width: none !important;
   }
@@ -65,16 +63,12 @@ svg.inline-svg {
     width: calc(100% + var(--bs-gutter-x, 1.5rem)) !important;
     max-width: none !important;
     border-radius: 0;
-    border-left: none;
-    border-right: none;
   }
   .section .figure img,
   .section figure img,
   div > div > .figure img,
   div > div > figure img {
     border-radius: 0 !important;
-    border-left: none !important;
-    border-right: none !important;
     width: 100% !important;
     max-width: none !important;
   }
