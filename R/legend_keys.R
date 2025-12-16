@@ -49,6 +49,22 @@
 #'     from \code{fill})
 #' }
 #'
+#' \strong{Important note for filled shapes (21-25):}
+#'
+#' When using filled shapes with both outline and fill colors, the behavior
+#' depends on which aesthetics are mapped in your original plot:
+#'
+#' \itemize{
+#'   \item \strong{White fill, colored outline}: Works with \code{aes(color = var)}.
+#'     Use \code{legend_keys(shape = "circle_filled", fill = "white")}.
+#'   \item \strong{Colored fill, black outline}: Requires \code{aes(color = var, fill = var)}
+#'     in your plot. Then use \code{legend_keys(colour = "black")}.
+#' }
+#'
+#' This is because \code{override.aes} can only set static values; it cannot
+#' inherit from mapped aesthetics. If you only map \code{color} and try to
+#' override the outline to black, the fill will not have a color mapping to use.
+#'
 #' Only non-NULL arguments are applied, so you can selectively modify specific
 #' properties.
 #'
@@ -70,10 +86,18 @@
 #'   geom_point(size = 3) +
 #'   legend_keys(shape = "square")
 #'
-#' # Filled shape with outline (shapes 21-25)
+#' # Filled shape with white fill and colored outline (shapes 21-25)
+#' # Works because we set fill to a static color (white)
 #' ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
 #'   geom_point(size = 3) +
 #'   legend_keys(shape = "circle_filled", fill = "white", stroke = 1.5)
+#'
+#' # Colored fill with black outline - MUST map both color AND fill in the plot
+#' # This is a ggplot2 limitation: override.aes can only set static values,
+#' # it cannot make fill "inherit" from color
+#' ggplot(mtcars, aes(mpg, wt, color = factor(cyl), fill = factor(cyl))) +
+#'   geom_point(size = 3, shape = 21, stroke = 1) +
+#'   legend_keys(colour = "black", stroke = 1)
 #'
 #' # Apply to fill aesthetic (e.g., for boxplots)
 #' ggplot(mtcars, aes(factor(cyl), mpg, fill = factor(cyl))) +
@@ -104,6 +128,21 @@ legend_keys <- function(size = NULL,
  # Convert shape names to numeric codes
  if (!is.null(shape) && is.character(shape)) {
    shape <- shape_name_to_code(shape)
+ }
+
+ # Warn if user likely wants colored fill with black outline but hasn't mapped fill
+ # This pattern (filled shape + colour override but no fill override) often indicates
+ # the user expects fill to inherit from the color mapping, which doesn't work
+ is_filled_shape <- !is.null(shape) && (
+   (is.numeric(shape) && shape %in% 21:25) ||
+   (is.character(shape) && grepl("_filled$", tolower(shape)))
+ )
+ if (is_filled_shape && !is.null(colour) && is.null(fill)) {
+   message(
+     "Note: Using filled shapes (21-25) with a colour override but no fill.\n",
+     "For colored fills with a black/custom outline, you must map both color AND fill\n",
+     "in your plot: aes(color = var, fill = var), then use legend_keys(colour = \"black\")."
+   )
  }
 
  # Build override.aes list with only non-NULL values
