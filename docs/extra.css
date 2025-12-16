@@ -12,6 +12,7 @@ svg.inline-svg {
   border-radius: .375rem;
   overflow: hidden;
   display: block;
+  margin-bottom: 1rem;
 }
 
 /* Mobile: code block text wrapping (LaTeX-style) */
