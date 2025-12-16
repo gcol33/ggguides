@@ -11,7 +11,7 @@ Provides one-liner functions for common legend and guide operations in 'ggplot2'
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://gcol33.github.io/ggguides/}
+  \item \url{https://gillescolling.com/ggguides/}
   \item \url{https://github.com/gcol33/ggguides}
   \item Report bugs at \url{https://github.com/gcol33/ggguides/issues}
 }
