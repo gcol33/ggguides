@@ -1,3 +1,10 @@
+/* Code block wrapping - prevent horizontal scroll */
+pre code {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
 /* Plot styling - match code block borders */
 /* Bootstrap 5 Sandstone uses --bs-border-radius: .375rem for pre/code */
 img.r-plt,
@@ -12,37 +19,6 @@ svg.inline-svg {
   border-radius: .375rem;
   overflow: hidden;
   display: block;
-}
-
-/* Mobile: match code block full-width behavior */
-/* Code blocks use negative margins to expand on mobile - plots should too */
-@media (max-width: 575.98px) {
-  .section > p > img.r-plt,
-  .section > .figure,
-  .section > figure,
-  .section > p > svg.inline-svg,
-  div > div > .figure,
-  div > div > figure {
-    margin-left: calc(var(--bs-gutter-x, 1.5rem) * -.5);
-    margin-right: calc(var(--bs-gutter-x, 1.5rem) * -.5);
-    width: calc(100% + var(--bs-gutter-x, 1.5rem));
-    max-width: none;
-    border-radius: 0;
-    border-left: none;
-    border-right: none;
-  }
-  .section > .figure img,
-  .section > figure img,
-  .section > p > img.r-plt,
-  .section > p > svg.inline-svg,
-  div > div > .figure img,
-  div > div > figure img {
-    border-radius: 0;
-    border-left: none;
-    border-right: none;
-    width: 100%;
-    max-width: none;
-  }
 }
 
 /* Dark mode border */
@@ -114,7 +90,7 @@ svg.inline-svg .svglite > g > rect[rx] {
   stroke: none !important;
 }
 
-/* Legend box backgrounds - override inline fill */
+/* Legend box backgrounds - override inline fill: #F5F6F8 */
 /* Exclude svg-bg which is the main plot background */
 [data-bs-theme="dark"] svg.inline-svg .svglite rect[style*="fill: #F5F6F8"]:not(.svg-bg),
 [data-bs-theme="dark"] svg.inline-svg .svglite rect.legend-bg {
@@ -123,12 +99,12 @@ svg.inline-svg .svglite > g > rect[rx] {
 
 /* Grid lines */
 /* White grid lines need to become dark in light mode, stay light in dark mode */
-/* Light mode: dark grid on light bg */
+/* Light mode: dark grid (#3E3F3A) on light bg (#F5F6F8) */
 svg.inline-svg .svglite polyline[style*="stroke: #FFFFFF"],
 svg.inline-svg .svglite polyline[style*="stroke: #ffffff"] {
   stroke: #3E3F3A !important;
 }
-/* Dark mode: light grid on dark bg */
+/* Dark mode: light grid (#DFD7CA) on dark bg (#343739) */
 [data-bs-theme="dark"] svg.inline-svg .svglite polyline[style*="stroke: #FFFFFF"],
 [data-bs-theme="dark"] svg.inline-svg .svglite polyline[style*="stroke: #ffffff"],
 [data-bs-theme="dark"] svg.inline-svg .svglite polyline[style*="stroke: #3E3F3A"],
@@ -152,3 +128,18 @@ svg.inline-svg .svglite polyline[style*="stroke: #ffffff"] {
   stroke: #495057 !important;
 }
 
+/* README/homepage images from man/figures */
+/* These are inline <img> tags with width="45%" etc */
+.contents img[src*="man/figures"],
+.contents img[src*="reference/figures"] {
+  border: 1px solid #DFD7CA;
+  border-radius: .375rem;
+  margin: 0.5rem 0;
+}
+
+[data-bs-theme="dark"] .contents img[src*="man/figures"],
+[data-bs-theme="dark"] .contents img[src*="reference/figures"] {
+  border-color: #495057;
+  /* Invert for dark mode - PNGs have white background */
+  filter: invert(0.88) hue-rotate(180deg);
+}
