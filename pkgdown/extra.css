@@ -127,3 +127,19 @@ svg.inline-svg .svglite polyline[style*="stroke: #ffffff"] {
 [data-bs-theme="dark"] svg.inline-svg line[style*="stroke: gray"] {
   stroke: #495057 !important;
 }
+
+/* README/homepage images from man/figures */
+/* These are inline <img> tags with width="45%" etc */
+.contents img[src*="man/figures"],
+.contents img[src*="reference/figures"] {
+  border: 1px solid #DFD7CA;
+  border-radius: .375rem;
+  margin: 0.5rem 0;
+}
+
+[data-bs-theme="dark"] .contents img[src*="man/figures"],
+[data-bs-theme="dark"] .contents img[src*="reference/figures"] {
+  border-color: #495057;
+  /* Invert for dark mode - PNGs have white background */
+  filter: invert(0.88) hue-rotate(180deg);
+}
