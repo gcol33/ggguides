@@ -7,28 +7,125 @@ library(ggplot2)
 library(ggguides)
 library(svglite)
 
-# Theme colors for SVG (matching pkgdown Sandstone theme)
+# Theme colors matching pkgdown Sandstone theme (Bootstrap 5)
 LIGHT_BG <- "#F5F6F8"
+LIGHT_BORDER <- "#DFD7CA"
+LIGHT_TEXT <- "#3E3F3A"
+DARK_BG <- "#343739"
+DARK_TEXT <- "#DFD7CA"
+FONT_FAMILY <- '"Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif'
 
 # Output directory
 out_dir <- "man/figures"
 if (!dir.exists(out_dir)) dir.create(out_dir, recursive = TRUE)
 
+# Set transparent theme for ggplot2
+theme_set(
+  theme_grey() +
+    theme(
+      plot.background = element_rect(fill = "transparent", color = NA),
+      panel.background = element_rect(fill = "transparent", color = NA),
+      legend.background = element_rect(fill = "transparent", color = NA),
+      legend.key = element_rect(fill = "transparent", color = NA),
+      legend.box.background = element_rect(fill = "transparent", color = NA)
+    )
+)
+
 # Base plot for examples
 base_plot <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
-geom_point(size = 3) +
-labs(color = "Cylinders", title = "Example Plot")
+  geom_point(size = 3) +
+  labs(color = "Cylinders", title = "Example Plot")
 
-# Helper to save plots
+#' Make an SVG file theme-aware (simplified version of build_pkgdown.R)
+#'
+#' @param svg_path Path to SVG file
+make_svg_theme_aware <- function(svg_path) {
+  svg_content <- paste(readLines(svg_path, warn = FALSE), collapse = "\n")
+
+  # Add svg-bg class to main background rect and set light bg color
+  svg_content <- sub(
+    "<rect width='100%' height='100%' style='stroke: none; fill: none;'/>",
+    sprintf("<rect class='svg-bg' width='100%%' height='100%%' style='stroke: none; fill: %s;'/>", LIGHT_BG),
+    svg_content, fixed = TRUE
+  )
+
+  # Replace gridline colors
+  svg_content <- gsub("stroke: #EBEBEB;", sprintf("stroke: %s;", LIGHT_TEXT), svg_content, fixed = TRUE)
+
+  # Modify CSS rules - remove rect from combined rule, add separate rect rule
+
+  line_rule_pat <- paste0(
+    "    .svglite line, .svglite polyline, .svglite polygon, ",
+    ".svglite path, .svglite rect, .svglite circle {\n",
+    "      fill: none;\n",
+    "      stroke: #000000;\n",
+    "      stroke-linecap: round;\n",
+    "      stroke-linejoin: round;\n",
+    "      stroke-miterlimit: 10.00;\n",
+    "    }"
+  )
+  new_line_rule <- sprintf(
+    paste0(
+      "    /* theme-aware-processed */\n",
+      "    .svglite line, .svglite polyline, .svglite polygon, ",
+      ".svglite path, .svglite circle {\n",
+      "      fill: none;\n",
+      "      stroke: %s;\n",
+      "      stroke-linecap: round;\n",
+      "      stroke-linejoin: round;\n",
+      "      stroke-miterlimit: 10.00;\n",
+      "    }\n",
+      "    .svglite > g > rect {\n",
+      "      fill: none;\n",
+      "      stroke: %s;\n",
+      "      stroke-linecap: round;\n",
+      "      stroke-linejoin: round;\n",
+      "      stroke-miterlimit: 10.00;\n",
+      "    }"
+    ),
+    LIGHT_TEXT, LIGHT_TEXT
+  )
+  svg_content <- sub(line_rule_pat, new_line_rule, svg_content, fixed = TRUE)
+
+  # Update text rule with fill color
+  text_rule_pat <- paste0(
+    "    .svglite text {\n",
+    "      white-space: pre;\n",
+    "    }"
+  )
+  new_text_rule <- sprintf(
+    paste0(
+      "    .svglite text {\n",
+      "      white-space: pre;\n",
+      "      fill: %s;\n",
+      "    }"
+    ),
+    LIGHT_TEXT
+  )
+  svg_content <- sub(text_rule_pat, new_text_rule, svg_content, fixed = TRUE)
+
+  # Update font family
+  svg_content <- gsub(
+    'font-family: "Arial";',
+    sprintf("font-family: %s;", FONT_FAMILY),
+    svg_content, fixed = TRUE
+  )
+
+  writeLines(svg_content, svg_path)
+}
+
+# Helper to save plots with theme-aware SVG processing
 save_example <- function(p, name, width = 6, height = 4) {
+  filepath <- file.path(out_dir, paste0(name, ".svg"))
   ggsave(
-    filename = file.path(out_dir, paste0(name, ".svg")),
+    filename = filepath,
     plot = p,
     width = width,
     height = height,
     device = svglite,
-    bg = LIGHT_BG
+    bg = "transparent"
   )
+  make_svg_theme_aware(filepath)
   message("Saved: ", name, ".svg")
 }
 
@@ -233,29 +330,27 @@ if (requireNamespace("patchwork", quietly = TRUE)) {
     width = 6, height = 8
   )
 
+  # Helper for grob-based saves (gtable objects)
+  save_grob_example <- function(gt, name, width = 6, height = 8) {
+    filepath <- file.path(out_dir, paste0(name, ".svg"))
+    svglite(filepath, width = width, height = height, bg = "transparent")
+    grid::grid.draw(gt)
+    dev.off()
+    make_svg_theme_aware(filepath)
+    message("Saved: ", name, ".svg")
+  }
+
   # Stacked plots - spanning legend
   gt <- collect_legends(p1 / p2 / p3, position = "right", span = TRUE)
-  svglite(file.path(out_dir, "patchwork_stacked_span.svg"),
-      width = 6, height = 8, bg = LIGHT_BG)
-  grid::grid.draw(gt)
-  dev.off()
-  message("Saved: patchwork_stacked_span.svg")
+  save_grob_example(gt, "patchwork_stacked_span", width = 6, height = 8)
 
   # Stacked plots - span row 1 only
   gt <- collect_legends(p1 / p2 / p3, position = "right", span = 1)
-  svglite(file.path(out_dir, "patchwork_span_row1.svg"),
-      width = 6, height = 8, bg = LIGHT_BG)
-  grid::grid.draw(gt)
-  dev.off()
-  message("Saved: patchwork_span_row1.svg")
+  save_grob_example(gt, "patchwork_span_row1", width = 6, height = 8)
 
   # Stacked plots - span rows 1:2
   gt <- collect_legends(p1 / p2 / p3, position = "right", span = 1:2)
-  svglite(file.path(out_dir, "patchwork_span_row12.svg"),
-      width = 6, height = 8, bg = LIGHT_BG)
-  grid::grid.draw(gt)
-  dev.off()
-  message("Saved: patchwork_span_row12.svg")
+  save_grob_example(gt, "patchwork_span_row12", width = 6, height = 8)
 }
 
 message("\nAll examples generated in: ", out_dir)
