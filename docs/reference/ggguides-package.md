@@ -9,7 +9,7 @@ collection across multi-panel plots created with 'patchwork' or
 
 Useful links:
 
-- <https://gcol33.github.io/ggguides/>
+- <https://gillescolling.com/ggguides/>
 
 - <https://github.com/gcol33/ggguides>
 
