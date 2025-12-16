@@ -16,32 +16,47 @@ svg.inline-svg {
 
 /* Mobile: match code block full-width behavior */
 /* Code blocks use negative margins to expand on mobile - plots should too */
+/* Use :has() to target the parent <p> that contains an SVG/img */
 @media (max-width: 575.98px) {
-  .section p > img.r-plt,
+  /* Target the p element wrapping standalone SVGs/imgs to expand full width */
+  p:has(> svg.inline-svg),
+  p:has(> img.r-plt) {
+    margin-left: calc(var(--bs-gutter-x, 1.5rem) * -.5) !important;
+    margin-right: calc(var(--bs-gutter-x, 1.5rem) * -.5) !important;
+    width: calc(100% + var(--bs-gutter-x, 1.5rem)) !important;
+    max-width: none !important;
+  }
+  /* SVGs/imgs inside the expanded p - remove borders on sides */
+  p > svg.inline-svg,
+  p > img.r-plt {
+    border-radius: 0 !important;
+    border-left: none !important;
+    border-right: none !important;
+    width: 100% !important;
+    max-width: none !important;
+  }
+  /* Figure elements */
   .section .figure,
   .section figure,
-  .section p > svg.inline-svg,
   div > div > .figure,
   div > div > figure {
-    margin-left: calc(var(--bs-gutter-x, 1.5rem) * -.5);
-    margin-right: calc(var(--bs-gutter-x, 1.5rem) * -.5);
-    width: calc(100% + var(--bs-gutter-x, 1.5rem));
-    max-width: none;
+    margin-left: calc(var(--bs-gutter-x, 1.5rem) * -.5) !important;
+    margin-right: calc(var(--bs-gutter-x, 1.5rem) * -.5) !important;
+    width: calc(100% + var(--bs-gutter-x, 1.5rem)) !important;
+    max-width: none !important;
     border-radius: 0;
     border-left: none;
     border-right: none;
   }
   .section .figure img,
   .section figure img,
-  .section p > img.r-plt,
-  .section p > svg.inline-svg,
   div > div > .figure img,
   div > div > figure img {
-    border-radius: 0;
-    border-left: none;
-    border-right: none;
-    width: 100%;
-    max-width: none;
+    border-radius: 0 !important;
+    border-left: none !important;
+    border-right: none !important;
+    width: 100% !important;
+    max-width: none !important;
   }
 }
 
