@@ -1,3 +1,10 @@
+/* Code block wrapping - prevent horizontal scroll */
+pre code {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
 /* Plot styling - match code block borders */
 /* Bootstrap 5 Sandstone uses --bs-border-radius: .375rem for pre/code */
 img.r-plt,
