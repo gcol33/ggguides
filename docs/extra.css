@@ -50,6 +50,7 @@ svg.inline-svg {
   p > svg.inline-svg,
   p > img.r-plt {
     border-radius: 0 !important;
+    border: 1px solid #DFD7CA !important;
     width: 100% !important;
     max-width: none !important;
   }
