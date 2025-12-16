@@ -39,17 +39,17 @@ p + legend_bottom() + ggtitle("Bottom")
 ### Alignment with Titles
 
 Use the `align_to` parameter to control how the legend aligns with the
-plot:
+plot. The difference is most visible when there’s a y-axis label:
 
 ``` r
 
-p_titled <- p + labs(title = "Fuel Economy by Weight")
+p_labeled <- p + labs(title = "Fuel Economy", y = "Weight (1000 lbs)")
 
-# Default: align to panel
-p_titled + legend_top() + ggtitle("Panel alignment (default)")
+# Default: align to panel (legend aligns with the plot area)
+p_labeled + legend_top() + ggtitle("Panel alignment (default)")
 
-# Align to full plot (useful with titles)
-p_titled + legend_top(align_to = "plot") + ggtitle("Plot alignment")
+# Align to full plot (legend spans title/axis labels too)
+p_labeled + legend_top(align_to = "plot") + ggtitle("Plot alignment")
 ```
 
 ![](positioning_files/figure-html/align-to-1.svg)![](positioning_files/figure-html/align-to-2.svg)

@@ -1,10 +1,3 @@
-/* Code block wrapping - prevent horizontal scroll */
-pre code {
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-}
-
 /* Plot styling - match code block borders */
 /* Bootstrap 5 Sandstone uses --bs-border-radius: .375rem for pre/code */
 img.r-plt,
@@ -19,6 +12,73 @@ svg.inline-svg {
   border-radius: .375rem;
   overflow: hidden;
   display: block;
+  margin-bottom: 1rem;
+}
+
+/* Mobile: code block text wrapping (LaTeX-style) */
+/* Wrap at spaces, break long tokens only when necessary, no horizontal scroll */
+@media (max-width: 575.98px) {
+  pre.sourceCode,
+  .sourceCode pre {
+    white-space: pre-wrap !important;
+    word-break: break-all !important;
+    overflow-x: hidden !important;
+    hyphens: auto !important;
+    -webkit-hyphens: auto !important;
+  }
+  pre.sourceCode code,
+  .sourceCode pre code {
+    white-space: pre-wrap !important;
+    word-break: break-all !important;
+    hyphens: auto !important;
+    -webkit-hyphens: auto !important;
+  }
+}
+
+/* Mobile: match code block full-width behavior */
+/* Code blocks use negative margins to expand on mobile - plots should too */
+/* Use :has() to target the parent <p> that contains an SVG/img */
+@media (max-width: 575.98px) {
+  /* Target the p element wrapping standalone SVGs/imgs to expand full width */
+  p:has(> svg.inline-svg),
+  p:has(> img.r-plt) {
+    margin-left: calc(var(--bs-gutter-x, 1.5rem) * -.5) !important;
+    margin-right: calc(var(--bs-gutter-x, 1.5rem) * -.5) !important;
+    width: calc(100% + var(--bs-gutter-x, 1.5rem)) !important;
+    max-width: none !important;
+  }
+  /* SVGs/imgs inside the expanded p */
+  p > svg.inline-svg,
+  p > img.r-plt {
+    border-radius: 0 !important;
+    border: 1px solid #DFD7CA !important;
+    width: 100% !important;
+    max-width: none !important;
+  }
+  /* Dark mode mobile border - must use full border shorthand to override */
+  [data-bs-theme="dark"] p > svg.inline-svg,
+  [data-bs-theme="dark"] p > img.r-plt {
+    border: 1px solid #495057 !important;
+  }
+  /* Figure elements */
+  .section .figure,
+  .section figure,
+  div > div > .figure,
+  div > div > figure {
+    margin-left: calc(var(--bs-gutter-x, 1.5rem) * -.5) !important;
+    margin-right: calc(var(--bs-gutter-x, 1.5rem) * -.5) !important;
+    width: calc(100% + var(--bs-gutter-x, 1.5rem)) !important;
+    max-width: none !important;
+    border-radius: 0;
+  }
+  .section .figure img,
+  .section figure img,
+  div > div > .figure img,
+  div > div > figure img {
+    border-radius: 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+  }
 }
 
 /* Dark mode border */
@@ -90,7 +150,7 @@ svg.inline-svg .svglite > g > rect[rx] {
   stroke: none !important;
 }
 
-/* Legend box backgrounds - override inline fill: #F5F6F8 */
+/* Legend box backgrounds - override inline fill */
 /* Exclude svg-bg which is the main plot background */
 [data-bs-theme="dark"] svg.inline-svg .svglite rect[style*="fill: #F5F6F8"]:not(.svg-bg),
 [data-bs-theme="dark"] svg.inline-svg .svglite rect.legend-bg {
@@ -99,12 +159,12 @@ svg.inline-svg .svglite > g > rect[rx] {
 
 /* Grid lines */
 /* White grid lines need to become dark in light mode, stay light in dark mode */
-/* Light mode: dark grid (#3E3F3A) on light bg (#F5F6F8) */
+/* Light mode: dark grid on light bg */
 svg.inline-svg .svglite polyline[style*="stroke: #FFFFFF"],
 svg.inline-svg .svglite polyline[style*="stroke: #ffffff"] {
   stroke: #3E3F3A !important;
 }
-/* Dark mode: light grid (#DFD7CA) on dark bg (#343739) */
+/* Dark mode: light grid on dark bg */
 [data-bs-theme="dark"] svg.inline-svg .svglite polyline[style*="stroke: #FFFFFF"],
 [data-bs-theme="dark"] svg.inline-svg .svglite polyline[style*="stroke: #ffffff"],
 [data-bs-theme="dark"] svg.inline-svg .svglite polyline[style*="stroke: #3E3F3A"],
@@ -128,18 +188,3 @@ svg.inline-svg .svglite polyline[style*="stroke: #ffffff"] {
   stroke: #495057 !important;
 }
 
-/* README/homepage images from man/figures */
-/* These are inline <img> tags with width="45%" etc */
-.contents img[src*="man/figures"],
-.contents img[src*="reference/figures"] {
-  border: 1px solid #DFD7CA;
-  border-radius: .375rem;
-  margin: 0.5rem 0;
-}
-
-[data-bs-theme="dark"] .contents img[src*="man/figures"],
-[data-bs-theme="dark"] .contents img[src*="reference/figures"] {
-  border-color: #495057;
-  /* Invert for dark mode - PNGs have white background */
-  filter: invert(0.88) hue-rotate(180deg);
-}

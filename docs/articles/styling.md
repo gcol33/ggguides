@@ -302,16 +302,24 @@ fill colors, making legends more visible against any background:
 
 ``` r
 
-# White fill with colored outline
+# White fill with colored outline - works with color mapping only
 p + legend_keys(shape = "circle_filled", fill = "white", stroke = 1.5) +
   ggtitle("White fill, colored outline")
 
-# Colored fill with black outline
-p + legend_keys(shape = "square_filled", colour = "black", stroke = 1) +
+# Colored fill with black outline - requires mapping BOTH color and fill
+ggplot(mtcars, aes(mpg, wt, color = factor(cyl), fill = factor(cyl))) +
+  geom_point(size = 3, shape = 21, stroke = 1) +
+  legend_keys(colour = "black", stroke = 1) +
   ggtitle("Colored fill, black outline")
+#> Warning: Duplicated `override.aes` is ignored.
 ```
 
 ![](styling_files/figure-html/keys-outline-1.svg)![](styling_files/figure-html/keys-outline-2.svg)
+
+Note: For colored fills with a custom outline, you must map both `color`
+and `fill` in the plot aesthetics. This is a ggplot2
+limitation—`override.aes` can only set static values, it cannot make
+fill inherit from color.
 
 Shape types:
 

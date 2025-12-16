@@ -188,3 +188,46 @@ svg.inline-svg .svglite polyline[style*="stroke: #ffffff"] {
   stroke: #495057 !important;
 }
 
+/* SVG copy button - container positioning */
+.svg-container {
+  position: relative;
+  display: block;
+}
+
+/* SVG copy button styling - matches code block copy button */
+.btn-copy-svg {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  opacity: 0;
+  transition: opacity 0.15s ease-in-out;
+  z-index: 10;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+}
+
+/* Show button on hover */
+.svg-container:hover .btn-copy-svg,
+.svg-container:focus-within .btn-copy-svg {
+  opacity: 1;
+}
+
+/* Keep button visible when focused (for keyboard users) */
+.btn-copy-svg:focus {
+  opacity: 1;
+}
+
+/* Mobile: always show button (no hover on touch) */
+@media (max-width: 575.98px) {
+  .btn-copy-svg {
+    opacity: 0.7;
+  }
+  .svg-container:hover .btn-copy-svg {
+    opacity: 1;
+  }
+  /* Adjust position for full-width mobile SVGs */
+  .svg-container {
+    position: relative;
+  }
+}
+
