@@ -127,7 +127,8 @@ parameter on <code><a href="../reference/legend_style.html">legend_style()</a></
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"Cylinders"</span>, size <span class="op">=</span> <span class="st">"Horsepower"</span>, shape <span class="op">=</span> <span class="st">"Transmission"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">p</span></span></code></pre></div>
-<p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
+
+<div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
 <svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='504.00pt' height='360.00pt' viewBox='0 0 504.00 360.00' class="r-plt inline-svg" style="max-width:100%;width:100%;height:auto;">
 <g class='svglite'>
 <defs>
@@ -288,7 +289,8 @@ parameter on <code><a href="../reference/legend_style.html">legend_style()</a></
 <text x='450.80' y='293.33' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='14.67px' lengthAdjust='spacingAndGlyphs'>300</text>
 </g>
 </g>
-</svg></div></p>
+</svg></div>
+
 </div>
 <div class="section level2">
 <h2 id="hiding-legends">Hiding Legends<a class="anchor" aria-label="anchor" href="#hiding-legends"></a>
@@ -298,7 +300,8 @@ keeping others:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Hide the size legend</span></span>
 <span><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="../reference/legend_hide.html">legend_hide</a></span><span class="op">(</span><span class="va">size</span><span class="op">)</span></span></code></pre></div>
-<p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
+
+<div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
 <svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='504.00pt' height='360.00pt' viewBox='0 0 504.00 360.00' class="r-plt inline-svg" style="max-width:100%;width:100%;height:auto;">
 <g class='svglite'>
 <defs>
@@ -442,12 +445,14 @@ keeping others:</p>
 <text x='450.80' y='231.34' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='4.89px' lengthAdjust='spacingAndGlyphs'>1</text>
 </g>
 </g>
-</svg></div></p>
+</svg></div>
+
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># Hide multiple legends</span></span>
 <span><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="../reference/legend_hide.html">legend_hide</a></span><span class="op">(</span><span class="va">size</span>, <span class="va">shape</span><span class="op">)</span></span></code></pre></div>
-<p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
+
+<div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
 <svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='504.00pt' height='360.00pt' viewBox='0 0 504.00 360.00' class="r-plt inline-svg" style="max-width:100%;width:100%;height:auto;">
 <g class='svglite'>
 <defs>
@@ -583,7 +588,8 @@ keeping others:</p>
 <text x='469.96' y='195.26' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='4.89px' lengthAdjust='spacingAndGlyphs'>8</text>
 </g>
 </g>
-</svg></div></p>
+</svg></div>
+
 </div>
 <div class="section level2">
 <h2 id="selecting-legends">Selecting Legends<a class="anchor" aria-label="anchor" href="#selecting-legends"></a>
@@ -593,7 +599,8 @@ keeping others:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Keep only the colour legend</span></span>
 <span><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="../reference/legend_select.html">legend_select</a></span><span class="op">(</span><span class="va">colour</span><span class="op">)</span></span></code></pre></div>
-<p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
+
+<div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
 <svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='504.00pt' height='360.00pt' viewBox='0 0 504.00 360.00' class="r-plt inline-svg" style="max-width:100%;width:100%;height:auto;">
 <g class='svglite'>
 <defs>
@@ -729,12 +736,14 @@ keeping others:</p>
 <text x='469.96' y='195.26' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='4.89px' lengthAdjust='spacingAndGlyphs'>8</text>
 </g>
 </g>
-</svg></div></p>
+</svg></div>
+
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># Keep colour and shape</span></span>
 <span><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="../reference/legend_select.html">legend_select</a></span><span class="op">(</span><span class="va">colour</span>, <span class="va">shape</span><span class="op">)</span></span></code></pre></div>
-<p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
+
+<div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
 <svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='504.00pt' height='360.00pt' viewBox='0 0 504.00 360.00' class="r-plt inline-svg" style="max-width:100%;width:100%;height:auto;">
 <g class='svglite'>
 <defs>
@@ -878,7 +887,8 @@ keeping others:</p>
 <text x='450.80' y='231.34' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='4.89px' lengthAdjust='spacingAndGlyphs'>1</text>
 </g>
 </g>
-</svg></div></p>
+</svg></div>
+
 </div>
 <div class="section level2">
 <h2 id="controlling-legend-order">Controlling Legend Order<a class="anchor" aria-label="anchor" href="#controlling-legend-order"></a>
@@ -888,7 +898,8 @@ keeping others:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Default order</span></span>
 <span><span class="va">p</span></span></code></pre></div>
-<p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
+
+<div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
 <svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='504.00pt' height='360.00pt' viewBox='0 0 504.00 360.00' class="r-plt inline-svg" style="max-width:100%;width:100%;height:auto;">
 <g class='svglite'>
 <defs>
@@ -1049,12 +1060,14 @@ keeping others:</p>
 <text x='450.80' y='293.33' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='14.67px' lengthAdjust='spacingAndGlyphs'>300</text>
 </g>
 </g>
-</svg></div></p>
+</svg></div>
+
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># Size legend first, then colour, then shape</span></span>
 <span><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="../reference/legend_order_guides.html">legend_order_guides</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span>, colour <span class="op">=</span> <span class="fl">2</span>, shape <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
-<p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
+
+<div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
 <svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='504.00pt' height='360.00pt' viewBox='0 0 504.00 360.00' class="r-plt inline-svg" style="max-width:100%;width:100%;height:auto;">
 <g class='svglite'>
 <defs>
@@ -1215,7 +1228,8 @@ keeping others:</p>
 <text x='450.80' y='293.33' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='4.89px' lengthAdjust='spacingAndGlyphs'>1</text>
 </g>
 </g>
-</svg></div></p>
+</svg></div>
+
 </div>
 <div class="section level2">
 <h2 id="merging-and-splitting-legends">Merging and Splitting Legends<a class="anchor" aria-label="anchor" href="#merging-and-splitting-legends"></a>
@@ -1234,7 +1248,8 @@ and matching labels. Use <code><a href="../reference/legend_merge.html">legend_m
 <span></span>
 <span><span class="co"># Legends merge automatically when titles and labels match</span></span>
 <span><span class="va">p_merge</span></span></code></pre></div>
-<p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
+
+<div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
 <svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='504.00pt' height='360.00pt' viewBox='0 0 504.00 360.00' class="r-plt inline-svg" style="max-width:100%;width:100%;height:auto;">
 <g class='svglite'>
 <defs>
@@ -1370,12 +1385,14 @@ and matching labels. Use <code><a href="../reference/legend_merge.html">legend_m
 <text x='469.96' y='195.26' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='4.89px' lengthAdjust='spacingAndGlyphs'>8</text>
 </g>
 </g>
-</svg></div></p>
+</svg></div>
+
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># Explicitly request merge (reinforces default behavior)</span></span>
 <span><span class="va">p_merge</span> <span class="op">+</span> <span class="fu"><a href="../reference/legend_merge.html">legend_merge</a></span><span class="op">(</span><span class="va">colour</span>, <span class="va">fill</span><span class="op">)</span></span></code></pre></div>
-<p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
+
+<div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
 <svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='504.00pt' height='360.00pt' viewBox='0 0 504.00 360.00' class="r-plt inline-svg" style="max-width:100%;width:100%;height:auto;">
 <g class='svglite'>
 <defs>
@@ -1511,7 +1528,8 @@ and matching labels. Use <code><a href="../reference/legend_merge.html">legend_m
 <text x='469.96' y='195.26' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='4.89px' lengthAdjust='spacingAndGlyphs'>8</text>
 </g>
 </g>
-</svg></div></p>
+</svg></div>
+
 </div>
 <div class="section level3">
 <h3 id="forcing-split">Forcing Split<a class="anchor" aria-label="anchor" href="#forcing-split"></a>
@@ -1519,7 +1537,8 @@ and matching labels. Use <code><a href="../reference/legend_merge.html">legend_m
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Force separate legends even when they could merge</span></span>
 <span><span class="va">p_merge</span> <span class="op">+</span> <span class="fu"><a href="../reference/legend_split.html">legend_split</a></span><span class="op">(</span><span class="va">colour</span>, <span class="va">fill</span><span class="op">)</span></span></code></pre></div>
-<p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
+
+<div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
 <svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='504.00pt' height='360.00pt' viewBox='0 0 504.00 360.00' class="r-plt inline-svg" style="max-width:100%;width:100%;height:auto;">
 <g class='svglite'>
 <defs>
@@ -1666,7 +1685,8 @@ and matching labels. Use <code><a href="../reference/legend_merge.html">legend_m
 <text x='469.96' y='239.98' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='4.89px' lengthAdjust='spacingAndGlyphs'>8</text>
 </g>
 </g>
-</svg></div></p>
+</svg></div>
+
 </div>
 </div>
 <div class="section level2">
@@ -1682,7 +1702,8 @@ position specific legends:</p>
 <span>  <span class="fu"><a href="../reference/legend_hide.html">legend_hide</a></span><span class="op">(</span><span class="va">shape</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/legend_left.html">legend_left</a></span><span class="op">(</span>by <span class="op">=</span> <span class="st">"colour"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/legend_bottom.html">legend_bottom</a></span><span class="op">(</span>by <span class="op">=</span> <span class="st">"size"</span><span class="op">)</span></span></code></pre></div>
-<p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
+
+<div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
 <svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='504.00pt' height='360.00pt' viewBox='0 0 504.00 360.00' class="r-plt inline-svg" style="max-width:100%;width:100%;height:auto;">
 <g class='svglite'>
 <defs>
@@ -1836,14 +1857,16 @@ position specific legends:</p>
 <text x='419.52' y='343.55' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='14.67px' lengthAdjust='spacingAndGlyphs'>300</text>
 </g>
 </g>
-</svg></div></p>
+</svg></div>
+
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Colour legend on top, size on right</span></span>
 <span><span class="va">p</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/legend_hide.html">legend_hide</a></span><span class="op">(</span><span class="va">shape</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/legend_top.html">legend_top</a></span><span class="op">(</span>by <span class="op">=</span> <span class="st">"colour"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/legend_right.html">legend_right</a></span><span class="op">(</span>by <span class="op">=</span> <span class="st">"size"</span><span class="op">)</span></span></code></pre></div>
-<p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
+
+<div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
 <svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='504.00pt' height='360.00pt' viewBox='0 0 504.00 360.00' class="r-plt inline-svg" style="max-width:100%;width:100%;height:auto;">
 <g class='svglite'>
 <defs>
@@ -1997,7 +2020,8 @@ position specific legends:</p>
 <text x='290.49' y='22.75' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='4.89px' lengthAdjust='spacingAndGlyphs'>8</text>
 </g>
 </g>
-</svg></div></p>
+</svg></div>
+
 </div>
 <div class="section level2">
 <h2 id="styling-legends-separately">Styling Legends Separately<a class="anchor" aria-label="anchor" href="#styling-legends-separately"></a>
@@ -2009,7 +2033,8 @@ apply different styles to different legends:</p>
 <span>  <span class="fu"><a href="../reference/legend_hide.html">legend_hide</a></span><span class="op">(</span><span class="va">shape</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/legend_style.html">legend_style</a></span><span class="op">(</span>title_face <span class="op">=</span> <span class="st">"bold"</span>, background <span class="op">=</span> <span class="st">"grey95"</span>, by <span class="op">=</span> <span class="st">"colour"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/legend_style.html">legend_style</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span>, by <span class="op">=</span> <span class="st">"size"</span><span class="op">)</span></span></code></pre></div>
-<p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
+
+<div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
 <svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='504.00pt' height='360.00pt' viewBox='0 0 504.00 360.00' class="r-plt inline-svg" style="max-width:100%;width:100%;height:auto;">
 <g class='svglite'>
 <defs>
@@ -2162,7 +2187,8 @@ apply different styles to different legends:</p>
 <text x='461.89' y='257.22' style='font-size: 10.00px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='16.69px' lengthAdjust='spacingAndGlyphs'>300</text>
 </g>
 </g>
-</svg></div></p>
+</svg></div>
+
 </div>
 <div class="section level2">
 <h2 id="combining-multiple-controls">Combining Multiple Controls<a class="anchor" aria-label="anchor" href="#combining-multiple-controls"></a>
@@ -2177,7 +2203,8 @@ apply different styles to different legends:</p>
 <span>  <span class="fu"><a href="../reference/legend_style.html">legend_style</a></span><span class="op">(</span>title_face <span class="op">=</span> <span class="st">"bold"</span>, title_size <span class="op">=</span> <span class="fl">14</span>, by <span class="op">=</span> <span class="st">"colour"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/legend_bottom.html">legend_bottom</a></span><span class="op">(</span>by <span class="op">=</span> <span class="st">"size"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/legend_style.html">legend_style</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">9</span>, direction <span class="op">=</span> <span class="st">"horizontal"</span>, by <span class="op">=</span> <span class="st">"size"</span><span class="op">)</span></span></code></pre></div>
-<p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
+
+<div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
 <svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='504.00pt' height='360.00pt' viewBox='0 0 504.00 360.00' class="r-plt inline-svg" style="max-width:100%;width:100%;height:auto;">
 <g class='svglite'>
 <defs>
@@ -2330,7 +2357,8 @@ apply different styles to different legends:</p>
 <text x='478.04' y='216.32' style='font-size: 9.00px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='15.00px' lengthAdjust='spacingAndGlyphs'>300</text>
 </g>
 </g>
-</svg></div></p>
+</svg></div>
+
 </div>
 <div class="section level2">
 <h2 id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a>
