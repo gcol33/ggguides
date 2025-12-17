@@ -38,18 +38,21 @@ svg.inline-svg {
 /* Mobile: match code block full-width behavior */
 /* Code blocks use negative margins to expand on mobile - plots should too */
 /* Use :has() to target the parent <p> that contains an SVG/img */
+/* Note: SVGs may be wrapped in .svg-container for copy button functionality */
 @media (max-width: 575.98px) {
   /* Target the p element wrapping standalone SVGs/imgs to expand full width */
   p:has(> svg.inline-svg),
-  p:has(> img.r-plt) {
+  p:has(> img.r-plt),
+  p:has(> .svg-container) {
     margin-left: calc(var(--bs-gutter-x, 1.5rem) * -.5) !important;
     margin-right: calc(var(--bs-gutter-x, 1.5rem) * -.5) !important;
     width: calc(100% + var(--bs-gutter-x, 1.5rem)) !important;
     max-width: none !important;
   }
-  /* SVGs/imgs inside the expanded p */
+  /* SVGs/imgs inside the expanded p (direct or via .svg-container) */
   p > svg.inline-svg,
-  p > img.r-plt {
+  p > img.r-plt,
+  p > .svg-container > svg.inline-svg {
     border-radius: 0 !important;
     border: 1px solid #DFD7CA !important;
     width: 100% !important;
@@ -57,7 +60,8 @@ svg.inline-svg {
   }
   /* Dark mode mobile border - must use full border shorthand to override */
   [data-bs-theme="dark"] p > svg.inline-svg,
-  [data-bs-theme="dark"] p > img.r-plt {
+  [data-bs-theme="dark"] p > img.r-plt,
+  [data-bs-theme="dark"] p > .svg-container > svg.inline-svg {
     border: 1px solid #495057 !important;
   }
   /* Figure elements */
