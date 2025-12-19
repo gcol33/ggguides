@@ -2,6 +2,13 @@
 
 ## ggguides (development version)
 
+## ggguides 1.1.1
+
+### Documentation
+
+- Added missing example images to README for Multiple Legends and
+  cowplot/Grid sections
+
 ## ggguides 1.1.0
 
 ### CRAN Submission

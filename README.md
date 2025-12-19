@@ -172,6 +172,8 @@ p + legend_hide(size)
 p + legend_select(colour)
 ```
 
+<img src="man/figures/legend_hide_size.svg" width="45%"> <img src="man/figures/legend_select_colour.svg" width="45%">
+
 #### Position legends separately
 
 Use the `by` parameter to position legends independently:
@@ -183,6 +185,8 @@ p +
   legend_bottom(by = "size")
 ```
 
+<img src="man/figures/legend_position_separate.svg" width="60%">
+
 #### Style legends separately
 
 Apply different styles to different legends:
@@ -193,6 +197,8 @@ p +
   legend_style(size = 10, by = "size")
 ```
 
+<img src="man/figures/legend_style_separate.svg" width="60%">
+
 #### `legend_order_guides()`
 
 Control the display order of multiple legends:
@@ -201,6 +207,8 @@ Control the display order of multiple legends:
 # Size legend first, then colour
 p + legend_order_guides(size = 1, colour = 2)
 ```
+
+<img src="man/figures/legend_order_guides.svg" width="60%">
 
 ---
 
@@ -317,6 +325,8 @@ leg <- get_legend(p)
 grid::grid.draw(leg)
 ```
 
+<img src="man/figures/get_legend.svg" width="20%">
+
 #### `shared_legend()`
 
 Combine plots with a shared legend (no patchwork required):
@@ -341,6 +351,12 @@ grid::grid.draw(gt)
 gt <- shared_legend(p1, p2, p3, p1, ncol = 2, nrow = 2, position = "right")
 grid::grid.draw(gt)
 ```
+
+<img src="man/figures/shared_legend_side.svg" width="80%">
+
+<img src="man/figures/shared_legend_stacked.svg" width="50%">
+
+<img src="man/figures/shared_legend_grid.svg" width="80%">
 
 All ggguides styling functions (`legend_style()`, `legend_wrap()`, etc.) work on individual plots regardless of layout package.
 
