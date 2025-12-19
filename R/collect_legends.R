@@ -37,7 +37,7 @@
 #' and positioning.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' library(ggplot2)
 #' library(patchwork)
 #'

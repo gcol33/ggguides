@@ -13,6 +13,11 @@
 
 \item{...}{Additional arguments (ignored)}
 }
+\value{
+A modified ggplot object with additional class \code{gg_centered_title}
+or \code{gg_autofit_legend} (for 90-degree rotation), used to trigger
+custom rendering behavior.
+}
 \description{
 Add legend_style_centered to ggplot
 }

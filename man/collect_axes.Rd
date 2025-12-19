@@ -37,7 +37,7 @@ For cowplot: Axis alignment in cowplot requires manual use of
 This function does not directly support cowplot objects.
 }
 \examples{
-\dontrun{
+\donttest{
 library(ggplot2)
 library(patchwork)
 

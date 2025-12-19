@@ -11,6 +11,10 @@
 
 \item{...}{Additional arguments (ignored)}
 }
+\value{
+Invisibly returns the input object. Called for the side effect of
+rendering the plot with centered legend titles.
+}
 \description{
 Plot method for centered title plots
 }

@@ -10,6 +10,9 @@
 #' @param object A legend_style_centered object
 #' @param plot A ggplot object
 #' @param ... Additional arguments (ignored)
+#' @return A modified ggplot object with additional class \code{gg_centered_title}
+#'   or \code{gg_autofit_legend} (for 90-degree rotation), used to trigger
+#'   custom rendering behavior.
 #' @importFrom ggplot2 ggplot_add
 #' @keywords internal
 #' @export
@@ -30,6 +33,8 @@ ggplot_add.legend_style_centered <- function(object, plot, ...) {
 #' Print method for centered title plots
 #' @param x A gg_centered_title object
 #' @param ... Additional arguments (ignored)
+#' @return Invisibly returns the input object. Called for the side effect of
+#'   rendering the plot with centered legend titles.
 #' @keywords internal
 #' @export
 print.gg_centered_title <- function(x, ...) {
@@ -43,6 +48,8 @@ print.gg_centered_title <- function(x, ...) {
 #' Plot method for centered title plots
 #' @param x A gg_centered_title object
 #' @param ... Additional arguments (ignored)
+#' @return Invisibly returns the input object. Called for the side effect of
+#'   rendering the plot with centered legend titles.
 #' @keywords internal
 #' @export
 plot.gg_centered_title <- function(x, ...) {
@@ -51,6 +58,8 @@ plot.gg_centered_title <- function(x, ...) {
 
 #' Convert centered title plot to gtable
 #' @param x A gg_centered_title object
+#' @return A gtable object (grob table) with centered legend titles, suitable for
+#'   rendering with \code{grid::grid.draw()} or saving with \code{ggplot2::ggsave()}.
 #' @method ggplotGrob gg_centered_title
 #' @keywords internal
 #' @export
@@ -63,6 +72,8 @@ ggplotGrob.gg_centered_title <- function(x) {
 #' Print method for auto-fit legend plots (90° rotation)
 #' @param x A gg_autofit_legend object
 #' @param ... Additional arguments (ignored)
+#' @return Invisibly returns the input object. Called for the side effect of
+#'   rendering the plot with auto-fitted and centered legend.
 #' @method print gg_autofit_legend
 #' @keywords internal
 #' @export
@@ -80,6 +91,8 @@ print.gg_autofit_legend <- function(x, ...) {
 #' Plot method for auto-fit legend plots
 #' @param x A gg_autofit_legend object
 #' @param ... Additional arguments (ignored)
+#' @return Invisibly returns the input object. Called for the side effect of
+#'   rendering the plot with auto-fitted and centered legend.
 #' @method plot gg_autofit_legend
 #' @keywords internal
 #' @export
@@ -89,6 +102,9 @@ plot.gg_autofit_legend <- function(x, ...) {
 
 #' Convert auto-fit legend plot to gtable
 #' @param x A gg_autofit_legend object
+#' @return A gtable object (grob table) with auto-fitted and centered legend,
+#'   suitable for rendering with \code{grid::grid.draw()} or saving with
+#'   \code{ggplot2::ggsave()}.
 #' @method ggplotGrob gg_autofit_legend
 #' @keywords internal
 #' @export
@@ -731,7 +747,7 @@ build_guide_with_style <- function(
 #'
 #' # Center title over keys only (long titles wrap automatically)
 #' # Returns a gtable - use grid::grid.draw() to render
-#' \dontrun{
+#' \donttest{
 #' g <- center_legend_title(p)
 #' grid::grid.draw(g)
 #' }

@@ -11,6 +11,10 @@
 
 \item{...}{Additional arguments (ignored)}
 }
+\value{
+Invisibly returns the input object. Called for the side effect of
+rendering the plot with auto-fitted and centered legend.
+}
 \description{
 Print method for auto-fit legend plots (90° rotation)
 }

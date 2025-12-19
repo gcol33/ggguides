@@ -9,6 +9,10 @@
 \arguments{
 \item{x}{A gg_centered_title object}
 }
+\value{
+A gtable object (grob table) with centered legend titles, suitable for
+rendering with \code{grid::grid.draw()} or saving with \code{ggplot2::ggsave()}.
+}
 \description{
 Convert centered title plot to gtable
 }

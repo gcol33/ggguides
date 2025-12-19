@@ -52,7 +52,7 @@ mechanism. Consider using the lemon package for manual legend extraction
 and positioning.
 }
 \examples{
-\dontrun{
+\donttest{
 library(ggplot2)
 library(patchwork)
 

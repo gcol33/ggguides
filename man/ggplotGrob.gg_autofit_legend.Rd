@@ -9,6 +9,11 @@
 \arguments{
 \item{x}{A gg_autofit_legend object}
 }
+\value{
+A gtable object (grob table) with auto-fitted and centered legend,
+suitable for rendering with \code{grid::grid.draw()} or saving with
+\code{ggplot2::ggsave()}.
+}
 \description{
 Convert auto-fit legend plot to gtable
 }
