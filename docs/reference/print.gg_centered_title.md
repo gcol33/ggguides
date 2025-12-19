@@ -18,3 +18,8 @@ print(x, ...)
 - ...:
 
   Additional arguments (ignored)
+
+## Value
+
+Invisibly returns the input object. Called for the side effect of
+rendering the plot with centered legend titles.

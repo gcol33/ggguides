@@ -69,7 +69,7 @@ and positioning.
 ## Examples
 
 ``` r
-if (FALSE) { # \dontrun{
+# \donttest{
 library(ggplot2)
 library(patchwork)
 
@@ -100,5 +100,5 @@ grid::grid.draw(gt)
 # Attach legend to rows 1 and 2
 gt <- collect_legends(p1 / p2 / p3, position = "right", span = 1:2)
 grid::grid.draw(gt)
-} # }
+# }
 ```

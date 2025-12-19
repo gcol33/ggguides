@@ -52,7 +52,7 @@ cowplot objects.
 ## Examples
 
 ``` r
-if (FALSE) { # \dontrun{
+# \donttest{
 library(ggplot2)
 library(patchwork)
 
@@ -72,5 +72,5 @@ collect_axes(p1 / p2)
 
 # Keep separate legends
 collect_axes(p1 / p2, guides = "keep")
-} # }
+# }
 ```

@@ -11,7 +11,7 @@ guide_legend(override.aes = list(...))."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">ggguides</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -141,7 +141,17 @@ interface for common legend key modifications. It's particularly useful for:</p>
 <li><p>Shapes 15-20: Filled solid (color from <code>colour</code>)</p></li>
 <li><p>Shapes 21-25: Outline + fill (outline from <code>colour</code>, interior
 from <code>fill</code>)</p></li>
-</ul><p>Only non-NULL arguments are applied, so you can selectively modify specific
+</ul><p><strong>Important note for filled shapes (21-25):</strong></p>
+<p>When using filled shapes with both outline and fill colors, the behavior
+depends on which aesthetics are mapped in your original plot:</p>
+<ul><li><p><strong>White fill, colored outline</strong>: Works with <code>aes(color = var)</code>.
+Use <code>legend_keys(shape = "circle_filled", fill = "white")</code>.</p></li>
+<li><p><strong>Colored fill, black outline</strong>: Requires <code>aes(color = var, fill = var)</code>
+in your plot. Then use <code>legend_keys(colour = "black")</code>.</p></li>
+</ul><p>This is because <code>override.aes</code> can only set static values; it cannot
+inherit from mapped aesthetics. If you only map <code>color</code> and try to
+override the outline to black, the fill will not have a color mapping to use.</p>
+<p>Only non-NULL arguments are applied, so you can selectively modify specific
 properties.</p>
     </div>
     <div class="section level2">
@@ -169,10 +179,18 @@ properties.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">legend_keys</span><span class="op">(</span>shape <span class="op">=</span> <span class="st">"square"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Filled shape with outline (shapes 21-25)</span></span>
+<span><span class="co"># Filled shape with white fill and colored outline (shapes 21-25)</span></span>
+<span><span class="co"># Works because we set fill to a static color (white)</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="va">wt</span>, color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">legend_keys</span><span class="op">(</span>shape <span class="op">=</span> <span class="st">"circle_filled"</span>, fill <span class="op">=</span> <span class="st">"white"</span>, stroke <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Colored fill with black outline - MUST map both color AND fill in the plot</span></span>
+<span><span class="co"># This is a ggplot2 limitation: override.aes can only set static values,</span></span>
+<span><span class="co"># it cannot make fill "inherit" from color</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="va">wt</span>, color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span>, fill <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">3</span>, shape <span class="op">=</span> <span class="fl">21</span>, stroke <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">legend_keys</span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"black"</span>, stroke <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Apply to fill aesthetic (e.g., for boxplots)</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span>, <span class="va">mpg</span>, fill <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>

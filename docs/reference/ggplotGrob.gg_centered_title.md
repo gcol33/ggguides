@@ -14,3 +14,11 @@ ggplotGrob(x)
 - x:
 
   A gg_centered_title object
+
+## Value
+
+A gtable object (grob table) with centered legend titles, suitable for
+rendering with
+[`grid::grid.draw()`](https://rdrr.io/r/grid/grid.draw.html) or saving
+with
+[`ggplot2::ggsave()`](https://ggplot2.tidyverse.org/reference/ggsave.html).

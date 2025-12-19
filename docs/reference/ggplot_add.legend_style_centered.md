@@ -22,3 +22,9 @@ ggplot_add(object, plot, ...)
 - ...:
 
   Additional arguments (ignored)
+
+## Value
+
+A modified ggplot object with additional class `gg_centered_title` or
+`gg_autofit_legend` (for 90-degree rotation), used to trigger custom
+rendering behavior.

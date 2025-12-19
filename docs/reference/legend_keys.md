@@ -101,6 +101,23 @@ useful for:
 - Shapes 21-25: Outline + fill (outline from `colour`, interior from
   `fill`)
 
+**Important note for filled shapes (21-25):**
+
+When using filled shapes with both outline and fill colors, the behavior
+depends on which aesthetics are mapped in your original plot:
+
+- **White fill, colored outline**: Works with `aes(color = var)`. Use
+  `legend_keys(shape = "circle_filled", fill = "white")`.
+
+- **Colored fill, black outline**: Requires
+  `aes(color = var, fill = var)` in your plot. Then use
+  `legend_keys(colour = "black")`.
+
+This is because `override.aes` can only set static values; it cannot
+inherit from mapped aesthetics. If you only map `color` and try to
+override the outline to black, the fill will not have a color mapping to
+use.
+
 Only non-NULL arguments are applied, so you can selectively modify
 specific properties.
 
@@ -131,10 +148,18 @@ ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
   geom_point(size = 3) +
   legend_keys(shape = "square")
 
-# Filled shape with outline (shapes 21-25)
+# Filled shape with white fill and colored outline (shapes 21-25)
+# Works because we set fill to a static color (white)
 ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
   geom_point(size = 3) +
   legend_keys(shape = "circle_filled", fill = "white", stroke = 1.5)
+
+# Colored fill with black outline - MUST map both color AND fill in the plot
+# This is a ggplot2 limitation: override.aes can only set static values,
+# it cannot make fill "inherit" from color
+ggplot(mtcars, aes(mpg, wt, color = factor(cyl), fill = factor(cyl))) +
+  geom_point(size = 3, shape = 21, stroke = 1) +
+  legend_keys(colour = "black", stroke = 1)
 
 # Apply to fill aesthetic (e.g., for boxplots)
 ggplot(mtcars, aes(factor(cyl), mpg, fill = factor(cyl))) +
