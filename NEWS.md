@@ -1,4 +1,8 @@
-# ggguides (development version)
+# ggguides 1.1.3
+
+## Maintenance
+
+* Removed dev files from repository (CLAUDE.md, FEATURES.md, ROADMAP.md, build_site.R)
 
 # ggguides 1.1.2
 
