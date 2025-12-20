@@ -26,6 +26,17 @@
   </clipPath>
 </defs>
 <g clip-path='url(#cpMC4wMHwxNDQuMDB8MC4wMHwyMTYuMDA=)'>
+<rect x='43.60' y='68.70' width='56.80' height='78.60' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<text x='49.08' y='83.28' style='font-size: 11.00px; font-family: "Arial";' textLength='45.84px' lengthAdjust='spacingAndGlyphs'>Cylinders</text>
+<rect x='49.08' y='89.98' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #EBEBEB;' />
+<circle cx='57.72' cy='98.62' r='1.95' style='stroke-width: 0.71; stroke: #F8766D; fill: #F8766D;' />
+<rect x='49.08' y='107.26' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #EBEBEB;' />
+<circle cx='57.72' cy='115.90' r='1.95' style='stroke-width: 0.71; stroke: #00BA38; fill: #00BA38;' />
+<rect x='49.08' y='124.54' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #EBEBEB;' />
+<circle cx='57.72' cy='133.18' r='1.95' style='stroke-width: 0.71; stroke: #619CFF; fill: #619CFF;' />
+<text x='71.84' y='101.77' style='font-size: 8.80px; font-family: "Arial";' textLength='4.89px' lengthAdjust='spacingAndGlyphs'>4</text>
+<text x='71.84' y='119.05' style='font-size: 8.80px; font-family: "Arial";' textLength='4.89px' lengthAdjust='spacingAndGlyphs'>6</text>
+<text x='71.84' y='136.33' style='font-size: 8.80px; font-family: "Arial";' textLength='4.89px' lengthAdjust='spacingAndGlyphs'>8</text>
 </g>
 </g>
 </svg>

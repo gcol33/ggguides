@@ -1,5 +1,11 @@
 # ggguides (development version)
 
+# ggguides 1.1.2
+
+## Bug Fixes
+
+* Fixed `get_legend()` returning empty grob with ggplot2 3.5.0+ (guide-box naming changed to position-specific names like "guide-box-right")
+
 # ggguides 1.1.1
 
 ## Documentation

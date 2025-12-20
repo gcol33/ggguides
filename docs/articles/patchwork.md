@@ -195,14 +195,14 @@ grid::grid.newpage()
 grid::grid.draw(leg)
 ```
 
+![](patchwork_files/figure-html/get-legend-1.svg)
+
 ### `shared_legend()` - Combine Plots with Shared Legend
 
 ``` r
 
 # Side-by-side with shared legend on right
 gt <- shared_legend(cp1, cp2, ncol = 2, position = "right")
-#> Warning: No legend found in the source plot. Returning plots without shared
-#> legend.
 grid::grid.newpage()
 grid::grid.draw(gt)
 ```
@@ -213,8 +213,6 @@ grid::grid.draw(gt)
 
 # Stacked with legend at bottom
 gt <- shared_legend(cp1, cp2, cp3, ncol = 1, position = "bottom")
-#> Warning: No legend found in the source plot. Returning plots without shared
-#> legend.
 grid::grid.newpage()
 grid::grid.draw(gt)
 ```
@@ -225,8 +223,6 @@ grid::grid.draw(gt)
 
 # 2x2 grid
 gt <- shared_legend(cp1, cp2, cp3, cp4, ncol = 2, nrow = 2, position = "right")
-#> Warning: No legend found in the source plot. Returning plots without shared
-#> legend.
 grid::grid.newpage()
 grid::grid.draw(gt)
 ```

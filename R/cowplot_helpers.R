@@ -35,14 +35,26 @@ get_legend <- function(plot) {
     stop("`plot` must be a ggplot object.", call. = FALSE)
 
   gt <- ggplot2::ggplotGrob(plot)
-  guide_idx <- which(gt$layout$name == "guide-box")
 
+
+  # ggplot2 3.5.0+ uses position-specific names like "guide-box-right"
+  guide_idx <- which(grepl("^guide-box", gt$layout$name))
 
   if (length(guide_idx) == 0) {
     return(NULL)
   }
 
-  gt$grobs[[guide_idx]]
+  # Return the first non-empty guide-box
+  for (idx in guide_idx) {
+    grob <- gt$grobs[[idx]]
+    # Check if it's a non-empty gtable (has actual content)
+    if (inherits(grob, "gtable") && length(grob$grobs) > 0) {
+      return(grob)
+    }
+  }
+
+  # Fallback: return first guide-box even if potentially empty
+gt$grobs[[guide_idx[1]]]
 }
 
 
