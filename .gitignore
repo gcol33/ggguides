@@ -32,5 +32,9 @@ Rplots.pdf
 
 # Local/dev files
 CLAUDE.md
+claude.md
 cran-comments.md
 build_site.R
+FEATURES.md
+ROADMAP.md
+*.tar.gz
