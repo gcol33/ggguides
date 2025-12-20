@@ -29,3 +29,8 @@ doc/
 .DS_Store
 Thumbs.db
 Rplots.pdf
+
+# Local/dev files
+CLAUDE.md
+cran-comments.md
+build_site.R
