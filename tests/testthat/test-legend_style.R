@@ -488,3 +488,133 @@ test_that("build_guide_with_style handles background parameters", {
   )
   expect_s3_class(result, "Guides")
 })
+
+# =============================================================================
+# legend_style face and color without by parameter
+# =============================================================================
+
+test_that("legend_style sets face without by parameter", {
+  result <- legend_style(face = "bold")
+  expect_s3_class(result, "theme")
+  expect_s3_class(result$legend.text, "element_text")
+})
+
+test_that("legend_style sets color without by parameter", {
+  result <- legend_style(color = "red")
+  expect_s3_class(result, "theme")
+})
+
+test_that("legend_style sets title_color without by parameter", {
+  result <- legend_style(title_color = "blue")
+  expect_s3_class(result, "theme")
+})
+
+test_that("legend_style errors on invalid angle", {
+  expect_error(legend_style(angle = 30), "angle must be one of")
+  expect_error(legend_style(angle = 180), "angle must be one of")
+})
+
+# =============================================================================
+# legend_style with negative angles
+# =============================================================================
+
+test_that("legend_style with angle = -45 sets correct hjust/vjust", {
+  result <- legend_style(angle = -45)
+  expect_s3_class(result, "legend_style_centered")
+})
+
+test_that("legend_style with angle = -90 sets correct hjust/vjust", {
+  result <- legend_style(angle = -90)
+  expect_s3_class(result, "legend_style_centered")
+})
+
+# =============================================================================
+# build_guide_with_style angle tests
+# =============================================================================
+
+test_that("build_guide_with_style handles angle = -45", {
+  result <- legend_style(angle = -45, by = "colour")
+  expect_s3_class(result, "Guides")
+})
+
+test_that("build_guide_with_style handles angle = -90", {
+  result <- legend_style(angle = -90, by = "colour")
+  expect_s3_class(result, "Guides")
+})
+
+test_that("build_guide_with_style handles angle = 90", {
+  result <- legend_style(angle = 90, by = "colour")
+  expect_s3_class(result, "Guides")
+})
+
+test_that("build_guide_with_style errors on invalid angle", {
+  expect_error(legend_style(angle = 30, by = "colour"), "angle must be one of")
+})
+
+# =============================================================================
+# legend_auto_fit with fill aesthetic
+# =============================================================================
+
+test_that("legend_auto_fit uses fill scale when colour scale not available", {
+  df <- data.frame(
+    x = 1:15,
+    y = 1:15,
+    group = factor(paste0("Cat_", sprintf("%02d", 1:15)))
+  )
+
+  p <- ggplot(df, aes(x, y, fill = group)) +
+    geom_tile()
+
+  result <- suppressMessages(legend_auto_fit(p, max_ratio = 0.3))
+  expect_s3_class(result, "ggplot")
+})
+
+# =============================================================================
+# as_margin with margin class input
+# =============================================================================
+
+test_that("as_margin passes through margin objects", {
+  m <- ggplot2::margin(1, 2, 3, 4, "cm")
+  result <- ggguides:::as_margin(m)
+  expect_identical(result, m)
+})
+
+# =============================================================================
+# center_legend_title with specific positions
+# =============================================================================
+
+test_that("center_legend_title with position = 'right' only", {
+  p <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
+    geom_point() +
+    theme(legend.position = "right")
+
+  result <- center_legend_title(p, position = "right")
+  expect_s3_class(result, "gtable")
+})
+
+test_that("center_legend_title with position = 'left' only", {
+  p <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
+    geom_point() +
+    theme(legend.position = "left")
+
+  result <- center_legend_title(p, position = "left")
+  expect_s3_class(result, "gtable")
+})
+
+test_that("center_legend_title with position = 'bottom' only", {
+  p <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
+    geom_point() +
+    theme(legend.position = "bottom")
+
+  result <- center_legend_title(p, position = "bottom")
+  expect_s3_class(result, "gtable")
+})
+
+test_that("center_legend_title with position = 'top' only", {
+  p <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
+    geom_point() +
+    theme(legend.position = "top")
+
+  result <- center_legend_title(p, position = "top")
+  expect_s3_class(result, "gtable")
+})

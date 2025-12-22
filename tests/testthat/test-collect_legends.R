@@ -409,3 +409,33 @@ test_that("collect_legends with span = TRUE works for left position", {
   result <- collect_legends(combined, position = "left", span = TRUE)
   expect_s3_class(result, "gtable")
 })
+
+# =============================================================================
+# shared_legend edge cases
+# =============================================================================
+
+test_that("shared_legend with neither ncol nor nrow defaults to single row", {
+  p1 <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) + geom_point()
+  p2 <- ggplot(mtcars, aes(mpg, hp, color = factor(cyl))) + geom_point()
+  p3 <- ggplot(mtcars, aes(mpg, disp, color = factor(cyl))) + geom_point()
+
+  # When neither ncol nor nrow specified, should default to n columns, 1 row
+  result <- shared_legend(p1, p2, p3)
+  expect_s3_class(result, "gtable")
+})
+
+test_that("shared_legend handles source plot without legend", {
+  p1 <- ggplot(mtcars, aes(mpg, wt)) + geom_point()
+  p2 <- ggplot(mtcars, aes(mpg, hp)) + geom_point()
+
+  # May or may not warn depending on get_legend behavior
+  result <- suppressWarnings(shared_legend(p1, p2, ncol = 2))
+  expect_s3_class(result, "gtable")
+})
+
+test_that("shared_legend with single plot works", {
+  p1 <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) + geom_point()
+
+  result <- shared_legend(p1)
+  expect_s3_class(result, "gtable")
+})

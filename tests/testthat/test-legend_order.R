@@ -151,3 +151,29 @@ test_that("legend_order handles unsupported aesthetic", {
   result <- legend_order(c("8", "6", "4"), aesthetic = "unsupported")
   expect_s3_class(result, "ggguides_legend_order")
 })
+
+# =============================================================================
+# legend_order with non-factor data
+# =============================================================================
+
+test_that("legend_order works with numeric (non-factor) mapped variable", {
+  # When the mapped variable is not a factor, it gets unique values sorted
+  p <- ggplot(mtcars, aes(mpg, wt, color = as.character(cyl))) +
+    geom_point() +
+    legend_order(c("8", "6", "4"))
+  expect_s3_class(p, "gg")
+})
+
+test_that("legend_order with size aesthetic", {
+  p <- ggplot(mtcars, aes(mpg, wt, size = factor(gear))) +
+    geom_point() +
+    legend_order(c("5", "4", "3"), aesthetic = "size")
+  expect_s3_class(p, "gg")
+})
+
+test_that("legend_order with alpha aesthetic", {
+  p <- ggplot(mtcars, aes(mpg, wt, alpha = factor(gear))) +
+    geom_point() +
+    legend_order(c("5", "4", "3"), aesthetic = "alpha")
+  expect_s3_class(p, "gg")
+})
