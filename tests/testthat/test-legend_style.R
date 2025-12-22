@@ -129,3 +129,184 @@ test_that("as_margin converts 4-vector", {
 test_that("as_margin errors on invalid length", {
   expect_error(ggguides:::as_margin(c(1, 2)), "single value or a vector of 4")
 })
+
+# =============================================================================
+# legend_style with angle tests
+# =============================================================================
+
+test_that("legend_style with angle returns legend_style_centered object", {
+  result <- legend_style(angle = 45)
+  expect_s3_class(result, "legend_style_centered")
+})
+
+test_that("legend_style accepts valid angles", {
+  for (angle in c(45, -45, 90, -90)) {
+    result <- legend_style(angle = angle)
+    expect_s3_class(result, "legend_style_centered")
+  }
+})
+
+test_that("legend_style with angle can be added to ggplot", {
+  p <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
+    geom_point() +
+    legend_style(angle = 45)
+  expect_s3_class(p, "gg")
+})
+
+# =============================================================================
+# legend_auto_fit() tests
+# =============================================================================
+
+test_that("legend_auto_fit returns a ggplot object", {
+  p <- ggplot(mpg, aes(displ, hwy, color = class)) +
+    geom_point()
+
+  result <- legend_auto_fit(p)
+  expect_s3_class(result, "ggplot")
+})
+
+test_that("legend_auto_fit errors if not a ggplot", {
+  expect_error(legend_auto_fit("not a plot"), "must be a ggplot object")
+  expect_error(legend_auto_fit(list()), "must be a ggplot object")
+})
+
+test_that("legend_auto_fit returns unchanged plot when legend fits", {
+  # Small legend should not trigger wrapping
+  p <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
+    geom_point()
+
+  result <- legend_auto_fit(p)
+  expect_s3_class(result, "ggplot")
+})
+
+test_that("legend_auto_fit accepts max_ratio parameter", {
+  p <- ggplot(mpg, aes(displ, hwy, color = class)) +
+    geom_point()
+
+  result <- legend_auto_fit(p, max_ratio = 0.5)
+  expect_s3_class(result, "ggplot")
+})
+
+test_that("legend_auto_fit returns unchanged plot when no legend", {
+  p <- ggplot(mtcars, aes(mpg, wt)) +
+    geom_point()
+
+  result <- legend_auto_fit(p)
+  expect_s3_class(result, "ggplot")
+})
+
+test_that("legend_auto_fit works with fill aesthetic", {
+  p <- ggplot(mpg, aes(class, fill = class)) +
+    geom_bar()
+
+  result <- legend_auto_fit(p)
+  expect_s3_class(result, "ggplot")
+})
+
+# =============================================================================
+# center_legend_title() tests
+# =============================================================================
+
+test_that("center_legend_title returns a gtable", {
+  p <- ggplot(mpg, aes(displ, hwy, color = class)) +
+    geom_point() +
+    legend_style(angle = 45)
+
+  result <- center_legend_title(p)
+  expect_s3_class(result, "gtable")
+})
+
+test_that("center_legend_title errors if not a ggplot", {
+  expect_error(center_legend_title("not a plot"), "must be a ggplot object")
+})
+
+test_that("center_legend_title accepts position parameter", {
+  p <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
+    geom_point()
+
+  # Test specific positions
+  for (pos in c("right", "left", "top", "bottom")) {
+    result <- center_legend_title(p, position = pos)
+    expect_s3_class(result, "gtable")
+  }
+})
+
+test_that("center_legend_title accepts position = 'all'", {
+  p <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
+    geom_point()
+
+  result <- center_legend_title(p, position = "all")
+  expect_s3_class(result, "gtable")
+})
+
+test_that("center_legend_title works with rotated labels", {
+  p <- ggplot(mpg, aes(displ, hwy, color = class)) +
+    geom_point() +
+    legend_style(angle = 45) +
+    labs(color = "Vehicle Class")
+
+  result <- center_legend_title(p)
+  expect_s3_class(result, "gtable")
+})
+
+test_that("center_legend_title works with long titles", {
+  p <- ggplot(mpg, aes(displ, hwy, color = class)) +
+    geom_point() +
+    legend_style(angle = 45) +
+    labs(color = "This is a Very Long Legend Title That Should Wrap")
+
+  result <- center_legend_title(p)
+  expect_s3_class(result, "gtable")
+})
+
+# =============================================================================
+# S3 method tests for gg_centered_title
+# =============================================================================
+
+test_that("gg_centered_title class is applied with angle", {
+  p <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
+    geom_point() +
+    legend_style(angle = 45)
+
+  expect_true("gg_centered_title" %in% class(p))
+})
+
+test_that("gg_autofit_legend class is applied with 90-degree angle", {
+  p <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
+    geom_point() +
+    legend_style(angle = 90)
+
+  expect_true("gg_autofit_legend" %in% class(p))
+})
+
+test_that("ggplotGrob.gg_centered_title returns gtable", {
+  p <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
+    geom_point() +
+    legend_style(angle = 45)
+
+  result <- ggplot2::ggplotGrob(p)
+  expect_s3_class(result, "gtable")
+})
+
+test_that("ggplotGrob.gg_autofit_legend returns gtable", {
+  p <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
+    geom_point() +
+    legend_style(angle = 90)
+
+  result <- ggplot2::ggplotGrob(p)
+  expect_s3_class(result, "gtable")
+})
+
+# =============================================================================
+# legend_style with by parameter
+# =============================================================================
+
+test_that("legend_style with by parameter returns Guides", {
+  result <- legend_style(size = 12, by = "colour")
+  expect_s3_class(result, "Guides")
+})
+
+test_that("legend_style with by normalizes color to colour", {
+  result <- legend_style(size = 12, by = "color")
+  expect_s3_class(result, "Guides")
+})
