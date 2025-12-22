@@ -1,5 +1,9 @@
 # ggguides
 
+[![R-CMD-check](https://github.com/gcol33/ggguides/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/gcol33/ggguides/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://codecov.io/gh/gcol33/ggguides/graph/badge.svg)](https://app.codecov.io/gh/gcol33/ggguides)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 Simplified legend and guide alignment for ggplot2.
 
 ## Installation
