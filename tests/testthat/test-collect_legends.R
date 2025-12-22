@@ -310,3 +310,102 @@ test_that("shared_legend sets horizontal direction for bottom/top positions", {
   result_top <- shared_legend(p1, p2, ncol = 2, position = "top")
   expect_s3_class(result_top, "gtable")
 })
+
+# =============================================================================
+# collect_legends() span tests for top/bottom positions
+# =============================================================================
+
+test_that("collect_legends with span works for bottom position", {
+  skip_if_not_installed("patchwork")
+  library(patchwork)
+
+  p1 <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) + geom_point()
+  p2 <- ggplot(mtcars, aes(mpg, hp, color = factor(cyl))) + geom_point()
+  combined <- p1 | p2
+
+  result <- collect_legends(combined, position = "bottom", span = TRUE)
+  expect_s3_class(result, "gtable")
+})
+
+test_that("collect_legends with span works for top position", {
+  skip_if_not_installed("patchwork")
+  library(patchwork)
+
+  p1 <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) + geom_point()
+  p2 <- ggplot(mtcars, aes(mpg, hp, color = factor(cyl))) + geom_point()
+  combined <- p1 | p2
+
+  result <- collect_legends(combined, position = "top", span = TRUE)
+  expect_s3_class(result, "gtable")
+})
+
+test_that("collect_legends with numeric span works for bottom position", {
+  skip_if_not_installed("patchwork")
+  library(patchwork)
+
+  p1 <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) + geom_point()
+  p2 <- ggplot(mtcars, aes(mpg, hp, color = factor(cyl))) + geom_point()
+  p3 <- ggplot(mtcars, aes(mpg, disp, color = factor(cyl))) + geom_point()
+  combined <- p1 | p2 | p3
+
+  # Span single column
+  result <- collect_legends(combined, position = "bottom", span = 1)
+  expect_s3_class(result, "gtable")
+
+  # Span multiple columns
+  result <- collect_legends(combined, position = "bottom", span = 1:2)
+  expect_s3_class(result, "gtable")
+})
+
+test_that("collect_legends with numeric span works for top position", {
+  skip_if_not_installed("patchwork")
+  library(patchwork)
+
+  p1 <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) + geom_point()
+  p2 <- ggplot(mtcars, aes(mpg, hp, color = factor(cyl))) + geom_point()
+  p3 <- ggplot(mtcars, aes(mpg, disp, color = factor(cyl))) + geom_point()
+  combined <- p1 | p2 | p3
+
+  result <- collect_legends(combined, position = "top", span = 1:2)
+  expect_s3_class(result, "gtable")
+})
+
+test_that("collect_legends with span errors on invalid column indices", {
+  skip_if_not_installed("patchwork")
+  library(patchwork)
+
+  p1 <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) + geom_point()
+  p2 <- ggplot(mtcars, aes(mpg, hp, color = factor(cyl))) + geom_point()
+  combined <- p1 | p2
+
+  expect_error(
+    collect_legends(combined, position = "bottom", span = 5),
+    "span indices must be between"
+  )
+})
+
+test_that("collect_legends warns when no legend found", {
+  skip_if_not_installed("patchwork")
+  library(patchwork)
+
+  p1 <- ggplot(mtcars, aes(mpg, wt)) + geom_point()
+  p2 <- ggplot(mtcars, aes(mpg, hp)) + geom_point()
+  combined <- p1 | p2
+
+  expect_warning(
+    collect_legends(combined, span = TRUE),
+    "No legend found"
+  )
+})
+
+test_that("collect_legends with span = TRUE works for left position", {
+  skip_if_not_installed("patchwork")
+  library(patchwork)
+
+  p1 <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) + geom_point()
+  p2 <- ggplot(mtcars, aes(mpg, hp, color = factor(cyl))) + geom_point()
+  combined <- p1 / p2
+
+  result <- collect_legends(combined, position = "left", span = TRUE)
+  expect_s3_class(result, "gtable")
+})

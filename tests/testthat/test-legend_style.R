@@ -310,3 +310,181 @@ test_that("legend_style with by normalizes color to colour", {
   result <- legend_style(size = 12, by = "color")
   expect_s3_class(result, "Guides")
 })
+
+# =============================================================================
+# legend_style with by parameter - comprehensive tests
+# =============================================================================
+
+test_that("legend_style with by accepts all styling parameters", {
+  result <- legend_style(
+    size = 12,
+    family = "serif",
+    face = "bold",
+    color = "red",
+    title_size = 14,
+    title_face = "bold",
+    title_color = "blue",
+    key_width = 1.5,
+    key_height = 1,
+    background = "grey90",
+    by = "colour"
+  )
+  expect_s3_class(result, "Guides")
+})
+
+test_that("legend_style with by and angle works", {
+  result <- legend_style(angle = 45, by = "colour")
+  expect_s3_class(result, "Guides")
+})
+
+test_that("legend_style with by and title_position works", {
+  result <- legend_style(title_position = "top", by = "colour")
+  expect_s3_class(result, "Guides")
+})
+
+test_that("legend_style with by and spacing works", {
+  result <- legend_style(spacing = 0.5, by = "colour")
+  expect_s3_class(result, "Guides")
+
+  result <- legend_style(spacing_x = 0.3, spacing_y = 0.5, by = "colour")
+  expect_s3_class(result, "Guides")
+})
+
+test_that("legend_style with by and margin works", {
+  result <- legend_style(margin = 0.5, by = "colour")
+  expect_s3_class(result, "Guides")
+})
+
+test_that("legend_style with by and direction works", {
+  result <- legend_style(direction = "horizontal", by = "colour")
+  expect_s3_class(result, "Guides")
+})
+
+test_that("legend_style with by and byrow works", {
+  result <- legend_style(byrow = TRUE, by = "colour")
+  expect_s3_class(result, "Guides")
+})
+
+test_that("legend_style with by can be added to ggplot", {
+  p <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl), size = hp)) +
+    geom_point() +
+    legend_style(size = 12, by = "colour") +
+    legend_style(size = 10, by = "size")
+  expect_s3_class(p, "gg")
+})
+
+# =============================================================================
+# legend_style additional parameters
+# =============================================================================
+
+test_that("legend_style sets title_angle", {
+  result <- legend_style(title_angle = 45)
+  expect_s3_class(result, "theme")
+})
+
+test_that("legend_style sets title_hjust and title_vjust", {
+  result <- legend_style(title_hjust = 0.5, title_vjust = 0.5)
+  expect_s3_class(result, "theme")
+})
+
+test_that("legend_style sets title_position", {
+  for (pos in c("top", "bottom", "left", "right")) {
+    result <- legend_style(title_position = pos)
+    expect_s3_class(result, "theme")
+  }
+})
+
+test_that("legend_style sets key_fill", {
+  result <- legend_style(key_fill = "white")
+  expect_s3_class(result, "theme")
+})
+
+test_that("legend_style sets spacing", {
+  result <- legend_style(spacing = 0.5)
+  expect_s3_class(result, "theme")
+})
+
+test_that("legend_style sets spacing_x and spacing_y separately", {
+  result <- legend_style(spacing_x = 0.3, spacing_y = 0.5)
+  expect_s3_class(result, "theme")
+})
+
+test_that("legend_style sets box_background and box_margin", {
+  result <- legend_style(box_background = "grey95", box_margin = 0.2)
+  expect_s3_class(result, "theme")
+})
+
+test_that("legend_style sets byrow", {
+  result <- legend_style(byrow = TRUE)
+  expect_s3_class(result, "theme")
+})
+
+# =============================================================================
+# legend_auto_fit with large legends
+# =============================================================================
+
+test_that("legend_auto_fit triggers wrapping for many items", {
+  # Create plot with many legend items that might overflow
+  df <- data.frame(
+    x = 1:20,
+    y = 1:20,
+    group = factor(paste0("Category_", sprintf("%02d", 1:20)))
+  )
+
+  p <- ggplot(df, aes(x, y, color = group)) +
+    geom_point() +
+    legend_style(angle = 90)
+
+  # This should potentially trigger wrapping
+  result <- suppressMessages(legend_auto_fit(p, max_ratio = 0.3))
+  expect_s3_class(result, "ggplot")
+})
+
+# =============================================================================
+# build_guide_with_style tests (via legend_style with by)
+# =============================================================================
+
+test_that("build_guide_with_style handles all text parameters", {
+  # Test through legend_style with by parameter
+  result <- legend_style(
+    size = 14,
+    family = "mono",
+    face = "italic",
+    color = "darkblue",
+    by = "colour"
+  )
+  expect_s3_class(result, "Guides")
+})
+
+test_that("build_guide_with_style handles title parameters", {
+  result <- legend_style(
+    title_size = 16,
+    title_face = "bold.italic",
+    title_color = "darkred",
+    title_angle = 0,
+    title_hjust = 0,
+    title_vjust = 1,
+    title_position = "left",
+    by = "colour"
+  )
+  expect_s3_class(result, "Guides")
+})
+
+test_that("build_guide_with_style handles key parameters", {
+  result <- legend_style(
+    key_width = 2,
+    key_height = 0.5,
+    key_fill = "lightgrey",
+    by = "colour"
+  )
+  expect_s3_class(result, "Guides")
+})
+
+test_that("build_guide_with_style handles background parameters", {
+  result <- legend_style(
+    background = "white",
+    background_color = "black",
+    by = "colour"
+  )
+  expect_s3_class(result, "Guides")
+})
