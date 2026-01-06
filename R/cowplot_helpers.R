@@ -99,7 +99,6 @@ gt$grobs[[guide_idx[1]]]
 #' p3 <- ggplot(mtcars, aes(mpg, disp, color = factor(cyl))) +
 #'   geom_point() + labs(title = "Plot 3", color = "Cylinders")
 #'
-#' \donttest{
 #' # Side-by-side with shared legend on right
 #' gt <- shared_legend(p1, p2, ncol = 2, position = "right")
 #' grid::grid.newpage()
@@ -114,7 +113,6 @@ gt$grobs[[guide_idx[1]]]
 #' gt <- shared_legend(p1, p2, p3, ncol = 1, position = "left")
 #' grid::grid.newpage()
 #' grid::grid.draw(gt)
-#' }
 #'
 #' @seealso \code{\link{get_legend}}, \code{\link{collect_legends}}
 #' @export

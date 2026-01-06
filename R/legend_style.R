@@ -747,10 +747,8 @@ build_guide_with_style <- function(
 #'
 #' # Center title over keys only (long titles wrap automatically)
 #' # Returns a gtable - use grid::grid.draw() to render
-#' \donttest{
 #' g <- center_legend_title(p)
 #' grid::grid.draw(g)
-#' }
 #'
 #' @seealso \code{\link{legend_style}}
 #' @export

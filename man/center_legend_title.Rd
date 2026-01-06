@@ -41,10 +41,8 @@ p <- ggplot(mpg, aes(displ, hwy, color = class)) +
 
 # Center title over keys only (long titles wrap automatically)
 # Returns a gtable - use grid::grid.draw() to render
-\donttest{
 g <- center_legend_title(p)
 grid::grid.draw(g)
-}
 
 }
 \seealso{

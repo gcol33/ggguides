@@ -37,26 +37,27 @@ For cowplot: Axis alignment in cowplot requires manual use of
 This function does not directly support cowplot objects.
 }
 \examples{
-\donttest{
 library(ggplot2)
-library(patchwork)
 
-# Two plots stacked vertically - x-axis is duplicated
-p1 <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
-  geom_point() +
-  labs(y = "Weight")
-p2 <- ggplot(mtcars, aes(mpg, hp, color = factor(cyl))) +
-  geom_point() +
-  labs(y = "Horsepower")
+if (requireNamespace("patchwork", quietly = TRUE)) {
+  library(patchwork)
 
-# Without collect_axes: both plots show x-axis
-p1 / p2
+  # Two plots stacked vertically - x-axis is duplicated
+  p1 <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
+    geom_point() +
+    labs(y = "Weight")
+  p2 <- ggplot(mtcars, aes(mpg, hp, color = factor(cyl))) +
+    geom_point() +
+    labs(y = "Horsepower")
 
-# With collect_axes: removes redundant x-axis from top plot
-collect_axes(p1 / p2)
+  # Without collect_axes: both plots show x-axis
+  p1 / p2
 
-# Keep separate legends
-collect_axes(p1 / p2, guides = "keep")
+  # With collect_axes: removes redundant x-axis from top plot
+  collect_axes(p1 / p2)
+
+  # Keep separate legends
+  collect_axes(p1 / p2, guides = "keep")
 }
 
 }
