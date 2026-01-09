@@ -1,3 +1,14 @@
+# ggguides 1.1.4
+
+## Documentation
+
+* Replaced `\donttest{}` with `if(requireNamespace())` conditionals for examples using suggested packages
+
+## Testing
+
+* Increased test coverage to 95%+
+* Added CI workflows and Codecov integration
+
 # ggguides 1.1.3
 
 ## Maintenance
