@@ -1,6 +1,8 @@
 # ggguides
 
-[![GitHub stars](https://img.shields.io/github/stars/gcol33/ggguides)](https://github.com/gcol33/ggguides)
+[![CRAN status](https://www.r-pkg.org/badges/version/ggguides)](https://CRAN.R-project.org/package=ggguides)
+[![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/ggguides)](https://cran.r-project.org/package=ggguides)
+[![Monthly downloads](https://cranlogs.r-pkg.org/badges/ggguides)](https://cran.r-project.org/package=ggguides)
 [![R-CMD-check](https://github.com/gcol33/ggguides/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/gcol33/ggguides/actions/workflows/R-CMD-check.yaml)
 [![Codecov test coverage](https://codecov.io/gh/gcol33/ggguides/graph/badge.svg)](https://app.codecov.io/gh/gcol33/ggguides)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
