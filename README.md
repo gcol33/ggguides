@@ -7,26 +7,87 @@
 [![Codecov test coverage](https://codecov.io/gh/gcol33/ggguides/graph/badge.svg)](https://app.codecov.io/gh/gcol33/ggguides)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Simplified legend and guide alignment for ggplot2.
+**Simple, Intuitive Legend Control for ggplot2**
+
+The `ggguides` package provides one-liner functions for common legend operations in ggplot2. Instead of memorizing `theme()` arguments and guide specifications, use readable functions like `legend_left()`, `legend_style()`, and `legend_inside()` to position, style, and customize legends with minimal code.
+
+## Quick Start
+
+```r
+library(ggplot2)
+library(ggguides)
+
+p <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
+  geom_point(size = 3)
+
+# Position legends
+p + legend_left()
+p + legend_inside("topright")
+
+# Style legends
+p + legend_style(size = 14, title_face = "bold")
+
+# Combine freely
+p + legend_bottom() + legend_style(background = "grey95")
+```
+
+## Statement of Need
+
+Legend customization in ggplot2 often requires verbose `theme()` calls with non-obvious argument names (`legend.position`, `legend.justification`, `legend.box.just`), and guide specifications scattered across `guides()` and `scale_*()` functions. Common tasks like positioning a legend inside the plot, styling the legend box, or managing multiple legends require looking up documentation repeatedly.
+
+`ggguides` addresses this by providing:
+
+- **Readable function names** that describe what they do (`legend_left()`, `legend_inside()`, `legend_reverse()`)
+- **Sensible defaults** that handle related settings together (e.g., `legend_left()` sets position, justification, and box alignment)
+- **Consistent API** across positioning, styling, and multi-legend operations
+- **Patchwork integration** for multi-panel figures with shared legends
 
 ## Installation
+
+```r
+install.packages("ggguides")
+```
+
+Or install the development version from GitHub:
 
 ```r
 # install.packages("pak")
 pak::pak("gcol33/ggguides")
 ```
 
-## Overview
+## Features
 
-ggguides provides one-liner functions for common legend operations in ggplot2:
+### Position Functions
 
-- **Position**: `legend_left()`, `legend_right()`, `legend_top()`, `legend_bottom()`, `legend_inside()`, `legend_none()`
-- **Direction**: `legend_horizontal()`, `legend_vertical()`
-- **Style**: `legend_style()`, `legend_wrap()`, `legend_reverse()`, `legend_order()`, `legend_keys()`, `colorbar_style()`
-- **Multiple Legends**: `legend_hide()`, `legend_select()`, `legend_order_guides()`, `legend_merge()`, `legend_split()`
-- **Multi-Panel**: `collect_legends()`, `collect_axes()` (patchwork), `shared_legend()`, `get_legend()` (cowplot/grid)
+- **`legend_left()` / `legend_right()`**: Side positioning with proper alignment
+- **`legend_top()` / `legend_bottom()`**: Horizontal layout with optional plot alignment
+- **`legend_inside()`**: Position inside plot using coordinates or shortcuts (`"topright"`, `"bottomleft"`, etc.)
+- **`legend_none()`**: Remove legend entirely
 
-## Examples
+### Style Functions
+
+- **`legend_style()`**: Comprehensive styling (size, font, background, borders, margins)
+- **`legend_wrap()`**: Wrap entries into columns or rows
+- **`legend_reverse()`**: Reverse entry order
+- **`legend_order()`**: Reorder legend entries
+- **`legend_keys()`**: Customize key appearance
+- **`colorbar_style()`**: Style continuous color legends
+
+### Multiple Legend Control
+
+- **`legend_hide()` / `legend_select()`**: Show/hide specific legends by aesthetic
+- **`legend_order_guides()`**: Control display order of multiple legends
+- **`legend_merge()` / `legend_split()`**: Combine or separate legend entries
+- **`by` parameter**: Apply any function to specific aesthetics only
+
+### Multi-Panel Support
+
+- **`collect_legends()`**: Collect legends from patchwork compositions
+- **`collect_axes()`**: Collect axes from patchwork compositions
+- **`shared_legend()`**: Combine plots with shared legend (no patchwork required)
+- **`get_legend()`**: Extract legend as standalone grob
+
+## Usage Examples
 
 ### Position Helpers
 
@@ -367,6 +428,14 @@ grid::grid.draw(gt)
 
 All ggguides styling functions (`legend_style()`, `legend_wrap()`, etc.) work on individual plots regardless of layout package.
 
+## Documentation
+
+- [Getting Started](https://gillescolling.com/ggguides/articles/getting-started.html)
+- [Positioning](https://gillescolling.com/ggguides/articles/positioning.html)
+- [Styling](https://gillescolling.com/ggguides/articles/styling.html)
+- [Multiple Legends](https://gillescolling.com/ggguides/articles/multiple-legends.html)
+- [Patchwork Integration](https://gillescolling.com/ggguides/articles/patchwork.html)
+
 ## Support
 
 > "Software is like sex: it's better when it's free." — Linus Torvalds
@@ -379,4 +448,16 @@ If this package saved you some time, buying me a coffee is a nice way to say tha
 
 ## License
 
-MIT
+MIT (see the LICENSE.md file)
+
+## Citation
+
+```bibtex
+@software{ggguides,
+  author = {Colling, Gilles},
+  title = {ggguides: Simplified Legend and Guide Alignment for ggplot2},
+  year = {2025},
+  url = {https://CRAN.R-project.org/package=ggguides},
+  doi = {10.32614/CRAN.package.ggguides}
+}
+```
