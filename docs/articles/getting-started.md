@@ -14,12 +14,15 @@ intuitive one-liner functions to position, style, and manage legends.
   [`legend_top()`](https://gcol33.github.io/ggguides/reference/legend_top.md),
   [`legend_bottom()`](https://gcol33.github.io/ggguides/reference/legend_bottom.md),
   [`legend_inside()`](https://gcol33.github.io/ggguides/reference/legend_inside.md)
+
 - Style legends with
   [`legend_style()`](https://gcol33.github.io/ggguides/reference/legend_style.md)
   for fonts, backgrounds, and borders
+
 - Wrap legend entries with
   [`legend_wrap()`](https://gcol33.github.io/ggguides/reference/legend_wrap.md)
   for multi-column layouts
+
 - Collect legends from patchwork compositions with
   [`collect_legends()`](https://gcol33.github.io/ggguides/reference/collect_legends.md)
 
@@ -161,9 +164,11 @@ ggplot(mpg, aes(displ, hwy, color = class)) +
 - See the [Legend
   Positioning](https://gcol33.github.io/ggguides/articles/positioning.md)
   article for detailed position control
+
 - See the [Styling &
   Customization](https://gcol33.github.io/ggguides/articles/styling.md)
   article for advanced styling options
+
 - See the [Patchwork
   Integration](https://gcol33.github.io/ggguides/articles/patchwork.md)
   article for multi-panel workflows

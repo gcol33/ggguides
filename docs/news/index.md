@@ -1,6 +1,25 @@
 # Changelog
 
-## ggguides (development version)
+## ggguides 1.1.4
+
+CRAN release: 2026-01-09
+
+### Documentation
+
+- Replaced `\donttest{}` with `if(requireNamespace())` conditionals for
+  examples using suggested packages
+
+### Testing
+
+- Increased test coverage to 95%+
+- Added CI workflows and Codecov integration
+
+## ggguides 1.1.3
+
+### Maintenance
+
+- Removed dev files from repository (CLAUDE.md, FEATURES.md, ROADMAP.md,
+  build_site.R)
 
 ## ggguides 1.1.2
 

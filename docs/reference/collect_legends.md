@@ -69,36 +69,37 @@ and positioning.
 ## Examples
 
 ``` r
-# \donttest{
 library(ggplot2)
-library(patchwork)
 
-p1 <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
-  geom_point()
-p2 <- ggplot(mtcars, aes(mpg, hp, color = factor(cyl))) +
-  geom_point()
+if (requireNamespace("patchwork", quietly = TRUE)) {
+  library(patchwork)
 
-# Without collection: each plot has its own legend
-p1 | p2
+  p1 <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
+    geom_point()
+  p2 <- ggplot(mtcars, aes(mpg, hp, color = factor(cyl))) +
+    geom_point()
 
-# With collection: single shared legend
-collect_legends(p1 | p2)
+  # Without collection: each plot has its own legend
+  p1 | p2
 
-# Place collected legend on the bottom
-collect_legends(p1 | p2, position = "bottom")
+  # With collection: single shared legend
+  collect_legends(p1 | p2)
 
-# Legend spanning full height (returns gtable, draw with grid.draw)
-gt <- collect_legends(p1 / p2, position = "right", span = TRUE)
-grid::grid.draw(gt)
+  # Place collected legend on the bottom
+  collect_legends(p1 | p2, position = "bottom")
 
-# Attach legend to specific rows (e.g., align with row 1 only)
-p3 <- ggplot(mtcars, aes(mpg, disp, color = factor(cyl))) +
-  geom_point() + labs(title = "Plot 3")
-gt <- collect_legends(p1 / p2 / p3, position = "right", span = 1)
-grid::grid.draw(gt)
+  # Legend spanning full height (returns gtable, draw with grid.draw)
+  gt <- collect_legends(p1 / p2, position = "right", span = TRUE)
+  grid::grid.draw(gt)
 
-# Attach legend to rows 1 and 2
-gt <- collect_legends(p1 / p2 / p3, position = "right", span = 1:2)
-grid::grid.draw(gt)
-# }
+  # Attach legend to specific rows (e.g., align with row 1 only)
+  p3 <- ggplot(mtcars, aes(mpg, disp, color = factor(cyl))) +
+    geom_point() + labs(title = "Plot 3")
+  gt <- collect_legends(p1 / p2 / p3, position = "right", span = 1)
+  grid::grid.draw(gt)
+
+  # Attach legend to rows 1 and 2
+  gt <- collect_legends(p1 / p2 / p3, position = "right", span = 1:2)
+  grid::grid.draw(gt)
+}
 ```

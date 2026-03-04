@@ -1,8 +1,83 @@
 # ggguides
 
-Simplified legend and guide alignment for ggplot2.
+[![CRAN
+status](https://www.r-pkg.org/badges/version/ggguides)](https://CRAN.R-project.org/package=ggguides)
+[![CRAN
+downloads](https://cranlogs.r-pkg.org/badges/grand-total/ggguides)](https://cran.r-project.org/package=ggguides)
+[![Monthly
+downloads](https://cranlogs.r-pkg.org/badges/ggguides)](https://cran.r-project.org/package=ggguides)
+[![R-CMD-check](https://github.com/gcol33/ggguides/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/gcol33/ggguides/actions/workflows/R-CMD-check.yaml)
+[![Codecov test
+coverage](https://codecov.io/gh/gcol33/ggguides/graph/badge.svg)](https://app.codecov.io/gh/gcol33/ggguides)
+[![License:
+MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+**Simple, Intuitive Legend Control for ggplot2**
+
+The `ggguides` package provides one-liner functions for common legend
+operations in ggplot2. Instead of memorizing
+[`theme()`](https://ggplot2.tidyverse.org/reference/theme.html)
+arguments and guide specifications, use readable functions like
+[`legend_left()`](https://gcol33.github.io/ggguides/reference/legend_left.md),
+[`legend_style()`](https://gcol33.github.io/ggguides/reference/legend_style.md),
+and
+[`legend_inside()`](https://gcol33.github.io/ggguides/reference/legend_inside.md)
+to position, style, and customize legends with minimal code.
+
+## Quick Start
+
+``` r
+
+library(ggplot2)
+library(ggguides)
+
+p <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
+  geom_point(size = 3)
+
+# Position legends
+p + legend_left()
+p + legend_inside("topright")
+
+# Style legends
+p + legend_style(size = 14, title_face = "bold")
+
+# Combine freely
+p + legend_bottom() + legend_style(background = "grey95")
+```
+
+## Statement of Need
+
+Legend customization in ggplot2 often requires verbose
+[`theme()`](https://ggplot2.tidyverse.org/reference/theme.html) calls
+with non-obvious argument names (`legend.position`,
+`legend.justification`, `legend.box.just`), and guide specifications
+scattered across
+[`guides()`](https://ggplot2.tidyverse.org/reference/guides.html) and
+`scale_*()` functions. Common tasks like positioning a legend inside the
+plot, styling the legend box, or managing multiple legends require
+looking up documentation repeatedly.
+
+`ggguides` addresses this by providing:
+
+- **Readable function names** that describe what they do
+  ([`legend_left()`](https://gcol33.github.io/ggguides/reference/legend_left.md),
+  [`legend_inside()`](https://gcol33.github.io/ggguides/reference/legend_inside.md),
+  [`legend_reverse()`](https://gcol33.github.io/ggguides/reference/legend_reverse.md))
+- **Sensible defaults** that handle related settings together (e.g.,
+  [`legend_left()`](https://gcol33.github.io/ggguides/reference/legend_left.md)
+  sets position, justification, and box alignment)
+- **Consistent API** across positioning, styling, and multi-legend
+  operations
+- **Patchwork integration** for multi-panel figures with shared legends
 
 ## Installation
+
+``` r
+
+install.packages("ggguides")
+```
+
+Or install the development version from GitHub:
 
 ``` r
 
@@ -10,43 +85,65 @@ Simplified legend and guide alignment for ggplot2.
 pak::pak("gcol33/ggguides")
 ```
 
-## Overview
+## Features
 
-ggguides provides one-liner functions for common legend operations in
-ggplot2:
+### Position Functions
 
-- **Position**:
-  [`legend_left()`](https://gcol33.github.io/ggguides/reference/legend_left.md),
-  [`legend_right()`](https://gcol33.github.io/ggguides/reference/legend_right.md),
-  [`legend_top()`](https://gcol33.github.io/ggguides/reference/legend_top.md),
-  [`legend_bottom()`](https://gcol33.github.io/ggguides/reference/legend_bottom.md),
-  [`legend_inside()`](https://gcol33.github.io/ggguides/reference/legend_inside.md),
-  [`legend_none()`](https://gcol33.github.io/ggguides/reference/legend_none.md)
-- **Direction**:
-  [`legend_horizontal()`](https://gcol33.github.io/ggguides/reference/legend_horizontal.md),
-  [`legend_vertical()`](https://gcol33.github.io/ggguides/reference/legend_vertical.md)
-- **Style**:
-  [`legend_style()`](https://gcol33.github.io/ggguides/reference/legend_style.md),
-  [`legend_wrap()`](https://gcol33.github.io/ggguides/reference/legend_wrap.md),
-  [`legend_reverse()`](https://gcol33.github.io/ggguides/reference/legend_reverse.md),
-  [`legend_order()`](https://gcol33.github.io/ggguides/reference/legend_order.md),
-  [`legend_keys()`](https://gcol33.github.io/ggguides/reference/legend_keys.md),
-  [`colorbar_style()`](https://gcol33.github.io/ggguides/reference/colorbar_style.md)
-- **Multiple Legends**:
-  [`legend_hide()`](https://gcol33.github.io/ggguides/reference/legend_hide.md),
-  [`legend_select()`](https://gcol33.github.io/ggguides/reference/legend_select.md),
-  [`legend_order_guides()`](https://gcol33.github.io/ggguides/reference/legend_order_guides.md),
-  [`legend_merge()`](https://gcol33.github.io/ggguides/reference/legend_merge.md),
-  [`legend_split()`](https://gcol33.github.io/ggguides/reference/legend_split.md)
-- **Multi-Panel**:
-  [`collect_legends()`](https://gcol33.github.io/ggguides/reference/collect_legends.md),
-  [`collect_axes()`](https://gcol33.github.io/ggguides/reference/collect_axes.md)
-  (patchwork),
-  [`shared_legend()`](https://gcol33.github.io/ggguides/reference/shared_legend.md),
-  [`get_legend()`](https://gcol33.github.io/ggguides/reference/get_legend.md)
-  (cowplot/grid)
+- **[`legend_left()`](https://gcol33.github.io/ggguides/reference/legend_left.md)
+  /
+  [`legend_right()`](https://gcol33.github.io/ggguides/reference/legend_right.md)**:
+  Side positioning with proper alignment
+- **[`legend_top()`](https://gcol33.github.io/ggguides/reference/legend_top.md)
+  /
+  [`legend_bottom()`](https://gcol33.github.io/ggguides/reference/legend_bottom.md)**:
+  Horizontal layout with optional plot alignment
+- **[`legend_inside()`](https://gcol33.github.io/ggguides/reference/legend_inside.md)**:
+  Position inside plot using coordinates or shortcuts (`"topright"`,
+  `"bottomleft"`, etc.)
+- **[`legend_none()`](https://gcol33.github.io/ggguides/reference/legend_none.md)**:
+  Remove legend entirely
 
-## Examples
+### Style Functions
+
+- **[`legend_style()`](https://gcol33.github.io/ggguides/reference/legend_style.md)**:
+  Comprehensive styling (size, font, background, borders, margins)
+- **[`legend_wrap()`](https://gcol33.github.io/ggguides/reference/legend_wrap.md)**:
+  Wrap entries into columns or rows
+- **[`legend_reverse()`](https://gcol33.github.io/ggguides/reference/legend_reverse.md)**:
+  Reverse entry order
+- **[`legend_order()`](https://gcol33.github.io/ggguides/reference/legend_order.md)**:
+  Reorder legend entries
+- **[`legend_keys()`](https://gcol33.github.io/ggguides/reference/legend_keys.md)**:
+  Customize key appearance
+- **[`colorbar_style()`](https://gcol33.github.io/ggguides/reference/colorbar_style.md)**:
+  Style continuous color legends
+
+### Multiple Legend Control
+
+- **[`legend_hide()`](https://gcol33.github.io/ggguides/reference/legend_hide.md)
+  /
+  [`legend_select()`](https://gcol33.github.io/ggguides/reference/legend_select.md)**:
+  Show/hide specific legends by aesthetic
+- **[`legend_order_guides()`](https://gcol33.github.io/ggguides/reference/legend_order_guides.md)**:
+  Control display order of multiple legends
+- **[`legend_merge()`](https://gcol33.github.io/ggguides/reference/legend_merge.md)
+  /
+  [`legend_split()`](https://gcol33.github.io/ggguides/reference/legend_split.md)**:
+  Combine or separate legend entries
+- **`by` parameter**: Apply any function to specific aesthetics only
+
+### Multi-Panel Support
+
+- **[`collect_legends()`](https://gcol33.github.io/ggguides/reference/collect_legends.md)**:
+  Collect legends from patchwork compositions
+- **[`collect_axes()`](https://gcol33.github.io/ggguides/reference/collect_axes.md)**:
+  Collect axes from patchwork compositions
+- **[`shared_legend()`](https://gcol33.github.io/ggguides/reference/shared_legend.md)**:
+  Combine plots with shared legend (no patchwork required)
+- **[`get_legend()`](https://gcol33.github.io/ggguides/reference/get_legend.md)**:
+  Extract legend as standalone grob
+
+## Usage Examples
 
 ### Position Helpers
 
@@ -413,6 +510,43 @@ All ggguides styling functions
 [`legend_wrap()`](https://gcol33.github.io/ggguides/reference/legend_wrap.md),
 etc.) work on individual plots regardless of layout package.
 
+## Documentation
+
+- [Getting
+  Started](https://gillescolling.com/ggguides/articles/getting-started.html)
+- [Positioning](https://gillescolling.com/ggguides/articles/positioning.html)
+- [Styling](https://gillescolling.com/ggguides/articles/styling.html)
+- [Multiple
+  Legends](https://gillescolling.com/ggguides/articles/multiple-legends.html)
+- [Patchwork
+  Integration](https://gillescolling.com/ggguides/articles/patchwork.html)
+
+## Support
+
+> “Software is like sex: it’s better when it’s free.” — Linus Torvalds
+
+I’m a PhD student who builds R packages in my free time because I
+believe good tools should be free and open. I started these projects for
+my own work and figured others might find them useful too.
+
+If this package saved you some time, buying me a coffee is a nice way to
+say thanks. It helps with my coffee addiction.
+
+[![Buy Me A
+Coffee](https://img.shields.io/badge/-Buy%20me%20a%20coffee-FFDD00?logo=buymeacoffee&logoColor=black)](https://buymeacoffee.com/gcol33)
+
 ## License
 
-MIT
+MIT (see the LICENSE.md file)
+
+## Citation
+
+``` bibtex
+@software{ggguides,
+  author = {Colling, Gilles},
+  title = {ggguides: Simplified Legend and Guide Alignment for ggplot2},
+  year = {2025},
+  url = {https://CRAN.R-project.org/package=ggguides},
+  doi = {10.32614/CRAN.package.ggguides}
+}
+```

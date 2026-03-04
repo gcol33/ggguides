@@ -7,7 +7,9 @@ handling:
 
 - **Duplicate legends** - Same aesthetic mapped in multiple plots
   creates redundancy
+
 - **Alignment issues** - Legends may not align properly across panels
+
 - **Spanning** - Legends should sometimes span multiple rows
 
 ggguides provides
@@ -248,6 +250,7 @@ etc.) work on individual plots regardless of layout package.
 - [Legend
   Positioning](https://gcol33.github.io/ggguides/articles/positioning.md)
   for single-plot placement
+
 - [Styling &
   Customization](https://gcol33.github.io/ggguides/articles/styling.md)
   for legend appearance

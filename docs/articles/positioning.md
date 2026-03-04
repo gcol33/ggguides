@@ -148,6 +148,7 @@ p + legend_none()
 - [Styling &
   Customization](https://gcol33.github.io/ggguides/articles/styling.md)
   for font, background, and border options
+
 - [Patchwork
   Integration](https://gcol33.github.io/ggguides/articles/patchwork.md)
   for multi-panel workflows

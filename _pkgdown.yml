@@ -1,31 +1,33 @@
 url: https://gcol33.github.io/ggguides/
-
 destination: docs
-
 template:
   bootstrap: 5
   bootswatch: sandstone
-  light-switch: true
-
+  light-switch: yes
+  includes:
+    in_header: pkgdown/mathjax-config.html
 figures:
   dev: svglite::svglite
   fig.ext: svg
-  bg: "#F5F6F8"
-
+  bg: '#F5F6F8'
 home:
-  title: "ggguides: Simplified Legend and Guide Alignment for ggplot2"
-  description: >
-    One-liner functions for common legend operations in ggplot2 - positioning,
-    styling, wrapping, and collection across multi-panel plots.
-
+  title: 'ggguides: Simplified Legend and Guide Alignment for ggplot2'
+  description: |
+    One-liner functions for common legend operations in ggplot2 - positioning, styling, wrapping, and collection across multi-panel plots.
 authors:
   Gilles Colling:
     href: https://github.com/gcol33
-
 navbar:
   structure:
-    left:  [intro, reference, articles, news]
-    right: [search, lightswitch, github]
+    left:
+    - intro
+    - reference
+    - articles
+    - news
+    right:
+    - search
+    - lightswitch
+    - github
   components:
     intro:
       text: Get Started
@@ -33,81 +35,72 @@ navbar:
     articles:
       text: Articles
       menu:
-        - text: "Getting Started"
-          href: articles/getting-started.html
-        - text: "Legend Positioning"
-          href: articles/positioning.html
-        - text: "Styling & Customization"
-          href: articles/styling.html
-        - text: "Multiple Legends"
-          href: articles/multiple-legends.html
-        - text: "Patchwork Integration"
-          href: articles/patchwork.html
+      - text: Getting Started
+        href: articles/getting-started.html
+      - text: Legend Positioning
+        href: articles/positioning.html
+      - text: Styling & Customization
+        href: articles/styling.html
+      - text: Multiple Legends
+        href: articles/multiple-legends.html
+      - text: Patchwork Integration
+        href: articles/patchwork.html
     github:
       icon: fab fa-github
       href: https://github.com/gcol33/ggguides
       aria-label: GitHub
-
 reference:
-  - title: "Position Helpers"
-    desc: "Control legend placement"
-    contents:
-      - legend_left
-      - legend_right
-      - legend_top
-      - legend_bottom
-      - legend_inside
-      - legend_none
-
-  - title: "Direction Helpers"
-    desc: "Control legend orientation"
-    contents:
-      - legend_horizontal
-      - legend_vertical
-
-  - title: "Style Helpers"
-    desc: "Customize legend appearance"
-    contents:
-      - legend_style
-      - legend_wrap
-      - legend_reverse
-      - legend_order
-      - legend_keys
-      - legend_auto_fit
-      - center_legend_title
-      - colorbar_style
-
-  - title: "Multiple Legends"
-    desc: "Control individual legends when a plot has multiple aesthetics"
-    contents:
-      - legend_hide
-      - legend_select
-      - legend_order_guides
-      - legend_merge
-      - legend_split
-
-  - title: "Multi-Panel Layouts"
-    desc: "Collect and align legends across multi-panel plots (patchwork or cowplot)"
-    contents:
-      - collect_legends
-      - collect_axes
-      - get_legend
-      - shared_legend
-
+- title: Position Helpers
+  desc: Control legend placement
+  contents:
+  - legend_left
+  - legend_right
+  - legend_top
+  - legend_bottom
+  - legend_inside
+  - legend_none
+- title: Direction Helpers
+  desc: Control legend orientation
+  contents:
+  - legend_horizontal
+  - legend_vertical
+- title: Style Helpers
+  desc: Customize legend appearance
+  contents:
+  - legend_style
+  - legend_wrap
+  - legend_reverse
+  - legend_order
+  - legend_keys
+  - legend_auto_fit
+  - center_legend_title
+  - colorbar_style
+- title: Multiple Legends
+  desc: Control individual legends when a plot has multiple aesthetics
+  contents:
+  - legend_hide
+  - legend_select
+  - legend_order_guides
+  - legend_merge
+  - legend_split
+- title: Multi-Panel Layouts
+  desc: Collect and align legends across multi-panel plots (patchwork or cowplot)
+  contents:
+  - collect_legends
+  - collect_axes
+  - get_legend
+  - shared_legend
 articles:
-  - title: "Getting Started"
-    navbar: ~
-    contents:
-      - getting-started
-
-  - title: "Guides"
-    navbar: ~
-    contents:
-      - positioning
-      - styling
-      - multiple-legends
-      - patchwork
-
+- title: Getting Started
+  navbar: ~
+  contents: getting-started
+- title: Guides
+  navbar: ~
+  contents:
+  - positioning
+  - styling
+  - multiple-legends
+  - patchwork
 footer:
   structure:
     left: developed_by

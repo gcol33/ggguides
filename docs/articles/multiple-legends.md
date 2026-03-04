@@ -8,16 +8,21 @@ to control these legends individually:
 
 - **Hide specific legends** with
   [`legend_hide()`](https://gcol33.github.io/ggguides/reference/legend_hide.md)
+
 - **Keep only certain legends** with
   [`legend_select()`](https://gcol33.github.io/ggguides/reference/legend_select.md)
+
 - **Control display order** with
   [`legend_order_guides()`](https://gcol33.github.io/ggguides/reference/legend_order_guides.md)
+
 - **Force merge/split** with
   [`legend_merge()`](https://gcol33.github.io/ggguides/reference/legend_merge.md)
   and
   [`legend_split()`](https://gcol33.github.io/ggguides/reference/legend_split.md)
+
 - **Position legends separately** using `by` parameter on position
   functions
+
 - **Style legends separately** using `by` parameter on
   [`legend_style()`](https://gcol33.github.io/ggguides/reference/legend_style.md)
 
@@ -233,9 +238,11 @@ p +
 - [Legend
   Positioning](https://gcol33.github.io/ggguides/articles/positioning.md)
   for single-legend placement
+
 - [Styling &
   Customization](https://gcol33.github.io/ggguides/articles/styling.md)
   for legend appearance
+
 - [Patchwork
   Integration](https://gcol33.github.io/ggguides/articles/patchwork.md)
   for multi-panel plots

@@ -8,14 +8,19 @@ functions are:
 
 - [`legend_style()`](https://gcol33.github.io/ggguides/reference/legend_style.md) -
   Comprehensive styling (fonts, backgrounds, borders)
+
 - [`legend_keys()`](https://gcol33.github.io/ggguides/reference/legend_keys.md) -
   Override key appearance (size, alpha, shape)
+
 - [`legend_order()`](https://gcol33.github.io/ggguides/reference/legend_order.md) -
   Reorder legend entries
+
 - [`legend_wrap()`](https://gcol33.github.io/ggguides/reference/legend_wrap.md) -
   Multi-column/row layouts
+
 - [`legend_reverse()`](https://gcol33.github.io/ggguides/reference/legend_reverse.md) -
   Reverse entry order
+
 - [`colorbar_style()`](https://gcol33.github.io/ggguides/reference/colorbar_style.md) -
   Customize continuous color bar legends
 
@@ -501,6 +506,7 @@ p_cont + colorbar_style(
 - [Legend
   Positioning](https://gcol33.github.io/ggguides/articles/positioning.md)
   for placement control
+
 - [Patchwork
   Integration](https://gcol33.github.io/ggguides/articles/patchwork.md)
   for multi-panel workflows

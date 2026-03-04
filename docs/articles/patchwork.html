@@ -14,6 +14,20 @@
 <meta property="og:title" content="Patchwork Integration">
 </head>
 <body>
+<p>
+
+
+
+
+
+
+
+
+  pkgdown/mathjax-config.html
+
+  
+
+  </p>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -21,7 +35,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ggguides</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,7 +88,7 @@
                         <h4 data-toc-skip class="author">Gilles
 Colling</h4>
             
-            <h4 data-toc-skip class="date">2025-12-20</h4>
+            <h4 data-toc-skip class="date">2026-03-04</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/gcol33/ggguides/blob/HEAD/vignettes/patchwork.Rmd" class="external-link"><code>vignettes/patchwork.Rmd</code></a></small>
       <div class="d-none name"><code>patchwork.Rmd</code></div>
@@ -88,15 +102,12 @@ Colling</h4>
 <p>When combining multiple plots with patchwork, legends often need
 special handling:</p>
 <ul>
-<li>
-<strong>Duplicate legends</strong> - Same aesthetic mapped in
-multiple plots creates redundancy</li>
-<li>
-<strong>Alignment issues</strong> - Legends may not align properly
-across panels</li>
-<li>
-<strong>Spanning</strong> - Legends should sometimes span multiple
-rows</li>
+<li><p><strong>Duplicate legends</strong> - Same aesthetic mapped in
+multiple plots creates redundancy</p></li>
+<li><p><strong>Alignment issues</strong> - Legends may not align
+properly across panels</p></li>
+<li><p><strong>Spanning</strong> - Legends should sometimes span
+multiple rows</p></li>
 </ul>
 <p>ggguides provides <code><a href="../reference/collect_legends.html">collect_legends()</a></code> and
 <code><a href="../reference/collect_axes.html">collect_axes()</a></code> to address these challenges.</p>
@@ -114,8 +125,7 @@ rows</li>
 <span></span>
 <span><span class="co"># Default patchwork: duplicate legends</span></span>
 <span><span class="va">p1</span> <span class="op">|</span> <span class="va">p2</span></span></code></pre></div>
-
-<div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
+<p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
 <svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='504.00pt' height='288.00pt' viewBox='0 0 504.00 288.00' class="r-plt inline-svg" style="max-width:100%;width:100%;height:auto;">
 <g class='svglite'>
 <defs>
@@ -373,8 +383,7 @@ rows</li>
 <text x='285.13' y='20.41' style='font-size: 13.20px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='33.70px' lengthAdjust='spacingAndGlyphs'>Plot 2</text>
 </g>
 </g>
-</svg></div>
-
+</svg></div></p>
 </div>
 <div class="section level2">
 <h2 id="basic-legend-collection">Basic Legend Collection<a class="anchor" aria-label="anchor" href="#basic-legend-collection"></a>
@@ -383,8 +392,7 @@ rows</li>
 in a composition:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/collect_legends.html">collect_legends</a></span><span class="op">(</span><span class="va">p1</span> <span class="op">|</span> <span class="va">p2</span><span class="op">)</span></span></code></pre></div>
-
-<div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
+<p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
 <svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='504.00pt' height='288.00pt' viewBox='0 0 504.00 288.00' class="r-plt inline-svg" style="max-width:100%;width:100%;height:auto;">
 <g class='svglite'>
 <defs>
@@ -630,16 +638,14 @@ in a composition:</p>
 <text x='464.48' y='168.11' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='4.89px' lengthAdjust='spacingAndGlyphs'>8</text>
 </g>
 </g>
-</svg></div>
-
+</svg></div></p>
 <div class="section level3">
 <h3 id="position-options">Position Options<a class="anchor" aria-label="anchor" href="#position-options"></a>
 </h3>
 <p>Control where the collected legend appears:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/collect_legends.html">collect_legends</a></span><span class="op">(</span><span class="va">p1</span> <span class="op">|</span> <span class="va">p2</span>, position <span class="op">=</span> <span class="st">"bottom"</span><span class="op">)</span></span></code></pre></div>
-
-<div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
+<p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
 <svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='504.00pt' height='360.00pt' viewBox='0 0 504.00 360.00' class="r-plt inline-svg" style="max-width:100%;width:100%;height:auto;">
 <g class='svglite'>
 <defs>
@@ -885,12 +891,10 @@ in a composition:</p>
 <text x='331.10' y='338.07' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='4.89px' lengthAdjust='spacingAndGlyphs'>8</text>
 </g>
 </g>
-</svg></div>
-
+</svg></div></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/collect_legends.html">collect_legends</a></span><span class="op">(</span><span class="va">p1</span> <span class="op">|</span> <span class="va">p2</span>, position <span class="op">=</span> <span class="st">"left"</span><span class="op">)</span></span></code></pre></div>
-
-<div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
+<p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
 <svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='504.00pt' height='288.00pt' viewBox='0 0 504.00 288.00' class="r-plt inline-svg" style="max-width:100%;width:100%;height:auto;">
 <g class='svglite'>
 <defs>
@@ -1136,8 +1140,7 @@ in a composition:</p>
 <text x='39.20' y='168.11' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='4.89px' lengthAdjust='spacingAndGlyphs'>8</text>
 </g>
 </g>
-</svg></div>
-
+</svg></div></p>
 </div>
 </div>
 <div class="section level2">
@@ -1157,8 +1160,7 @@ more visible.</p>
 <span><span class="co"># Stack with different heights: 1, 1/2, 1/4</span></span>
 <span><span class="va">stacked</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">p1</span> <span class="op">/</span> <span class="va">p2</span> <span class="op">/</span> <span class="va">p3</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_layout.html" class="external-link">plot_layout</a></span><span class="op">(</span>heights <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/collect_legends.html">collect_legends</a></span><span class="op">(</span><span class="va">stacked</span>, position <span class="op">=</span> <span class="st">"right"</span><span class="op">)</span></span></code></pre></div>
-
-<div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
+<p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
 <svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='504.00pt' height='504.00pt' viewBox='0 0 504.00 504.00' class="r-plt inline-svg" style="max-width:100%;width:100%;height:auto;">
 <g class='svglite'>
 <defs>
@@ -1498,8 +1500,7 @@ more visible.</p>
 <text x='464.48' y='276.11' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='4.89px' lengthAdjust='spacingAndGlyphs'>8</text>
 </g>
 </g>
-</svg></div>
-
+</svg></div></p>
 </div>
 <div class="section level3">
 <h3 id="spanning-full-height">Spanning Full Height<a class="anchor" aria-label="anchor" href="#spanning-full-height"></a>
@@ -1509,8 +1510,7 @@ height:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/collect_legends.html">collect_legends</a></span><span class="op">(</span><span class="va">stacked</span>, position <span class="op">=</span> <span class="st">"right"</span>, span <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/grid.draw.html" class="external-link">grid.draw</a></span><span class="op">(</span><span class="va">gt</span><span class="op">)</span></span></code></pre></div>
-
-<div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
+<p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
 <svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='504.00pt' height='504.00pt' viewBox='0 0 504.00 504.00' class="r-plt inline-svg" style="max-width:100%;width:100%;height:auto;">
 <g class='svglite'>
 <defs>
@@ -1850,8 +1850,7 @@ height:</p>
 <text x='464.48' y='280.27' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='4.89px' lengthAdjust='spacingAndGlyphs'>8</text>
 </g>
 </g>
-</svg></div>
-
+</svg></div></p>
 </div>
 <div class="section level3">
 <h3 id="attaching-to-specific-rows">Attaching to Specific Rows<a class="anchor" aria-label="anchor" href="#attaching-to-specific-rows"></a>
@@ -1861,8 +1860,7 @@ height:</p>
 <code class="sourceCode R"><span><span class="co"># Legend attached to row 1 only (the tallest plot)</span></span>
 <span><span class="va">gt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/collect_legends.html">collect_legends</a></span><span class="op">(</span><span class="va">stacked</span>, position <span class="op">=</span> <span class="st">"right"</span>, span <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/grid.draw.html" class="external-link">grid.draw</a></span><span class="op">(</span><span class="va">gt</span><span class="op">)</span></span></code></pre></div>
-
-<div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
+<p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
 <svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='504.00pt' height='504.00pt' viewBox='0 0 504.00 504.00' class="r-plt inline-svg" style="max-width:100%;width:100%;height:auto;">
 <g class='svglite'>
 <defs>
@@ -2202,14 +2200,12 @@ height:</p>
 <text x='464.48' y='150.93' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='4.89px' lengthAdjust='spacingAndGlyphs'>8</text>
 </g>
 </g>
-</svg></div>
-
+</svg></div></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Legend attached to rows 1 and 2</span></span>
 <span><span class="va">gt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/collect_legends.html">collect_legends</a></span><span class="op">(</span><span class="va">stacked</span>, position <span class="op">=</span> <span class="st">"right"</span>, span <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span></span>
 <span><span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/grid.draw.html" class="external-link">grid.draw</a></span><span class="op">(</span><span class="va">gt</span><span class="op">)</span></span></code></pre></div>
-
-<div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
+<p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
 <svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='504.00pt' height='504.00pt' viewBox='0 0 504.00 504.00' class="r-plt inline-svg" style="max-width:100%;width:100%;height:auto;">
 <g class='svglite'>
 <defs>
@@ -2549,8 +2545,7 @@ height:</p>
 <text x='464.48' y='250.88' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='4.89px' lengthAdjust='spacingAndGlyphs'>8</text>
 </g>
 </g>
-</svg></div>
-
+</svg></div></p>
 </div>
 </div>
 <div class="section level2">
@@ -2568,8 +2563,7 @@ height:</p>
 <span></span>
 <span><span class="co"># Without axis collection (both have x-axis)</span></span>
 <span><span class="va">p_top</span> <span class="op">/</span> <span class="va">p_bottom</span></span></code></pre></div>
-
-<div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
+<p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
 <svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='504.00pt' height='360.00pt' viewBox='0 0 504.00 360.00' class="r-plt inline-svg" style="max-width:100%;width:100%;height:auto;">
 <g class='svglite'>
 <defs>
@@ -2805,13 +2799,11 @@ height:</p>
 <text transform='translate(18.84,254.25) rotate(-90)' text-anchor='middle' style='font-size: 11.00px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='66.66px' lengthAdjust='spacingAndGlyphs'>Displacement</text>
 </g>
 </g>
-</svg></div>
-
+</svg></div></p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># With axis collection (removes redundant x-axis from top)</span></span>
 <span><span class="fu"><a href="../reference/collect_axes.html">collect_axes</a></span><span class="op">(</span><span class="va">p_top</span> <span class="op">/</span> <span class="va">p_bottom</span><span class="op">)</span></span></code></pre></div>
-
-<div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
+<p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
 <svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='504.00pt' height='360.00pt' viewBox='0 0 504.00 360.00' class="r-plt inline-svg" style="max-width:100%;width:100%;height:auto;">
 <g class='svglite'>
 <defs>
@@ -3034,8 +3026,7 @@ height:</p>
 <text transform='translate(18.84,247.75) rotate(-90)' text-anchor='middle' style='font-size: 11.00px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='66.66px' lengthAdjust='spacingAndGlyphs'>Displacement</text>
 </g>
 </g>
-</svg></div>
-
+</svg></div></p>
 </div>
 <div class="section level2">
 <h2 id="combining-with-styling">Combining with Styling<a class="anchor" aria-label="anchor" href="#combining-with-styling"></a>
@@ -3046,8 +3037,7 @@ height:</p>
 <span><span class="va">p2_styled</span> <span class="op">&lt;-</span> <span class="va">p2</span> <span class="op">+</span> <span class="fu"><a href="../reference/legend_style.html">legend_style</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">11</span>, title_face <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/collect_legends.html">collect_legends</a></span><span class="op">(</span><span class="va">p1_styled</span> <span class="op">|</span> <span class="va">p2_styled</span>, position <span class="op">=</span> <span class="st">"right"</span><span class="op">)</span></span></code></pre></div>
-
-<div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
+<p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
 <svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='504.00pt' height='360.00pt' viewBox='0 0 504.00 360.00' class="r-plt inline-svg" style="max-width:100%;width:100%;height:auto;">
 <g class='svglite'>
 <defs>
@@ -3293,8 +3283,7 @@ height:</p>
 <text x='460.16' y='204.90' style='font-size: 11.00px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='6.12px' lengthAdjust='spacingAndGlyphs'>8</text>
 </g>
 </g>
-</svg></div>
-
+</svg></div></p>
 </div>
 <div class="section level2">
 <h2 id="complex-layouts">Complex Layouts<a class="anchor" aria-label="anchor" href="#complex-layouts"></a>
@@ -3307,8 +3296,7 @@ height:</p>
 <span><span class="co"># 2x2 grid</span></span>
 <span><span class="va">layout</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">p1</span> <span class="op">|</span> <span class="va">p2</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="va">p3</span> <span class="op">|</span> <span class="va">p4</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/collect_legends.html">collect_legends</a></span><span class="op">(</span><span class="va">layout</span>, position <span class="op">=</span> <span class="st">"right"</span><span class="op">)</span></span></code></pre></div>
-
-<div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
+<p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
 <svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='504.00pt' height='432.00pt' viewBox='0 0 504.00 432.00' class="r-plt inline-svg" style="max-width:100%;width:100%;height:auto;">
 <g class='svglite'>
 <defs>
@@ -3763,8 +3751,7 @@ height:</p>
 <text x='464.48' y='240.11' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='4.89px' lengthAdjust='spacingAndGlyphs'>8</text>
 </g>
 </g>
-</svg></div>
-
+</svg></div></p>
 </div>
 <div class="section level2">
 <h2 id="cowplot-grid-users">cowplot / Grid Users<a class="anchor" aria-label="anchor" href="#cowplot-grid-users"></a>
@@ -3782,8 +3769,7 @@ patchwork:</p>
 <span><span class="co"># Use with cowplot::plot_grid() or grid::grid.draw()</span></span>
 <span><span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/grid.newpage.html" class="external-link">grid.newpage</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/grid.draw.html" class="external-link">grid.draw</a></span><span class="op">(</span><span class="va">leg</span><span class="op">)</span></span></code></pre></div>
-
-<div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
+<p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
 <svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='504.00pt' height='360.00pt' viewBox='0 0 504.00 360.00' class="r-plt inline-svg" style="max-width:100%;width:100%;height:auto;">
 <g class='svglite'>
 <defs>
@@ -3834,8 +3820,7 @@ patchwork:</p>
 <text x='251.84' y='208.27' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='4.89px' lengthAdjust='spacingAndGlyphs'>8</text>
 </g>
 </g>
-</svg></div>
-
+</svg></div></p>
 </div>
 <div class="section level3">
 <h3 id="shared_legend---combine-plots-with-shared-legend">
@@ -3846,8 +3831,7 @@ patchwork:</p>
 <span><span class="va">gt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/shared_legend.html">shared_legend</a></span><span class="op">(</span><span class="va">cp1</span>, <span class="va">cp2</span>, ncol <span class="op">=</span> <span class="fl">2</span>, position <span class="op">=</span> <span class="st">"right"</span><span class="op">)</span></span>
 <span><span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/grid.newpage.html" class="external-link">grid.newpage</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/grid.draw.html" class="external-link">grid.draw</a></span><span class="op">(</span><span class="va">gt</span><span class="op">)</span></span></code></pre></div>
-
-<div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
+<p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
 <svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='504.00pt' height='288.00pt' viewBox='0 0 504.00 288.00' class="r-plt inline-svg" style="max-width:100%;width:100%;height:auto;">
 <g class='svglite'>
 <defs>
@@ -4083,15 +4067,13 @@ patchwork:</p>
 <text x='453.44' y='172.27' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='4.89px' lengthAdjust='spacingAndGlyphs'>8</text>
 </g>
 </g>
-</svg></div>
-
+</svg></div></p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Stacked with legend at bottom</span></span>
 <span><span class="va">gt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/shared_legend.html">shared_legend</a></span><span class="op">(</span><span class="va">cp1</span>, <span class="va">cp2</span>, <span class="va">cp3</span>, ncol <span class="op">=</span> <span class="fl">1</span>, position <span class="op">=</span> <span class="st">"bottom"</span><span class="op">)</span></span>
 <span><span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/grid.newpage.html" class="external-link">grid.newpage</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/grid.draw.html" class="external-link">grid.draw</a></span><span class="op">(</span><span class="va">gt</span><span class="op">)</span></span></code></pre></div>
-
-<div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
+<p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
 <svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='504.00pt' height='432.00pt' viewBox='0 0 504.00 432.00' class="r-plt inline-svg" style="max-width:100%;width:100%;height:auto;">
 <g class='svglite'>
 <defs>
@@ -4421,15 +4403,13 @@ patchwork:</p>
 <text x='319.73' y='391.95' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='4.89px' lengthAdjust='spacingAndGlyphs'>8</text>
 </g>
 </g>
-</svg></div>
-
+</svg></div></p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 2x2 grid</span></span>
 <span><span class="va">gt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/shared_legend.html">shared_legend</a></span><span class="op">(</span><span class="va">cp1</span>, <span class="va">cp2</span>, <span class="va">cp3</span>, <span class="va">cp4</span>, ncol <span class="op">=</span> <span class="fl">2</span>, nrow <span class="op">=</span> <span class="fl">2</span>, position <span class="op">=</span> <span class="st">"right"</span><span class="op">)</span></span>
 <span><span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/grid.newpage.html" class="external-link">grid.newpage</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/grid.draw.html" class="external-link">grid.draw</a></span><span class="op">(</span><span class="va">gt</span><span class="op">)</span></span></code></pre></div>
-
-<div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
+<p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
 <svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='504.00pt' height='360.00pt' viewBox='0 0 504.00 360.00' class="r-plt inline-svg" style="max-width:100%;width:100%;height:auto;">
 <g class='svglite'>
 <defs>
@@ -4848,8 +4828,7 @@ patchwork:</p>
 <text x='453.44' y='208.27' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='4.89px' lengthAdjust='spacingAndGlyphs'>8</text>
 </g>
 </g>
-</svg></div>
-
+</svg></div></p>
 <p>All ggguides styling functions (<code><a href="../reference/legend_style.html">legend_style()</a></code>,
 <code><a href="../reference/legend_wrap.html">legend_wrap()</a></code>, etc.) work on individual plots regardless of
 layout package.</p>
@@ -4898,12 +4877,10 @@ layout package.</p>
 </table>
 <p><strong>Learn more:</strong></p>
 <ul>
-<li>
-<a href="positioning.html">Legend Positioning</a> for single-plot
-placement</li>
-<li>
-<a href="styling.html">Styling &amp; Customization</a> for legend
-appearance</li>
+<li><p><a href="positioning.html">Legend Positioning</a> for single-plot
+placement</p></li>
+<li><p><a href="styling.html">Styling &amp; Customization</a> for legend
+appearance</p></li>
 </ul>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -4927,117 +4904,80 @@ appearance</li>
 
 
 
-  <script>
-/* SVG Copy Button Functionality - Copy as PNG Image */
+  
+<script>
+/* SVG Copy Button Functionality */
 (function() {
   "use strict";
 
-  // Convert SVG to PNG and copy to clipboard
-  async function copySvgAsImage(svg, btn) {
-    try {
-      // Get SVG dimensions
-      var svgRect = svg.getBoundingClientRect();
-      var width = svgRect.width;
-      var height = svgRect.height;
-
-      // Use higher resolution for better quality (2x)
-      var scale = 2;
-      var canvas = document.createElement("canvas");
-      canvas.width = width * scale;
-      canvas.height = height * scale;
-      var ctx = canvas.getContext("2d");
-      ctx.scale(scale, scale);
-
-      // Clone SVG and prepare for rendering
-      var clone = svg.cloneNode(true);
-      clone.classList.remove("inline-svg");
-
-      // Get computed styles and inline them for proper rendering
-      var svgStyles = window.getComputedStyle(svg);
-
-      // Serialize SVG
-      var serializer = new XMLSerializer();
-      var svgString = serializer.serializeToString(clone);
-
-      // Create a blob and URL for the SVG
-      var svgBlob = new Blob([svgString], { type: "image/svg+xml;charset=utf-8" });
-      var url = URL.createObjectURL(svgBlob);
-
-      // Create image and draw to canvas
-      var img = new Image();
-      img.onload = async function() {
-        // Fill white background (for transparency)
-        ctx.fillStyle = "#FFFFFF";
-        ctx.fillRect(0, 0, width, height);
-
-        // Draw the SVG
-        ctx.drawImage(img, 0, 0, width, height);
-        URL.revokeObjectURL(url);
-
-        // Convert canvas to blob and copy to clipboard
-        canvas.toBlob(async function(blob) {
-          try {
-            var item = new ClipboardItem({ "image/png": blob });
-            await navigator.clipboard.write([item]);
-
-            // Show success tooltip
-            showTooltip(btn, "Copied!");
-          } catch (err) {
-            console.error("Failed to copy image:", err);
-            showTooltip(btn, "Copy failed - try right-click");
-          }
-        }, "image/png");
-      };
-
-      img.onerror = function() {
-        URL.revokeObjectURL(url);
-        console.error("Failed to load SVG as image");
-        showTooltip(btn, "Copy failed");
-      };
-
-      img.src = url;
-
-    } catch (err) {
-      console.error("Error copying SVG:", err);
-      showTooltip(btn, "Copy failed");
-    }
-  }
-
-  // Show tooltip message
-  function showTooltip(btn, message) {
-    var originalTitle = btn.getAttribute("data-bs-original-title") || btn.getAttribute("title");
-    btn.setAttribute("data-bs-original-title", message);
-    var tooltip = bootstrap.Tooltip.getInstance(btn);
-    if (tooltip) {
-      tooltip.show();
-    }
-    setTimeout(function() {
-      btn.setAttribute("data-bs-original-title", originalTitle);
-    }, 1500);
-  }
-
   // Initialize SVG copy buttons after DOM is ready
   document.addEventListener("DOMContentLoaded", function() {
-    // Check for Clipboard API support
-    if (!navigator.clipboard || !navigator.clipboard.write) {
-      console.warn("Clipboard API not supported - SVG copy buttons disabled");
+    if (typeof ClipboardJS === "undefined") {
+      console.warn("ClipboardJS not loaded - SVG copy buttons disabled");
       return;
     }
 
-    // Add click handlers to all SVG copy buttons
-    document.querySelectorAll(".btn-copy-svg").forEach(function(btn) {
-      btn.addEventListener("click", function(e) {
-        e.preventDefault();
-        var container = btn.closest(".svg-container");
-        if (!container) return;
+    // Initialize clipboard for SVG copy buttons
+    var svgClipboard = new ClipboardJS(".btn-copy-svg", {
+      text: function(trigger) {
+        var container = trigger.closest(".svg-container");
+        if (!container) return "";
 
         var svg = container.querySelector("svg");
-        if (!svg) return;
+        if (!svg) return "";
 
-        copySvgAsImage(svg, btn);
-      });
+        // Clone SVG to avoid modifying the original
+        var clone = svg.cloneNode(true);
 
-      // Initialize Bootstrap tooltip
+        // Remove inline-svg class (not needed in copied version)
+        clone.classList.remove("inline-svg");
+
+        // Add XML declaration and serialize
+        var serializer = new XMLSerializer();
+        var svgString = serializer.serializeToString(clone);
+
+        // Add XML declaration if not present
+        if (!svgString.startsWith("<?xml")) {
+          svgString = '<?xml version="1.0" encoding="UTF-8"?>\n' + svgString;
+        }
+
+        return svgString;
+      }
+    });
+
+    // Handle success
+    svgClipboard.on("success", function(e) {
+      var btn = e.trigger;
+      var originalTitle = btn.getAttribute("data-bs-original-title") || btn.getAttribute("title");
+
+      // Update tooltip to show "Copied!"
+      btn.setAttribute("data-bs-original-title", "Copied!");
+      var tooltip = bootstrap.Tooltip.getInstance(btn);
+      if (tooltip) {
+        tooltip.show();
+      }
+
+      // Reset after delay
+      setTimeout(function() {
+        btn.setAttribute("data-bs-original-title", originalTitle);
+      }, 1500);
+
+      e.clearSelection();
+    });
+
+    // Handle error
+    svgClipboard.on("error", function(e) {
+      var btn = e.trigger;
+      btn.setAttribute("data-bs-original-title", "Press Ctrl+C to copy");
+      var tooltip = bootstrap.Tooltip.getInstance(btn);
+      if (tooltip) {
+        tooltip.show();
+      }
+    });
+
+    // Initialize tooltips for SVG copy buttons
+    var svgCopyButtons = document.querySelectorAll(".btn-copy-svg");
+    svgCopyButtons.forEach(function(btn) {
       new bootstrap.Tooltip(btn, { container: "body" });
     });
   });
