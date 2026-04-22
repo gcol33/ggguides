@@ -37,10 +37,15 @@ theme_set(
 When a plot maps multiple aesthetics (colour, size, shape, etc.), ggplot2 creates separate legends for each. ggguides provides functions to control these legends individually:
 
 - **Hide specific legends** with `legend_hide()`
+
 - **Keep only certain legends** with `legend_select()`
+
 - **Control display order** with `legend_order_guides()`
+
 - **Force merge/split** with `legend_merge()` and `legend_split()`
+
 - **Position legends separately** using `by` parameter on position functions
+
 - **Style legends separately** using `by` parameter on `legend_style()`
 
 ## Example Plot
@@ -150,6 +155,47 @@ p +
   legend_style(size = 10, by = "size")
 ```
 
+## Four Legends, One per Side
+
+When a plot has four legends and you want one on each side (top, bottom, left, right), you can fine-tune each legend along three axes:
+
+1. **Side placement** — `legend_top/bottom/left/right(by = "<aes>")`
+2. **Distance from the panel** — `legend_style(by = "<aes>", margin = c(t, r, b, l))`
+3. **Slide along the side** — `legend_style(by = "<aes>", justification = ...)`
+
+For top/bottom legends, `justification` is `"left"`, `"center"`, `"right"` (or a number in `[0, 1]`). For left/right legends, it's `"top"`, `"center"`, `"bottom"` (or a number).
+
+```{r four-sides, fig.width = 8, fig.height = 6}
+p4 <- ggplot(mtcars, aes(mpg, wt,
+                         colour = factor(cyl),
+                         fill   = factor(gear),
+                         size   = hp,
+                         shape  = factor(am))) +
+  geom_point(stroke = 1.2) +
+  labs(colour = "Cyl", fill = "Gear", size = "HP", shape = "AM")
+
+p4 +
+  # 1. Send each legend to its side
+  legend_top   (by = "colour") +
+  legend_bottom(by = "fill")   +
+  legend_left  (by = "size")   +
+  legend_right (by = "shape")  +
+
+  # 2. Slide each legend along its side
+  legend_style(by = "colour", justification = "left") +
+  legend_style(by = "fill",   justification = "right") +
+  legend_style(by = "size",   justification = "top") +
+  legend_style(by = "shape",  justification = "bottom") +
+
+  # 3. Nudge each legend toward/away from the panel via margin (cm)
+  legend_style(by = "colour", margin = c(0, 0, 0.3, 0)) +
+  legend_style(by = "fill",   margin = c(0.3, 0, 0, 0)) +
+  legend_style(by = "size",   margin = c(0, 0.3, 0, 0)) +
+  legend_style(by = "shape",  margin = c(0, 0, 0, 0.3))
+```
+
+Each `legend_style(by = ...)` call is additive — you can chain as many as you need to tune one legend at a time without affecting the others.
+
 ## Combining Multiple Controls
 
 All functions work together:
@@ -180,5 +226,7 @@ p +
 **Learn more:**
 
 - [Legend Positioning](positioning.html) for single-legend placement
+
 - [Styling & Customization](styling.html) for legend appearance
+
 - [Patchwork Integration](patchwork.html) for multi-panel plots

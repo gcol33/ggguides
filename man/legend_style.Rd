@@ -30,6 +30,7 @@ legend_style(
   box_margin = NULL,
   direction = NULL,
   byrow = NULL,
+  justification = NULL,
   by = NULL
 )
 }
@@ -97,6 +98,15 @@ Ignored when \code{by} is specified.}
 \item{byrow}{For multi-column legends, fill by row (\code{TRUE}) or by column
 (\code{FALSE}).}
 
+\item{justification}{Justification of the legend along its side. For legends
+on the top or bottom: \code{"left"}, \code{"center"}, \code{"right"}, or a
+numeric value in \code{[0, 1]}. For legends on the left or right:
+\code{"top"}, \code{"center"}, \code{"bottom"}, or a numeric value in
+\code{[0, 1]}. When \code{by} is specified, applies per-guide via
+\code{guide_legend(theme = theme(legend.justification = ...))}. When
+\code{by} is NULL, sets \code{legend.justification} for the whole plot.
+Requires ggplot2 >= 3.5.0 for per-guide use.}
+
 \item{by}{Optional aesthetic name (character) to style only a specific legend.
 When specified, uses per-guide theming via \code{guide_legend(theme = ...)}.
 Requires ggplot2 >= 3.5.0. Common values: \code{"colour"}, \code{"fill"},
@@ -152,6 +162,14 @@ ggplot(mtcars, aes(mpg, wt, color = factor(cyl), size = hp)) +
   geom_point() +
   legend_style(title_face = "bold", background = "grey95", by = "colour") +
   legend_style(size = 10, by = "size")
+
+# Per-legend justification: slide each legend along its side
+ggplot(mtcars, aes(mpg, wt, color = factor(cyl), size = hp)) +
+  geom_point() +
+  legend_top(by = "colour") +
+  legend_right(by = "size") +
+  legend_style(by = "colour", justification = "left") +
+  legend_style(by = "size",   justification = "top")
 
 }
 \seealso{

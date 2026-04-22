@@ -1,3 +1,13 @@
+# ggguides 1.1.5
+
+## New Features
+
+* `legend_style()` gains a `justification` argument. With `by = NULL` it sets `legend.justification` globally; with `by = "<aes>"` it slides a single legend along its side via `guide_legend(theme = ...)`. Useful when four legends sit on four different sides and each needs its own alignment.
+
+## Documentation
+
+* `multiple-legends` vignette: added a "Four Legends, One per Side" section showing per-legend side, justification, and margin adjustments together.
+
 # ggguides 1.1.4
 
 ## Documentation

@@ -196,6 +196,14 @@ legend_reverse <- function() {
 #' @param direction Legend direction: \code{"horizontal"} or \code{"vertical"}.
 #' @param byrow For multi-column legends, fill by row (\code{TRUE}) or by column
 #'   (\code{FALSE}).
+#' @param justification Justification of the legend along its side. For legends
+#'   on the top or bottom: \code{"left"}, \code{"center"}, \code{"right"}, or a
+#'   numeric value in \code{[0, 1]}. For legends on the left or right:
+#'   \code{"top"}, \code{"center"}, \code{"bottom"}, or a numeric value in
+#'   \code{[0, 1]}. When \code{by} is specified, applies per-guide via
+#'   \code{guide_legend(theme = theme(legend.justification = ...))}. When
+#'   \code{by} is NULL, sets \code{legend.justification} for the whole plot.
+#'   Requires ggplot2 >= 3.5.0 for per-guide use.
 #' @param by Optional aesthetic name (character) to style only a specific legend.
 #'   When specified, uses per-guide theming via \code{guide_legend(theme = ...)}.
 #'   Requires ggplot2 >= 3.5.0. Common values: \code{"colour"}, \code{"fill"},
@@ -246,6 +254,14 @@ legend_reverse <- function() {
 #'   legend_style(title_face = "bold", background = "grey95", by = "colour") +
 #'   legend_style(size = 10, by = "size")
 #'
+#' # Per-legend justification: slide each legend along its side
+#' ggplot(mtcars, aes(mpg, wt, color = factor(cyl), size = hp)) +
+#'   geom_point() +
+#'   legend_top(by = "colour") +
+#'   legend_right(by = "size") +
+#'   legend_style(by = "colour", justification = "left") +
+#'   legend_style(by = "size",   justification = "top")
+#'
 #' @seealso \code{\link{legend_left}}, \code{\link{legend_wrap}},
 #'   \code{\link{legend_reverse}}
 #' @export
@@ -275,6 +291,7 @@ legend_style <- function(
     box_margin = NULL,
     direction = NULL,
     byrow = NULL,
+    justification = NULL,
     by = NULL
 ) {
   # --- Per-guide styling when `by` is specified ---
@@ -288,7 +305,8 @@ legend_style <- function(
       title_position = title_position, key_width = key_width, key_height = key_height,
       key_fill = key_fill, spacing = spacing, spacing_x = spacing_x,
       spacing_y = spacing_y, margin = margin, background = background,
-      background_color = background_color, direction = direction, byrow = byrow
+      background_color = background_color, direction = direction, byrow = byrow,
+      justification = justification
     ))
   }
 
@@ -405,6 +423,12 @@ legend_style <- function(
   }
   if (!is.null(byrow)) {
     args$legend.byrow <- byrow
+  }
+
+  # --- Justification ---
+  # When `by` is NULL, set legend.justification globally (applies to all sides).
+  if (!is.null(justification)) {
+    args$legend.justification <- justification
   }
 
   theme_obj <- do.call(theme, args)
@@ -594,7 +618,7 @@ build_guide_with_style <- function(
     title_position = NULL, key_width = NULL, key_height = NULL,
     key_fill = NULL, spacing = NULL, spacing_x = NULL, spacing_y = NULL,
     margin = NULL, background = NULL, background_color = NULL,
-    direction = NULL, byrow = NULL
+    direction = NULL, byrow = NULL, justification = NULL
 ) {
   theme_args <- list()
 
@@ -698,6 +722,11 @@ build_guide_with_style <- function(
   }
   if (!is.null(byrow)) {
     theme_args$legend.byrow <- byrow
+  }
+
+  # --- Per-guide justification ---
+  if (!is.null(justification)) {
+    theme_args$legend.justification <- justification
   }
 
   # Build embedded theme
