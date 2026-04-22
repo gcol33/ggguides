@@ -41,8 +41,11 @@ functions to position, style, and manage legends.
 **Key features:**
 
 - Position legends with `legend_left()`, `legend_right()`, `legend_top()`, `legend_bottom()`, `legend_inside()`
+
 - Style legends with `legend_style()` for fonts, backgrounds, and borders
+
 - Wrap legend entries with `legend_wrap()` for multi-column layouts
+
 - Collect legends from patchwork compositions with `collect_legends()`
 
 ## Installation
@@ -142,5 +145,7 @@ ggplot(mpg, aes(displ, hwy, color = class)) +
 ## What's Next
 
 - See the [Legend Positioning](positioning.html) article for detailed position control
+
 - See the [Styling & Customization](styling.html) article for advanced styling options
+
 - See the [Patchwork Integration](patchwork.html) article for multi-panel workflows

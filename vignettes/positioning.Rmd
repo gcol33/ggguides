@@ -148,4 +148,5 @@ p + legend_none()
 **Learn more:**
 
 - [Styling & Customization](styling.html) for font, background, and border options
+
 - [Patchwork Integration](patchwork.html) for multi-panel workflows

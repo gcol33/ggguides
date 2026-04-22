@@ -37,7 +37,9 @@ theme_set(
 When combining multiple plots with patchwork, legends often need special handling:
 
 - **Duplicate legends** - Same aesthetic mapped in multiple plots creates redundancy
+
 - **Alignment issues** - Legends may not align properly across panels
+
 - **Spanning** - Legends should sometimes span multiple rows
 
 ggguides provides `collect_legends()` and `collect_axes()` to address these challenges.
@@ -228,4 +230,5 @@ on individual plots regardless of layout package.
 **Learn more:**
 
 - [Legend Positioning](positioning.html) for single-plot placement
+
 - [Styling & Customization](styling.html) for legend appearance

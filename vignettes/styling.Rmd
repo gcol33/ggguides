@@ -38,10 +38,15 @@ ggguides provides styling functions to customize legend appearance without
 diving into ggplot2's theme element hierarchy. The main functions are:
 
 - `legend_style()` - Comprehensive styling (fonts, backgrounds, borders)
+
 - `legend_keys()` - Override key appearance (size, alpha, shape)
+
 - `legend_order()` - Reorder legend entries
+
 - `legend_wrap()` - Multi-column/row layouts
+
 - `legend_reverse()` - Reverse entry order
+
 - `colorbar_style()` - Customize continuous color bar legends
 
 ## Font Styling
@@ -416,4 +421,5 @@ p_cont + colorbar_style(
 **Learn more:**
 
 - [Legend Positioning](positioning.html) for placement control
+
 - [Patchwork Integration](patchwork.html) for multi-panel workflows
