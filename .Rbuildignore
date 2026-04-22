@@ -6,6 +6,8 @@
 ^Rplots\.pdf$
 ^_pkgdown\.yml$
 ^build_site\.R$
+^_build\.R$
+^cran-comments\.md$
 ^claude\.md$
 ^\.github$
 ^docs$
