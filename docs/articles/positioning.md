@@ -80,7 +80,7 @@ justification:
 
 ``` r
 
-p + legend_inside(x = 0.95, y = 0.95, just = c("right", "top"))
+p + legend_inside(x = 0.95, y = 0.95, justification = c("right", "top"))
 ```
 
 ![](positioning_files/figure-html/inside-coords-1.svg)

@@ -22,7 +22,7 @@ convenient position shortcuts like "topright" or "bottomleft".'></head><body><p>
 
     <a class="navbar-brand me-2" href="../index.html">ggguides</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.6</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,10 +74,11 @@ convenient position shortcuts like <code>"topright"</code> or <code>"bottomleft"
 <span>  x <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  y <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  position <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  just <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  justification <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  background <span class="op">=</span> <span class="st">"white"</span>,</span>
 <span>  border <span class="op">=</span> <span class="cn">NA</span>,</span>
-<span>  padding <span class="op">=</span> <span class="fl">0.2</span></span>
+<span>  padding <span class="op">=</span> <span class="fl">0.2</span>,</span>
+<span>  just <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -102,10 +103,10 @@ and 1 is top. Ignored if <code>position</code> is specified.</p></dd>
 <code>"bottomright"</code>. If specified, overrides <code>x</code> and <code>y</code>.</p></dd>
 
 
-<dt id="arg-just">just<a class="anchor" aria-label="anchor" href="#arg-just"></a></dt>
-<dd><p>Justification of legend relative to the anchor point. Either a
-character vector of length 2 (horizontal, vertical) or a single value.
-Common values: <code>c("left", "top")</code>, <code>c("right", "bottom")</code>,
+<dt id="arg-justification">justification<a class="anchor" aria-label="anchor" href="#arg-justification"></a></dt>
+<dd><p>Justification of legend relative to the anchor point.
+Either a character vector of length 2 (horizontal, vertical) or a single
+value. Common values: <code>c("left", "top")</code>, <code>c("right", "bottom")</code>,
 <code>"center"</code>. If <code>NULL</code>, automatically determined based on position.</p></dd>
 
 
@@ -148,7 +149,7 @@ Common values: <code>c("left", "top")</code>, <code>c("right", "bottom")</code>,
 <span><span class="co"># Using coordinates</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="va">wt</span>, color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">legend_inside</span><span class="op">(</span>x <span class="op">=</span> <span class="fl">0.95</span>, y <span class="op">=</span> <span class="fl">0.95</span>, just <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"right"</span>, <span class="st">"top"</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="fu">legend_inside</span><span class="op">(</span>x <span class="op">=</span> <span class="fl">0.95</span>, y <span class="op">=</span> <span class="fl">0.95</span>, justification <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"right"</span>, <span class="st">"top"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Custom background and border</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="va">wt</span>, color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>

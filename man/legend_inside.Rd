@@ -8,10 +8,11 @@ legend_inside(
   x = NULL,
   y = NULL,
   position = NULL,
-  just = NULL,
+  justification = NULL,
   background = "white",
   border = NA,
-  padding = 0.2
+  padding = 0.2,
+  just = NULL
 )
 }
 \arguments{
@@ -26,9 +27,9 @@ and 1 is top. Ignored if \code{position} is specified.}
 \code{"center"}, \code{"right"}, \code{"bottomleft"}, \code{"bottom"},
 \code{"bottomright"}. If specified, overrides \code{x} and \code{y}.}
 
-\item{just}{Justification of legend relative to the anchor point. Either a
-character vector of length 2 (horizontal, vertical) or a single value.
-Common values: \code{c("left", "top")}, \code{c("right", "bottom")},
+\item{justification}{Justification of legend relative to the anchor point.
+Either a character vector of length 2 (horizontal, vertical) or a single
+value. Common values: \code{c("left", "top")}, \code{c("right", "bottom")},
 \code{"center"}. If \code{NULL}, automatically determined based on position.}
 
 \item{background}{Background fill color for the legend. Default is
@@ -60,7 +61,7 @@ ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
 # Using coordinates
 ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
   geom_point() +
-  legend_inside(x = 0.95, y = 0.95, just = c("right", "top"))
+  legend_inside(x = 0.95, y = 0.95, justification = c("right", "top"))
 
 # Custom background and border
 ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +

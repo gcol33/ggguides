@@ -96,7 +96,7 @@ p + legend_inside(position = "bottomleft") + ggtitle("Bottom left")
 For precise control, specify x/y coordinates (0-1 scale) and justification:
 
 ```{r inside-coords}
-p + legend_inside(x = 0.95, y = 0.95, just = c("right", "top"))
+p + legend_inside(x = 0.95, y = 0.95, justification = c("right", "top"))
 ```
 
 ### Adding Background

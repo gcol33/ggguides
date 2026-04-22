@@ -87,7 +87,7 @@ p + legend_inside(position = "topright")
 
 ``` r
 
-p + legend_inside(x = 0.02, y = 0.98, just = c("left", "top"))
+p + legend_inside(x = 0.02, y = 0.98, justification = c("left", "top"))
 ```
 
 ![](getting-started_files/figure-html/inside-coords-1.svg)

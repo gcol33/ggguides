@@ -93,7 +93,7 @@ p + legend_inside(position = "topright")
 ```
 
 ```{r inside-coords}
-p + legend_inside(x = 0.02, y = 0.98, just = c("left", "top"))
+p + legend_inside(x = 0.02, y = 0.98, justification = c("left", "top"))
 ```
 
 ### Removing the Legend

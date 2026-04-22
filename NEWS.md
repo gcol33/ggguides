@@ -1,3 +1,9 @@
+# ggguides 1.1.6
+
+## API Consistency
+
+* `legend_inside()`: renamed `just` argument to `justification` for consistency with `legend_style(justification = ...)` and ggplot2's `legend.justification` theme element. The old `just` name still works but emits a deprecation warning.
+
 # ggguides 1.1.5
 
 ## New Features

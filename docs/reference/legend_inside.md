@@ -10,10 +10,11 @@ legend_inside(
   x = NULL,
   y = NULL,
   position = NULL,
-  just = NULL,
+  justification = NULL,
   background = "white",
   border = NA,
-  padding = 0.2
+  padding = 0.2,
+  just = NULL
 )
 ```
 
@@ -35,7 +36,7 @@ legend_inside(
   `"topright"`, `"left"`, `"center"`, `"right"`, `"bottomleft"`,
   `"bottom"`, `"bottomright"`. If specified, overrides `x` and `y`.
 
-- just:
+- justification:
 
   Justification of legend relative to the anchor point. Either a
   character vector of length 2 (horizontal, vertical) or a single value.
@@ -82,7 +83,7 @@ ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
 # Using coordinates
 ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
   geom_point() +
-  legend_inside(x = 0.95, y = 0.95, just = c("right", "top"))
+  legend_inside(x = 0.95, y = 0.95, justification = c("right", "top"))
 
 # Custom background and border
 ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +

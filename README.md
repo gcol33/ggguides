@@ -135,7 +135,7 @@ p + legend_inside(position = "topright")
 p + legend_inside(position = "bottomleft")
 
 # Using coordinates
-p + legend_inside(x = 0.95, y = 0.95, just = c("right", "top"))
+p + legend_inside(x = 0.95, y = 0.95, justification = c("right", "top"))
 
 # With custom styling
 p + legend_inside(position = "center", background = "grey95", border = "grey50")
