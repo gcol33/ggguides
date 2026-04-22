@@ -63,6 +63,11 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.1.6" id="ggguides-116">ggguides 1.1.6<a class="anchor" aria-label="anchor" href="#ggguides-116"></a></h2>
 <div class="section level3">
+<h3 id="bug-fixes-1-1-6">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-1-6"></a></h3>
+<ul><li>
+<code>legend_*(by = &lt;aes&gt;)</code> and <code>legend_style(by = &lt;aes&gt;)</code> now compose correctly when chained for the same aesthetic. Previously, each call built a fresh <code><a href="https://ggplot2.tidyverse.org/reference/guide_legend.html" class="external-link">guide_legend()</a></code> that replaced the prior one, so <code>legend_top(by = "colour") + legend_style(by = "colour", margin = ...)</code> silently reset the colour legend’s position back to the plot default. The per-aesthetic helpers now return a ggguides update object whose <code>ggplot_add</code> method merges new params into the existing guide. This fixes the “Four Legends, One per Side” vignette example. (reported by Youtao)</li>
+</ul></div>
+<div class="section level3">
 <h3 id="api-consistency-1-1-6">API Consistency<a class="anchor" aria-label="anchor" href="#api-consistency-1-1-6"></a></h3>
 <ul><li>
 <code><a href="../reference/legend_inside.html">legend_inside()</a></code>: renamed <code>just</code> argument to <code>justification</code> for consistency with <code>legend_style(justification = ...)</code> and ggplot2’s <code>legend.justification</code> theme element. The old <code>just</code> name still works but emits a deprecation warning.</li>

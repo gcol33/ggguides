@@ -2,6 +2,7 @@
 
 S3method(ggplotGrob,gg_autofit_legend)
 S3method(ggplotGrob,gg_centered_title)
+S3method(ggplot_add,ggguides_guide_update)
 S3method(ggplot_add,ggguides_legend_order)
 S3method(ggplot_add,legend_style_centered)
 S3method(plot,gg_autofit_legend)

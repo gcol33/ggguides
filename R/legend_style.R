@@ -736,11 +736,54 @@ build_guide_with_style <- function(
     NULL
   }
 
-  # Create guide with embedded theme
-  guide <- guide_legend(theme = embedded_theme)
+  ggguides_guide_update(
+    by = by,
+    guide_params = list(),
+    theme_delta = embedded_theme
+  )
+}
 
-  guides_args <- stats::setNames(list(guide), by)
-  do.call(guides, guides_args)
+#' Build a ggguides per-aesthetic guide update object
+#' @noRd
+ggguides_guide_update <- function(by, guide_params = list(), theme_delta = NULL) {
+  structure(
+    list(
+      by = by,
+      guide_params = guide_params,
+      theme_delta = theme_delta
+    ),
+    class = c("ggguides_guide_update", "gg")
+  )
+}
+
+#' @export
+ggplot_add.ggguides_guide_update <- function(object, plot, ...) {
+  by <- object$by
+
+  existing <- tryCatch(plot$guides$guides[[by]], error = function(e) NULL)
+
+  if (is.null(existing) || !inherits(existing, "Guide")) {
+    new_params <- object$guide_params
+    if (!is.null(object$theme_delta)) new_params$theme <- object$theme_delta
+    new_guide <- do.call(ggplot2::guide_legend, new_params)
+    guides_arg <- stats::setNames(list(new_guide), by)
+    return(plot + do.call(ggplot2::guides, guides_arg))
+  }
+
+  for (nm in names(object$guide_params)) {
+    existing$params[[nm]] <- object$guide_params[[nm]]
+  }
+
+  if (!is.null(object$theme_delta)) {
+    existing_theme <- existing$params$theme
+    if (inherits(existing_theme, "theme")) {
+      existing$params$theme <- existing_theme + object$theme_delta
+    } else {
+      existing$params$theme <- object$theme_delta
+    }
+  }
+
+  plot
 }
 
 #' Center Legend Title Over Keys

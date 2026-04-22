@@ -38,6 +38,8 @@ value. Common values: \code{c("left", "top")}, \code{c("right", "bottom")},
 \item{border}{Border color for the legend box. Default is \code{NA} (no border).}
 
 \item{padding}{Padding around legend content in cm. Default is \code{0.2}.}
+
+\item{just}{Deprecated. Use \code{justification} instead.}
 }
 \value{
 A ggplot2 theme object that can be added to a plot.

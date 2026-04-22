@@ -301,14 +301,14 @@ test_that("ggplotGrob.gg_autofit_legend returns gtable", {
 # legend_style with by parameter
 # =============================================================================
 
-test_that("legend_style with by parameter returns Guides", {
+test_that("legend_style with by parameter returns per-aesthetic guide update", {
   result <- legend_style(size = 12, by = "colour")
-  expect_s3_class(result, "Guides")
+  expect_s3_class(result, "ggguides_guide_update")
 })
 
 test_that("legend_style with by normalizes color to colour", {
   result <- legend_style(size = 12, by = "color")
-  expect_s3_class(result, "Guides")
+  expect_s3_class(result, "ggguides_guide_update")
 })
 
 # =============================================================================
@@ -329,40 +329,40 @@ test_that("legend_style with by accepts all styling parameters", {
     background = "grey90",
     by = "colour"
   )
-  expect_s3_class(result, "Guides")
+  expect_s3_class(result, "ggguides_guide_update")
 })
 
 test_that("legend_style with by and angle works", {
   result <- legend_style(angle = 45, by = "colour")
-  expect_s3_class(result, "Guides")
+  expect_s3_class(result, "ggguides_guide_update")
 })
 
 test_that("legend_style with by and title_position works", {
   result <- legend_style(title_position = "top", by = "colour")
-  expect_s3_class(result, "Guides")
+  expect_s3_class(result, "ggguides_guide_update")
 })
 
 test_that("legend_style with by and spacing works", {
   result <- legend_style(spacing = 0.5, by = "colour")
-  expect_s3_class(result, "Guides")
+  expect_s3_class(result, "ggguides_guide_update")
 
   result <- legend_style(spacing_x = 0.3, spacing_y = 0.5, by = "colour")
-  expect_s3_class(result, "Guides")
+  expect_s3_class(result, "ggguides_guide_update")
 })
 
 test_that("legend_style with by and margin works", {
   result <- legend_style(margin = 0.5, by = "colour")
-  expect_s3_class(result, "Guides")
+  expect_s3_class(result, "ggguides_guide_update")
 })
 
 test_that("legend_style with by and direction works", {
   result <- legend_style(direction = "horizontal", by = "colour")
-  expect_s3_class(result, "Guides")
+  expect_s3_class(result, "ggguides_guide_update")
 })
 
 test_that("legend_style with by and byrow works", {
   result <- legend_style(byrow = TRUE, by = "colour")
-  expect_s3_class(result, "Guides")
+  expect_s3_class(result, "ggguides_guide_update")
 })
 
 test_that("legend_style with by can be added to ggplot", {
@@ -453,7 +453,7 @@ test_that("build_guide_with_style handles all text parameters", {
     color = "darkblue",
     by = "colour"
   )
-  expect_s3_class(result, "Guides")
+  expect_s3_class(result, "ggguides_guide_update")
 })
 
 test_that("build_guide_with_style handles title parameters", {
@@ -467,7 +467,7 @@ test_that("build_guide_with_style handles title parameters", {
     title_position = "left",
     by = "colour"
   )
-  expect_s3_class(result, "Guides")
+  expect_s3_class(result, "ggguides_guide_update")
 })
 
 test_that("build_guide_with_style handles key parameters", {
@@ -477,7 +477,7 @@ test_that("build_guide_with_style handles key parameters", {
     key_fill = "lightgrey",
     by = "colour"
   )
-  expect_s3_class(result, "Guides")
+  expect_s3_class(result, "ggguides_guide_update")
 })
 
 test_that("build_guide_with_style handles background parameters", {
@@ -486,7 +486,7 @@ test_that("build_guide_with_style handles background parameters", {
     background_color = "black",
     by = "colour"
   )
-  expect_s3_class(result, "Guides")
+  expect_s3_class(result, "ggguides_guide_update")
 })
 
 # =============================================================================
@@ -534,17 +534,17 @@ test_that("legend_style with angle = -90 sets correct hjust/vjust", {
 
 test_that("build_guide_with_style handles angle = -45", {
   result <- legend_style(angle = -45, by = "colour")
-  expect_s3_class(result, "Guides")
+  expect_s3_class(result, "ggguides_guide_update")
 })
 
 test_that("build_guide_with_style handles angle = -90", {
   result <- legend_style(angle = -90, by = "colour")
-  expect_s3_class(result, "Guides")
+  expect_s3_class(result, "ggguides_guide_update")
 })
 
 test_that("build_guide_with_style handles angle = 90", {
   result <- legend_style(angle = 90, by = "colour")
-  expect_s3_class(result, "Guides")
+  expect_s3_class(result, "ggguides_guide_update")
 })
 
 test_that("build_guide_with_style errors on invalid angle", {

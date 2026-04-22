@@ -58,12 +58,10 @@ legend_left <- function(by = NULL) {
       legend.box.just = "left"
     )
   } else {
-    by <- normalize_aesthetic(by)
-    guides_args <- stats::setNames(
-      list(guide_legend(position = "left")),
-      by
+    ggguides_guide_update(
+      by = normalize_aesthetic(by),
+      guide_params = list(position = "left")
     )
-    do.call(guides, guides_args)
   }
 }
 
@@ -116,12 +114,10 @@ legend_right <- function(by = NULL) {
       legend.box.just = "right"
     )
   } else {
-    by <- normalize_aesthetic(by)
-    guides_args <- stats::setNames(
-      list(guide_legend(position = "right")),
-      by
+    ggguides_guide_update(
+      by = normalize_aesthetic(by),
+      guide_params = list(position = "right")
     )
-    do.call(guides, guides_args)
   }
 }
 
@@ -168,12 +164,10 @@ legend_right <- function(by = NULL) {
 #' @export
 legend_top <- function(align_to = c("panel", "plot"), by = NULL) {
   if (!is.null(by)) {
-    by <- normalize_aesthetic(by)
-    guides_args <- stats::setNames(
-      list(guide_legend(position = "top", direction = "horizontal")),
-      by
-    )
-    return(do.call(guides, guides_args))
+    return(ggguides_guide_update(
+      by = normalize_aesthetic(by),
+      guide_params = list(position = "top", direction = "horizontal")
+    ))
   }
 
   align_to <- match.arg(align_to)
@@ -235,12 +229,10 @@ legend_top <- function(align_to = c("panel", "plot"), by = NULL) {
 #' @export
 legend_bottom <- function(align_to = c("panel", "plot"), by = NULL) {
   if (!is.null(by)) {
-    by <- normalize_aesthetic(by)
-    guides_args <- stats::setNames(
-      list(guide_legend(position = "bottom", direction = "horizontal")),
-      by
-    )
-    return(do.call(guides, guides_args))
+    return(ggguides_guide_update(
+      by = normalize_aesthetic(by),
+      guide_params = list(position = "bottom", direction = "horizontal")
+    ))
   }
 
   align_to <- match.arg(align_to)
@@ -297,6 +289,7 @@ legend_none <- function() {
 #'   Either a character vector of length 2 (horizontal, vertical) or a single
 #'   value. Common values: \code{c("left", "top")}, \code{c("right", "bottom")},
 #'   \code{"center"}. If \code{NULL}, automatically determined based on position.
+#' @param just Deprecated. Use \code{justification} instead.
 #' @param background Background fill color for the legend. Default is
 #'   \code{"white"}.
 #' @param border Border color for the legend box. Default is \code{NA} (no border).

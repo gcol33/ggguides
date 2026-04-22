@@ -2,6 +2,20 @@
 
 ## ggguides 1.1.6
 
+### Bug Fixes
+
+- `legend_*(by = <aes>)` and `legend_style(by = <aes>)` now compose
+  correctly when chained for the same aesthetic. Previously, each call
+  built a fresh
+  [`guide_legend()`](https://ggplot2.tidyverse.org/reference/guide_legend.html)
+  that replaced the prior one, so
+  `legend_top(by = "colour") + legend_style(by = "colour", margin = ...)`
+  silently reset the colour legend’s position back to the plot default.
+  The per-aesthetic helpers now return a ggguides update object whose
+  `ggplot_add` method merges new params into the existing guide. This
+  fixes the “Four Legends, One per Side” vignette example. (reported by
+  Youtao)
+
 ### API Consistency
 
 - [`legend_inside()`](https://gcol33.github.io/ggguides/reference/legend_inside.md):

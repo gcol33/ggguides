@@ -55,6 +55,10 @@ legend_inside(
 
   Padding around legend content in cm. Default is `0.2`.
 
+- just:
+
+  Deprecated. Use `justification` instead.
+
 ## Value
 
 A ggplot2 theme object that can be added to a plot.

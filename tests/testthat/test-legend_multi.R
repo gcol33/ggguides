@@ -151,24 +151,24 @@ test_that("normalize_aesthetic passes through other aesthetics", {
 # Position functions with by parameter
 # =============================================================================
 
-test_that("legend_left with by returns a Guides object", {
+test_that("legend_left with by returns a per-aesthetic guide update", {
   result <- legend_left(by = "colour")
-  expect_s3_class(result, "Guides")
+  expect_s3_class(result, "ggguides_guide_update")
 })
 
-test_that("legend_right with by returns a Guides object", {
+test_that("legend_right with by returns a per-aesthetic guide update", {
   result <- legend_right(by = "colour")
-  expect_s3_class(result, "Guides")
+  expect_s3_class(result, "ggguides_guide_update")
 })
 
-test_that("legend_top with by returns a Guides object", {
+test_that("legend_top with by returns a per-aesthetic guide update", {
   result <- legend_top(by = "colour")
-  expect_s3_class(result, "Guides")
+  expect_s3_class(result, "ggguides_guide_update")
 })
 
-test_that("legend_bottom with by returns a Guides object", {
+test_that("legend_bottom with by returns a per-aesthetic guide update", {
   result <- legend_bottom(by = "colour")
-  expect_s3_class(result, "Guides")
+  expect_s3_class(result, "ggguides_guide_update")
 })
 
 test_that("position functions can position legends separately", {
@@ -183,9 +183,9 @@ test_that("position functions can position legends separately", {
 # legend_style with by parameter
 # =============================================================================
 
-test_that("legend_style with by returns a Guides object", {
+test_that("legend_style with by returns a per-aesthetic guide update", {
   result <- legend_style(size = 14, by = "colour")
-  expect_s3_class(result, "Guides")
+  expect_s3_class(result, "ggguides_guide_update")
 })
 
 test_that("legend_style can style legends separately", {
@@ -198,5 +198,5 @@ test_that("legend_style can style legends separately", {
 
 test_that("legend_style with by normalizes color to colour", {
   result <- legend_style(size = 14, by = "color")
-  expect_s3_class(result, "Guides")
+  expect_s3_class(result, "ggguides_guide_update")
 })
