@@ -203,6 +203,58 @@ p +
 
 ![](multiple-legends_files/figure-html/style-separately-1.svg)
 
+## Four Legends, One per Side
+
+When a plot has four legends and you want one on each side (top, bottom,
+left, right), you can fine-tune each legend along three axes:
+
+1.  **Side placement** — `legend_top/bottom/left/right(by = "<aes>")`
+
+2.  **Distance from the panel** —
+    `legend_style(by = "<aes>", margin = c(t, r, b, l))`
+
+3.  **Slide along the side** —
+    `legend_style(by = "<aes>", justification = ...)`
+
+For top/bottom legends, `justification` is `"left"`, `"center"`,
+`"right"` (or a number in `[0, 1]`). For left/right legends, it’s
+`"top"`, `"center"`, `"bottom"` (or a number).
+
+``` r
+
+p4 <- ggplot(mtcars, aes(mpg, wt,
+                         colour = factor(cyl),
+                         fill   = factor(gear),
+                         size   = hp,
+                         shape  = factor(am))) +
+  geom_point(stroke = 1.2) +
+  labs(colour = "Cyl", fill = "Gear", size = "HP", shape = "AM")
+
+p4 +
+  # 1. Send each legend to its side
+  legend_top   (by = "colour") +
+  legend_bottom(by = "fill")   +
+  legend_left  (by = "size")   +
+  legend_right (by = "shape")  +
+
+  # 2. Slide each legend along its side
+  legend_style(by = "colour", justification = "left") +
+  legend_style(by = "fill",   justification = "right") +
+  legend_style(by = "size",   justification = "top") +
+  legend_style(by = "shape",  justification = "bottom") +
+
+  # 3. Nudge each legend toward/away from the panel via margin (cm)
+  legend_style(by = "colour", margin = c(0, 0, 0.3, 0)) +
+  legend_style(by = "fill",   margin = c(0.3, 0, 0, 0)) +
+  legend_style(by = "size",   margin = c(0, 0.3, 0, 0)) +
+  legend_style(by = "shape",  margin = c(0, 0, 0, 0.3))
+```
+
+![](multiple-legends_files/figure-html/four-sides-1.svg)
+
+Each `legend_style(by = ...)` call is additive — you can chain as many
+as you need to tune one legend at a time without affecting the others.
+
 ## Combining Multiple Controls
 
 All functions work together:

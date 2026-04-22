@@ -34,6 +34,7 @@ legend_style(
   box_margin = NULL,
   direction = NULL,
   byrow = NULL,
+  justification = NULL,
   by = NULL
 )
 ```
@@ -148,6 +149,17 @@ legend_style(
 
   For multi-column legends, fill by row (`TRUE`) or by column (`FALSE`).
 
+- justification:
+
+  Justification of the legend along its side. For legends on the top or
+  bottom: `"left"`, `"center"`, `"right"`, or a numeric value in
+  `[0, 1]`. For legends on the left or right: `"top"`, `"center"`,
+  `"bottom"`, or a numeric value in `[0, 1]`. When `by` is specified,
+  applies per-guide via
+  `guide_legend(theme = theme(legend.justification = ...))`. When `by`
+  is NULL, sets `legend.justification` for the whole plot. Requires
+  ggplot2 \>= 3.5.0 for per-guide use.
+
 - by:
 
   Optional aesthetic name (character) to style only a specific legend.
@@ -209,4 +221,12 @@ ggplot(mtcars, aes(mpg, wt, color = factor(cyl), size = hp)) +
   geom_point() +
   legend_style(title_face = "bold", background = "grey95", by = "colour") +
   legend_style(size = 10, by = "size")
+
+# Per-legend justification: slide each legend along its side
+ggplot(mtcars, aes(mpg, wt, color = factor(cyl), size = hp)) +
+  geom_point() +
+  legend_top(by = "colour") +
+  legend_right(by = "size") +
+  legend_style(by = "colour", justification = "left") +
+  legend_style(by = "size",   justification = "top")
 ```
