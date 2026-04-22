@@ -51,6 +51,12 @@ functions to position, style, and manage legends.
 ## Installation
 
 ```{r eval=FALSE}
+install.packages("ggguides")
+```
+
+Or the development version from GitHub:
+
+```{r eval=FALSE}
 # install.packages("pak")
 pak::pak("gcol33/ggguides")
 ```

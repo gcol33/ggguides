@@ -160,7 +160,9 @@ p +
 When a plot has four legends and you want one on each side (top, bottom, left, right), you can fine-tune each legend along three axes:
 
 1. **Side placement** — `legend_top/bottom/left/right(by = "<aes>")`
+
 2. **Distance from the panel** — `legend_style(by = "<aes>", margin = c(t, r, b, l))`
+
 3. **Slide along the side** — `legend_style(by = "<aes>", justification = ...)`
 
 For top/bottom legends, `justification` is `"left"`, `"center"`, `"right"` (or a number in `[0, 1]`). For left/right legends, it's `"top"`, `"center"`, `"bottom"` (or a number).
