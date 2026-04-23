@@ -24,7 +24,7 @@ text, title, keys, spacing, background, and direction in one call."></head><body
 
     <a class="navbar-brand me-2" href="../index.html">ggguides</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.8</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.9</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -226,10 +226,11 @@ Ignored when <code>by</code> is specified.</p></dd>
 on the top or bottom: <code>"left"</code>, <code>"center"</code>, <code>"right"</code>, or a
 numeric value in <code>[0, 1]</code>. For legends on the left or right:
 <code>"top"</code>, <code>"center"</code>, <code>"bottom"</code>, or a numeric value in
-<code>[0, 1]</code>. When <code>by</code> is specified, applies per-guide via
-<code>guide_legend(theme = theme(legend.justification = ...))</code>. When
-<code>by</code> is NULL, sets <code>legend.justification</code> for the whole plot.
-Requires ggplot2 &gt;= 3.5.0 for per-guide use.</p></dd>
+<code>[0, 1]</code>. When <code>by</code> is specified, applies a whole-plot
+<code>theme(legend.justification.&lt;side&gt; = ...)</code> keyed on the guide's
+resolved side (so any later <code>legend_&lt;side&gt;(by = ...)</code> call takes
+effect). When <code>by</code> is NULL, sets <code>legend.justification.&lt;side&gt;</code>
+for every axis on which the scalar is valid. Requires ggplot2 &gt;= 3.5.0.</p></dd>
 
 
 <dt id="arg-by">by<a class="anchor" aria-label="anchor" href="#arg-by"></a></dt>

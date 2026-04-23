@@ -155,10 +155,11 @@ legend_style(
   bottom: `"left"`, `"center"`, `"right"`, or a numeric value in
   `[0, 1]`. For legends on the left or right: `"top"`, `"center"`,
   `"bottom"`, or a numeric value in `[0, 1]`. When `by` is specified,
-  applies per-guide via
-  `guide_legend(theme = theme(legend.justification = ...))`. When `by`
-  is NULL, sets `legend.justification` for the whole plot. Requires
-  ggplot2 \>= 3.5.0 for per-guide use.
+  applies a whole-plot `theme(legend.justification.<side> = ...)` keyed
+  on the guide's resolved side (so any later `legend_<side>(by = ...)`
+  call takes effect). When `by` is NULL, sets
+  `legend.justification.<side>` for every axis on which the scalar is
+  valid. Requires ggplot2 \>= 3.5.0.
 
 - by:
 
