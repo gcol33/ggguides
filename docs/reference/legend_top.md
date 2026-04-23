@@ -7,10 +7,16 @@ than just the panel.
 ## Usage
 
 ``` r
-legend_top(align_to = c("panel", "plot"), by = NULL)
+legend_top(justification = "center", align_to = c("panel", "plot"), by = NULL)
 ```
 
 ## Arguments
+
+- justification:
+
+  Where the legend sits along the top edge. One of `"left"`, `"center"`,
+  `"right"`, or a numeric value in `[0, 1]` (0 = left, 1 = right).
+  Default is `"center"`. Only used when `by` is NULL.
 
 - align_to:
 
@@ -31,6 +37,13 @@ legend_top(align_to = c("panel", "plot"), by = NULL)
 A ggplot2 theme object (when `by` is NULL) or a guides specification
 (when `by` is specified).
 
+## Details
+
+`justification` slides the legend along the top rail: `"left"` /
+`"center"` / `"right"` or a number in `[0, 1]`. For per-guide
+justification, use
+[`legend_style`](https://gcol33.github.io/ggguides/reference/legend_style.md)`(by = ..., justification = ...)`.
+
 ## See also
 
 [`legend_bottom`](https://gcol33.github.io/ggguides/reference/legend_bottom.md),
@@ -47,6 +60,11 @@ library(ggplot2)
 ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
   geom_point() +
   legend_top()
+
+# Slide legend to the left end of the top rail
+ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
+  geom_point() +
+  legend_top(justification = "left")
 
 # Aligned to full plot (useful with titles)
 ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +

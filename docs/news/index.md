@@ -1,5 +1,51 @@
 # Changelog
 
+## ggguides 1.1.8
+
+### Bug Fixes
+
+- [`legend_left()`](https://gcol33.github.io/ggguides/reference/legend_left.md),
+  [`legend_right()`](https://gcol33.github.io/ggguides/reference/legend_right.md),
+  [`legend_top()`](https://gcol33.github.io/ggguides/reference/legend_top.md),
+  and
+  [`legend_bottom()`](https://gcol33.github.io/ggguides/reference/legend_bottom.md)
+  were writing to `legend.justification`, the generic fallback element.
+  In ggplot2 \>= 3.5.0 each side has its own element —
+  `legend.justification.left`, `legend.justification.right`,
+  `legend.justification.top`, `legend.justification.bottom` — and the
+  generic fallback is silently coerced per axis.
+  [`legend_left()`](https://gcol33.github.io/ggguides/reference/legend_left.md)
+  in particular was sending `"left"` to a vertical rail, which ggplot2
+  coerced to `0` (bottom), so the legend was actually pinned to the
+  bottom of the left edge when users expected it centered. The four side
+  functions now write to the side-specific element and default to
+  `"center"`, which is what the documentation has always described.
+  (reported by Youtao)
+
+### New Features
+
+- [`legend_left()`](https://gcol33.github.io/ggguides/reference/legend_left.md),
+  [`legend_right()`](https://gcol33.github.io/ggguides/reference/legend_right.md),
+  [`legend_top()`](https://gcol33.github.io/ggguides/reference/legend_top.md),
+  and
+  [`legend_bottom()`](https://gcol33.github.io/ggguides/reference/legend_bottom.md)
+  gain a `justification` argument. It slides the legend along its rail:
+  `"top"`/`"center"`/`"bottom"` (or a number in `[0, 1]`) for
+  left/right, `"left"`/`"center"`/`"right"` for top/bottom. This is the
+  side-legend counterpart to `legend_inside(justification = ...)`. For
+  per-guide control when several legends sit on different sides, keep
+  using `legend_style(by = ..., justification = ...)`.
+
+### Documentation
+
+- [`?legend_left`](https://gcol33.github.io/ggguides/reference/legend_left.md)
+  (and the three siblings) now explain the “rail” semantics and note the
+  naming asymmetry with
+  [`legend_inside()`](https://gcol33.github.io/ggguides/reference/legend_inside.md):
+  on a side, the justification keyword refers to where the legend sits
+  along the panel edge; inside, it refers to which corner of the legend
+  anchors to the `(x, y)` position.
+
 ## ggguides 1.1.7
 
 ### Bug Fixes
@@ -17,6 +63,8 @@
   override. (reported by Youtao)
 
 ## ggguides 1.1.6
+
+CRAN release: 2026-04-23
 
 ### Bug Fixes
 

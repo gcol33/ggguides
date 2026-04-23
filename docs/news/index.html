@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ggguides</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.8</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,6 +61,24 @@
     </div>
 
     <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.1.8" id="ggguides-118">ggguides 1.1.8<a class="anchor" aria-label="anchor" href="#ggguides-118"></a></h2>
+<div class="section level3">
+<h3 id="bug-fixes-1-1-8">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-1-8"></a></h3>
+<ul><li>
+<code><a href="../reference/legend_left.html">legend_left()</a></code>, <code><a href="../reference/legend_right.html">legend_right()</a></code>, <code><a href="../reference/legend_top.html">legend_top()</a></code>, and <code><a href="../reference/legend_bottom.html">legend_bottom()</a></code> were writing to <code>legend.justification</code>, the generic fallback element. In ggplot2 &gt;= 3.5.0 each side has its own element — <code>legend.justification.left</code>, <code>legend.justification.right</code>, <code>legend.justification.top</code>, <code>legend.justification.bottom</code> — and the generic fallback is silently coerced per axis. <code><a href="../reference/legend_left.html">legend_left()</a></code> in particular was sending <code>"left"</code> to a vertical rail, which ggplot2 coerced to <code>0</code> (bottom), so the legend was actually pinned to the bottom of the left edge when users expected it centered. The four side functions now write to the side-specific element and default to <code>"center"</code>, which is what the documentation has always described. (reported by Youtao)</li>
+</ul></div>
+<div class="section level3">
+<h3 id="new-features-1-1-8">New Features<a class="anchor" aria-label="anchor" href="#new-features-1-1-8"></a></h3>
+<ul><li>
+<code><a href="../reference/legend_left.html">legend_left()</a></code>, <code><a href="../reference/legend_right.html">legend_right()</a></code>, <code><a href="../reference/legend_top.html">legend_top()</a></code>, and <code><a href="../reference/legend_bottom.html">legend_bottom()</a></code> gain a <code>justification</code> argument. It slides the legend along its rail: <code>"top"</code>/<code>"center"</code>/<code>"bottom"</code> (or a number in <code>[0, 1]</code>) for left/right, <code>"left"</code>/<code>"center"</code>/<code>"right"</code> for top/bottom. This is the side-legend counterpart to <code>legend_inside(justification = ...)</code>. For per-guide control when several legends sit on different sides, keep using <code>legend_style(by = ..., justification = ...)</code>.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="documentation-1-1-8">Documentation<a class="anchor" aria-label="anchor" href="#documentation-1-1-8"></a></h3>
+<ul><li>
+<code><a href="../reference/legend_left.html">?legend_left</a></code> (and the three siblings) now explain the “rail” semantics and note the naming asymmetry with <code><a href="../reference/legend_inside.html">legend_inside()</a></code>: on a side, the justification keyword refers to where the legend sits along the panel edge; inside, it refers to which corner of the legend anchors to the <code>(x, y)</code> position.</li>
+</ul></div>
+</div>
+    <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.1.7" id="ggguides-117">ggguides 1.1.7<a class="anchor" aria-label="anchor" href="#ggguides-117"></a></h2>
 <div class="section level3">
 <h3 id="bug-fixes-1-1-7">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-1-7"></a></h3>
@@ -69,7 +87,7 @@
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.1.6" id="ggguides-116">ggguides 1.1.6<a class="anchor" aria-label="anchor" href="#ggguides-116"></a></h2>
+<h2 class="pkg-version" data-toc-text="1.1.6" id="ggguides-116">ggguides 1.1.6<a class="anchor" aria-label="anchor" href="#ggguides-116"></a></h2><p class="text-muted">CRAN release: 2026-04-23</p>
 <div class="section level3">
 <h3 id="bug-fixes-1-1-6">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-1-6"></a></h3>
 <ul><li>

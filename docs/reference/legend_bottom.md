@@ -7,10 +7,20 @@ panel.
 ## Usage
 
 ``` r
-legend_bottom(align_to = c("panel", "plot"), by = NULL)
+legend_bottom(
+  justification = "center",
+  align_to = c("panel", "plot"),
+  by = NULL
+)
 ```
 
 ## Arguments
+
+- justification:
+
+  Where the legend sits along the bottom edge. One of `"left"`,
+  `"center"`, `"right"`, or a numeric value in `[0, 1]` (0 = left, 1 =
+  right). Default is `"center"`. Only used when `by` is NULL.
 
 - align_to:
 
@@ -31,6 +41,12 @@ legend_bottom(align_to = c("panel", "plot"), by = NULL)
 A ggplot2 theme object (when `by` is NULL) or a guides specification
 (when `by` is specified).
 
+## Details
+
+`justification` slides the legend along the bottom rail. For per-guide
+justification, use
+[`legend_style`](https://gcol33.github.io/ggguides/reference/legend_style.md)`(by = ..., justification = ...)`.
+
 ## See also
 
 [`legend_top`](https://gcol33.github.io/ggguides/reference/legend_top.md),
@@ -47,6 +63,11 @@ library(ggplot2)
 ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
   geom_point() +
   legend_bottom()
+
+# Slide legend to the right end of the bottom rail
+ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
+  geom_point() +
+  legend_bottom(justification = "right")
 
 # Aligned to full plot
 ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +

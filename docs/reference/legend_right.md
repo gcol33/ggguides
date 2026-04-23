@@ -1,15 +1,22 @@
 # Place Legend on the Right with Proper Alignment
 
-A one-liner to position the legend on the right side of the plot with
-correct right alignment for both the key box and text labels.
+A one-liner to position the legend on the right side of the plot. Slides
+the legend along the right rail via `justification`, and right-aligns
+multiple legend boxes via `legend.box.just`.
 
 ## Usage
 
 ``` r
-legend_right(by = NULL)
+legend_right(justification = "center", by = NULL)
 ```
 
 ## Arguments
+
+- justification:
+
+  Where the legend sits along the right edge. One of `"top"`,
+  `"center"`, `"bottom"`, or a numeric value in `[0, 1]` (0 = bottom, 1
+  = top). Default is `"center"`. Only used when `by` is NULL.
 
 - by:
 
@@ -25,16 +32,10 @@ A ggplot2 theme object (when `by` is NULL) or a guides specification
 
 ## Details
 
-When `by` is NULL (default), this function sets three theme elements:
-
-- `legend.position = "right"` to place the legend on the right
-
-- `legend.justification = "right"` to right-justify the legend box
-
-- `legend.box.just = "right"` to right-align multiple legend boxes
-
-When `by` is specified, only the legend for that aesthetic is moved,
-allowing different legends to be placed in different positions.
+`justification` slides the legend along the right rail: `"top"` /
+`"center"` / `"bottom"` or a number in `[0, 1]`. For per-guide
+justification, use
+[`legend_style`](https://gcol33.github.io/ggguides/reference/legend_style.md)`(by = ..., justification = ...)`.
 
 ## See also
 
@@ -52,6 +53,11 @@ library(ggplot2)
 ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
   geom_point() +
   legend_right()
+
+# Pin legend to the bottom of the right rail
+ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
+  geom_point() +
+  legend_right(justification = "bottom")
 
 # Position only the size legend on the right
 ggplot(mtcars, aes(mpg, wt, color = factor(cyl), size = hp)) +
