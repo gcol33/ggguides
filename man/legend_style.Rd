@@ -102,10 +102,11 @@ Ignored when \code{by} is specified.}
 on the top or bottom: \code{"left"}, \code{"center"}, \code{"right"}, or a
 numeric value in \code{[0, 1]}. For legends on the left or right:
 \code{"top"}, \code{"center"}, \code{"bottom"}, or a numeric value in
-\code{[0, 1]}. When \code{by} is specified, applies per-guide via
-\code{guide_legend(theme = theme(legend.justification = ...))}. When
-\code{by} is NULL, sets \code{legend.justification} for the whole plot.
-Requires ggplot2 >= 3.5.0 for per-guide use.}
+\code{[0, 1]}. When \code{by} is specified, applies a whole-plot
+\code{theme(legend.justification.<side> = ...)} keyed on the guide's
+resolved side (so any later \code{legend_<side>(by = ...)} call takes
+effect). When \code{by} is NULL, sets \code{legend.justification.<side>}
+for every axis on which the scalar is valid. Requires ggplot2 >= 3.5.0.}
 
 \item{by}{Optional aesthetic name (character) to style only a specific legend.
 When specified, uses per-guide theming via \code{guide_legend(theme = ...)}.

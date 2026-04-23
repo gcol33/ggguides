@@ -1,3 +1,11 @@
+# ggguides 1.1.9
+
+## Bug Fixes
+
+* `legend_style(by = <aes>, justification = ...)` had no visible effect. The update attached the justification to the guide's embedded theme via `guide_legend(theme = theme(legend.justification.<side> = ...))`, but ggplot2 >= 3.5 does not consult the side-specific justification elements inside a guide's embedded theme — only the whole-plot theme is read. Legends stayed centered along their rail regardless of the `justification` value. The NEWS entry for 1.1.5 that introduced this argument was therefore incorrect: the workaround Youtao documented, `theme(legend.justification.<side> = ...)`, was the only thing that actually worked. 1.1.9 fixes this by routing per-guide `justification` to a whole-plot theme element keyed on the guide's resolved side, so `legend_top(by = "colour") + legend_style(by = "colour", justification = "left")` now slides the colour legend to the left end of the top rail as documented. If you had a `theme(legend.justification.<side> = ...)` workaround in your code, you can remove it. (reported by Youtao)
+
+* `legend_style(justification = ...)` without `by` was writing to the generic `legend.justification`, which ggplot2 coerces per axis and mis-maps mixed-axis scalars (e.g., `"left"` on a vertical rail becomes `0` — bottom). It now writes to the side-specific theme elements (`legend.justification.top`/`.bottom` for horizontal scalars; `legend.justification.left`/`.right` for vertical scalars; all four for `"center"` and numerics).
+
 # ggguides 1.1.8
 
 ## Bug Fixes

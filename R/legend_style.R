@@ -2,6 +2,40 @@
 # Legend Styling Functions
 # =============================================================================
 
+# Map a scalar justification onto the ggplot2 >= 3.5 side-specific theme
+# elements. Character "left"/"right" only apply to horizontal rails
+# (top/bottom); "top"/"bottom" only apply to vertical rails (left/right);
+# "center", numerics, and length-2 values apply to all four sides.
+# Writing to the generic `legend.justification` is avoided because
+# ggplot2 coerces it per axis and inside guide_legend(theme = ...) it is
+# not consulted at all.
+#' @noRd
+justification_elements <- function(j) {
+  if (is.character(j) && length(j) == 1) {
+    if (j %in% c("left", "right")) {
+      list(legend.justification.top = j, legend.justification.bottom = j)
+    } else if (j %in% c("top", "bottom")) {
+      list(legend.justification.left = j, legend.justification.right = j)
+    } else if (j == "center") {
+      list(
+        legend.justification.top = j, legend.justification.bottom = j,
+        legend.justification.left = j, legend.justification.right = j
+      )
+    } else {
+      stop(
+        "justification must be one of \"left\", \"right\", \"top\", ",
+        "\"bottom\", \"center\", or numeric in [0, 1].",
+        call. = FALSE
+      )
+    }
+  } else {
+    list(
+      legend.justification.top = j, legend.justification.bottom = j,
+      legend.justification.left = j, legend.justification.right = j
+    )
+  }
+}
+
 # =============================================================================
 # Custom ggplot class for auto-centering legend titles
 # =============================================================================
@@ -200,10 +234,11 @@ legend_reverse <- function() {
 #'   on the top or bottom: \code{"left"}, \code{"center"}, \code{"right"}, or a
 #'   numeric value in \code{[0, 1]}. For legends on the left or right:
 #'   \code{"top"}, \code{"center"}, \code{"bottom"}, or a numeric value in
-#'   \code{[0, 1]}. When \code{by} is specified, applies per-guide via
-#'   \code{guide_legend(theme = theme(legend.justification = ...))}. When
-#'   \code{by} is NULL, sets \code{legend.justification} for the whole plot.
-#'   Requires ggplot2 >= 3.5.0 for per-guide use.
+#'   \code{[0, 1]}. When \code{by} is specified, applies a whole-plot
+#'   \code{theme(legend.justification.<side> = ...)} keyed on the guide's
+#'   resolved side (so any later \code{legend_<side>(by = ...)} call takes
+#'   effect). When \code{by} is NULL, sets \code{legend.justification.<side>}
+#'   for every axis on which the scalar is valid. Requires ggplot2 >= 3.5.0.
 #' @param by Optional aesthetic name (character) to style only a specific legend.
 #'   When specified, uses per-guide theming via \code{guide_legend(theme = ...)}.
 #'   Requires ggplot2 >= 3.5.0. Common values: \code{"colour"}, \code{"fill"},
@@ -426,9 +461,13 @@ legend_style <- function(
   }
 
   # --- Justification ---
-  # When `by` is NULL, set legend.justification globally (applies to all sides).
+  # ggplot2 >= 3.5 reads one of the side-specific elements
+  # (legend.justification.{top,bottom,left,right}) depending on where the
+  # legend sits. The generic legend.justification falls back per axis and
+  # coerces incorrectly for mixed-axis values (e.g., "left" on a vertical
+  # rail -> 0 -> "bottom"). Dispatch to the valid axes.
   if (!is.null(justification)) {
-    args$legend.justification <- justification
+    args <- c(args, justification_elements(justification))
   }
 
   theme_obj <- do.call(theme, args)
@@ -724,12 +763,10 @@ build_guide_with_style <- function(
     theme_args$legend.byrow <- byrow
   }
 
-  # --- Per-guide justification ---
-  if (!is.null(justification)) {
-    theme_args$legend.justification <- justification
-  }
-
-  # Build embedded theme
+  # Build embedded theme (justification is applied separately at
+  # ggplot_add time — ggplot2's guide_legend(theme = ...) does not consult
+  # legend.justification.{side} for the guide it wraps, so we must route
+  # it to a whole-plot theme keyed on the guide's resolved position).
   embedded_theme <- if (length(theme_args) > 0) {
     do.call(theme, theme_args)
   } else {
@@ -739,18 +776,21 @@ build_guide_with_style <- function(
   ggguides_guide_update(
     by = by,
     guide_params = list(),
-    theme_delta = embedded_theme
+    theme_delta = embedded_theme,
+    justification = justification
   )
 }
 
 #' Build a ggguides per-aesthetic guide update object
 #' @noRd
-ggguides_guide_update <- function(by, guide_params = list(), theme_delta = NULL) {
+ggguides_guide_update <- function(by, guide_params = list(), theme_delta = NULL,
+                                  justification = NULL) {
   structure(
     list(
       by = by,
       guide_params = guide_params,
-      theme_delta = theme_delta
+      theme_delta = theme_delta,
+      justification = justification
     ),
     class = c("ggguides_guide_update", "gg")
   )
@@ -767,7 +807,8 @@ ggplot_add.ggguides_guide_update <- function(object, plot, ...) {
     if (!is.null(object$theme_delta)) new_params$theme <- object$theme_delta
     new_guide <- do.call(ggplot2::guide_legend, new_params)
     guides_arg <- stats::setNames(list(new_guide), by)
-    return(plot + do.call(ggplot2::guides, guides_arg))
+    plot <- plot + do.call(ggplot2::guides, guides_arg)
+    return(apply_guide_justification(plot, object, new_params$position))
   }
 
   for (nm in names(object$guide_params)) {
@@ -783,7 +824,28 @@ ggplot_add.ggguides_guide_update <- function(object, plot, ...) {
     }
   }
 
-  plot
+  apply_guide_justification(plot, object, existing$params$position)
+}
+
+# Per-guide justification cannot go through guide_legend(theme = ...): in
+# ggplot2 >= 3.5, guide_legend does not consult legend.justification.{side}
+# in its embedded theme. Route it to a whole-plot theme element keyed on
+# the guide's resolved side. If the side is not yet known (the user called
+# legend_style(by=, justification=) before any position-setting helper),
+# fall back to setting all four side slots — when the side is later
+# resolved, the matching slot will take effect.
+#' @noRd
+apply_guide_justification <- function(plot, object, position) {
+  j <- object$justification
+  if (is.null(j)) return(plot)
+
+  if (is.character(position) && length(position) == 1 &&
+      position %in% c("top", "bottom", "left", "right")) {
+    key <- paste0("legend.justification.", position)
+    plot + do.call(ggplot2::theme, stats::setNames(list(j), key))
+  } else {
+    plot + do.call(ggplot2::theme, justification_elements(j))
+  }
 }
 
 #' Center Legend Title Over Keys

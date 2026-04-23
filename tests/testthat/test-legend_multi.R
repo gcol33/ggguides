@@ -200,3 +200,41 @@ test_that("legend_style with by normalizes color to colour", {
   result <- legend_style(size = 14, by = "color")
   expect_s3_class(result, "ggguides_guide_update")
 })
+
+test_that("legend_style(by=, justification=) writes to side-specific theme slot", {
+  # ggplot2 >= 3.5 does NOT consult legend.justification.{side} inside
+  # guide_legend(theme = ...). The update must route justification to a
+  # whole-plot theme keyed on the guide's resolved position.
+  p <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
+    geom_point() +
+    legend_top(by = "colour") +
+    legend_style(by = "colour", justification = "left")
+  expect_equal(p$theme$legend.justification.top, "left")
+
+  p2 <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
+    geom_point() +
+    legend_left(by = "colour") +
+    legend_style(by = "colour", justification = "top")
+  expect_equal(p2$theme$legend.justification.left, "top")
+})
+
+test_that("legend_style(by=, justification=) without prior position sets all four slots", {
+  # Fallback when the guide's side is not yet known — any later
+  # position-setter will pick the slot matching its side.
+  p <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
+    geom_point() +
+    legend_style(by = "colour", justification = "center")
+  expect_equal(p$theme$legend.justification.top, "center")
+  expect_equal(p$theme$legend.justification.bottom, "center")
+  expect_equal(p$theme$legend.justification.left, "center")
+  expect_equal(p$theme$legend.justification.right, "center")
+})
+
+test_that("legend_style(justification=) without by sets axis-appropriate slots", {
+  # "left" is only meaningful on horizontal rails (top/bottom).
+  t <- legend_style(justification = "left")
+  expect_equal(t$legend.justification.top, "left")
+  expect_equal(t$legend.justification.bottom, "left")
+  expect_null(t$legend.justification.left)
+  expect_null(t$legend.justification.right)
+})
