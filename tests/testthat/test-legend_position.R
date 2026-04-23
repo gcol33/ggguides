@@ -13,8 +13,18 @@ test_that("legend_left returns a theme object", {
 test_that("legend_left sets correct theme elements", {
   result <- legend_left()
   expect_equal(result$legend.position, "left")
-  expect_equal(result$legend.justification, "left")
+  # v1.1.8: use side-specific justification so "center" is the actual default
+  expect_equal(result$legend.justification.left, "center")
+  expect_null(result$legend.justification)
   expect_equal(result$legend.box.just, "left")
+})
+
+test_that("legend_left honours justification argument", {
+  result <- legend_left(justification = "top")
+  expect_equal(result$legend.justification.left, "top")
+
+  result <- legend_left(justification = 0.25)
+  expect_equal(result$legend.justification.left, 0.25)
 })
 
 test_that("legend_left can be added to a ggplot", {
@@ -45,8 +55,14 @@ test_that("legend_right returns a theme object", {
 test_that("legend_right sets correct position", {
   result <- legend_right()
   expect_equal(result$legend.position, "right")
-  expect_equal(result$legend.justification, "right")
+  expect_equal(result$legend.justification.right, "center")
+  expect_null(result$legend.justification)
   expect_equal(result$legend.box.just, "right")
+})
+
+test_that("legend_right honours justification argument", {
+  result <- legend_right(justification = "bottom")
+  expect_equal(result$legend.justification.right, "bottom")
 })
 
 test_that("legend_right can be added to a ggplot", {
@@ -70,6 +86,17 @@ test_that("legend_top sets correct position and direction", {
   result <- legend_top()
   expect_equal(result$legend.position, "top")
   expect_equal(result$legend.direction, "horizontal")
+  expect_equal(result$legend.justification.top, "center")
+  expect_null(result$legend.justification)
+})
+
+test_that("legend_top honours justification argument", {
+  result <- legend_top(justification = "left")
+  expect_equal(result$legend.justification.top, "left")
+
+  result <- legend_top(justification = "right", align_to = "plot")
+  expect_equal(result$legend.justification.top, "right")
+  expect_equal(result$legend.location, "plot")
 })
 
 test_that("legend_top align_to='plot' sets legend.location", {
@@ -98,6 +125,13 @@ test_that("legend_bottom sets correct position and direction", {
   result <- legend_bottom()
   expect_equal(result$legend.position, "bottom")
   expect_equal(result$legend.direction, "horizontal")
+  expect_equal(result$legend.justification.bottom, "center")
+  expect_null(result$legend.justification)
+})
+
+test_that("legend_bottom honours justification argument", {
+  result <- legend_bottom(justification = "right")
+  expect_equal(result$legend.justification.bottom, "right")
 })
 
 test_that("legend_bottom align_to='plot' sets legend.location", {

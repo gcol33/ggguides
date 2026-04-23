@@ -165,15 +165,20 @@ test_that("legend_order works with numeric (non-factor) mapped variable", {
 })
 
 test_that("legend_order with size aesthetic", {
-  p <- ggplot(mtcars, aes(mpg, wt, size = factor(gear))) +
-    geom_point() +
-    legend_order(c("5", "4", "3"), aesthetic = "size")
+  # ggplot2 warns about size-for-discrete; irrelevant to what we're testing.
+  p <- suppressWarnings(
+    ggplot(mtcars, aes(mpg, wt, size = factor(gear))) +
+      geom_point() +
+      legend_order(c("5", "4", "3"), aesthetic = "size")
+  )
   expect_s3_class(p, "gg")
 })
 
 test_that("legend_order with alpha aesthetic", {
-  p <- ggplot(mtcars, aes(mpg, wt, alpha = factor(gear))) +
-    geom_point() +
-    legend_order(c("5", "4", "3"), aesthetic = "alpha")
+  p <- suppressWarnings(
+    ggplot(mtcars, aes(mpg, wt, alpha = factor(gear))) +
+      geom_point() +
+      legend_order(c("5", "4", "3"), aesthetic = "alpha")
+  )
   expect_s3_class(p, "gg")
 })

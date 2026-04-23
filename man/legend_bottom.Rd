@@ -4,9 +4,18 @@
 \alias{legend_bottom}
 \title{Place Legend on Bottom with Horizontal Layout}
 \usage{
-legend_bottom(align_to = c("panel", "plot"), by = NULL)
+legend_bottom(
+  justification = "center",
+  align_to = c("panel", "plot"),
+  by = NULL
+)
 }
 \arguments{
+\item{justification}{Where the legend sits along the bottom edge.
+One of \code{"left"}, \code{"center"}, \code{"right"}, or a numeric value
+in \code{[0, 1]} (0 = left, 1 = right). Default is \code{"center"}.
+Only used when \code{by} is NULL.}
+
 \item{align_to}{Where to align the legend. Either \code{"panel"} (default,
 aligns to plot panel) or \code{"plot"} (aligns to full plot including title).
 Requires ggplot2 >= 3.5.0 for \code{"plot"} alignment. Ignored when
@@ -25,6 +34,10 @@ specification (when \code{by} is specified).
 A one-liner to position the legend below the plot with horizontal layout.
 Optionally aligns to the full plot area rather than just the panel.
 }
+\details{
+\code{justification} slides the legend along the bottom rail. For per-guide
+justification, use \code{\link{legend_style}(by = ..., justification = ...)}.
+}
 \examples{
 library(ggplot2)
 
@@ -32,6 +45,11 @@ library(ggplot2)
 ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
   geom_point() +
   legend_bottom()
+
+# Slide legend to the right end of the bottom rail
+ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
+  geom_point() +
+  legend_bottom(justification = "right")
 
 # Aligned to full plot
 ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +

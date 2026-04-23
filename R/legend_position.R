@@ -4,10 +4,15 @@
 
 #' Place Legend on the Left with Proper Alignment
 #'
-#' A one-liner to position the legend on the left side of the plot with correct
-#' left alignment for both the key box and text labels. This goes beyond simple
-#' \code{legend.position = "left"} by also setting justification and box alignment.
+#' A one-liner to position the legend on the left side of the plot. Slides the
+#' legend along the left rail via \code{justification}, and left-aligns multiple
+#' legend boxes via \code{legend.box.just}.
 #'
+#' @param justification Where the legend sits along the left edge.
+#'   One of \code{"top"}, \code{"center"}, \code{"bottom"}, or a numeric value
+#'   in \code{[0, 1]} (0 = bottom, 1 = top). Default is \code{"center"}.
+#'   Only used when \code{by} is NULL. For per-guide justification, use
+#'   \code{\link{legend_style}(by = ..., justification = ...)}.
 #' @param by Optional aesthetic name (character) to position only a specific
 #'   legend. When specified, uses per-guide positioning via
 #'   \code{guide_legend(position = "left")}. Requires ggplot2 >= 3.5.0.
@@ -17,28 +22,37 @@
 #'   specification (when \code{by} is specified).
 #'
 #' @details
-#' When \code{by} is NULL (default), this function sets three theme elements:
+#' The left-positioned legend lives in a vertical rail along the panel's left
+#' edge. \code{justification} slides it along that rail: \code{"top"} pins the
+#' legend's top edge to the panel top; \code{"bottom"} pins its bottom edge to
+#' the panel bottom; \code{"center"} centers it vertically.
+#'
+#' Note the naming asymmetry with \code{\link{legend_inside}}: for side legends
+#' the justification keyword refers to where the legend sits along the panel
+#' edge; for inside legends it refers to which corner of the legend anchors to
+#' the \code{(x, y)} position.
+#'
+#' When \code{by} is NULL (default), this function sets:
 #' \itemize{
-#'   \item \code{legend.position = "left"} to place the legend on the left
-#'   \item \code{legend.justification = "left"} to left-justify the legend box
+#'   \item \code{legend.position = "left"}
+#'   \item \code{legend.justification.left = justification}
 #'   \item \code{legend.box.just = "left"} to left-align multiple legend boxes
 #' }
 #'
-#' When \code{by} is specified, only the legend for that aesthetic is moved,
-#' allowing different legends to be placed in different positions.
+#' When \code{by} is specified, only the legend for that aesthetic is moved.
 #'
 #' @examples
 #' library(ggplot2)
 #'
-#' # Basic usage
+#' # Basic usage — legend centered vertically on the left
 #' ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
 #'   geom_point() +
 #'   legend_left()
 #'
-#' # Works with multiple legends
-#' ggplot(mtcars, aes(mpg, wt, color = factor(cyl), shape = factor(am))) +
-#'   geom_point(size = 3) +
-#'   legend_left()
+#' # Pin legend to the top of the left rail
+#' ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
+#'   geom_point() +
+#'   legend_left(justification = "top")
 #'
 #' # Position only the colour legend on the left
 #' ggplot(mtcars, aes(mpg, wt, color = factor(cyl), size = hp)) +
@@ -50,11 +64,11 @@
 #'   \code{\link{legend_bottom}}, \code{\link{legend_inside}},
 #'   \code{\link{legend_none}}
 #' @export
-legend_left <- function(by = NULL) {
+legend_left <- function(justification = "center", by = NULL) {
   if (is.null(by)) {
     theme(
       legend.position = "left",
-      legend.justification = "left",
+      legend.justification.left = justification,
       legend.box.just = "left"
     )
   } else {
@@ -67,9 +81,14 @@ legend_left <- function(by = NULL) {
 
 #' Place Legend on the Right with Proper Alignment
 #'
-#' A one-liner to position the legend on the right side of the plot with correct
-#' right alignment for both the key box and text labels.
+#' A one-liner to position the legend on the right side of the plot. Slides the
+#' legend along the right rail via \code{justification}, and right-aligns
+#' multiple legend boxes via \code{legend.box.just}.
 #'
+#' @param justification Where the legend sits along the right edge.
+#'   One of \code{"top"}, \code{"center"}, \code{"bottom"}, or a numeric value
+#'   in \code{[0, 1]} (0 = bottom, 1 = top). Default is \code{"center"}.
+#'   Only used when \code{by} is NULL.
 #' @param by Optional aesthetic name (character) to position only a specific
 #'   legend. When specified, uses per-guide positioning via
 #'   \code{guide_legend(position = "right")}. Requires ggplot2 >= 3.5.0.
@@ -79,15 +98,10 @@ legend_left <- function(by = NULL) {
 #'   specification (when \code{by} is specified).
 #'
 #' @details
-#' When \code{by} is NULL (default), this function sets three theme elements:
-#' \itemize{
-#'   \item \code{legend.position = "right"} to place the legend on the right
-#'   \item \code{legend.justification = "right"} to right-justify the legend box
-#'   \item \code{legend.box.just = "right"} to right-align multiple legend boxes
-#' }
-#'
-#' When \code{by} is specified, only the legend for that aesthetic is moved,
-#' allowing different legends to be placed in different positions.
+#' \code{justification} slides the legend along the right rail:
+#' \code{"top"} / \code{"center"} / \code{"bottom"} or a number in \code{[0, 1]}.
+#' For per-guide justification, use
+#' \code{\link{legend_style}(by = ..., justification = ...)}.
 #'
 #' @examples
 #' library(ggplot2)
@@ -96,6 +110,11 @@ legend_left <- function(by = NULL) {
 #' ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
 #'   geom_point() +
 #'   legend_right()
+#'
+#' # Pin legend to the bottom of the right rail
+#' ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
+#'   geom_point() +
+#'   legend_right(justification = "bottom")
 #'
 #' # Position only the size legend on the right
 #' ggplot(mtcars, aes(mpg, wt, color = factor(cyl), size = hp)) +
@@ -106,11 +125,11 @@ legend_left <- function(by = NULL) {
 #' @seealso \code{\link{legend_left}}, \code{\link{legend_top}},
 #'   \code{\link{legend_bottom}}, \code{\link{legend_inside}}
 #' @export
-legend_right <- function(by = NULL) {
+legend_right <- function(justification = "center", by = NULL) {
   if (is.null(by)) {
     theme(
       legend.position = "right",
-      legend.justification = "right",
+      legend.justification.right = justification,
       legend.box.just = "right"
     )
   } else {
@@ -127,6 +146,10 @@ legend_right <- function(by = NULL) {
 #' Optionally aligns to the full plot area (including title) rather than just
 #' the panel.
 #'
+#' @param justification Where the legend sits along the top edge.
+#'   One of \code{"left"}, \code{"center"}, \code{"right"}, or a numeric value
+#'   in \code{[0, 1]} (0 = left, 1 = right). Default is \code{"center"}.
+#'   Only used when \code{by} is NULL.
 #' @param align_to Where to align the legend. Either \code{"panel"} (default,
 #'   aligns to plot panel) or \code{"plot"} (aligns to full plot including title).
 #'   Requires ggplot2 >= 3.5.0 for \code{"plot"} alignment. Ignored when
@@ -139,6 +162,12 @@ legend_right <- function(by = NULL) {
 #' @return A ggplot2 theme object (when \code{by} is NULL) or a guides
 #'   specification (when \code{by} is specified).
 #'
+#' @details
+#' \code{justification} slides the legend along the top rail:
+#' \code{"left"} / \code{"center"} / \code{"right"} or a number in \code{[0, 1]}.
+#' For per-guide justification, use
+#' \code{\link{legend_style}(by = ..., justification = ...)}.
+#'
 #' @examples
 #' library(ggplot2)
 #'
@@ -146,6 +175,11 @@ legend_right <- function(by = NULL) {
 #' ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
 #'   geom_point() +
 #'   legend_top()
+#'
+#' # Slide legend to the left end of the top rail
+#' ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
+#'   geom_point() +
+#'   legend_top(justification = "left")
 #'
 #' # Aligned to full plot (useful with titles)
 #' ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
@@ -162,7 +196,8 @@ legend_right <- function(by = NULL) {
 #' @seealso \code{\link{legend_bottom}}, \code{\link{legend_left}},
 #'   \code{\link{legend_right}}, \code{\link{legend_horizontal}}
 #' @export
-legend_top <- function(align_to = c("panel", "plot"), by = NULL) {
+legend_top <- function(justification = "center",
+                       align_to = c("panel", "plot"), by = NULL) {
   if (!is.null(by)) {
     return(ggguides_guide_update(
       by = normalize_aesthetic(by),
@@ -174,7 +209,7 @@ legend_top <- function(align_to = c("panel", "plot"), by = NULL) {
 
   theme_args <- list(
     legend.position = "top",
-    legend.justification = "center",
+    legend.justification.top = justification,
     legend.box.just = "center",
     legend.direction = "horizontal"
   )
@@ -192,6 +227,10 @@ legend_top <- function(align_to = c("panel", "plot"), by = NULL) {
 #' A one-liner to position the legend below the plot with horizontal layout.
 #' Optionally aligns to the full plot area rather than just the panel.
 #'
+#' @param justification Where the legend sits along the bottom edge.
+#'   One of \code{"left"}, \code{"center"}, \code{"right"}, or a numeric value
+#'   in \code{[0, 1]} (0 = left, 1 = right). Default is \code{"center"}.
+#'   Only used when \code{by} is NULL.
 #' @param align_to Where to align the legend. Either \code{"panel"} (default,
 #'   aligns to plot panel) or \code{"plot"} (aligns to full plot including title).
 #'   Requires ggplot2 >= 3.5.0 for \code{"plot"} alignment. Ignored when
@@ -204,6 +243,10 @@ legend_top <- function(align_to = c("panel", "plot"), by = NULL) {
 #' @return A ggplot2 theme object (when \code{by} is NULL) or a guides
 #'   specification (when \code{by} is specified).
 #'
+#' @details
+#' \code{justification} slides the legend along the bottom rail. For per-guide
+#' justification, use \code{\link{legend_style}(by = ..., justification = ...)}.
+#'
 #' @examples
 #' library(ggplot2)
 #'
@@ -211,6 +254,11 @@ legend_top <- function(align_to = c("panel", "plot"), by = NULL) {
 #' ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
 #'   geom_point() +
 #'   legend_bottom()
+#'
+#' # Slide legend to the right end of the bottom rail
+#' ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
+#'   geom_point() +
+#'   legend_bottom(justification = "right")
 #'
 #' # Aligned to full plot
 #' ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
@@ -227,7 +275,8 @@ legend_top <- function(align_to = c("panel", "plot"), by = NULL) {
 #' @seealso \code{\link{legend_top}}, \code{\link{legend_left}},
 #'   \code{\link{legend_right}}, \code{\link{legend_horizontal}}
 #' @export
-legend_bottom <- function(align_to = c("panel", "plot"), by = NULL) {
+legend_bottom <- function(justification = "center",
+                          align_to = c("panel", "plot"), by = NULL) {
   if (!is.null(by)) {
     return(ggguides_guide_update(
       by = normalize_aesthetic(by),
@@ -239,7 +288,7 @@ legend_bottom <- function(align_to = c("panel", "plot"), by = NULL) {
 
   theme_args <- list(
     legend.position = "bottom",
-    legend.justification = "center",
+    legend.justification.bottom = justification,
     legend.box.just = "center",
     legend.direction = "horizontal"
   )

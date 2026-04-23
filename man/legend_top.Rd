@@ -4,9 +4,14 @@
 \alias{legend_top}
 \title{Place Legend on Top with Horizontal Layout}
 \usage{
-legend_top(align_to = c("panel", "plot"), by = NULL)
+legend_top(justification = "center", align_to = c("panel", "plot"), by = NULL)
 }
 \arguments{
+\item{justification}{Where the legend sits along the top edge.
+One of \code{"left"}, \code{"center"}, \code{"right"}, or a numeric value
+in \code{[0, 1]} (0 = left, 1 = right). Default is \code{"center"}.
+Only used when \code{by} is NULL.}
+
 \item{align_to}{Where to align the legend. Either \code{"panel"} (default,
 aligns to plot panel) or \code{"plot"} (aligns to full plot including title).
 Requires ggplot2 >= 3.5.0 for \code{"plot"} alignment. Ignored when
@@ -26,6 +31,12 @@ A one-liner to position the legend above the plot with horizontal layout.
 Optionally aligns to the full plot area (including title) rather than just
 the panel.
 }
+\details{
+\code{justification} slides the legend along the top rail:
+\code{"left"} / \code{"center"} / \code{"right"} or a number in \code{[0, 1]}.
+For per-guide justification, use
+\code{\link{legend_style}(by = ..., justification = ...)}.
+}
 \examples{
 library(ggplot2)
 
@@ -33,6 +44,11 @@ library(ggplot2)
 ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
   geom_point() +
   legend_top()
+
+# Slide legend to the left end of the top rail
+ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
+  geom_point() +
+  legend_top(justification = "left")
 
 # Aligned to full plot (useful with titles)
 ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +

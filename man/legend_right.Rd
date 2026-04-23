@@ -4,9 +4,14 @@
 \alias{legend_right}
 \title{Place Legend on the Right with Proper Alignment}
 \usage{
-legend_right(by = NULL)
+legend_right(justification = "center", by = NULL)
 }
 \arguments{
+\item{justification}{Where the legend sits along the right edge.
+One of \code{"top"}, \code{"center"}, \code{"bottom"}, or a numeric value
+in \code{[0, 1]} (0 = bottom, 1 = top). Default is \code{"center"}.
+Only used when \code{by} is NULL.}
+
 \item{by}{Optional aesthetic name (character) to position only a specific
 legend. When specified, uses per-guide positioning via
 \code{guide_legend(position = "right")}. Requires ggplot2 >= 3.5.0.
@@ -17,19 +22,15 @@ A ggplot2 theme object (when \code{by} is NULL) or a guides
 specification (when \code{by} is specified).
 }
 \description{
-A one-liner to position the legend on the right side of the plot with correct
-right alignment for both the key box and text labels.
+A one-liner to position the legend on the right side of the plot. Slides the
+legend along the right rail via \code{justification}, and right-aligns
+multiple legend boxes via \code{legend.box.just}.
 }
 \details{
-When \code{by} is NULL (default), this function sets three theme elements:
-\itemize{
-\item \code{legend.position = "right"} to place the legend on the right
-\item \code{legend.justification = "right"} to right-justify the legend box
-\item \code{legend.box.just = "right"} to right-align multiple legend boxes
-}
-
-When \code{by} is specified, only the legend for that aesthetic is moved,
-allowing different legends to be placed in different positions.
+\code{justification} slides the legend along the right rail:
+\code{"top"} / \code{"center"} / \code{"bottom"} or a number in \code{[0, 1]}.
+For per-guide justification, use
+\code{\link{legend_style}(by = ..., justification = ...)}.
 }
 \examples{
 library(ggplot2)
@@ -38,6 +39,11 @@ library(ggplot2)
 ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
   geom_point() +
   legend_right()
+
+# Pin legend to the bottom of the right rail
+ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
+  geom_point() +
+  legend_right(justification = "bottom")
 
 # Position only the size legend on the right
 ggplot(mtcars, aes(mpg, wt, color = factor(cyl), size = hp)) +

@@ -4,9 +4,15 @@
 \alias{legend_left}
 \title{Place Legend on the Left with Proper Alignment}
 \usage{
-legend_left(by = NULL)
+legend_left(justification = "center", by = NULL)
 }
 \arguments{
+\item{justification}{Where the legend sits along the left edge.
+One of \code{"top"}, \code{"center"}, \code{"bottom"}, or a numeric value
+in \code{[0, 1]} (0 = bottom, 1 = top). Default is \code{"center"}.
+Only used when \code{by} is NULL. For per-guide justification, use
+\code{\link{legend_style}(by = ..., justification = ...)}.}
+
 \item{by}{Optional aesthetic name (character) to position only a specific
 legend. When specified, uses per-guide positioning via
 \code{guide_legend(position = "left")}. Requires ggplot2 >= 3.5.0.
@@ -17,33 +23,42 @@ A ggplot2 theme object (when \code{by} is NULL) or a guides
 specification (when \code{by} is specified).
 }
 \description{
-A one-liner to position the legend on the left side of the plot with correct
-left alignment for both the key box and text labels. This goes beyond simple
-\code{legend.position = "left"} by also setting justification and box alignment.
+A one-liner to position the legend on the left side of the plot. Slides the
+legend along the left rail via \code{justification}, and left-aligns multiple
+legend boxes via \code{legend.box.just}.
 }
 \details{
-When \code{by} is NULL (default), this function sets three theme elements:
+The left-positioned legend lives in a vertical rail along the panel's left
+edge. \code{justification} slides it along that rail: \code{"top"} pins the
+legend's top edge to the panel top; \code{"bottom"} pins its bottom edge to
+the panel bottom; \code{"center"} centers it vertically.
+
+Note the naming asymmetry with \code{\link{legend_inside}}: for side legends
+the justification keyword refers to where the legend sits along the panel
+edge; for inside legends it refers to which corner of the legend anchors to
+the \code{(x, y)} position.
+
+When \code{by} is NULL (default), this function sets:
 \itemize{
-\item \code{legend.position = "left"} to place the legend on the left
-\item \code{legend.justification = "left"} to left-justify the legend box
+\item \code{legend.position = "left"}
+\item \code{legend.justification.left = justification}
 \item \code{legend.box.just = "left"} to left-align multiple legend boxes
 }
 
-When \code{by} is specified, only the legend for that aesthetic is moved,
-allowing different legends to be placed in different positions.
+When \code{by} is specified, only the legend for that aesthetic is moved.
 }
 \examples{
 library(ggplot2)
 
-# Basic usage
+# Basic usage — legend centered vertically on the left
 ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
   geom_point() +
   legend_left()
 
-# Works with multiple legends
-ggplot(mtcars, aes(mpg, wt, color = factor(cyl), shape = factor(am))) +
-  geom_point(size = 3) +
-  legend_left()
+# Pin legend to the top of the left rail
+ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
+  geom_point() +
+  legend_left(justification = "top")
 
 # Position only the colour legend on the left
 ggplot(mtcars, aes(mpg, wt, color = factor(cyl), size = hp)) +
