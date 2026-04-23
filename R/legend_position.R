@@ -368,7 +368,7 @@ legend_inside <- function(x = NULL, y = NULL, position = NULL, justification = N
   theme(
     legend.position = "inside",
     legend.position.inside = c(x, y),
-    legend.justification = justification,
+    legend.justification.inside = justification,
     legend.background = element_rect(fill = background, color = border),
     legend.margin = margin(padding, padding, padding, padding, "cm")
   )

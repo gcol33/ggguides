@@ -1,3 +1,9 @@
+# ggguides 1.1.7
+
+## Bug Fixes
+
+* `legend_inside(justification = ...)` had no visible effect because the function was writing to `legend.justification` — the theme element that anchors side legends. In ggplot2 >= 3.5.0 the anchor for `legend.position = "inside"` is a separate element, `legend.justification.inside`. `legend_inside()` now writes to that element, so the `justification` argument (and the justifications implied by `position = "topright"`, `"bottomleft"`, etc.) move the legend as documented. Users who had been working around the bug with `theme(legend.justification = ...)` should remove that override. (reported by Youtao)
+
 # ggguides 1.1.6
 
 ## Bug Fixes

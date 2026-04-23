@@ -163,6 +163,22 @@ test_that("legend_inside works with coordinates", {
   expect_equal(result$legend.position.inside, c(0.5, 0.5))
 })
 
+test_that("legend_inside sets legend.justification.inside (not legend.justification)", {
+  # ggplot2 3.5.0+ uses legend.justification.inside as the anchor for
+  # legend.position = "inside". legend.justification is for side legends.
+  # Previously legend_inside() wrote to legend.justification, which had no
+  # effect when position was "inside".
+  result <- legend_inside(position = "topright")
+  expect_equal(result$legend.justification.inside, c("right", "top"))
+
+  result <- legend_inside(x = 0.1, y = 0.1, justification = c("left", "bottom"))
+  expect_equal(result$legend.justification.inside, c("left", "bottom"))
+
+  # Default justification when only x/y are given
+  result <- legend_inside(x = 0.5, y = 0.5)
+  expect_equal(result$legend.justification.inside, c("left", "top"))
+})
+
 test_that("legend_inside errors without position or coordinates", {
   expect_error(legend_inside(), "Either provide")
 })
