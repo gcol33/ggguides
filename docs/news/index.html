@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ggguides</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.7</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -60,6 +60,14 @@
       <small>Source: <a href="https://github.com/gcol33/ggguides/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.1.7" id="ggguides-117">ggguides 1.1.7<a class="anchor" aria-label="anchor" href="#ggguides-117"></a></h2>
+<div class="section level3">
+<h3 id="bug-fixes-1-1-7">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-1-7"></a></h3>
+<ul><li>
+<code>legend_inside(justification = ...)</code> had no visible effect because the function was writing to <code>legend.justification</code> — the theme element that anchors side legends. In ggplot2 &gt;= 3.5.0 the anchor for <code>legend.position = "inside"</code> is a separate element, <code>legend.justification.inside</code>. <code><a href="../reference/legend_inside.html">legend_inside()</a></code> now writes to that element, so the <code>justification</code> argument (and the justifications implied by <code>position = "topright"</code>, <code>"bottomleft"</code>, etc.) move the legend as documented. Users who had been working around the bug with <code>theme(legend.justification = ...)</code> should remove that override. (reported by Youtao)</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.1.6" id="ggguides-116">ggguides 1.1.6<a class="anchor" aria-label="anchor" href="#ggguides-116"></a></h2>
 <div class="section level3">
