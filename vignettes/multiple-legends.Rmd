@@ -155,6 +155,21 @@ p +
   legend_style(size = 10, by = "size")
 ```
 
+## Combining Multiple Controls
+
+All functions work together:
+
+```{r combined}
+# Complex example: hide shape, position colour on left with bold title,
+# position size at bottom with smaller text
+p +
+  legend_hide(shape) +
+  legend_left(by = "colour") +
+  legend_style(title_face = "bold", title_size = 14, by = "colour") +
+  legend_bottom(by = "size") +
+  legend_style(size = 9, direction = "horizontal", by = "size")
+```
+
 ## Four Legends, One per Side
 
 When a plot has four legends and you want one on each side (top, bottom, left, right), you can fine-tune each legend along three axes:
@@ -274,21 +289,6 @@ The per-guide form is what you want when different legends need different alignm
 ### Why one line per parameter
 
 `legend_style(by = "<aes>", ...)` calls are additive. You can fold every style argument for `colour` into a single call, but splitting by concern (position, alignment, appearance, padding) keeps each parameter on a line that is easy to locate. When a reviewer asks to move the colour legend half a centimetre down, the edit is one number on one line.
-
-## Combining Multiple Controls
-
-All functions work together:
-
-```{r combined}
-# Complex example: hide shape, position colour on left with bold title,
-# position size at bottom with smaller text
-p +
-  legend_hide(shape) +
-  legend_left(by = "colour") +
-  legend_style(title_face = "bold", title_size = 14, by = "colour") +
-  legend_bottom(by = "size") +
-  legend_style(size = 9, direction = "horizontal", by = "size")
-```
 
 ## Summary
 

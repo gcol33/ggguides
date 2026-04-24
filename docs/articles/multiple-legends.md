@@ -203,6 +203,24 @@ p +
 
 ![](multiple-legends_files/figure-html/style-separately-1.svg)
 
+## Combining Multiple Controls
+
+All functions work together:
+
+``` r
+
+# Complex example: hide shape, position colour on left with bold title,
+# position size at bottom with smaller text
+p +
+  legend_hide(shape) +
+  legend_left(by = "colour") +
+  legend_style(title_face = "bold", title_size = 14, by = "colour") +
+  legend_bottom(by = "size") +
+  legend_style(size = 9, direction = "horizontal", by = "size")
+```
+
+![](multiple-legends_files/figure-html/combined-1.svg)
+
 ## Four Legends, One per Side
 
 When a plot has four legends and you want one on each side (top, bottom,
@@ -370,24 +388,6 @@ style argument for `colour` into a single call, but splitting by concern
 (position, alignment, appearance, padding) keeps each parameter on a
 line that is easy to locate. When a reviewer asks to move the colour
 legend half a centimetre down, the edit is one number on one line.
-
-## Combining Multiple Controls
-
-All functions work together:
-
-``` r
-
-# Complex example: hide shape, position colour on left with bold title,
-# position size at bottom with smaller text
-p +
-  legend_hide(shape) +
-  legend_left(by = "colour") +
-  legend_style(title_face = "bold", title_size = 14, by = "colour") +
-  legend_bottom(by = "size") +
-  legend_style(size = 9, direction = "horizontal", by = "size")
-```
-
-![](multiple-legends_files/figure-html/combined-1.svg)
 
 ## Summary
 
