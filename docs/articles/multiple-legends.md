@@ -257,11 +257,11 @@ as you need to tune one legend at a time without affecting the others.
 
 ## Six Legends, Stacked per Side
 
-ggplot2 allows more than one legend to share a side — they stack in the
-order ggplot2 resolves them. With ggguides you can send any legend to
-any side, then slide and pad each one independently. The plot below has
-**six** legends: two on top, two on the right, one on the bottom, one on
-the left.
+More than one legend can share a side. ggplot2 stacks them in the order
+it resolves them, and ggguides lets you pick which legend goes where,
+slide it along the rail, and style it without touching the others. The
+plot below has **six** legends: two on top, two on the right, one on the
+bottom, one on the left.
 
 ``` r
 
@@ -322,57 +322,54 @@ p6 +
 
 ### What each step is doing
 
-**Step 1 — side placement.** `legend_<side>(by = "<aes>")` sends one
+**Step 1, side placement.** `legend_<side>(by = "<aes>")` sends one
 legend to one side. Call it twice with different aesthetics and both
-legends land on that side; ggplot2 stacks them in the order they’re
-resolved. Here `colour` + `fill` share the top rail, `size` + `alpha`
-share the right rail, and `shape` / `linetype` get a side of their own.
+legends land on that side. In the example, `colour` and `fill` share the
+top rail, `size` and `alpha` share the right rail, and `shape` and
+`linetype` each get a side of their own.
 
-**Step 2 — slide along the rail.**
+**Step 2, slide along the rail.**
 `legend_style(by = "<aes>", justification = ...)` repositions a single
 legend without affecting its neighbours. The keyword interpretation
 depends on which rail the legend sits on:
 
-- **Top / bottom rail** (horizontal): `"left"`, `"center"`, `"right"`,
-  or a number in `[0, 1]` (0 = flush left, 1 = flush right). In the
-  example, `colour` is pushed to the left end of the top rail and `fill`
-  to the right end, so the two top legends fan out to opposite corners.
+- Top or bottom rail (horizontal): `"left"`, `"center"`, `"right"`, or a
+  number in `[0, 1]` where 0 is flush left and 1 is flush right. In the
+  example, `colour` sits at the left end of the top rail and `fill` at
+  the right end, so the two top legends land in opposite corners.
 
-- **Left / right rail** (vertical): `"top"`, `"center"`, `"bottom"`, or
-  a number (0 = bottom, 1 = top). `size` is pinned to the top of the
-  right rail and `alpha` to the bottom.
+- Left or right rail (vertical): `"top"`, `"center"`, `"bottom"`, or a
+  number where 0 is bottom and 1 is top. `size` sits at the top of the
+  right rail and `alpha` at the bottom.
 
-You can mix this with whole-plot justification via
-`legend_style(justification = ...)` (no `by`), but the per-guide form is
-what you want when different legends need different alignments.
+The per-guide form is what you want when different legends need
+different alignments. For a single alignment applied to every legend at
+once, use `legend_style(justification = ...)` without `by`.
 
-**Step 3 — appearance.** Anything
+**Step 3, appearance.** Anything
 [`legend_style()`](https://gcol33.github.io/ggguides/reference/legend_style.md)
 accepts (`title_face`, `title_size`, `size` for label text, `key_width`,
-`key_height`, `direction`, `background`, …) can be scoped to a single
-legend by adding `by = "<aes>"`. Calls are additive — each line tunes
-one axis of one legend and leaves the rest untouched — so chaining many
-short calls is idiomatic and easier to read than one megacall. Here the
-top legends get bold titles and smaller keys, the right legends get
-smaller text, and `shape` is forced horizontal to fit the bottom rail
-while `linetype` stays vertical for the left rail.
+`key_height`, `direction`, `background`, and so on) can be scoped to a
+single legend by adding `by = "<aes>"`. Each call tunes one legend and
+leaves the others alone, so chaining several short calls is the intended
+shape. In the example the top legends get bold titles and smaller keys,
+the right legends get smaller text, `shape` is forced horizontal so it
+fits the bottom rail, and `linetype` stays vertical for the left rail.
 
-**Step 4 — padding.** `margin = c(top, right, bottom, left)` (in cm)
-nudges a single legend toward or away from the panel. Always pad on the
-side that faces the panel: a bottom legend uses `c(top, 0, 0, 0)`, a
-left legend uses `c(0, right, 0, 0)`, and so on. This is often the
-difference between “legend readable” and “legend crammed against the
-axis text”.
+**Step 4, padding.** `margin = c(top, right, bottom, left)` (in cm)
+moves a single legend toward or away from the panel. Pad on the side
+that faces the panel: a bottom legend uses `c(top, 0, 0, 0)`, a left
+legend uses `c(0, right, 0, 0)`. Without padding, legends often end up
+pressed against the axis text; a few tenths of a centimetre usually
+fixes it.
 
-### Why four separate calls per legend, not one
+### Why one line per parameter
 
-`legend_style(by = "colour", ...)` is additive on purpose. You could
-merge all four style calls for `colour` into a single one, but splitting
-them by concern (position / alignment / appearance / padding) means
-every parameter lives on a line that is easy to find and tweak in
-isolation. When a reviewer asks “can you move the colour legend half a
-centimetre down?” you edit one number on one line, not a twenty-argument
-call.
+`legend_style(by = "<aes>", ...)` calls are additive. You can fold every
+style argument for `colour` into a single call, but splitting by concern
+(position, alignment, appearance, padding) keeps each parameter on a
+line that is easy to locate. When a reviewer asks to move the colour
+legend half a centimetre down, the edit is one number on one line.
 
 ## Combining Multiple Controls
 

@@ -353,4 +353,50 @@ if (requireNamespace("patchwork", quietly = TRUE)) {
   save_grob_example(gt, "patchwork_span_row12", width = 6, height = 8)
 }
 
+# =============================================================================
+# Six Legends, Stacked per Side (README hero)
+# =============================================================================
+
+p6 <- ggplot(mtcars, aes(mpg, wt)) +
+  geom_smooth(aes(linetype = factor(vs)), method = "lm", se = FALSE,
+              colour = "grey40") +
+  geom_point(aes(colour = factor(cyl),
+                 fill   = factor(gear),
+                 size   = hp,
+                 alpha  = qsec,
+                 shape  = factor(am)),
+             stroke = 1.2) +
+  scale_shape_manual(values = c(21, 24)) +
+  labs(colour = "Cyl", fill = "Gear", size = "HP",
+       alpha = "QSec", shape = "AM", linetype = "VS")
+
+save_example(
+  p6 +
+    legend_top(by = "colour")    + legend_top(by = "fill")     +
+    legend_right(by = "size")    + legend_right(by = "alpha")  +
+    legend_bottom(by = "shape")  + legend_left(by = "linetype") +
+    legend_style(by = "colour",   justification = "left")   +
+    legend_style(by = "fill",     justification = "right")  +
+    legend_style(by = "size",     justification = "top")    +
+    legend_style(by = "alpha",    justification = "bottom") +
+    legend_style(by = "shape",    justification = "center") +
+    legend_style(by = "linetype", justification = "center") +
+    legend_style(by = "colour", title_face = "bold",
+                 key_width = 0.4, key_height = 0.4) +
+    legend_style(by = "fill",   title_face = "bold",
+                 key_width = 0.4, key_height = 0.4) +
+    legend_style(by = "size",  title_size = 9, size = 8) +
+    legend_style(by = "alpha", title_size = 9, size = 8) +
+    legend_style(by = "shape",    direction = "horizontal") +
+    legend_style(by = "linetype", direction = "vertical")   +
+    legend_style(by = "colour",   margin = c(0, 0, 0.2, 0)) +
+    legend_style(by = "fill",     margin = c(0, 0, 0.2, 0)) +
+    legend_style(by = "size",     margin = c(0, 0, 0, 0.3)) +
+    legend_style(by = "alpha",    margin = c(0, 0, 0, 0.3)) +
+    legend_style(by = "shape",    margin = c(0.3, 0, 0, 0)) +
+    legend_style(by = "linetype", margin = c(0, 0.3, 0, 0)),
+  "six_legends",
+  width = 9, height = 6.5
+)
+
 message("\nAll examples generated in: ", out_dir)

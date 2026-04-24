@@ -2396,11 +2396,11 @@ the others.</p>
 <div class="section level2">
 <h2 id="six-legends-stacked-per-side">Six Legends, Stacked per Side<a class="anchor" aria-label="anchor" href="#six-legends-stacked-per-side"></a>
 </h2>
-<p>ggplot2 allows more than one legend to share a side — they stack in
-the order ggplot2 resolves them. With ggguides you can send any legend
-to any side, then slide and pad each one independently. The plot below
-has <strong>six</strong> legends: two on top, two on the right, one on
-the bottom, one on the left.</p>
+<p>More than one legend can share a side. ggplot2 stacks them in the
+order it resolves them, and ggguides lets you pick which legend goes
+where, slide it along the rail, and style it without touching the
+others. The plot below has <strong>six</strong> legends: two on top, two
+on the right, one on the bottom, one on the left.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p6</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="va">wt</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html" class="external-link">geom_smooth</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>linetype <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">vs</span><span class="op">)</span><span class="op">)</span>, method <span class="op">=</span> <span class="st">"lm"</span>, se <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -2656,63 +2656,61 @@ the bottom, one on the left.</p>
 <div class="section level3">
 <h3 id="what-each-step-is-doing">What each step is doing<a class="anchor" aria-label="anchor" href="#what-each-step-is-doing"></a>
 </h3>
-<p><strong>Step 1 — side placement.</strong>
+<p><strong>Step 1, side placement.</strong>
 <code>legend_&lt;side&gt;(by = "&lt;aes&gt;")</code> sends one legend to
 one side. Call it twice with different aesthetics and both legends land
-on that side; ggplot2 stacks them in the order they’re resolved. Here
-<code>colour</code> + <code>fill</code> share the top rail,
-<code>size</code> + <code>alpha</code> share the right rail, and
-<code>shape</code> / <code>linetype</code> get a side of their own.</p>
-<p><strong>Step 2 — slide along the rail.</strong>
+on that side. In the example, <code>colour</code> and <code>fill</code>
+share the top rail, <code>size</code> and <code>alpha</code> share the
+right rail, and <code>shape</code> and <code>linetype</code> each get a
+side of their own.</p>
+<p><strong>Step 2, slide along the rail.</strong>
 <code>legend_style(by = "&lt;aes&gt;", justification = ...)</code>
 repositions a single legend without affecting its neighbours. The
 keyword interpretation depends on which rail the legend sits on:</p>
 <ul>
-<li><p><strong>Top / bottom rail</strong> (horizontal):
-<code>"left"</code>, <code>"center"</code>, <code>"right"</code>, or a
-number in <code>[0, 1]</code> (0 = flush left, 1 = flush right). In the
-example, <code>colour</code> is pushed to the left end of the top rail
-and <code>fill</code> to the right end, so the two top legends fan out
-to opposite corners.</p></li>
-<li><p><strong>Left / right rail</strong> (vertical):
-<code>"top"</code>, <code>"center"</code>, <code>"bottom"</code>, or a
-number (0 = bottom, 1 = top). <code>size</code> is pinned to the top of
-the right rail and <code>alpha</code> to the bottom.</p></li>
+<li><p>Top or bottom rail (horizontal): <code>"left"</code>,
+<code>"center"</code>, <code>"right"</code>, or a number in
+<code>[0, 1]</code> where 0 is flush left and 1 is flush right. In the
+example, <code>colour</code> sits at the left end of the top rail and
+<code>fill</code> at the right end, so the two top legends land in
+opposite corners.</p></li>
+<li><p>Left or right rail (vertical): <code>"top"</code>,
+<code>"center"</code>, <code>"bottom"</code>, or a number where 0 is
+bottom and 1 is top. <code>size</code> sits at the top of the right rail
+and <code>alpha</code> at the bottom.</p></li>
 </ul>
-<p>You can mix this with whole-plot justification via
-<code>legend_style(justification = ...)</code> (no <code>by</code>), but
-the per-guide form is what you want when different legends need
-different alignments.</p>
-<p><strong>Step 3 — appearance.</strong> Anything
+<p>The per-guide form is what you want when different legends need
+different alignments. For a single alignment applied to every legend at
+once, use <code>legend_style(justification = ...)</code> without
+<code>by</code>.</p>
+<p><strong>Step 3, appearance.</strong> Anything
 <code><a href="../reference/legend_style.html">legend_style()</a></code> accepts (<code>title_face</code>,
 <code>title_size</code>, <code>size</code> for label text,
 <code>key_width</code>, <code>key_height</code>, <code>direction</code>,
-<code>background</code>, …) can be scoped to a single legend by adding
-<code>by = "&lt;aes&gt;"</code>. Calls are additive — each line tunes
-one axis of one legend and leaves the rest untouched — so chaining many
-short calls is idiomatic and easier to read than one megacall. Here the
-top legends get bold titles and smaller keys, the right legends get
-smaller text, and <code>shape</code> is forced horizontal to fit the
-bottom rail while <code>linetype</code> stays vertical for the left
-rail.</p>
-<p><strong>Step 4 — padding.</strong>
-<code>margin = c(top, right, bottom, left)</code> (in cm) nudges a
-single legend toward or away from the panel. Always pad on the side that
-faces the panel: a bottom legend uses <code>c(top, 0, 0, 0)</code>, a
-left legend uses <code>c(0, right, 0, 0)</code>, and so on. This is
-often the difference between “legend readable” and “legend crammed
-against the axis text”.</p>
+<code>background</code>, and so on) can be scoped to a single legend by
+adding <code>by = "&lt;aes&gt;"</code>. Each call tunes one legend and
+leaves the others alone, so chaining several short calls is the intended
+shape. In the example the top legends get bold titles and smaller keys,
+the right legends get smaller text, <code>shape</code> is forced
+horizontal so it fits the bottom rail, and <code>linetype</code> stays
+vertical for the left rail.</p>
+<p><strong>Step 4, padding.</strong>
+<code>margin = c(top, right, bottom, left)</code> (in cm) moves a single
+legend toward or away from the panel. Pad on the side that faces the
+panel: a bottom legend uses <code>c(top, 0, 0, 0)</code>, a left legend
+uses <code>c(0, right, 0, 0)</code>. Without padding, legends often end
+up pressed against the axis text; a few tenths of a centimetre usually
+fixes it.</p>
 </div>
 <div class="section level3">
-<h3 id="why-four-separate-calls-per-legend-not-one">Why four separate calls per legend, not one<a class="anchor" aria-label="anchor" href="#why-four-separate-calls-per-legend-not-one"></a>
+<h3 id="why-one-line-per-parameter">Why one line per parameter<a class="anchor" aria-label="anchor" href="#why-one-line-per-parameter"></a>
 </h3>
-<p><code>legend_style(by = "colour", ...)</code> is additive on purpose.
-You could merge all four style calls for <code>colour</code> into a
-single one, but splitting them by concern (position / alignment /
-appearance / padding) means every parameter lives on a line that is easy
-to find and tweak in isolation. When a reviewer asks “can you move the
-colour legend half a centimetre down?” you edit one number on one line,
-not a twenty-argument call.</p>
+<p><code>legend_style(by = "&lt;aes&gt;", ...)</code> calls are
+additive. You can fold every style argument for <code>colour</code> into
+a single call, but splitting by concern (position, alignment,
+appearance, padding) keeps each parameter on a line that is easy to
+locate. When a reviewer asks to move the colour legend half a centimetre
+down, the edit is one number on one line.</p>
 </div>
 </div>
 <div class="section level2">
