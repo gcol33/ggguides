@@ -808,43 +808,335 @@ ggplot_add.ggguides_guide_update <- function(object, plot, ...) {
     new_guide <- do.call(ggplot2::guide_legend, new_params)
     guides_arg <- stats::setNames(list(new_guide), by)
     plot <- plot + do.call(ggplot2::guides, guides_arg)
-    return(apply_guide_justification(plot, object, new_params$position))
-  }
-
-  for (nm in names(object$guide_params)) {
-    existing$params[[nm]] <- object$guide_params[[nm]]
-  }
-
-  if (!is.null(object$theme_delta)) {
-    existing_theme <- existing$params$theme
-    if (inherits(existing_theme, "theme")) {
-      existing$params$theme <- existing_theme + object$theme_delta
-    } else {
-      existing$params$theme <- object$theme_delta
+    pos <- new_params$position
+  } else {
+    for (nm in names(object$guide_params)) {
+      existing$params[[nm]] <- object$guide_params[[nm]]
     }
+    if (!is.null(object$theme_delta)) {
+      existing_theme <- existing$params$theme
+      if (inherits(existing_theme, "theme")) {
+        existing$params$theme <- existing_theme + object$theme_delta
+      } else {
+        existing$params$theme <- object$theme_delta
+      }
+    }
+    pos <- existing$params$position
   }
 
-  apply_guide_justification(plot, object, existing$params$position)
+  if (is.null(object$justification)) return(plot)
+
+  # Per-guide justification needs two paths:
+  #
+  #  1. Theme write — sets legend.justification.<side> globally so single-
+  #     legend-per-side cases work via ggplot2's native layout. This is the
+  #     v1.1.9 behavior; kept as a fallback. Two legends on the same side
+  #     overwrite each other here, which is why path 2 exists.
+  #
+  #  2. Plot-attribute stash + render-time gtable rewrite. The per-legend
+  #     justifications are recorded on the plot, and ggplotGrob.gg_per_legend_just
+  #     edits the guide-box-<side> internal gtable so each legend sits at
+  #     its requested rail position even when it shares a side.
+  plot <- apply_guide_justification_theme(plot, object$justification, pos)
+  plot <- store_per_legend_justification(plot, by, object$justification)
+  plot
 }
 
-# Per-guide justification cannot go through guide_legend(theme = ...): in
-# ggplot2 >= 3.5, guide_legend does not consult legend.justification.{side}
-# in its embedded theme. Route it to a whole-plot theme element keyed on
-# the guide's resolved side. If the side is not yet known (the user called
-# legend_style(by=, justification=) before any position-setting helper),
-# fall back to setting all four side slots — when the side is later
-# resolved, the matching slot will take effect.
+# Set the side-specific theme element so single-legend cases keep working
+# without any gtable surgery. For unresolved sides, write all four slots so
+# whichever side the legend ends up on will pick up the value.
 #' @noRd
-apply_guide_justification <- function(plot, object, position) {
-  j <- object$justification
-  if (is.null(j)) return(plot)
-
+apply_guide_justification_theme <- function(plot, j, position) {
   if (is.character(position) && length(position) == 1 &&
       position %in% c("top", "bottom", "left", "right")) {
     key <- paste0("legend.justification.", position)
     plot + do.call(ggplot2::theme, stats::setNames(list(j), key))
   } else {
     plot + do.call(ggplot2::theme, justification_elements(j))
+  }
+}
+
+# Stash a {aesthetic -> justification} entry on the plot as an attribute,
+# and tag the plot so the render-time post-processor runs.
+#' @noRd
+store_per_legend_justification <- function(plot, by, j) {
+  j_map <- attr(plot, "ggguides_justifications")
+  if (is.null(j_map)) j_map <- list()
+  j_map[[by]] <- j
+  attr(plot, "ggguides_justifications") <- j_map
+  if (!inherits(plot, "gg_per_legend_just")) {
+    class(plot) <- c("gg_per_legend_just", class(plot))
+  }
+  plot
+}
+
+# =============================================================================
+# Render-time gtable post-processing for per-legend justification
+# =============================================================================
+#
+# ggplot2's legend.justification.<side> is a single global theme element, so
+# two legends on the same edge can only share one justification — the last
+# write wins. To let users pin (e.g.) colour to the left of the top edge and
+# fill to the right of the same edge, we tag the plot at add-time and rewrite
+# the guide-box-<side> internal gtable here. Each guide-box is laid out as
+#
+#   [pad-null, 0pt, leg_1, gap, leg_2, gap, ..., leg_N, 0pt, pad-null]
+#
+# (cols for top/bottom, rows for left/right). Reshaping the pad/gap null
+# units controls each legend's fractional position along the rail.
+
+#' @export
+ggplotGrob.gg_per_legend_just <- function(x) {
+  # Make sure the gtable ordering matches the requested justification ordering
+  # before ggplot2 builds — ggplot2's intrinsic guide order may not match what
+  # the user wrote (e.g. they want colour on the left of the top edge but
+  # ggplot2 places fill first), and the post-processor below only redistributes
+  # slack, it does not swap legend cells.
+  prepared <- assign_per_legend_order(x)
+  class(prepared) <- setdiff(class(prepared), "gg_per_legend_just")
+  g <- ggplot2::ggplotGrob(prepared)
+  apply_per_legend_just_to_gtable(g, x)
+}
+
+# Set guide_legend(order = N) on each per-legend-justification guide so the
+# gtable column/row order matches the user's requested justification order
+# along the rail. Guides without an explicit per-legend justification are
+# left alone (or get pushed after the explicitly-justified ones).
+#' @noRd
+assign_per_legend_order <- function(plot) {
+  j_map <- attr(plot, "ggguides_justifications")
+  if (length(j_map) == 0) return(plot)
+
+  side_targets <- list()
+  user_orders <- list()
+  for (aes in names(j_map)) {
+    guide <- tryCatch(plot$guides$guides[[aes]], error = function(e) NULL)
+    pos <- if (!is.null(guide)) guide$params$position else NULL
+    if (!is.character(pos) || length(pos) != 1 ||
+        !pos %in% c("top", "bottom", "left", "right")) next
+    user_order <- guide$params$order
+    if (!is.null(user_order) && is.numeric(user_order) && user_order != 0) {
+      # User explicitly set order via legend_order() or guides() — respect
+      # it and skip rail-position-based reordering for this side. The
+      # post-processor's slack distribution still runs.
+      user_orders[[pos]] <- TRUE
+      next
+    }
+    if (is.null(side_targets[[pos]])) side_targets[[pos]] <- list()
+    side_targets[[pos]][[aes]] <- to_rail_position(
+      j_map[[aes]], horizontal = pos %in% c("top", "bottom")
+    )
+  }
+
+  for (side in names(side_targets)) {
+    if (isTRUE(user_orders[[side]])) {
+      warning(
+        "ggguides: per-legend justification on side '", side, "' was ",
+        "skipped because guide_legend(order = ...) is already set on a ",
+        "guide on that side. Remove the explicit order or move the ",
+        "justification to match.",
+        call. = FALSE
+      )
+      next
+    }
+    aes_targets <- unlist(side_targets[[side]])
+    sorted_aes <- names(aes_targets)[order(aes_targets)]
+    for (i in seq_along(sorted_aes)) {
+      plot$guides$guides[[sorted_aes[i]]]$params$order <- i
+    }
+  }
+  plot
+}
+
+#' @export
+print.gg_per_legend_just <- function(x, ...) {
+  g <- ggplotGrob.gg_per_legend_just(x)
+  grid::grid.newpage()
+  grid::grid.draw(g)
+  invisible(x)
+}
+
+#' @export
+plot.gg_per_legend_just <- function(x, ...) {
+  print.gg_per_legend_just(x, ...)
+}
+
+#' @noRd
+apply_per_legend_just_to_gtable <- function(g, plot) {
+  j_map <- attr(plot, "ggguides_justifications")
+  if (length(j_map) == 0) return(g)
+
+  side_groups <- list(top = list(), bottom = list(),
+                      left = list(), right = list())
+  for (aes in names(j_map)) {
+    guide <- tryCatch(plot$guides$guides[[aes]], error = function(e) NULL)
+    pos <- if (!is.null(guide)) guide$params$position else NULL
+    if (is.character(pos) && length(pos) == 1 && pos %in% names(side_groups)) {
+      side_groups[[pos]][[aes]] <- j_map[[aes]]
+    }
+  }
+
+  for (side in names(side_groups)) {
+    if (length(side_groups[[side]]) == 0) next
+    g <- reposition_guide_box(g, side, side_groups[[side]], plot)
+  }
+  g
+}
+
+# Layout the guide-box-<side> internal gtable conforms to. ggplot2 has used
+# this 2N+3 strip pattern since 3.5 — see ggplot2 R/guides-.R::Guides$assemble().
+# A mismatch means ggplot2 changed its internal structure; we abort the
+# reposition and warn (once per session) so the caller knows the global theme
+# fallback is being used instead.
+GUIDE_BOX_LAYOUT_VERSION_TESTED <- "4.0.3"
+
+#' @noRd
+warn_layout_mismatch <- function(side, observed, expected, what) {
+  key <- "ggguides.layout_mismatch_warned"
+  if (isTRUE(getOption(key))) return(invisible())
+  options(stats::setNames(list(TRUE), key))
+  warning(
+    "ggguides per-legend justification: guide-box-", side, " ", what,
+    " is ", observed, " (expected ", expected, ") under ggplot2 ",
+    utils::packageVersion("ggplot2"),
+    ". The internal layout is not what ggguides ",
+    utils::packageVersion("ggguides"),
+    " was built for (last verified against ggplot2 ",
+    GUIDE_BOX_LAYOUT_VERSION_TESTED, "). ",
+    "Falling back to single-side global justification — multiple legends ",
+    "on the same edge may collide. Please file an issue at ",
+    "https://github.com/gcol33/ggguides/issues with your ggplot2 version.",
+    call. = FALSE
+  )
+}
+
+#' @noRd
+reposition_guide_box <- function(g, side, legends, plot) {
+  box_name <- paste0("guide-box-", side)
+  box_idx <- which(g$layout$name == box_name)
+  if (length(box_idx) == 0) return(g)
+
+  inner <- g$grobs[[box_idx]]
+  if (!inherits(inner, "gtable")) return(g)
+
+  guide_cells <- which(inner$layout$name == "guides")
+  if (length(guide_cells) == 0) return(g)
+
+  horizontal <- side %in% c("top", "bottom")
+  n_legends <- length(guide_cells)
+
+  # Only every-legend-justified groups are safe to reposition: with mixed
+  # specs we cannot tell which gtable cell corresponds to which aesthetic.
+  if (n_legends != length(legends)) return(g)
+
+  expected <- 2 * n_legends + 3
+  axis_units <- if (horizontal) inner$widths else inner$heights
+  if (length(axis_units) != expected) {
+    warn_layout_mismatch(side, length(axis_units), expected,
+                         if (horizontal) "width count" else "height count")
+    return(g)
+  }
+
+  # The outer pad cells (indices 1 and `expected`) are how ggplot2 honors
+  # legend.justification.<side> — they are always null units. If they aren't,
+  # ggplot2 has reshaped guide-box internals and we should not edit blindly.
+  # Gap cells (indices 4, 6, ...) are normally fixed cm (legend.spacing.x);
+  # we deliberately overwrite them with null to redistribute slack.
+  for (idx in c(1, expected)) {
+    u <- axis_units[[idx]]
+    if (!inherits(u, "unit") ||
+        !identical(grid::unitType(u)[1], "null")) {
+      warn_layout_mismatch(side, "non-null pad cell", "null",
+                           paste("pad at index", idx))
+      return(g)
+    }
+  }
+
+  # The gtable cells appear in the order set by assign_per_legend_order(),
+  # which is ascending target rail position.
+  raw_targets <- vapply(names(legends), function(a) {
+    to_rail_position(legends[[a]], horizontal = horizontal)
+  }, numeric(1))
+  sorted_targets <- sort(raw_targets)
+
+  start_pad <- sorted_targets[1]
+  end_pad <- 1 - sorted_targets[n_legends]
+  gaps <- if (n_legends >= 2) diff(sorted_targets) else numeric(0)
+
+  if (start_pad + sum(gaps) + end_pad <= 0) {
+    # All targets at 0 (everything at start edge): keep slack at the end so
+    # the layout doesn't degenerate to all-zero null cols.
+    end_pad <- 1
+  }
+
+  axis_units[[1]] <- grid::unit(start_pad, "null")
+  axis_units[[expected]] <- grid::unit(end_pad, "null")
+  for (i in seq_along(gaps)) {
+    axis_units[[2 * i + 2]] <- grid::unit(gaps[i], "null")
+  }
+
+  if (horizontal) inner$widths <- axis_units else inner$heights <- axis_units
+
+  # ggplot2 wraps the guide-box in a viewport whose width (or height for
+  # vertical rails) is fixed to the natural total of the legends, which
+  # collapses any null slack we just inserted. Stretch the viewport to the
+  # full panel and re-anchor it so the null cols can spread the legends.
+  inner$vp <- stretch_guide_box_vp(inner$vp, horizontal)
+
+  g$grobs[[box_idx]] <- inner
+  g
+}
+
+# Tolerantly stretch the guide-box viewport along its rail axis. Returns a
+# viewport unchanged if it doesn't expose the fields we expect, rather than
+# throwing — the visible symptom of a no-op is "legends end up at default
+# position" which is recoverable; throwing would break rendering entirely.
+#' @noRd
+stretch_guide_box_vp <- function(vp, horizontal) {
+  if (is.null(vp)) return(vp)
+  if (horizontal) {
+    if (!is.null(vp$width))         vp$width <- grid::unit(1, "npc")
+    if (!is.null(vp$x))             vp$x <- grid::unit(0.5, "npc")
+    if (is.numeric(vp$valid.just) && length(vp$valid.just) >= 1)
+      vp$valid.just[1] <- 0.5
+    if (is.numeric(vp$justification) && length(vp$justification) >= 1)
+      vp$justification[1] <- 0.5
+  } else {
+    if (!is.null(vp$height))        vp$height <- grid::unit(1, "npc")
+    if (!is.null(vp$y))             vp$y <- grid::unit(0.5, "npc")
+    if (is.numeric(vp$valid.just) && length(vp$valid.just) >= 2)
+      vp$valid.just[2] <- 0.5
+    if (is.numeric(vp$justification) && length(vp$justification) >= 2)
+      vp$justification[2] <- 0.5
+  }
+  vp
+}
+
+# Convert a justification spec to a fractional position along the rail.
+# Horizontal rail: 0 = left, 1 = right. Vertical rail: 0 = top, 1 = bottom
+# (gtable rows grow downward, so this matches the row indexing).
+#' @noRd
+to_rail_position <- function(j, horizontal) {
+  if (is.numeric(j) && length(j) == 1) {
+    j <- max(0, min(1, j))
+    # ggplot2 numeric justification: 0 = bottom for vertical rails. Invert
+    # so vertical positions match top-to-bottom row order.
+    if (!horizontal) j <- 1 - j
+    return(j)
+  }
+  if (is.character(j) && length(j) == 1) {
+    if (horizontal) {
+      switch(j,
+        "left" = 0, "right" = 1, "center" = 0.5,
+        stop("invalid horizontal justification: ", j, call. = FALSE))
+    } else {
+      switch(j,
+        "top" = 0, "bottom" = 1, "center" = 0.5,
+        stop("invalid vertical justification: ", j, call. = FALSE))
+    }
+  } else {
+    stop("justification must be a single character or numeric value",
+         call. = FALSE)
   }
 }
 

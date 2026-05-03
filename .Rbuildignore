@@ -12,3 +12,4 @@
 ^\.github$
 ^docs$
 ^pkgdown$
+^dev_notes$

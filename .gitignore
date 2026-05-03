@@ -38,4 +38,5 @@ cran-comments.md
 build_site.R
 FEATURES.md
 ROADMAP.md
+dev_notes/
 *.tar.gz

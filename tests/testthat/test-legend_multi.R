@@ -238,3 +238,100 @@ test_that("legend_style(justification=) without by sets axis-appropriate slots",
   expect_null(t$legend.justification.left)
   expect_null(t$legend.justification.right)
 })
+
+test_that("per-legend justification stashes metadata and tags the plot", {
+  # The render-time gtable post-processor reads `ggguides_justifications`
+  # and dispatches via the gg_per_legend_just S3 class. Without the stash,
+  # two legends sharing a side would collide on the global theme write.
+  p <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl), size = hp)) +
+    geom_point() +
+    legend_top(by = "colour") + legend_top(by = "size") +
+    legend_style(by = "colour", justification = "left") +
+    legend_style(by = "size",   justification = "right")
+  j <- attr(p, "ggguides_justifications")
+  expect_equal(j$colour, "left")
+  expect_equal(j$size,   "right")
+  expect_true(inherits(p, "gg_per_legend_just"))
+})
+
+test_that("explicit guide_legend(order=) is respected and warns about justification", {
+  # If the user already pinned an order on a guide that also has a per-legend
+  # justification, we must not silently overwrite their order. Skip rail-
+  # position reordering on that side and warn so they can resolve the conflict.
+  p <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl), fill = factor(gear))) +
+    geom_point(shape = 21) +
+    legend_top(by = "colour") + legend_top(by = "fill") +
+    legend_style(by = "colour", justification = "left") +
+    legend_style(by = "fill",   justification = "right")
+  # Simulate user setting order directly on a guide that retained position
+  # (the cleanest way to construct this state without ggplot2's guides()
+  # call wiping the position).
+  p$guides$guides[["colour"]]$params$order <- 2L
+  expect_warning(
+    prepared <- ggguides:::assign_per_legend_order(p),
+    "guide_legend\\(order"
+  )
+  expect_equal(prepared$guides$guides[["colour"]]$params$order, 2L)
+})
+
+test_that("layout-shape mismatch falls back to global theme with a warning", {
+  options(ggguides.layout_mismatch_warned = NULL)
+  on.exit(options(ggguides.layout_mismatch_warned = NULL))
+  # Construct a minimal gtable shaped like guide-box-top but with the wrong
+  # number of width columns. The post-processor must refuse to edit and warn.
+  fake <- gtable::gtable(widths = grid::unit(rep(1, 4), "null"),
+                         heights = grid::unit(1, "cm"),
+                         name = "fake")
+  fake <- gtable::gtable_add_grob(fake, grid::nullGrob(), t = 1, l = 2,
+                                  name = "guides")
+  fake <- gtable::gtable_add_grob(fake, grid::nullGrob(), t = 1, l = 3,
+                                  name = "guides")
+  parent <- gtable::gtable(widths = grid::unit(1, "null"),
+                           heights = grid::unit(1, "null"))
+  parent <- gtable::gtable_add_grob(parent, fake, t = 1, l = 1,
+                                    name = "guide-box-top")
+  expect_warning(
+    out <- ggguides:::reposition_guide_box(parent, "top",
+      list(colour = "left", fill = "right"), NULL),
+    "guide-box-top"
+  )
+  # No edit happened — same widths back.
+  inner_out <- out$grobs[[1]]
+  expect_equal(length(inner_out$widths), 4)
+})
+
+test_that("stretch_guide_box_vp tolerates viewports without our fields", {
+  # A viewport that only exposes name (no width/x/just): stretch should leave
+  # it intact rather than crash.
+  vp <- grid::viewport(name = "guides")
+  vp$width <- NULL; vp$x <- NULL
+  vp$valid.just <- NULL; vp$justification <- NULL
+  out <- ggguides:::stretch_guide_box_vp(vp, horizontal = TRUE)
+  expect_identical(out$name, "guides")
+})
+
+test_that("two legends on the same edge get independent rail positions", {
+  # The pre-fix bug: legend_style(by = 'fill', justification = 'right')
+  # overwrote legend_style(by = 'colour', justification = 'left') because
+  # both wrote to theme(legend.justification.top = ...). After the fix,
+  # the gtable post-processor places each legend at its requested fraction
+  # of the rail, so they no longer collide.
+  p <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl), fill = factor(gear))) +
+    geom_point(shape = 21) +
+    legend_top(by = "colour") + legend_top(by = "fill") +
+    legend_style(by = "colour", justification = "left") +
+    legend_style(by = "fill",   justification = "right")
+  g <- ggguides:::ggplotGrob.gg_per_legend_just(p)
+  box_idx <- which(g$layout$name == "guide-box-top")
+  expect_length(box_idx, 1)
+  inner <- g$grobs[[box_idx]]
+  # 7-column layout: pad, 0pt, leg, gap, leg, 0pt, pad — slack distribution
+  # should put 0null on each end and 1null in the middle gap.
+  expect_length(inner$widths, 7)
+  expect_equal(as.numeric(inner$widths[[1]]), 0)
+  expect_equal(as.numeric(inner$widths[[7]]), 0)
+  expect_equal(as.numeric(inner$widths[[4]]), 1)
+  # Viewport must be stretched to full panel width or the null cols get
+  # collapsed by ggplot2's natural-width viewport on the guide-box.
+  expect_equal(as.numeric(inner$vp$width), 1)
+})
