@@ -13,3 +13,4 @@
 ^docs$
 ^pkgdown$
 ^dev_notes$
+^\.code-review-graph$

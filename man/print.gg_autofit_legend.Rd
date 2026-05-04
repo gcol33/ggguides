@@ -2,7 +2,7 @@
 % Please edit documentation in R/legend_style.R
 \name{print.gg_autofit_legend}
 \alias{print.gg_autofit_legend}
-\title{Print method for auto-fit legend plots (90° rotation)}
+\title{Print method for auto-fit legend plots (90 deg rotation)}
 \usage{
 \method{print}{gg_autofit_legend}(x, ...)
 }
@@ -16,6 +16,6 @@ Invisibly returns the input object. Called for the side effect of
 rendering the plot with auto-fitted and centered legend.
 }
 \description{
-Print method for auto-fit legend plots (90° rotation)
+Print method for auto-fit legend plots (90 deg rotation)
 }
 \keyword{internal}

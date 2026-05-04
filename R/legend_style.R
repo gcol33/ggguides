@@ -55,7 +55,7 @@ ggplot_add.legend_style_centered <- function(object, plot, ...) {
   plot <- plot + object$theme
 
   # Mark this plot for title centering at render time
-  # For 90° rotation, also mark for auto-fit
+  # For 90 deg rotation, also mark for auto-fit
   if (!is.null(object$angle) && abs(object$angle) == 90) {
     class(plot) <- c("gg_autofit_legend", class(plot))
   } else {
@@ -103,7 +103,7 @@ ggplotGrob.gg_centered_title <- function(x) {
   center_legend_title(x)
 }
 
-#' Print method for auto-fit legend plots (90° rotation)
+#' Print method for auto-fit legend plots (90 deg rotation)
 #' @param x A gg_autofit_legend object
 #' @param ... Additional arguments (ignored)
 #' @return Invisibly returns the input object. Called for the side effect of
@@ -405,7 +405,7 @@ legend_style <- function(
   }
 
   # --- Key styling ---
-  # For 90° rotation, auto-set key_height so labels don't overlap vertically
+  # For 90 deg rotation, auto-set key_height so labels don't overlap vertically
   # Auto-fit will handle wrapping at render time
   if (!is.null(angle) && abs(angle) == 90 && is.null(key_height)) {
     text_size <- if (!is.null(size)) size else 11
@@ -473,7 +473,7 @@ legend_style <- function(
   theme_obj <- do.call(theme, args)
 
   # When angle is set, return a custom object that will apply title centering
-  # and auto-fit for 90° rotation
+  # and auto-fit for 90 deg rotation
   if (!is.null(angle)) {
     result <- structure(
       list(theme = theme_obj, angle = angle),
@@ -717,7 +717,7 @@ build_guide_with_style <- function(
   }
 
   # --- Key styling ---
-  # For 90° rotation, auto-set key_height so labels don't overlap vertically
+  # For 90 deg rotation, auto-set key_height so labels don't overlap vertically
   if (!is.null(angle) && abs(angle) == 90 && is.null(key_height)) {
     text_size <- if (!is.null(size)) size else 11
     key_height <- text_size * 0.025 * 8
@@ -764,7 +764,7 @@ build_guide_with_style <- function(
   }
 
   # Build embedded theme (justification is applied separately at
-  # ggplot_add time — ggplot2's guide_legend(theme = ...) does not consult
+  # ggplot_add time -- ggplot2's guide_legend(theme = ...) does not consult
   # legend.justification.{side} for the guide it wraps, so we must route
   # it to a whole-plot theme keyed on the guide's resolved position).
   embedded_theme <- if (length(theme_args) > 0) {
@@ -828,7 +828,7 @@ ggplot_add.ggguides_guide_update <- function(object, plot, ...) {
 
   # Per-guide justification needs two paths:
   #
-  #  1. Theme write — sets legend.justification.<side> globally so single-
+  #  1. Theme write -- sets legend.justification.<side> globally so single-
   #     legend-per-side cases work via ggplot2's native layout. This is the
   #     v1.1.9 behavior; kept as a fallback. Two legends on the same side
   #     overwrite each other here, which is why path 2 exists.
@@ -875,7 +875,7 @@ store_per_legend_justification <- function(plot, by, j) {
 # =============================================================================
 #
 # ggplot2's legend.justification.<side> is a single global theme element, so
-# two legends on the same edge can only share one justification — the last
+# two legends on the same edge can only share one justification -- the last
 # write wins. To let users pin (e.g.) colour to the left of the top edge and
 # fill to the right of the same edge, we tag the plot at add-time and rewrite
 # the guide-box-<side> internal gtable here. Each guide-box is laid out as
@@ -885,10 +885,17 @@ store_per_legend_justification <- function(plot, by, j) {
 # (cols for top/bottom, rows for left/right). Reshaping the pad/gap null
 # units controls each legend's fractional position along the rail.
 
+#' Convert per-legend-justification plot to gtable
+#' @param x A gg_per_legend_just object
+#' @return A gtable object (grob table) with per-legend justifications applied,
+#'   suitable for rendering with \code{grid::grid.draw()} or saving with
+#'   \code{ggplot2::ggsave()}.
+#' @method ggplotGrob gg_per_legend_just
+#' @keywords internal
 #' @export
 ggplotGrob.gg_per_legend_just <- function(x) {
   # Make sure the gtable ordering matches the requested justification ordering
-  # before ggplot2 builds — ggplot2's intrinsic guide order may not match what
+  # before ggplot2 builds -- ggplot2's intrinsic guide order may not match what
   # the user wrote (e.g. they want colour on the left of the top edge but
   # ggplot2 places fill first), and the post-processor below only redistributes
   # slack, it does not swap legend cells.
@@ -916,7 +923,7 @@ assign_per_legend_order <- function(plot) {
         !pos %in% c("top", "bottom", "left", "right")) next
     user_order <- guide$params$order
     if (!is.null(user_order) && is.numeric(user_order) && user_order != 0) {
-      # User explicitly set order via legend_order() or guides() — respect
+      # User explicitly set order via legend_order() or guides() -- respect
       # it and skip rail-position-based reordering for this side. The
       # post-processor's slack distribution still runs.
       user_orders[[pos]] <- TRUE
@@ -984,7 +991,7 @@ apply_per_legend_just_to_gtable <- function(g, plot) {
 }
 
 # Layout the guide-box-<side> internal gtable conforms to. ggplot2 has used
-# this 2N+3 strip pattern since 3.5 — see ggplot2 R/guides-.R::Guides$assemble().
+# this 2N+3 strip pattern since 3.5 -- see ggplot2 R/guides-.R::Guides$assemble().
 # A mismatch means ggplot2 changed its internal structure; we abort the
 # reposition and warn (once per session) so the caller knows the global theme
 # fallback is being used instead.
@@ -1003,7 +1010,7 @@ warn_layout_mismatch <- function(side, observed, expected, what) {
     utils::packageVersion("ggguides"),
     " was built for (last verified against ggplot2 ",
     GUIDE_BOX_LAYOUT_VERSION_TESTED, "). ",
-    "Falling back to single-side global justification — multiple legends ",
+    "Falling back to single-side global justification -- multiple legends ",
     "on the same edge may collide. Please file an issue at ",
     "https://github.com/gcol33/ggguides/issues with your ggplot2 version.",
     call. = FALSE
@@ -1038,7 +1045,7 @@ reposition_guide_box <- function(g, side, legends, plot) {
   }
 
   # The outer pad cells (indices 1 and `expected`) are how ggplot2 honors
-  # legend.justification.<side> — they are always null units. If they aren't,
+  # legend.justification.<side> -- they are always null units. If they aren't,
   # ggplot2 has reshaped guide-box internals and we should not edit blindly.
   # Gap cells (indices 4, 6, ...) are normally fixed cm (legend.spacing.x);
   # we deliberately overwrite them with null to redistribute slack.
@@ -1089,7 +1096,7 @@ reposition_guide_box <- function(g, side, legends, plot) {
 
 # Tolerantly stretch the guide-box viewport along its rail axis. Returns a
 # viewport unchanged if it doesn't expose the fields we expect, rather than
-# throwing — the visible symptom of a no-op is "legends end up at default
+# throwing -- the visible symptom of a no-op is "legends end up at default
 # position" which is recoverable; throwing would break rendering entirely.
 #' @noRd
 stretch_guide_box_vp <- function(vp, horizontal) {
@@ -1239,7 +1246,7 @@ center_legend_title <- function(plot, position = "all") {
         title_width_cm <- nchar(title_text) * char_width_cm
 
         # Find the first label to check for overlap
-        # Labels at 45° start at the key edge and extend diagonally
+        # Labels at 45 deg start at the key edge and extend diagonally
         # The "safe zone" is approximately key_width + small buffer
         # Only wrap if title extends significantly beyond the key column
         safe_zone_cm <- key_width_cm + 0.3  # key width + small margin
