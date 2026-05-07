@@ -14,3 +14,7 @@
 ^pkgdown$
 ^dev_notes$
 ^\.code-review-graph$
+^_submit_cran\.R$
+^_submit_cran\.log$
+^_winbuilder\.R$
+^_winbuilder\.log$
