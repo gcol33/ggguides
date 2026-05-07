@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ggguides</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.9</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.10</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -60,6 +60,19 @@
       <small>Source: <a href="https://github.com/gcol33/ggguides/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.1.10" id="ggguides-1110">ggguides 1.1.10<a class="anchor" aria-label="anchor" href="#ggguides-1110"></a></h2>
+<div class="section level3">
+<h3 id="bug-fixes-1-1-10">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-1-10"></a></h3>
+<ul><li>
+<code>legend_style(by = &lt;aes&gt;, justification = ...)</code> collided when two or more legends shared the same edge. The 1.1.9 fix routed each call to a single global <code>theme(legend.justification.&lt;side&gt; = ...)</code>, so the second call overwrote the first — <code>legend_style(by = "colour", justification = "left") + legend_style(by = "fill", justification = "right")</code> on the top edge ended up with both legends pinned to the right. Per-legend justification now also stashes the requested rail position on the plot and rewrites the <code>guide-box-&lt;side&gt;</code> internal gtable at render time so each legend sits at its own fraction of the rail. The render-time path also reorders the guides so the gtable cell order matches the requested rail order. The global theme write is kept as a fallback for the single-legend case. (reported by Youtao)</li>
+</ul></div>
+<div class="section level3">
+<h3 id="internal-1-1-10">Internal<a class="anchor" aria-label="anchor" href="#internal-1-1-10"></a></h3>
+<ul><li><p>The render-time gtable post-processor checks ggplot2’s guide-box layout shape (column count and pad-cell unit type) and falls back to the previous behavior with a one-shot warning if it doesn’t match what ggguides was tested against (currently ggplot2 4.0.3) — so a future ggplot2 internal change degrades gracefully instead of producing wrong output.</p></li>
+<li><p>If a guide already has an explicit <code>guide_legend(order = N)</code> set, per-legend justification reordering on that side is skipped and a warning is emitted, so the user-supplied order is never silently overwritten.</p></li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.1.9" id="ggguides-119">ggguides 1.1.9<a class="anchor" aria-label="anchor" href="#ggguides-119"></a></h2>
 <div class="section level3">

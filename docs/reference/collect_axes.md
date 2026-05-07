@@ -39,9 +39,8 @@ When `guides = "collect"`, legends are also merged into a single shared
 legend.
 
 For cowplot: Axis alignment in cowplot requires manual use of
-[`align_plots`](https://wilkelab.org/cowplot/reference/align_plots.html)
-with `align = "h"` or `"v"`. This function does not directly support
-cowplot objects.
+`align_plots` with `align = "h"` or `"v"`. This function does not
+directly support cowplot objects.
 
 ## See also
 

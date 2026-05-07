@@ -1,5 +1,36 @@
 # Changelog
 
+## ggguides 1.1.10
+
+### Bug Fixes
+
+- `legend_style(by = <aes>, justification = ...)` collided when two or
+  more legends shared the same edge. The 1.1.9 fix routed each call to a
+  single global `theme(legend.justification.<side> = ...)`, so the
+  second call overwrote the first —
+  `legend_style(by = "colour", justification = "left") + legend_style(by = "fill", justification = "right")`
+  on the top edge ended up with both legends pinned to the right.
+  Per-legend justification now also stashes the requested rail position
+  on the plot and rewrites the `guide-box-<side>` internal gtable at
+  render time so each legend sits at its own fraction of the rail. The
+  render-time path also reorders the guides so the gtable cell order
+  matches the requested rail order. The global theme write is kept as a
+  fallback for the single-legend case. (reported by Youtao)
+
+### Internal
+
+- The render-time gtable post-processor checks ggplot2’s guide-box
+  layout shape (column count and pad-cell unit type) and falls back to
+  the previous behavior with a one-shot warning if it doesn’t match what
+  ggguides was tested against (currently ggplot2 4.0.3) — so a future
+  ggplot2 internal change degrades gracefully instead of producing wrong
+  output.
+
+- If a guide already has an explicit `guide_legend(order = N)` set,
+  per-legend justification reordering on that side is skipped and a
+  warning is emitted, so the user-supplied order is never silently
+  overwritten.
+
 ## ggguides 1.1.9
 
 ### Bug Fixes

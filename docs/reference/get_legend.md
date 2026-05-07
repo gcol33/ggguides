@@ -23,9 +23,7 @@ A grob containing the legend, or `NULL` if the plot has no legend.
 
 This function is useful for cowplot workflows where you want to manually
 position a shared legend. The extracted legend can be combined with
-plots using
-[`cowplot::plot_grid()`](https://wilkelab.org/cowplot/reference/plot_grid.html)
-or drawn directly with
+plots using `cowplot::plot_grid()` or drawn directly with
 [`grid::grid.draw()`](https://rdrr.io/r/grid/grid.draw.html).
 
 ## See also

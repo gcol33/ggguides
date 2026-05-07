@@ -1,6 +1,6 @@
-# Print method for auto-fit legend plots (90° rotation)
+# Print method for auto-fit legend plots (90 deg rotation)
 
-Print method for auto-fit legend plots (90° rotation)
+Print method for auto-fit legend plots (90 deg rotation)
 
 ## Usage
 
