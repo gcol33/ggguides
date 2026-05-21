@@ -115,7 +115,7 @@ Or install the development version from GitHub:
 
 ``` r
 
-# install.packages("pak")
+install.packages("pak")
 pak::pak("gcol33/ggguides")
 ```
 
