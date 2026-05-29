@@ -1,6 +1,6 @@
 # ggguides
 
-*the legend wandered off again*
+*rearranging the legends on a ggplot*
 
 [![CRAN status](https://www.r-pkg.org/badges/version/ggguides)](https://CRAN.R-project.org/package=ggguides)
 [![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/ggguides)](https://cran.r-project.org/package=ggguides)
