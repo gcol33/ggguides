@@ -1,7 +1,5 @@
 # ggguides
 
-> Small exact engines for scientific computing in R.
-
 *rearranging the legends on a ggplot*
 
 [![CRAN status](https://www.r-pkg.org/badges/version/ggguides)](https://CRAN.R-project.org/package=ggguides)
