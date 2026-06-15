@@ -34,20 +34,23 @@ svg.inline-svg {
 
 /* Mobile: match code block full-width behavior */
 @media (max-width: 575.98px) {
-  p:has(> svg.inline-svg), p:has(> img.r-plt) {
+  p:has(> svg.inline-svg), p:has(> img.r-plt),
+  .svg-container:not(.figure *) {
     margin-left: calc(var(--bs-gutter-x, 1.5rem) * -.5) !important;
     margin-right: calc(var(--bs-gutter-x, 1.5rem) * -.5) !important;
     width: calc(100% + var(--bs-gutter-x, 1.5rem)) !important;
     max-width: none !important;
   }
-  p > svg.inline-svg, p > img.r-plt {
+  p > svg.inline-svg, p > img.r-plt,
+  .svg-container > svg.inline-svg {
     border-radius: 0 !important;
     border: 1px solid #DFD7CA !important;
     width: 100% !important;
     max-width: none !important;
   }
   [data-bs-theme="dark"] p > svg.inline-svg,
-  [data-bs-theme="dark"] p > img.r-plt {
+  [data-bs-theme="dark"] p > img.r-plt,
+  [data-bs-theme="dark"] .svg-container > svg.inline-svg {
     border: 1px solid #495057 !important;
   }
   .section .figure, .section figure, div > div > .figure, div > div > figure {
