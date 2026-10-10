@@ -17,6 +17,17 @@ Tell it where the legend goes. `ggguides` wraps the `theme()`, `guides()`, and
 multi-panel layouts duplicate the same legend, `collect_legends()` and
 `shared_legend()` do the gtable surgery to leave one.
 
+## Installation
+
+```r
+install.packages("ggguides")            # CRAN
+
+install.packages("pak")                 # development version
+pak::pak("gcol33/ggguides")
+```
+
+## Quick start
+
 ```r
 library(ggplot2)
 library(ggguides)
@@ -123,15 +134,6 @@ directly:
 ```r
 gt <- shared_legend(p1, p2, p3, ncol = 1, position = "bottom")
 grid::grid.draw(gt)
-```
-
-## Installation
-
-```r
-install.packages("ggguides")            # CRAN
-
-install.packages("pak")                 # development version
-pak::pak("gcol33/ggguides")
 ```
 
 ## Documentation

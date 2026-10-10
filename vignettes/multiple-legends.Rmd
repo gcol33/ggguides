@@ -32,6 +32,15 @@ theme_set(
 )
 ```
 
+## Installation
+
+```{r, eval = FALSE}
+install.packages("ggguides")            # CRAN
+
+install.packages("pak")                 # development version
+pak::pak("gcol33/ggguides")
+```
+
 ## Overview
 
 When a plot maps multiple aesthetics (colour, size, shape, etc.), ggplot2 creates separate legends for each. ggguides provides functions to control these legends individually:

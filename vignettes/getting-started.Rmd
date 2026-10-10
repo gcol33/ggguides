@@ -32,6 +32,19 @@ theme_set(
 )
 ```
 
+## Installation
+
+```{r eval=FALSE}
+install.packages("ggguides")
+```
+
+Or the development version from GitHub:
+
+```{r eval=FALSE}
+# install.packages("pak")
+pak::pak("gcol33/ggguides")
+```
+
 ## Overview
 
 **ggguides** simplifies common legend operations in ggplot2. Instead of memorizing
@@ -47,19 +60,6 @@ functions to position, style, and manage legends.
 - Wrap legend entries with `legend_wrap()` for multi-column layouts
 
 - Collect legends from patchwork compositions with `collect_legends()`
-
-## Installation
-
-```{r eval=FALSE}
-install.packages("ggguides")
-```
-
-Or the development version from GitHub:
-
-```{r eval=FALSE}
-# install.packages("pak")
-pak::pak("gcol33/ggguides")
-```
 
 ## Basic Usage
 
