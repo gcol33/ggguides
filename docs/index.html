@@ -7,8 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>ggguides: Simplified Legend and Guide Alignment for ggplot2 • ggguides</title>
 <script src="lightswitch.js"></script><script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><link href="extra.css" rel="stylesheet">
 <meta property="og:title" content="ggguides: Simplified Legend and Guide Alignment for ggplot2">
@@ -16,9 +16,22 @@
 ">
 <meta property="og:description" content="One-liner functions for common legend operations in ggplot2 - positioning, styling, wrapping, and collection across multi-panel plots.
 ">
+<script>
+(function () {
+  var D = String.fromCharCode(36);
+  window.MathJax = {
+    tex: {
+      inlineMath: [[D, D], ["\\(", "\\)"]],
+      displayMath: [[D + D, D + D], ["\\[", "\\]"]]
+    },
+    chtml: { linebreaks: { automatic: true, width: "90% container" } },
+    svg: { linebreaks: { automatic: true, width: "90% container" } },
+    options: { renderActions: { addMenu: [] } }
+  };
+})();
+</script>
 </head>
 <body>
-
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -76,7 +89,19 @@
 <p><a href="https://CRAN.R-project.org/package=ggguides" class="external-link"><img src="https://www.r-pkg.org/badges/version/ggguides" alt="CRAN status"></a> <a href="https://cran.r-project.org/package=ggguides" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/grand-total/ggguides" alt="CRAN downloads"></a> <a href="https://cran.r-project.org/package=ggguides" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/ggguides" alt="Monthly downloads"></a> <a href="https://github.com/gcol33/ggguides/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/gcol33/ggguides/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a> <a href="https://app.codecov.io/gh/gcol33/ggguides" class="external-link"><img src="https://codecov.io/gh/gcol33/ggguides/graph/badge.svg" alt="Codecov test coverage"></a> <a href="https://opensource.org/licenses/MIT" class="external-link"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a></p>
 <p><strong>Named one-liners for ggplot2 legend placement, styling, and collection.</strong></p>
 <p>Tell it where the legend goes. <code>ggguides</code> wraps the <code><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme()</a></code>, <code><a href="https://ggplot2.tidyverse.org/reference/guides.html" class="external-link">guides()</a></code>, and <code><a href="https://ggplot2.tidyverse.org/reference/guide_legend.html" class="external-link">guide_legend()</a></code> calls behind readable verbs like <code><a href="reference/legend_left.html">legend_left()</a></code>, <code><a href="reference/legend_inside.html">legend_inside()</a></code>, and <code><a href="reference/legend_style.html">legend_style()</a></code>, each one a layer you add with <code>+</code>. Where multi-panel layouts duplicate the same legend, <code><a href="reference/collect_legends.html">collect_legends()</a></code> and <code><a href="reference/shared_legend.html">shared_legend()</a></code> do the gtable surgery to leave one.</p>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"ggguides"</span><span class="op">)</span>            <span class="co"># CRAN</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"pak"</span><span class="op">)</span>                 <span class="co"># development version</span></span>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"gcol33/ggguides"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="quick-start">Quick start<a class="anchor" aria-label="anchor" href="#quick-start"></a>
+</h2>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://gillescolling.com/ggguides/" class="external-link">ggguides</a></span><span class="op">)</span></span>
 <span></span>
@@ -86,11 +111,12 @@
 <span><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="reference/legend_left.html">legend_left</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="reference/legend_inside.html">legend_inside</a></span><span class="op">(</span><span class="st">"topright"</span><span class="op">)</span></span>
 <span><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="reference/legend_style.html">legend_style</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">14</span>, title_face <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span></span></code></pre></div>
+</div>
 <div class="section level2">
 <h2 id="named-verbs-over-theme-arguments">Named verbs over theme() arguments<a class="anchor" aria-label="anchor" href="#named-verbs-over-theme-arguments"></a>
 </h2>
 <p>Moving a legend to the left in base ggplot2 means setting <code>legend.position</code>, <code>legend.justification.left</code>, and <code>legend.box.just</code> so multiple legend boxes line up. The argument names are easy to forget and scattered across <code><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme()</a></code>, <code><a href="https://ggplot2.tidyverse.org/reference/guides.html" class="external-link">guides()</a></code>, and <code>scale_*()</code>. <code>ggguides</code> names the intent and sets the related arguments together:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"left"</span>,</span>
 <span>          legend.justification.left <span class="op">=</span> <span class="st">"top"</span>,</span>
 <span>          legend.box.just <span class="op">=</span> <span class="st">"left"</span><span class="op">)</span>     <span class="co"># base ggplot2</span></span>
@@ -103,7 +129,7 @@
 </h2>
 <p>A plot with several aesthetics gets several legends. ggplot2 lets them share a side; ggguides lets you pick which legend goes where, slide it along the rail, and style it without touching the others. The <code>by</code> argument targets a single aesthetic.</p>
 <p><img src="reference/figures/six_legends.svg" width="100%"></p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p6</span> <span class="op">+</span></span>
 <span>  <span class="co"># Side placement. Two legends share the top rail, two share the right.</span></span>
 <span>  <span class="fu"><a href="reference/legend_top.html">legend_top</a></span><span class="op">(</span>by <span class="op">=</span> <span class="st">"colour"</span><span class="op">)</span>    <span class="op">+</span> <span class="fu"><a href="reference/legend_top.html">legend_top</a></span><span class="op">(</span>by <span class="op">=</span> <span class="st">"fill"</span><span class="op">)</span>     <span class="op">+</span></span>
@@ -141,7 +167,7 @@
 <h2 id="shared-legends-across-panels">Shared legends across panels<a class="anchor" aria-label="anchor" href="#shared-legends-across-panels"></a>
 </h2>
 <p><code><a href="reference/collect_legends.html">collect_legends()</a></code> removes the duplicate legends a patchwork layout produces and keeps one. For stacked plots, <code>span</code> controls whether that legend centers, fills the full height, or attaches to specific rows.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com" class="external-link">patchwork</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="va">wt</span>,   color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -154,18 +180,9 @@
 <span><span class="fu"><a href="reference/collect_legends.html">collect_legends</a></span><span class="op">(</span><span class="va">stacked</span>, position <span class="op">=</span> <span class="st">"right"</span>, span <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co"># spans full height</span></span>
 <span><span class="fu"><a href="reference/collect_legends.html">collect_legends</a></span><span class="op">(</span><span class="va">stacked</span>, position <span class="op">=</span> <span class="st">"right"</span>, span <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span>  <span class="co"># attaches to rows 1-2</span></span></code></pre></div>
 <p>Without patchwork, <code><a href="reference/shared_legend.html">shared_legend()</a></code> arranges plots and draws a single legend directly:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gt</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/shared_legend.html">shared_legend</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, <span class="va">p3</span>, ncol <span class="op">=</span> <span class="fl">1</span>, position <span class="op">=</span> <span class="st">"bottom"</span><span class="op">)</span></span>
 <span><span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/grid.draw.html" class="external-link">grid.draw</a></span><span class="op">(</span><span class="va">gt</span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level2">
-<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
-</h2>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"ggguides"</span><span class="op">)</span>            <span class="co"># CRAN</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"pak"</span><span class="op">)</span>                 <span class="co"># development version</span></span>
-<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"gcol33/ggguides"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="documentation">Documentation<a class="anchor" aria-label="anchor" href="#documentation"></a>
@@ -249,7 +266,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>
@@ -259,6 +276,5 @@
 
 
 
-  
-</body>
+  </body>
 </html>
