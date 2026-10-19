@@ -1,5 +1,7 @@
 # ggguides
 
+*rearranging the legends on a ggplot*
+
 [![CRAN
 status](https://www.r-pkg.org/badges/version/ggguides)](https://CRAN.R-project.org/package=ggguides)
 [![CRAN
@@ -12,19 +14,36 @@ coverage](https://codecov.io/gh/gcol33/ggguides/graph/badge.svg)](https://app.co
 [![License:
 MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-**Simple, Intuitive Legend Control for ggplot2**
+**Named one-liners for ggplot2 legend placement, styling, and
+collection.**
 
-The `ggguides` package provides one-liner functions for common legend
-operations in ggplot2. Instead of memorizing
-[`theme()`](https://ggplot2.tidyverse.org/reference/theme.html)
-arguments and guide specifications, use readable functions like
+Tell it where the legend goes. `ggguides` wraps the
+[`theme()`](https://ggplot2.tidyverse.org/reference/theme.html),
+[`guides()`](https://ggplot2.tidyverse.org/reference/guides.html), and
+[`guide_legend()`](https://ggplot2.tidyverse.org/reference/guide_legend.html)
+calls behind readable verbs like
 [`legend_left()`](https://gcol33.github.io/ggguides/reference/legend_left.md),
-[`legend_style()`](https://gcol33.github.io/ggguides/reference/legend_style.md),
+[`legend_inside()`](https://gcol33.github.io/ggguides/reference/legend_inside.md),
 and
-[`legend_inside()`](https://gcol33.github.io/ggguides/reference/legend_inside.md)
-to position, style, and customize legends with minimal code.
+[`legend_style()`](https://gcol33.github.io/ggguides/reference/legend_style.md),
+each one a layer you add with `+`. Where multi-panel layouts duplicate
+the same legend,
+[`collect_legends()`](https://gcol33.github.io/ggguides/reference/collect_legends.md)
+and
+[`shared_legend()`](https://gcol33.github.io/ggguides/reference/shared_legend.md)
+do the gtable surgery to leave one.
 
-## Quick Start
+## Installation
+
+``` r
+
+install.packages("ggguides")            # CRAN
+
+install.packages("pak")                 # development version
+pak::pak("gcol33/ggguides")
+```
+
+## Quick start
 
 ``` r
 
@@ -34,23 +53,40 @@ library(ggguides)
 p <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
   geom_point(size = 3)
 
-# Position legends
 p + legend_left()
 p + legend_inside("topright")
-
-# Style legends
 p + legend_style(size = 14, title_face = "bold")
-
-# Combine freely
-p + legend_bottom() + legend_style(background = "grey95")
 ```
 
-## Example
+## Named verbs over theme() arguments
 
-Six legends on four sides, each one positioned and styled independently.
-ggplot2 lets several legends share a side; ggguides lets you pick which
-legend goes where, slide it along the rail, and style it without
-touching the others.
+Moving a legend to the left in base ggplot2 means setting
+`legend.position`, `legend.justification.left`, and `legend.box.just` so
+multiple legend boxes line up. The argument names are easy to forget and
+scattered across
+[`theme()`](https://ggplot2.tidyverse.org/reference/theme.html),
+[`guides()`](https://ggplot2.tidyverse.org/reference/guides.html), and
+`scale_*()`. `ggguides` names the intent and sets the related arguments
+together:
+
+``` r
+
+p + theme(legend.position = "left",
+          legend.justification.left = "top",
+          legend.box.just = "left")     # base ggplot2
+
+p + legend_left(justification = "top")  # ggguides
+```
+
+Each function returns an ordinary ggplot2 layer, so they compose like
+any other `+` term and stack with your existing theme.
+
+## One legend per aesthetic, placed where you want
+
+A plot with several aesthetics gets several legends. ggplot2 lets them
+share a side; ggguides lets you pick which legend goes where, slide it
+along the rail, and style it without touching the others. The `by`
+argument targets a single aesthetic.
 
 ![](reference/figures/six_legends.svg)
 
@@ -63,15 +99,15 @@ p6 +
   legend_bottom(by = "shape")  + legend_left(by = "linetype") +
 
   # Slide each one along its rail.
-  legend_style(by = "colour",   justification = "left")   +
-  legend_style(by = "fill",     justification = "right")  +
-  legend_style(by = "size",     justification = "top")    +
-  legend_style(by = "alpha",    justification = "bottom") +
+  legend_style(by = "colour", justification = "left")   +
+  legend_style(by = "fill",   justification = "right")  +
+  legend_style(by = "size",   justification = "top")    +
+  legend_style(by = "alpha",  justification = "bottom") +
 
-  # Appearance (bold titles, smaller keys, smaller text, forced direction).
+  # Appearance per legend.
   legend_style(by = "colour", title_face = "bold",
                key_width = 0.4, key_height = 0.4) +
-  legend_style(by = "size",   title_size = 9, size = 8)  +
+  legend_style(by = "size",   title_size = 9, size = 8) +
   legend_style(by = "shape",  direction = "horizontal")
 ```
 
@@ -79,470 +115,77 @@ p6 +
 is the intended shape. Full walkthrough in the [Multiple Legends
 vignette](https://gillescolling.com/ggguides/articles/multiple-legends.html#six-legends-stacked-per-side).
 
-## Statement of Need
+## What’s in the box
 
-Legend customization in ggplot2 often requires verbose
-[`theme()`](https://ggplot2.tidyverse.org/reference/theme.html) calls
-with non-obvious argument names (`legend.position`,
-`legend.justification`, `legend.box.just`), and guide specifications
-scattered across
-[`guides()`](https://ggplot2.tidyverse.org/reference/guides.html) and
-`scale_*()` functions. Common tasks like positioning a legend inside the
-plot, styling the legend box, or managing multiple legends require
-looking up documentation repeatedly.
-
-`ggguides` addresses this by providing:
-
-- **Readable function names** that describe what they do
-  ([`legend_left()`](https://gcol33.github.io/ggguides/reference/legend_left.md),
-  [`legend_inside()`](https://gcol33.github.io/ggguides/reference/legend_inside.md),
-  [`legend_reverse()`](https://gcol33.github.io/ggguides/reference/legend_reverse.md))
-- **Sensible defaults** that handle related settings together (e.g.,
-  [`legend_left()`](https://gcol33.github.io/ggguides/reference/legend_left.md)
-  sets position, justification, and box alignment)
-- **Consistent API** across positioning, styling, and multi-legend
-  operations
-- **Patchwork integration** for multi-panel figures with shared legends
-
-## Installation
-
-``` r
-
-install.packages("ggguides")
-```
-
-Or install the development version from GitHub:
-
-``` r
-
-install.packages("pak")
-pak::pak("gcol33/ggguides")
-```
-
-## Features
-
-### Position Functions
-
-- **[`legend_left()`](https://gcol33.github.io/ggguides/reference/legend_left.md)
+- **Placement**:
+  [`legend_left()`](https://gcol33.github.io/ggguides/reference/legend_left.md),
+  [`legend_right()`](https://gcol33.github.io/ggguides/reference/legend_right.md),
+  [`legend_top()`](https://gcol33.github.io/ggguides/reference/legend_top.md),
+  [`legend_bottom()`](https://gcol33.github.io/ggguides/reference/legend_bottom.md),
+  [`legend_inside()`](https://gcol33.github.io/ggguides/reference/legend_inside.md)
+  (corner shortcuts or `x`/`y` coordinates),
+  [`legend_none()`](https://gcol33.github.io/ggguides/reference/legend_none.md).
+- **Styling**:
+  [`legend_style()`](https://gcol33.github.io/ggguides/reference/legend_style.md)
+  for size, font, background, border, and margins;
+  [`legend_wrap()`](https://gcol33.github.io/ggguides/reference/legend_wrap.md)
+  for columns or rows;
+  [`legend_reverse()`](https://gcol33.github.io/ggguides/reference/legend_reverse.md)
+  and
+  [`legend_order()`](https://gcol33.github.io/ggguides/reference/legend_order.md)
+  for entry order;
+  [`legend_keys()`](https://gcol33.github.io/ggguides/reference/legend_keys.md);
+  [`colorbar_style()`](https://gcol33.github.io/ggguides/reference/colorbar_style.md)
+  for continuous scales.
+- **Multiple legends**:
+  [`legend_hide()`](https://gcol33.github.io/ggguides/reference/legend_hide.md)
   /
-  [`legend_right()`](https://gcol33.github.io/ggguides/reference/legend_right.md)**:
-  Side positioning with proper alignment
-- **[`legend_top()`](https://gcol33.github.io/ggguides/reference/legend_top.md)
-  /
-  [`legend_bottom()`](https://gcol33.github.io/ggguides/reference/legend_bottom.md)**:
-  Horizontal layout with optional plot alignment
-- **[`legend_inside()`](https://gcol33.github.io/ggguides/reference/legend_inside.md)**:
-  Position inside plot using coordinates or shortcuts (`"topright"`,
-  `"bottomleft"`, etc.)
-- **[`legend_none()`](https://gcol33.github.io/ggguides/reference/legend_none.md)**:
-  Remove legend entirely
-
-### Style Functions
-
-- **[`legend_style()`](https://gcol33.github.io/ggguides/reference/legend_style.md)**:
-  Comprehensive styling (size, font, background, borders, margins)
-- **[`legend_wrap()`](https://gcol33.github.io/ggguides/reference/legend_wrap.md)**:
-  Wrap entries into columns or rows
-- **[`legend_reverse()`](https://gcol33.github.io/ggguides/reference/legend_reverse.md)**:
-  Reverse entry order
-- **[`legend_order()`](https://gcol33.github.io/ggguides/reference/legend_order.md)**:
-  Reorder legend entries
-- **[`legend_keys()`](https://gcol33.github.io/ggguides/reference/legend_keys.md)**:
-  Customize key appearance
-- **[`colorbar_style()`](https://gcol33.github.io/ggguides/reference/colorbar_style.md)**:
-  Style continuous color legends
-
-### Multiple Legend Control
-
-- **[`legend_hide()`](https://gcol33.github.io/ggguides/reference/legend_hide.md)
-  /
-  [`legend_select()`](https://gcol33.github.io/ggguides/reference/legend_select.md)**:
-  Show/hide specific legends by aesthetic
-- **[`legend_order_guides()`](https://gcol33.github.io/ggguides/reference/legend_order_guides.md)**:
-  Control display order of multiple legends
-- **[`legend_merge()`](https://gcol33.github.io/ggguides/reference/legend_merge.md)
-  /
-  [`legend_split()`](https://gcol33.github.io/ggguides/reference/legend_split.md)**:
-  Combine or separate legend entries
-- **`by` parameter**: Apply any function to specific aesthetics only
-
-### Multi-Panel Support
-
-- **[`collect_legends()`](https://gcol33.github.io/ggguides/reference/collect_legends.md)**:
-  Collect legends from patchwork compositions
-- **[`collect_axes()`](https://gcol33.github.io/ggguides/reference/collect_axes.md)**:
-  Collect axes from patchwork compositions
-- **[`shared_legend()`](https://gcol33.github.io/ggguides/reference/shared_legend.md)**:
-  Combine plots with shared legend (no patchwork required)
-- **[`get_legend()`](https://gcol33.github.io/ggguides/reference/get_legend.md)**:
-  Extract legend as standalone grob
-
-## Usage Examples
-
-### Position Helpers
-
-``` r
-
-library(ggplot2)
-library(ggguides)
-
-p <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
-  geom_point(size = 3) +
-  labs(color = "Cylinders")
-```
-
-#### `legend_left()` / `legend_right()`
-
-Position with proper alignment (sets justification and box.just
-together):
-
-``` r
-
-p + legend_left()
-p + legend_right()
-```
-
-![](reference/figures/legend_left.svg)![](reference/figures/legend_right.svg)
-
-#### `legend_top()` / `legend_bottom()`
-
-Horizontal layout with optional plot alignment:
-
-``` r
-
-p + legend_top()
-p + legend_bottom()
-
-# Align to full plot (useful with titles)
-p + labs(title = "My Title") + legend_top(align_to = "plot")
-```
-
-![](reference/figures/legend_top.svg)![](reference/figures/legend_bottom.svg)
-
-#### `legend_inside()`
-
-Position inside the plot using coordinates or shortcuts:
-
-``` r
-
-# Using shortcuts
-p + legend_inside(position = "topright")
-p + legend_inside(position = "bottomleft")
-
-# Using coordinates
-p + legend_inside(x = 0.95, y = 0.95, justification = c("right", "top"))
-
-# With custom styling
-p + legend_inside(position = "center", background = "grey95", border = "grey50")
-```
-
-![](reference/figures/legend_inside_topright.svg)![](reference/figures/legend_inside_bottomleft.svg)
-
-#### `legend_none()`
-
-Remove the legend entirely:
-
-``` r
-
-p + legend_none()
-```
-
-![](reference/figures/legend_none.svg)
-
-------------------------------------------------------------------------
-
-### Style Helpers
-
-#### `legend_style()`
-
-Comprehensive styling in one call:
-
-``` r
-
-# Change font size - affects both title and labels
-p + legend_style(size = 14)
-
-# Change font family
-p + legend_style(family = "serif")
-p + legend_style(family = "mono")
-
-# Combine size and family
-p + legend_style(size = 14, family = "serif")
-```
-
-![](reference/figures/legend_style_size.svg)![](reference/figures/legend_style_font.svg)
-
-``` r
-
-# Full styling with title emphasis
-p + legend_style(
-  size = 12,
-  title_size = 14,
-  title_face = "bold",
-  key_width = 1.5,
-  background = "grey95",
-  background_color = "grey70",
-  margin = 0.3
-)
-```
-
-![](reference/figures/legend_style_full.svg)
-
-#### `legend_wrap()`
-
-Wrap legend entries into columns or rows:
-
-``` r
-
-ggplot(mpg, aes(displ, hwy, color = class)) +
-  geom_point() +
-  legend_wrap(ncol = 2)
-
-# Or by rows
-ggplot(mpg, aes(displ, hwy, color = class)) +
-  geom_point() +
-  legend_wrap(nrow = 2)
-```
-
-![](reference/figures/legend_wrap_ncol2.svg)![](reference/figures/legend_wrap_nrow2.svg)
-
-#### `legend_reverse()`
-
-Reverse legend entry order:
-
-``` r
-
-p + legend_reverse()
-```
-
-![](reference/figures/legend_reverse.svg)
-
-------------------------------------------------------------------------
-
-### Multiple Legends
-
-When a plot has multiple aesthetics, control each legend separately:
-
-#### `legend_hide()` / `legend_select()`
-
-Hide specific legends or keep only certain ones:
-
-``` r
-
-# Plot with multiple aesthetics
-p <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl), size = hp)) +
-  geom_point() +
-  labs(color = "Cylinders", size = "Horsepower")
-
-# Hide the size legend
-p + legend_hide(size)
-
-# Keep only the colour legend
-p + legend_select(colour)
-```
-
-![](reference/figures/legend_hide_size.svg)![](reference/figures/legend_select_colour.svg)
-
-#### Position legends separately
-
-Use the `by` parameter to position legends independently:
-
-``` r
-
-# Colour legend on left, size legend at bottom
-p +
-  legend_left(by = "colour") +
-  legend_bottom(by = "size")
-```
-
-![](reference/figures/legend_position_separate.svg)
-
-#### Style legends separately
-
-Apply different styles to different legends:
-
-``` r
-
-p +
-  legend_style(title_face = "bold", by = "colour") +
-  legend_style(size = 10, by = "size")
-```
-
-![](reference/figures/legend_style_separate.svg)
-
-#### `legend_order_guides()`
-
-Control the display order of multiple legends:
-
-``` r
-
-# Size legend first, then colour
-p + legend_order_guides(size = 1, colour = 2)
-```
-
-![](reference/figures/legend_order_guides.svg)
-
-------------------------------------------------------------------------
-
-### Patchwork Integration
-
-#### `collect_legends()`
-
-Collect legends from patchwork compositions:
+  [`legend_select()`](https://gcol33.github.io/ggguides/reference/legend_select.md)
+  to drop or keep legends by aesthetic,
+  [`legend_order_guides()`](https://gcol33.github.io/ggguides/reference/legend_order_guides.md)
+  for display order, and the `by` argument on every placement and style
+  function.
+- **Multi-panel**:
+  [`collect_legends()`](https://gcol33.github.io/ggguides/reference/collect_legends.md)
+  and
+  [`collect_axes()`](https://gcol33.github.io/ggguides/reference/collect_axes.md)
+  for patchwork compositions,
+  [`shared_legend()`](https://gcol33.github.io/ggguides/reference/shared_legend.md)
+  to combine plots with one legend without patchwork, and
+  [`get_legend()`](https://gcol33.github.io/ggguides/reference/get_legend.md)
+  to pull a legend out as a standalone grob for cowplot or base grid.
+
+## Shared legends across panels
+
+[`collect_legends()`](https://gcol33.github.io/ggguides/reference/collect_legends.md)
+removes the duplicate legends a patchwork layout produces and keeps one.
+For stacked plots, `span` controls whether that legend centers, fills
+the full height, or attaches to specific rows.
 
 ``` r
 
 library(patchwork)
 
-p1 <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
-  geom_point() + labs(title = "Plot 1")
-p2 <- ggplot(mtcars, aes(mpg, hp, color = factor(cyl))) +
-  geom_point() + labs(title = "Plot 2")
+p1 <- ggplot(mtcars, aes(mpg, wt,   color = factor(cyl))) + geom_point()
+p2 <- ggplot(mtcars, aes(mpg, hp,   color = factor(cyl))) + geom_point()
+p3 <- ggplot(mtcars, aes(mpg, disp, color = factor(cyl))) + geom_point()
 
-# Without collection (duplicate legends)
-p1 | p2
-
-# With collection
-collect_legends(p1 | p2)
-
-# Position at bottom
-collect_legends(p1 | p2, position = "bottom")
-```
-
-![](reference/figures/patchwork_no_collect.svg)
-
-![](reference/figures/patchwork_collect.svg)
-
-#### Height Spanning
-
-For stacked plots, use `span = TRUE` to make the legend span the full
-height. Using different plot heights makes the spanning behavior more
-visible:
-
-``` r
-
-library(patchwork)
-
-p3 <- ggplot(mtcars, aes(mpg, disp, color = factor(cyl))) +
-  geom_point() + labs(title = "Plot 3")
-
-# Stack with different heights: 4, 2, 1
 stacked <- (p1 / p2 / p3) + plot_layout(heights = c(4, 2, 1))
 
-# Default: legend centered
-collect_legends(stacked, position = "right")
-
-# With spanning: legend fills full height
-gt <- collect_legends(stacked, position = "right", span = TRUE)
-grid::grid.draw(gt)
+collect_legends(stacked, position = "right")              # centered
+collect_legends(stacked, position = "right", span = TRUE) # spans full height
+collect_legends(stacked, position = "right", span = 1:2)  # attaches to rows 1-2
 ```
 
-![](reference/figures/patchwork_stacked_default.svg)![](reference/figures/patchwork_stacked_span.svg)
-
-#### Row-Specific Attachment
-
-Attach the legend to specific rows instead of spanning all:
+Without patchwork,
+[`shared_legend()`](https://gcol33.github.io/ggguides/reference/shared_legend.md)
+arranges plots and draws a single legend directly:
 
 ``` r
 
-# Attach legend to row 1 only (the tallest plot)
-gt <- collect_legends(stacked, position = "right", span = 1)
-grid::grid.draw(gt)
-
-# Attach legend to rows 1 and 2
-gt <- collect_legends(stacked, position = "right", span = 1:2)
-grid::grid.draw(gt)
-```
-
-![](reference/figures/patchwork_span_row1.svg)![](reference/figures/patchwork_span_row12.svg)
-
-------------------------------------------------------------------------
-
-### Combining Functions
-
-Functions compose naturally:
-
-``` r
-
-ggplot(mpg, aes(displ, hwy, color = class)) +
-  geom_point() +
-  legend_left() +
-  legend_style(size = 12, title_face = "bold", background = "grey95")
-```
-
-![](reference/figures/combined_left_styled.svg)
-
-``` r
-
-ggplot(mpg, aes(displ, hwy, color = class)) +
-  geom_point() +
-  legend_wrap(ncol = 2) +
-  legend_bottom()
-```
-
-![](reference/figures/combined_wrap_bottom.svg)
-
-------------------------------------------------------------------------
-
-### cowplot / Base Grid Support
-
-ggguides also works without patchwork for cowplot users or anyone using
-base grid:
-
-#### `get_legend()`
-
-Extract a legend as a standalone grob:
-
-``` r
-
-p <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
-  geom_point() + labs(color = "Cylinders")
-
-# Extract the legend
-leg <- get_legend(p)
-
-# Use with cowplot::plot_grid() or grid::grid.draw()
-grid::grid.draw(leg)
-```
-
-![](reference/figures/get_legend.svg)
-
-#### `shared_legend()`
-
-Combine plots with a shared legend (no patchwork required):
-
-``` r
-
-p1 <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
-  geom_point() + labs(title = "Plot 1", color = "Cylinders")
-p2 <- ggplot(mtcars, aes(mpg, hp, color = factor(cyl))) +
-  geom_point() + labs(title = "Plot 2", color = "Cylinders")
-p3 <- ggplot(mtcars, aes(mpg, disp, color = factor(cyl))) +
-  geom_point() + labs(title = "Plot 3", color = "Cylinders")
-
-# Side-by-side with shared legend
-gt <- shared_legend(p1, p2, ncol = 2, position = "right")
-grid::grid.draw(gt)
-
-# Stacked with legend at bottom
 gt <- shared_legend(p1, p2, p3, ncol = 1, position = "bottom")
 grid::grid.draw(gt)
-
-# 2x2 grid
-gt <- shared_legend(p1, p2, p3, p1, ncol = 2, nrow = 2, position = "right")
-grid::grid.draw(gt)
 ```
-
-![](reference/figures/shared_legend_side.svg)
-
-![](reference/figures/shared_legend_stacked.svg)
-
-![](reference/figures/shared_legend_grid.svg)
-
-All ggguides styling functions
-([`legend_style()`](https://gcol33.github.io/ggguides/reference/legend_style.md),
-[`legend_wrap()`](https://gcol33.github.io/ggguides/reference/legend_wrap.md),
-etc.) work on individual plots regardless of layout package.
 
 ## Documentation
 

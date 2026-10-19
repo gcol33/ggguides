@@ -1,5 +1,15 @@
 # Multiple Legends
 
+## Installation
+
+``` r
+
+install.packages("ggguides")            # CRAN
+
+install.packages("pak")                 # development version
+pak::pak("gcol33/ggguides")
+```
+
 ## Overview
 
 When a plot maps multiple aesthetics (colour, size, shape, etc.),

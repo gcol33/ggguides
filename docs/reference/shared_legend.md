@@ -51,7 +51,8 @@ shared_legend(
 
 A gtable that can be drawn with
 [`grid::grid.draw()`](https://rdrr.io/r/grid/grid.draw.html) or used
-with `cowplot::ggdraw()`.
+with
+[`cowplot::ggdraw()`](https://wilkelab.org/cowplot/reference/ggdraw.html).
 
 ## Details
 

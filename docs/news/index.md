@@ -2,6 +2,8 @@
 
 ## ggguides 1.1.10
 
+CRAN release: 2026-05-07
+
 ### Bug Fixes
 
 - `legend_style(by = <aes>, justification = ...)` collided when two or

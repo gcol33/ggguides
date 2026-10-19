@@ -1,5 +1,15 @@
 # Legend Positioning
 
+## Installation
+
+``` r
+
+install.packages("ggguides")            # CRAN
+
+install.packages("pak")                 # development version
+pak::pak("gcol33/ggguides")
+```
+
 ## Overview
 
 ggguides provides position helpers that handle legend placement without

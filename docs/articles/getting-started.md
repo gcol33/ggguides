@@ -1,5 +1,20 @@
 # Getting Started with ggguides
 
+## Installation
+
+``` r
+
+install.packages("ggguides")
+```
+
+Or the development version from GitHub:
+
+``` r
+
+# install.packages("pak")
+pak::pak("gcol33/ggguides")
+```
+
 ## Overview
 
 **ggguides** simplifies common legend operations in ggplot2. Instead of
@@ -25,21 +40,6 @@ intuitive one-liner functions to position, style, and manage legends.
 
 - Collect legends from patchwork compositions with
   [`collect_legends()`](https://gcol33.github.io/ggguides/reference/collect_legends.md)
-
-## Installation
-
-``` r
-
-install.packages("ggguides")
-```
-
-Or the development version from GitHub:
-
-``` r
-
-# install.packages("pak")
-pak::pak("gcol33/ggguides")
-```
 
 ## Basic Usage
 

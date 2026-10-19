@@ -1,5 +1,15 @@
 # Styling & Customization
 
+## Installation
+
+``` r
+
+install.packages("ggguides")            # CRAN
+
+install.packages("pak")                 # development version
+pak::pak("gcol33/ggguides")
+```
+
 ## Overview
 
 ggguides provides styling functions to customize legend appearance
