@@ -7,16 +7,18 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/gcol33/ggguides/blob/HEAD/DESCRIPTION)
+[`inst/CITATION`](https://github.com/gcol33/ggguides/blob/HEAD/inst/CITATION)
 
 Colling G (2026). *ggguides: Simplified Legend and Guide Alignment for
-'ggplot2'*. R package version 1.1.10,
-<https://gillescolling.com/ggguides/>.
+ggplot2*.
+[doi:10.32614/CRAN.package.ggguides](https://doi.org/10.32614/CRAN.package.ggguides).
+R package version 1.1.10, <https://gillescolling.com/ggguides/>.
 
-    @Manual{,
-      title = {ggguides: Simplified Legend and Guide Alignment for 'ggplot2'},
+    @Manual{colling2026ggguides,
+      title = {ggguides: Simplified Legend and Guide Alignment for ggplot2},
       author = {Gilles Colling},
       year = {2026},
       note = {R package version 1.1.10},
+      doi = {10.32614/CRAN.package.ggguides},
       url = {https://gillescolling.com/ggguides/},
     }

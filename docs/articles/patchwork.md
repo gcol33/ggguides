@@ -33,7 +33,6 @@ to address these challenges.
 ``` r
 
 library(patchwork)
-#> Warning: package 'patchwork' was built under R version 4.6.1
 
 p1 <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
   geom_point() + labs(title = "Plot 1", color = "Cylinders")

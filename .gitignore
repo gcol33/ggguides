@@ -40,3 +40,6 @@ FEATURES.md
 ROADMAP.md
 dev_notes/
 *.tar.gz
+
+# Local run scripts
+.run*

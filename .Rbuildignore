@@ -18,3 +18,7 @@
 ^_submit_cran\.log$
 ^_winbuilder\.R$
 ^_winbuilder\.log$
+^README\.Rmd$
+^\.run.*$
+^sidecars$
+^CITATION\.cff$

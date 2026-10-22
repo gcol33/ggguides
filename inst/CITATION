@@ -1,0 +1,10 @@
+bibentry(
+  bibtype  = "Manual",
+  key      = "colling2026ggguides",
+  title    = paste0("ggguides: ", gsub("'", "", meta$Title)),
+  author   = person("Gilles", "Colling", comment = c(ORCID = "0000-0003-3070-6066")),
+  year     = "2026",
+  note     = paste("R package version", meta$Version),
+  doi      = "10.32614/CRAN.package.ggguides",
+  url      = "https://gillescolling.com/ggguides/"
+)
