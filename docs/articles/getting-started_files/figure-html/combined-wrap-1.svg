@@ -35,7 +35,7 @@
   </clipPath>
 </defs>
 <g clip-path='url(#cpMC4wMHw0MzIuMDB8MC4wMHwyODguMDA=)'>
-<rect x='0.000000000000032' y='0.00' width='432.00' height='288.00' style='stroke-width: 1.07; stroke: none;' /> fill: #F5F6F8;' />
+<rect x='0.000000000000032' y='0.00' width='432.00' height='288.00' style='stroke-width: 1.07; stroke: none;' />
 </g>
 <defs>
   <clipPath id='cpMzMuMTN8NDI2LjUyfDUuNDh8MTQ5LjAz'>
@@ -43,7 +43,7 @@
   </clipPath>
 </defs>
 <g clip-path='url(#cpMzMuMTN8NDI2LjUyfDUuNDh8MTQ5LjAz)'>
-<rect x='33.13' y='5.48' width='393.39' height='143.55' style='stroke-width: 1.07; stroke: none;' /> fill: #F5F6F8;' />
+<rect x='33.13' y='5.48' width='393.39' height='143.55' style='stroke-width: 1.07; stroke: none;' />
 <polyline points='33.13,130.27 426.52,130.27 ' style='stroke-width: 0.53; stroke: #FFFFFF; stroke-linecap: butt;' />
 <polyline points='33.13,89.49 426.52,89.49 ' style='stroke-width: 0.53; stroke: #FFFFFF; stroke-linecap: butt;' />
 <polyline points='33.13,48.71 426.52,48.71 ' style='stroke-width: 0.53; stroke: #FFFFFF; stroke-linecap: butt;' />
@@ -319,22 +319,22 @@
 <text x='408.64' y='160.26' text-anchor='middle' style='font-size: 0.88em;fill: #4D4D4D; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;'>7</text>
 <text x='229.82' y='172.73' text-anchor='middle' style='font-size: 1.1em; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;'>displ</text>
 <text transform='translate(13.36,77.25) rotate(-90)' text-anchor='middle' style='font-size: 1.1em; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;'>hwy</text>
-<rect x='144.94' y='186.00' width='169.76' height='96.52' style='stroke-width: 0.75; stroke: none;' /> fill: #F5F6F8;' />
-<rect x='144.94' y='186.00' width='169.76' height='96.52' style='stroke-width: 1.07; stroke: none;' /> fill: #F5F6F8;' />
+<rect x='144.94' y='186.00' width='169.76' height='96.52' style='stroke-width: 0.75; stroke: none;' />
+<rect x='144.94' y='186.00' width='169.76' height='96.52' style='stroke-width: 1.07; stroke: none;' />
 <text x='150.42' y='238.20' style='font-size: 1.1em; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;'>class</text>
-<rect x='180.96' y='191.48' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none;' /> fill: #F5F6F8;' />
+<rect x='180.96' y='191.48' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none;' />
 <circle cx='189.60' cy='200.12' r='1.95' style='stroke-width: 0.71; stroke: #F8766D; fill: #F8766D;' />
-<rect x='239.03' y='191.48' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none;' /> fill: #F5F6F8;' />
+<rect x='239.03' y='191.48' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none;' />
 <circle cx='247.67' cy='200.12' r='1.95' style='stroke-width: 0.71; stroke: #C49A00; fill: #C49A00;' />
-<rect x='180.96' y='214.24' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none;' /> fill: #F5F6F8;' />
+<rect x='180.96' y='214.24' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none;' />
 <circle cx='189.60' cy='222.88' r='1.95' style='stroke-width: 0.71; stroke: #53B400; fill: #53B400;' />
-<rect x='239.03' y='214.24' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none;' /> fill: #F5F6F8;' />
+<rect x='239.03' y='214.24' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none;' />
 <circle cx='247.67' cy='222.88' r='1.95' style='stroke-width: 0.71; stroke: #00C094; fill: #00C094;' />
-<rect x='180.96' y='237.00' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none;' /> fill: #F5F6F8;' />
+<rect x='180.96' y='237.00' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none;' />
 <circle cx='189.60' cy='245.64' r='1.95' style='stroke-width: 0.71; stroke: #00B6EB; fill: #00B6EB;' />
-<rect x='239.03' y='237.00' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none;' /> fill: #F5F6F8;' />
+<rect x='239.03' y='237.00' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none;' />
 <circle cx='247.67' cy='245.64' r='1.95' style='stroke-width: 0.71; stroke: #A58AFF; fill: #A58AFF;' />
-<rect x='180.96' y='259.76' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none;' /> fill: #F5F6F8;' />
+<rect x='180.96' y='259.76' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none;' />
 <circle cx='189.60' cy='268.40' r='1.95' style='stroke-width: 0.71; stroke: #FB61D7; fill: #FB61D7;' />
 <text x='203.72' y='203.27' style='font-size: 0.88em; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;'>2seater</text>
 <text x='261.79' y='203.27' style='font-size: 0.88em; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;'>compact</text>

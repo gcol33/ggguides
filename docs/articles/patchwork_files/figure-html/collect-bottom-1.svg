@@ -35,7 +35,7 @@
   </clipPath>
 </defs>
 <g clip-path='url(#cpMC4wMHw1MDQuMDB8MC4wMHwzNjAuMDA=)'>
-<rect x='0.00' y='0.00' width='504.00' height='360.00' style='stroke-width: 1.07; stroke: none;' /> fill: #F5F6F8;' />
+<rect x='0.00' y='0.00' width='504.00' height='360.00' style='stroke-width: 1.07; stroke: none;' />
 </g>
 <defs>
   <clipPath id='cpMzMuNzJ8NDkzLjA0fDI4LjY2fDI4My44Mw=='>
@@ -52,7 +52,7 @@
   </clipPath>
 </defs>
 <g clip-path='url(#cpNS40OHwyNDcuMTF8NS40OHwzNTQuNTI=)'>
-<rect x='5.48' y='5.48' width='241.63' height='349.04' style='stroke-width: 1.07; stroke: none;' /> fill: #F5F6F8;' />
+<rect x='5.48' y='5.48' width='241.63' height='349.04' style='stroke-width: 1.07; stroke: none;' />
 </g>
 <g clip-path='url(#cpMC4wMHw1MDQuMDB8MC4wMHwzNjAuMDA=)'>
 </g>
@@ -62,7 +62,7 @@
   </clipPath>
 </defs>
 <g clip-path='url(#cpMjQ3LjExfDQ5OC41Mnw1LjQ4fDM1NC41Mg==)'>
-<rect x='247.11' y='5.48' width='251.41' height='349.04' style='stroke-width: 1.07; stroke: none;' /> fill: #F5F6F8;' />
+<rect x='247.11' y='5.48' width='251.41' height='349.04' style='stroke-width: 1.07; stroke: none;' />
 </g>
 <g clip-path='url(#cpMC4wMHw1MDQuMDB8MC4wMHwzNjAuMDA=)'>
 </g>
@@ -72,7 +72,7 @@
   </clipPath>
 </defs>
 <g clip-path='url(#cpMzMuNzJ8MjQxLjYzfDI4LjY2fDI4My44Mw==)'>
-<rect x='33.72' y='28.66' width='207.91' height='255.17' style='stroke-width: 1.07; stroke: none;' /> fill: #F5F6F8;' />
+<rect x='33.72' y='28.66' width='207.91' height='255.17' style='stroke-width: 1.07; stroke: none;' />
 <polyline points='33.72,273.00 241.63,273.00 ' style='stroke-width: 0.53; stroke: #FFFFFF; stroke-linecap: butt;' />
 <polyline points='33.72,213.69 241.63,213.69 ' style='stroke-width: 0.53; stroke: #FFFFFF; stroke-linecap: butt;' />
 <polyline points='33.72,154.37 241.63,154.37 ' style='stroke-width: 0.53; stroke: #FFFFFF; stroke-linecap: butt;' />
@@ -157,7 +157,7 @@
   </clipPath>
 </defs>
 <g clip-path='url(#cpMjg1LjEzfDQ5My4wNHwyOC42NnwyODMuODM=)'>
-<rect x='285.13' y='28.66' width='207.91' height='255.17' style='stroke-width: 1.07; stroke: none;' /> fill: #F5F6F8;' />
+<rect x='285.13' y='28.66' width='207.91' height='255.17' style='stroke-width: 1.07; stroke: none;' />
 <polyline points='285.13,273.87 493.04,273.87 ' style='stroke-width: 0.53; stroke: #FFFFFF; stroke-linecap: butt;' />
 <polyline points='285.13,191.90 493.04,191.90 ' style='stroke-width: 0.53; stroke: #FFFFFF; stroke-linecap: butt;' />
 <polyline points='285.13,109.93 493.04,109.93 ' style='stroke-width: 0.53; stroke: #FFFFFF; stroke-linecap: butt;' />
@@ -230,14 +230,14 @@
 <text x='389.08' y='307.52' text-anchor='middle' style='font-size: 1.1em; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;'>mpg</text>
 <text transform='translate(260.47,156.24) rotate(-90)' text-anchor='middle' style='font-size: 1.1em; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;'>hp</text>
 <text x='285.13' y='20.41' style='font-size: 1.32em; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;'>Plot 2</text>
-<rect x='185.28' y='320.80' width='156.19' height='28.24' style='stroke-width: 0.75; stroke: none;' /> fill: #F5F6F8;' />
-<rect x='185.28' y='320.80' width='156.19' height='28.24' style='stroke-width: 1.07; stroke: none;' /> fill: #F5F6F8;' />
+<rect x='185.28' y='320.80' width='156.19' height='28.24' style='stroke-width: 0.75; stroke: none;' />
+<rect x='185.28' y='320.80' width='156.19' height='28.24' style='stroke-width: 1.07; stroke: none;' />
 <text x='190.76' y='338.86' style='font-size: 1.1em; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;'>Cylinders</text>
-<rect x='242.09' y='326.28' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none;' /> fill: #F5F6F8;' />
+<rect x='242.09' y='326.28' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none;' />
 <circle cx='250.73' cy='334.92' r='1.95' style='stroke-width: 0.71; stroke: #F8766D; fill: #F8766D;' />
-<rect x='275.22' y='326.28' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none;' /> fill: #F5F6F8;' />
+<rect x='275.22' y='326.28' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none;' />
 <circle cx='283.86' cy='334.92' r='1.95' style='stroke-width: 0.71; stroke: #00BA38; fill: #00BA38;' />
-<rect x='308.34' y='326.28' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none;' /> fill: #F5F6F8;' />
+<rect x='308.34' y='326.28' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none;' />
 <circle cx='316.98' cy='334.92' r='1.95' style='stroke-width: 0.71; stroke: #619CFF; fill: #619CFF;' />
 <text x='264.85' y='338.07' style='font-size: 0.88em; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;'>4</text>
 <text x='297.97' y='338.07' style='font-size: 0.88em; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;'>6</text>

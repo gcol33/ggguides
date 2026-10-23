@@ -35,7 +35,7 @@
   </clipPath>
 </defs>
 <g clip-path='url(#cpMC4wMHw0MzIuMDB8MC4wMHwyODguMDA=)'>
-<rect x='0.000000000000032' y='0.00' width='432.00' height='288.00' style='stroke-width: 1.07; stroke: none;' /> fill: #F5F6F8;' />
+<rect x='0.000000000000032' y='0.00' width='432.00' height='288.00' style='stroke-width: 1.07; stroke: none;' />
 </g>
 <defs>
   <clipPath id='cpMjguMjR8MzY0LjczfDUuNDh8MjU2LjUw'>
@@ -43,7 +43,7 @@
   </clipPath>
 </defs>
 <g clip-path='url(#cpMjguMjR8MzY0LjczfDUuNDh8MjU2LjUw)'>
-<rect x='28.24' y='5.48' width='336.50' height='251.02' style='stroke-width: 1.07; stroke: none;' /> fill: #F5F6F8;' />
+<rect x='28.24' y='5.48' width='336.50' height='251.02' style='stroke-width: 1.07; stroke: none;' />
 <polyline points='28.24,250.01 364.73,250.01 ' style='stroke-width: 0.53; stroke: #FFFFFF; stroke-linecap: butt;' />
 <polyline points='28.24,185.67 364.73,185.67 ' style='stroke-width: 0.53; stroke: #FFFFFF; stroke-linecap: butt;' />
 <polyline points='28.24,121.34 364.73,121.34 ' style='stroke-width: 0.53; stroke: #FFFFFF; stroke-linecap: butt;' />
@@ -5713,8 +5713,8 @@
 <text x='313.23' y='267.74' text-anchor='middle' style='font-size: 0.88em;fill: #4D4D4D; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;'>90</text>
 <text x='196.49' y='280.20' text-anchor='middle' style='font-size: 1.1em; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;'>waiting</text>
 <text transform='translate(13.36,130.99) rotate(-90)' text-anchor='middle' style='font-size: 1.1em; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;'>eruptions</text>
-<rect x='375.69' y='74.47' width='50.83' height='113.03' style='stroke-width: 0.75; stroke: none;' /> fill: #F5F6F8;' />
-<rect x='375.69' y='74.47' width='50.83' height='113.03' style='stroke-width: 1.07; stroke: none;' /> fill: #F5F6F8;' />
+<rect x='375.69' y='74.47' width='50.83' height='113.03' style='stroke-width: 0.75; stroke: none;' />
+<rect x='375.69' y='74.47' width='50.83' height='113.03' style='stroke-width: 1.07; stroke: none;' />
 <text x='381.17' y='88.99' style='font-size: 1.1em; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;'>density</text>
 <image width='17.28' height='86.40' x='381.17' y='95.63' preserveAspectRatio='none' xlink:href='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAEsCAYAAAACUNnVAAAAmElEQVQ4ja2UQRLDMAgDd3hk/tnX5agcknFaCoa0vnkMCEnGsL12GQhDYDpPwoDrpBFlRDWi/9Wu6AHC9FkLYLrzlhD3oJ3mDvRHRYy7IC8A7bCK8gpWKYDzeQVArDcDyD2YAnSofZvzaOA6Q7Oahp/dmRuVTQ0xU5TGP2o8Waool1obVuv1q8qP9xPvg633XlGLDtfIhNUBcBeA5ss0BXMAAAAASUVORK5CYII='/>
 <polyline points='395.00,158.60 398.45,158.60 ' style='stroke-width: 0.38; stroke: #FFFFFF; stroke-linecap: butt;' />
