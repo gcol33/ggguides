@@ -28,10 +28,16 @@ p <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
   labs(color = "Cylinders")
 
 p + legend_left() + ggtitle("Left")
+```
+
+![](positioning_files/figure-html/left-1.svg)
+
+``` r
+
 p + legend_right() + ggtitle("Right")
 ```
 
-![](positioning_files/figure-html/left-right-1.svg)![](positioning_files/figure-html/left-right-2.svg)
+![](positioning_files/figure-html/right-1.svg)
 
 ### Top and Bottom
 
@@ -41,28 +47,41 @@ oriented horizontally:
 ``` r
 
 p + legend_top() + ggtitle("Top")
+```
+
+![](positioning_files/figure-html/top-1.svg)
+
+``` r
+
 p + legend_bottom() + ggtitle("Bottom")
 ```
 
-![](positioning_files/figure-html/top-bottom-1.svg)![](positioning_files/figure-html/top-bottom-2.svg)
+![](positioning_files/figure-html/bottom-1.svg)
 
 ### Alignment with Titles
 
 Use the `align_to` parameter to control how the legend aligns with the
-plot. The difference is most visible when there’s a y-axis label:
+plot. The difference is most visible when there’s a y-axis label. By
+default the legend aligns with the panel:
 
 ``` r
 
 p_labeled <- p + labs(title = "Fuel Economy", y = "Weight (1000 lbs)")
 
-# Default: align to panel (legend aligns with the plot area)
 p_labeled + legend_top() + ggtitle("Panel alignment (default)")
+```
 
-# Align to full plot (legend spans title/axis labels too)
+![](positioning_files/figure-html/align-panel-1.svg)
+
+With `align_to = "plot"` the legend aligns with the full plot, including
+the axis title:
+
+``` r
+
 p_labeled + legend_top(align_to = "plot") + ggtitle("Plot alignment")
 ```
 
-![](positioning_files/figure-html/align-to-1.svg)![](positioning_files/figure-html/align-to-2.svg)
+![](positioning_files/figure-html/align-plot-1.svg)
 
 ## Inside Positioning
 
@@ -78,10 +97,16 @@ Available shortcuts: `"topright"`, `"topleft"`, `"bottomright"`,
 ``` r
 
 p + legend_inside(position = "topright") + ggtitle("Top right")
+```
+
+![](positioning_files/figure-html/inside-topright-1.svg)
+
+``` r
+
 p + legend_inside(position = "bottomleft") + ggtitle("Bottom left")
 ```
 
-![](positioning_files/figure-html/inside-shortcuts-1.svg)![](positioning_files/figure-html/inside-shortcuts-2.svg)
+![](positioning_files/figure-html/inside-bottomleft-1.svg)
 
 ### Using Coordinates
 
@@ -119,10 +144,16 @@ Control legend entry direction independently of position:
 ``` r
 
 p + legend_horizontal() + ggtitle("Horizontal")
+```
+
+![](positioning_files/figure-html/horizontal-1.svg)
+
+``` r
+
 p + legend_vertical() + ggtitle("Vertical")
 ```
 
-![](positioning_files/figure-html/direction-1.svg)![](positioning_files/figure-html/direction-2.svg)
+![](positioning_files/figure-html/vertical-1.svg)
 
 ### Combining Direction and Position
 

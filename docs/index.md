@@ -113,7 +113,7 @@ added as a further layer:
 
 p +
   legend_inside(position = "topright") +
-  legend_style(size = 14, title_face = "bold")
+  legend_style(size = 18, title_face = "bold")
 ```
 
 ![The same scatter plot with the colour legend inside the panel in the
@@ -162,7 +162,7 @@ the bottom and one on the left:
 ![Scatter plot of car weight against fuel economy with six legends:
 colour and fill above the panel, size and transparency on the right,
 shape below and line type on the
-left.](reference/figures/six_legends.svg)
+left.](reference/figures/README-six-legends-1.svg)
 
 ## One legend for several plots
 
@@ -178,7 +178,7 @@ library(patchwork)
 p1 <- ggplot(mtcars, aes(mpg, wt, colour = factor(cyl))) + geom_point()
 p2 <- ggplot(mtcars, aes(mpg, hp, colour = factor(cyl))) + geom_point()
 p3 <- ggplot(mtcars, aes(mpg, disp, colour = factor(cyl))) + geom_point()
-stacked <- (p1 / p2 / p3) + plot_layout(heights = c(4, 2, 1))
+stacked <- (p1 / p2 / p3) + plot_layout(heights = c(2, 1.5, 1))
 
 gt <- collect_legends(stacked, position = "right", span = TRUE)
 grid::grid.draw(gt)

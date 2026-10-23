@@ -30,14 +30,19 @@ to address these challenges.
 
 ## The Problem: Duplicate Legends
 
+Plots placed side by side get narrow panels, so the examples use three
+x-axis breaks (`x_breaks`) to keep the tick labels apart.
+
 ``` r
 
 library(patchwork)
 
+x_breaks <- scale_x_continuous(breaks = c(10, 20, 30))
+
 p1 <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
-  geom_point() + labs(title = "Plot 1", color = "Cylinders")
+  geom_point() + x_breaks + labs(title = "Plot 1", color = "Cylinders")
 p2 <- ggplot(mtcars, aes(mpg, hp, color = factor(cyl))) +
-  geom_point() + labs(title = "Plot 2", color = "Cylinders")
+  geom_point() + x_breaks + labs(title = "Plot 2", color = "Cylinders")
 
 # Default patchwork: duplicate legends
 p1 | p2
@@ -88,10 +93,10 @@ visible.
 
 # Create plots with different heights using plot_layout
 p3 <- ggplot(mtcars, aes(mpg, disp, color = factor(cyl))) +
-  geom_point() + labs(title = "Plot 3", color = "Cylinders")
+  geom_point() + x_breaks + labs(title = "Plot 3", color = "Cylinders")
 
-# Stack with different heights: 1, 1/2, 1/4
-stacked <- (p1 / p2 / p3) + plot_layout(heights = c(4, 2, 1))
+# Stack with different heights: 1, 3/4, 1/2
+stacked <- (p1 / p2 / p3) + plot_layout(heights = c(2, 1.5, 1))
 collect_legends(stacked, position = "right")
 ```
 
@@ -166,8 +171,8 @@ ggguides functions work together:
 
 ``` r
 
-p1_styled <- p1 + legend_style(size = 11, title_face = "bold")
-p2_styled <- p2 + legend_style(size = 11, title_face = "bold")
+p1_styled <- p1 + legend_style(size = 15, title_face = "bold")
+p2_styled <- p2 + legend_style(size = 15, title_face = "bold")
 
 collect_legends(p1_styled | p2_styled, position = "right")
 ```

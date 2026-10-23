@@ -13,15 +13,16 @@ vignette: >
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.width = 7,
+  fig.width = 6.5,
   fig.height = 5
 )
 library(ggguides)
 library(ggplot2)
 
-# Theme with transparent backgrounds for pkgdown light/dark mode
+# Transparent backgrounds for pkgdown light/dark mode; base_size 17 keeps
+# axis and legend text (0.8 x base_size) at 11 px or more on a phone
 theme_set(
-  theme_grey() +
+  theme_grey(base_size = 17) +
     theme(
       plot.background = element_rect(fill = "transparent", color = NA),
       panel.background = element_rect(fill = "transparent", color = NA),
@@ -55,13 +56,18 @@ ggguides provides `collect_legends()` and `collect_axes()` to address these chal
 
 ## The Problem: Duplicate Legends
 
+Plots placed side by side get narrow panels, so the examples use three
+x-axis breaks (`x_breaks`) to keep the tick labels apart.
+
 ```{r problem, fig.height=4}
 library(patchwork)
 
+x_breaks <- scale_x_continuous(breaks = c(10, 20, 30))
+
 p1 <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
-  geom_point() + labs(title = "Plot 1", color = "Cylinders")
+  geom_point() + x_breaks + labs(title = "Plot 1", color = "Cylinders")
 p2 <- ggplot(mtcars, aes(mpg, hp, color = factor(cyl))) +
-  geom_point() + labs(title = "Plot 2", color = "Cylinders")
+  geom_point() + x_breaks + labs(title = "Plot 2", color = "Cylinders")
 
 # Default patchwork: duplicate legends
 p1 | p2
@@ -94,13 +100,13 @@ Using different plot heights makes the spanning behavior more visible.
 
 ### Default: Centered
 
-```{r stacked-default, fig.height=7}
+```{r stacked-default, fig.height=8}
 # Create plots with different heights using plot_layout
 p3 <- ggplot(mtcars, aes(mpg, disp, color = factor(cyl))) +
-  geom_point() + labs(title = "Plot 3", color = "Cylinders")
+  geom_point() + x_breaks + labs(title = "Plot 3", color = "Cylinders")
 
-# Stack with different heights: 1, 1/2, 1/4
-stacked <- (p1 / p2 / p3) + plot_layout(heights = c(4, 2, 1))
+# Stack with different heights: 1, 3/4, 1/2
+stacked <- (p1 / p2 / p3) + plot_layout(heights = c(2, 1.5, 1))
 collect_legends(stacked, position = "right")
 ```
 
@@ -108,7 +114,7 @@ collect_legends(stacked, position = "right")
 
 Use `span = TRUE` to make the legend fill the full height:
 
-```{r stacked-span, fig.height=7}
+```{r stacked-span, fig.height=8}
 gt <- collect_legends(stacked, position = "right", span = TRUE)
 grid::grid.draw(gt)
 ```
@@ -117,12 +123,12 @@ grid::grid.draw(gt)
 
 Attach the legend to specific row(s) instead of spanning all:
 
-```{r span-row1, fig.height=7}
+```{r span-row1, fig.height=8}
 # Legend attached to row 1 only (the tallest plot)
 gt <- collect_legends(stacked, position = "right", span = 1)
 grid::grid.draw(gt)
 ```
-```{r span-row12, fig.height=7}
+```{r span-row12, fig.height=8}
 # Legend attached to rows 1 and 2
 gt <- collect_legends(stacked, position = "right", span = 1:2)
 grid::grid.draw(gt)
@@ -155,8 +161,8 @@ collect_axes(p_top / p_bottom)
 ggguides functions work together:
 
 ```{r combined, fig.height=5}
-p1_styled <- p1 + legend_style(size = 11, title_face = "bold")
-p2_styled <- p2 + legend_style(size = 11, title_face = "bold")
+p1_styled <- p1 + legend_style(size = 15, title_face = "bold")
+p2_styled <- p2 + legend_style(size = 15, title_face = "bold")
 
 collect_legends(p1_styled | p2_styled, position = "right")
 ```
@@ -181,11 +187,11 @@ ggguides provides cowplot-compatible functions that work without patchwork:
 ```{r cowplot-setup, include=FALSE}
 # Fresh plots for cowplot examples (not modified by patchwork)
 cp1 <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
-  geom_point() + labs(title = "Plot 1", color = "Cylinders")
+  geom_point() + x_breaks + labs(title = "Plot 1", color = "Cylinders")
 cp2 <- ggplot(mtcars, aes(mpg, hp, color = factor(cyl))) +
-  geom_point() + labs(title = "Plot 2", color = "Cylinders")
+  geom_point() + x_breaks + labs(title = "Plot 2", color = "Cylinders")
 cp3 <- ggplot(mtcars, aes(mpg, disp, color = factor(cyl))) +
-  geom_point() + labs(title = "Plot 3", color = "Cylinders")
+  geom_point() + x_breaks + labs(title = "Plot 3", color = "Cylinders")
 cp4 <- ggplot(mtcars, aes(qsec, wt, color = factor(cyl))) +
   geom_point() + labs(title = "Plot 4", color = "Cylinders")
 ```
@@ -210,7 +216,7 @@ grid::grid.newpage()
 grid::grid.draw(gt)
 ```
 
-```{r shared-legend-stacked, fig.height=6}
+```{r shared-legend-stacked, fig.height=10}
 # Stacked with legend at bottom
 gt <- shared_legend(cp1, cp2, cp3, ncol = 1, position = "bottom")
 grid::grid.newpage()

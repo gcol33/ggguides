@@ -13,15 +13,16 @@ vignette: >
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.width = 6,
-  fig.height = 4
+  fig.width = 6.5,
+  fig.height = 4.5
 )
 library(ggguides)
 library(ggplot2)
 
-# Theme with transparent backgrounds for pkgdown light/dark mode
+# Transparent backgrounds for pkgdown light/dark mode; base_size 17 keeps
+# axis and legend text (0.8 x base_size) at 11 px or more on a phone
 theme_set(
-  theme_grey() +
+  theme_grey(base_size = 17) +
     theme(
       plot.background = element_rect(fill = "transparent", color = NA),
       panel.background = element_rect(fill = "transparent", color = NA),
@@ -62,23 +63,34 @@ diving into ggplot2's theme element hierarchy. The main functions are:
 
 ### Font Size
 
-Adjust the overall text size (applies to both title and labels):
+Adjust the overall text size (applies to both title and labels). The
+plot below uses the theme's default legend text:
 
-```{r style-size, fig.show='hold', out.width='48%'}
+```{r style-size-default}
 p <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
   geom_point(size = 3) +
   labs(color = "Cylinders")
 
 p + ggtitle("Default size")
-p + legend_style(size = 14) + ggtitle("size = 14")
+```
+
+With `size = 18`, the legend title and labels are drawn at 18 points:
+
+```{r style-size}
+p + legend_style(size = 18) + ggtitle("size = 18")
 ```
 
 ### Font Family
 
-Change the font family for legend text:
+Change the font family for legend text, here to a serif font:
 
-```{r style-family, fig.show='hold', out.width='48%'}
+```{r style-family-serif}
 p + legend_style(family = "serif") + ggtitle("serif")
+```
+
+and to a monospaced font:
+
+```{r style-family-mono}
 p + legend_style(family = "mono") + ggtitle("mono")
 ```
 
@@ -88,8 +100,8 @@ Make the title stand out with separate size and face settings:
 
 ```{r style-title}
 p + legend_style(
-  size = 12,
-  title_size = 14,
+  size = 14,
+  title_size = 20,
   title_face = "bold"
 )
 ```
@@ -100,7 +112,7 @@ For legends with long category names, rotate the labels to save space:
 
 ### Basic Rotation
 
-```{r rotation-basic, fig.width=7}
+```{r rotation-basic, fig.height = 6}
 p_long <- ggplot(mpg, aes(displ, hwy, color = class)) +
   geom_point()
 
@@ -112,17 +124,26 @@ p_long + legend_style(angle = 45)
 Use 90 degrees for fully vertical text. Key height is automatically adjusted to
 prevent label overlap:
 
-```{r rotation-vertical, fig.width=7}
+```{r rotation-vertical, fig.height = 6}
 p_long + legend_style(angle = 90)
 ```
 
 ### Title Rotation
 
-Rotate the legend title independently:
+Rotate the legend title independently of the labels:
 
-```{r rotation-title, fig.show='hold', out.width='48%'}
-p_long + legend_style(title_angle = 90, title_hjust = 0.5) + ggtitle("Rotated title only")
-p_long + legend_style(angle = 45, title_angle = 90) + ggtitle("Both rotated")
+```{r rotation-title, fig.height = 6}
+p_long +
+  legend_style(title_angle = 90, title_hjust = 0.5) +
+  ggtitle("Rotated title only")
+```
+
+Title and labels can be rotated together, each by its own angle:
+
+```{r rotation-title-labels, fig.height = 6}
+p_long +
+  legend_style(angle = 45, title_angle = 90) +
+  ggtitle("Both rotated")
 ```
 
 ## Background and Border
@@ -170,8 +191,8 @@ Combine all styling options:
 
 ```{r style-full}
 p + legend_style(
-  size = 11,
-  title_size = 13,
+  size = 14,
+  title_size = 19,
   title_face = "bold",
   family = "sans",
   key_width = 1.2,
@@ -188,7 +209,7 @@ multi-row layouts.
 
 ### By Columns
 
-```{r wrap-ncol, fig.width=7}
+```{r wrap-ncol}
 ggplot(mpg, aes(displ, hwy, color = class)) +
   geom_point() +
   legend_wrap(ncol = 2)
@@ -196,17 +217,9 @@ ggplot(mpg, aes(displ, hwy, color = class)) +
 
 ### By Rows
 
-```{r wrap-nrow, fig.width=7}
-ggplot(mpg, aes(displ, hwy, color = class)) +
-  geom_point() +
-  legend_wrap(nrow = 2)
-```
+Rows suit a horizontal legend below or above the panel:
 
-### With Bottom Position
-
-Wrapping works well with horizontal legends:
-
-```{r wrap-bottom, fig.width=7}
+```{r wrap-bottom}
 ggplot(mpg, aes(displ, hwy, color = class)) +
   geom_point() +
   legend_wrap(nrow = 2) +
@@ -221,23 +234,38 @@ affecting the plot.
 
 ### Enlarging Small Points
 
-```{r keys-size, fig.show='hold', out.width='48%'}
+Points drawn at `size = 1` give legend keys of the same size:
+
+```{r keys-size-default}
 p_small <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
   geom_point(size = 1) +
   labs(color = "Cylinders")
 
 p_small + ggtitle("Small points in legend")
+```
+
+`legend_keys(size = 4)` enlarges the keys and leaves the points in the panel
+unchanged:
+
+```{r keys-size}
 p_small + legend_keys(size = 4) + ggtitle("Enlarged legend keys")
 ```
 
 ### Removing Transparency
 
-```{r keys-alpha, fig.show='hold', out.width='48%'}
+Points drawn with `alpha = 0.3` give equally faint legend keys:
+
+```{r keys-alpha-default}
 p_alpha <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
   geom_point(alpha = 0.3, size = 3) +
   labs(color = "Cylinders")
 
 p_alpha + ggtitle("Transparent legend keys")
+```
+
+`legend_keys(alpha = 1)` draws the keys opaque:
+
+```{r keys-alpha}
 p_alpha + legend_keys(alpha = 1) + ggtitle("Opaque legend keys")
 ```
 
@@ -264,8 +292,11 @@ ggplot(mtcars, aes(factor(cyl), mpg, fill = factor(cyl))) +
 
 Use named shapes for clarity instead of numeric codes:
 
-```{r keys-shape, fig.show='hold', out.width='48%'}
+```{r keys-shape-square}
 p + legend_keys(shape = "square") + ggtitle("Square")
+```
+
+```{r keys-shape-diamond}
 p + legend_keys(shape = "diamond") + ggtitle("Diamond")
 ```
 
@@ -275,14 +306,17 @@ Available shape names include: `"circle"`, `"square"`, `"diamond"`, `"triangle"`
 ### Filled Shapes with Outlines
 
 Shapes 21-25 (or names ending in `_filled`) support both outline and fill colors,
-making legends more visible against any background:
+making legends more visible against any background. A white fill with a
+colored outline works with the color mapping alone:
 
-```{r keys-outline, fig.show='hold', out.width='48%'}
-# White fill with colored outline - works with color mapping only
+```{r keys-outline-white}
 p + legend_keys(shape = "circle_filled", fill = "white", stroke = 1.5) +
   ggtitle("White fill, colored outline")
+```
 
-# Colored fill with black outline - requires mapping BOTH color and fill
+A colored fill with a black outline needs both `color` and `fill` mapped:
+
+```{r keys-outline-black}
 ggplot(mtcars, aes(mpg, wt, color = factor(cyl), fill = factor(cyl))) +
   geom_point(size = 3, shape = 21, stroke = 1) +
   legend_keys(colour = "black", stroke = 1) +
@@ -318,8 +352,11 @@ p + legend_order(c("8", "6", "4"))
 
 Apply functions like `rev` or `sort` to the current order:
 
-```{r order-rev, fig.show='hold', out.width='48%'}
+```{r order-rev}
 p + legend_order(rev) + ggtitle("Reversed")
+```
+
+```{r order-sort}
 p + legend_order(sort) + ggtitle("Sorted")
 ```
 
@@ -345,23 +382,23 @@ p + legend_reverse()
 
 All ggguides functions compose with `+`:
 
-```{r combined-styling, fig.width=7}
+```{r combined-styling}
 ggplot(mpg, aes(displ, hwy, color = class)) +
   geom_point() +
   legend_left() +
   legend_style(
-    size = 11,
+    size = 15,
     title_face = "bold",
     background = "#FFF3E0"
   )
 ```
 
-```{r combined-wrap-style, fig.width=7}
+```{r combined-wrap-style}
 ggplot(mpg, aes(displ, hwy, color = class)) +
   geom_point() +
   legend_wrap(ncol = 2) +
   legend_bottom() +
-  legend_style(size = 10, title_face = "bold")
+  legend_style(size = 14, title_face = "bold")
 ```
 
 ## Styling Continuous Color Bars
@@ -393,9 +430,18 @@ p_cont + colorbar_style(width = 10, height = 0.5, direction = "horizontal", aest
 ```
 ### Adding a Frame
 
-```{r colorbar-frame, fig.show='hold', out.width='48%'}
-p_cont + colorbar_style(frame = TRUE, aesthetic = "fill") + ggtitle("Black frame")
-p_cont + colorbar_style(frame = "#FF9800", aesthetic = "fill") + ggtitle("Orange frame")
+`frame = TRUE` draws a black frame:
+
+```{r colorbar-frame}
+p_cont + colorbar_style(frame = TRUE, aesthetic = "fill") +
+  ggtitle("Black frame")
+```
+
+A color string sets the frame color:
+
+```{r colorbar-frame-color}
+p_cont + colorbar_style(frame = "#FF9800", aesthetic = "fill") +
+  ggtitle("Orange frame")
 ```
 
 ### Removing Ticks

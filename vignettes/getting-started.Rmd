@@ -13,15 +13,16 @@ vignette: >
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.width = 6,
-  fig.height = 4
+  fig.width = 6.5,
+  fig.height = 4.5
 )
 library(ggguides)
 library(ggplot2)
 
-# Theme with transparent backgrounds for pkgdown light/dark mode
+# Transparent backgrounds for pkgdown light/dark mode; base_size 17 keeps
+# axis and legend text (0.8 x base_size) at 11 px or more on a phone
 theme_set(
-  theme_grey() +
+  theme_grey(base_size = 17) +
     theme(
       plot.background = element_rect(fill = "transparent", color = NA),
       panel.background = element_rect(fill = "transparent", color = NA),
@@ -107,13 +108,13 @@ p + legend_none()
 Use `legend_style()` to customize the legend appearance:
 
 ```{r style-size}
-p + legend_style(size = 14)
+p + legend_style(size = 18)
 ```
 
 ```{r style-full}
 p + legend_style(
-  size = 12,
-  title_size = 14,
+  size = 15,
+  title_size = 20,
   title_face = "bold",
   background = "#FFF3E0",
   background_color = "#FF9800"
@@ -138,7 +139,7 @@ ggguides functions compose naturally with the `+` operator:
 ggplot(mpg, aes(displ, hwy, color = class)) +
   geom_point() +
   legend_left() +
-  legend_style(size = 12, title_face = "bold", background = "#FFF3E0")
+  legend_style(size = 15, title_face = "bold", background = "#FFF3E0")
 ```
 
 ```{r combined-wrap}

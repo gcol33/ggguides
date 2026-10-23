@@ -46,6 +46,7 @@ p <- ggplot(mtcars, aes(mpg, wt,
                         size = hp,
                         shape = factor(am))) +
   geom_point() +
+  scale_size(breaks = c(100, 200, 300)) +
   labs(color = "Cylinders", size = "Horsepower", shape = "Transmission")
 
 p
@@ -208,7 +209,7 @@ to apply different styles to different legends:
 p +
   legend_hide(shape) +
   legend_style(title_face = "bold", background = "grey95", by = "colour") +
-  legend_style(size = 10, by = "size")
+  legend_style(size = 16, by = "size")
 ```
 
 ![](multiple-legends_files/figure-html/style-separately-1.svg)
@@ -219,14 +220,14 @@ All functions work together:
 
 ``` r
 
-# Complex example: hide shape, position colour on left with bold title,
-# position size at bottom with smaller text
+# Hide shape, put colour on the left with a large bold title,
+# lay size out horizontally at the bottom
 p +
   legend_hide(shape) +
   legend_left(by = "colour") +
-  legend_style(title_face = "bold", title_size = 14, by = "colour") +
+  legend_style(title_face = "bold", title_size = 20, by = "colour") +
   legend_bottom(by = "size") +
-  legend_style(size = 9, direction = "horizontal", by = "size")
+  legend_style(direction = "horizontal", by = "size")
 ```
 
 ![](multiple-legends_files/figure-html/combined-1.svg)
@@ -325,13 +326,13 @@ p6 +
   legend_style(by = "shape",    justification = "center") +
   legend_style(by = "linetype", justification = "center") +
 
-  # 3. Appearance — per-legend title weight, key size, direction, text size
-  legend_style(by = "colour",   title_face = "bold",
+  # 3. Appearance — per-legend title weight, key size, direction, title size
+  legend_style(by = "colour",   title_face = "bold", title_position = "top",
                key_width = 0.4, key_height = 0.4) +
-  legend_style(by = "fill",     title_face = "bold",
+  legend_style(by = "fill",     title_face = "bold", title_position = "top",
                key_width = 0.4, key_height = 0.4) +
-  legend_style(by = "size",     title_size = 9, size = 8)  +
-  legend_style(by = "alpha",    title_size = 9, size = 8)  +
+  legend_style(by = "size",     title_size = 14)          +
+  legend_style(by = "alpha",    title_size = 14)          +
   legend_style(by = "shape",    direction = "horizontal")  +
   legend_style(by = "linetype", direction = "vertical")    +
 
@@ -380,9 +381,10 @@ accepts (`title_face`, `title_size`, `size` for label text, `key_width`,
 `key_height`, `direction`, `background`, and so on) can be scoped to a
 single legend by adding `by = "<aes>"`. Each call tunes one legend and
 leaves the others alone, so chaining several short calls is the intended
-shape. In the example the top legends get bold titles and smaller keys,
-the right legends get smaller text, `shape` is forced horizontal so it
-fits the bottom rail, and `linetype` stays vertical for the left rail.
+shape. In the example the top legends get bold titles above smaller
+keys, the right legends get smaller titles, `shape` is forced horizontal
+so it fits the bottom rail, and `linetype` stays vertical for the left
+rail.
 
 **Step 4, padding.** `margin = c(top, right, bottom, left)` (in cm)
 moves a single legend toward or away from the panel. Pad on the side

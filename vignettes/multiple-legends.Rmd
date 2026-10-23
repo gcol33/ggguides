@@ -13,15 +13,16 @@ vignette: >
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.width = 7,
+  fig.width = 6.5,
   fig.height = 5
 )
 library(ggguides)
 library(ggplot2)
 
-# Theme with transparent backgrounds for pkgdown light/dark mode
+# Transparent backgrounds for pkgdown light/dark mode; base_size 17 keeps
+# axis and legend text (0.8 x base_size) at 11 px or more on a phone
 theme_set(
-  theme_grey() +
+  theme_grey(base_size = 17) +
     theme(
       plot.background = element_rect(fill = "transparent", color = NA),
       panel.background = element_rect(fill = "transparent", color = NA),
@@ -66,6 +67,7 @@ p <- ggplot(mtcars, aes(mpg, wt,
                         size = hp,
                         shape = factor(am))) +
   geom_point() +
+  scale_size(breaks = c(100, 200, 300)) +
   labs(color = "Cylinders", size = "Horsepower", shape = "Transmission")
 
 p
@@ -161,7 +163,7 @@ Use the `by` parameter on `legend_style()` to apply different styles to differen
 p +
   legend_hide(shape) +
   legend_style(title_face = "bold", background = "grey95", by = "colour") +
-  legend_style(size = 10, by = "size")
+  legend_style(size = 16, by = "size")
 ```
 
 ## Combining Multiple Controls
@@ -169,14 +171,14 @@ p +
 All functions work together:
 
 ```{r combined}
-# Complex example: hide shape, position colour on left with bold title,
-# position size at bottom with smaller text
+# Hide shape, put colour on the left with a large bold title,
+# lay size out horizontally at the bottom
 p +
   legend_hide(shape) +
   legend_left(by = "colour") +
-  legend_style(title_face = "bold", title_size = 14, by = "colour") +
+  legend_style(title_face = "bold", title_size = 20, by = "colour") +
   legend_bottom(by = "size") +
-  legend_style(size = 9, direction = "horizontal", by = "size")
+  legend_style(direction = "horizontal", by = "size")
 ```
 
 ## Four Legends, One per Side
@@ -191,7 +193,7 @@ When a plot has four legends and you want one on each side (top, bottom, left, r
 
 For top/bottom legends, `justification` is `"left"`, `"center"`, `"right"` (or a number in `[0, 1]`). For left/right legends, it's `"top"`, `"center"`, `"bottom"` (or a number).
 
-```{r four-sides, fig.width = 8, fig.height = 6}
+```{r four-sides, fig.height = 6.5}
 p4 <- ggplot(mtcars, aes(mpg, wt,
                          colour = factor(cyl),
                          fill   = factor(gear),
@@ -226,7 +228,7 @@ Each `legend_style(by = ...)` call is additive — you can chain as many as you 
 
 More than one legend can share a side. ggplot2 stacks them in the order it resolves them, and ggguides lets you pick which legend goes where, slide it along the rail, and style it without touching the others. The plot below has **six** legends: two on top, two on the right, one on the bottom, one on the left.
 
-```{r six-legends, fig.width = 9, fig.height = 6.5}
+```{r six-legends, fig.height = 6.5}
 p6 <- ggplot(mtcars, aes(mpg, wt)) +
   geom_smooth(aes(linetype = factor(vs)), method = "lm", se = FALSE,
               colour = "grey40") +
@@ -259,13 +261,13 @@ p6 +
   legend_style(by = "shape",    justification = "center") +
   legend_style(by = "linetype", justification = "center") +
 
-  # 3. Appearance — per-legend title weight, key size, direction, text size
-  legend_style(by = "colour",   title_face = "bold",
+  # 3. Appearance — per-legend title weight, key size, direction, title size
+  legend_style(by = "colour",   title_face = "bold", title_position = "top",
                key_width = 0.4, key_height = 0.4) +
-  legend_style(by = "fill",     title_face = "bold",
+  legend_style(by = "fill",     title_face = "bold", title_position = "top",
                key_width = 0.4, key_height = 0.4) +
-  legend_style(by = "size",     title_size = 9, size = 8)  +
-  legend_style(by = "alpha",    title_size = 9, size = 8)  +
+  legend_style(by = "size",     title_size = 14)          +
+  legend_style(by = "alpha",    title_size = 14)          +
   legend_style(by = "shape",    direction = "horizontal")  +
   legend_style(by = "linetype", direction = "vertical")    +
 
@@ -291,7 +293,7 @@ p6 +
 
 The per-guide form is what you want when different legends need different alignments. For a single alignment applied to every legend at once, use `legend_style(justification = ...)` without `by`.
 
-**Step 3, appearance.** Anything `legend_style()` accepts (`title_face`, `title_size`, `size` for label text, `key_width`, `key_height`, `direction`, `background`, and so on) can be scoped to a single legend by adding `by = "<aes>"`. Each call tunes one legend and leaves the others alone, so chaining several short calls is the intended shape. In the example the top legends get bold titles and smaller keys, the right legends get smaller text, `shape` is forced horizontal so it fits the bottom rail, and `linetype` stays vertical for the left rail.
+**Step 3, appearance.** Anything `legend_style()` accepts (`title_face`, `title_size`, `size` for label text, `key_width`, `key_height`, `direction`, `background`, and so on) can be scoped to a single legend by adding `by = "<aes>"`. Each call tunes one legend and leaves the others alone, so chaining several short calls is the intended shape. In the example the top legends get bold titles above smaller keys, the right legends get smaller titles, `shape` is forced horizontal so it fits the bottom rail, and `linetype` stays vertical for the left rail.
 
 **Step 4, padding.** `margin = c(top, right, bottom, left)` (in cm) moves a single legend toward or away from the panel. Pad on the side that faces the panel: a bottom legend uses `c(top, 0, 0, 0)`, a left legend uses `c(0, right, 0, 0)`. Without padding, legends often end up pressed against the axis text; a few tenths of a centimetre usually fixes it.
 

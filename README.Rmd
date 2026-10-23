@@ -9,12 +9,12 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/README-",
   dev = "svglite",
   fig.ext = "svg",
-  fig.width = 6,
-  fig.height = 3.6,
+  fig.width = 6.5,
+  fig.height = 4,
   out.width = "100%"
 )
 options(width = 80)
-ggplot2::theme_set(ggplot2::theme_grey(base_size = 15))
+ggplot2::theme_set(ggplot2::theme_grey(base_size = 17))
 ```
 
 # ggguides
@@ -70,7 +70,7 @@ Inside the panel, a corner is named with `position`, and the style is added as a
 ```{r inside, fig.alt = "The same scatter plot with the colour legend inside the panel in the top-right corner, its title in bold and its text larger."}
 p +
   legend_inside(position = "topright") +
-  legend_style(size = 14, title_face = "bold")
+  legend_style(size = 18, title_face = "bold")
 ```
 
 ## Compared with theme()
@@ -97,19 +97,54 @@ q + legend_top(by = "colour") + legend_right(by = "size")
 
 Calls with `by` add up, one line per legend and setting. [Multiple Legends](https://gillescolling.com/ggguides/articles/multiple-legends.html#six-legends-stacked-per-side) builds this plot with six legends, two on top, two on the right, one at the bottom and one on the left:
 
-<img src="man/figures/six_legends.svg" width="100%" alt="Scatter plot of car weight against fuel economy with six legends: colour and fill above the panel, size and transparency on the right, shape below and line type on the left.">
+```{r six-legends, echo = FALSE, message = FALSE, fig.height = 6.5, fig.alt = "Scatter plot of car weight against fuel economy with six legends: colour and fill above the panel, size and transparency on the right, shape below and line type on the left."}
+p6 <- ggplot(mtcars, aes(mpg, wt)) +
+  geom_smooth(aes(linetype = factor(vs)), method = "lm", se = FALSE,
+              colour = "grey40") +
+  geom_point(aes(colour = factor(cyl), fill = factor(gear), size = hp,
+                 alpha = qsec, shape = factor(am)),
+             stroke = 1.2) +
+  scale_shape_manual(values = c(21, 24)) +
+  labs(colour = "Cyl", fill = "Gear", size = "HP",
+       alpha = "QSec", shape = "AM", linetype = "VS")
+
+p6 +
+  legend_top(by = "colour") + legend_top(by = "fill") +
+  legend_right(by = "size") + legend_right(by = "alpha") +
+  legend_bottom(by = "shape") + legend_left(by = "linetype") +
+  legend_style(by = "colour", justification = "left") +
+  legend_style(by = "fill", justification = "right") +
+  legend_style(by = "size", justification = "top") +
+  legend_style(by = "alpha", justification = "bottom") +
+  legend_style(by = "shape", justification = "center") +
+  legend_style(by = "linetype", justification = "center") +
+  legend_style(by = "colour", title_face = "bold", title_position = "top",
+               key_width = 0.4, key_height = 0.4) +
+  legend_style(by = "fill", title_face = "bold", title_position = "top",
+               key_width = 0.4, key_height = 0.4) +
+  legend_style(by = "size", title_size = 14) +
+  legend_style(by = "alpha", title_size = 14) +
+  legend_style(by = "shape", direction = "horizontal") +
+  legend_style(by = "linetype", direction = "vertical") +
+  legend_style(by = "colour", margin = c(0, 0, 0.2, 0)) +
+  legend_style(by = "fill", margin = c(0, 0, 0.2, 0)) +
+  legend_style(by = "size", margin = c(0, 0, 0, 0.3)) +
+  legend_style(by = "alpha", margin = c(0, 0, 0, 0.3)) +
+  legend_style(by = "shape", margin = c(0.3, 0, 0, 0)) +
+  legend_style(by = "linetype", margin = c(0, 0.3, 0, 0))
+```
 
 ## One legend for several plots
 
 A patchwork layout repeats the legend of each plot. `collect_legends()` keeps one, and `span = TRUE` stretches it along the full height of stacked plots:
 
-```{r collect, fig.height = 5.5,fig.alt = "Three scatter plots of mtcars stacked vertically, of weight, horsepower and displacement against fuel economy, with one colour legend for cylinders on the right spanning all three panels."}
+```{r collect, fig.height = 8, fig.alt = "Three scatter plots of mtcars stacked vertically, of weight, horsepower and displacement against fuel economy, with one colour legend for cylinders on the right spanning all three panels."}
 library(patchwork)
 
 p1 <- ggplot(mtcars, aes(mpg, wt, colour = factor(cyl))) + geom_point()
 p2 <- ggplot(mtcars, aes(mpg, hp, colour = factor(cyl))) + geom_point()
 p3 <- ggplot(mtcars, aes(mpg, disp, colour = factor(cyl))) + geom_point()
-stacked <- (p1 / p2 / p3) + plot_layout(heights = c(4, 2, 1))
+stacked <- (p1 / p2 / p3) + plot_layout(heights = c(2, 1.5, 1))
 
 gt <- collect_legends(stacked, position = "right", span = TRUE)
 grid::grid.draw(gt)

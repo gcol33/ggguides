@@ -13,15 +13,16 @@ vignette: >
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.width = 6,
-  fig.height = 4
+  fig.width = 6.5,
+  fig.height = 4.5
 )
 library(ggguides)
 library(ggplot2)
 
-# Theme with transparent backgrounds for pkgdown light/dark mode
+# Transparent backgrounds for pkgdown light/dark mode; base_size 17 keeps
+# axis and legend text (0.8 x base_size) at 11 px or more on a phone
 theme_set(
-  theme_grey() +
+  theme_grey(base_size = 17) +
     theme(
       plot.background = element_rect(fill = "transparent", color = NA),
       panel.background = element_rect(fill = "transparent", color = NA),
@@ -52,12 +53,15 @@ and `legend.box.just` to achieve proper alignment.
 
 ### Left and Right
 
-```{r left-right, fig.show='hold', out.width='48%'}
+```{r left}
 p <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
   geom_point(size = 3) +
   labs(color = "Cylinders")
 
 p + legend_left() + ggtitle("Left")
+```
+
+```{r right}
 p + legend_right() + ggtitle("Right")
 ```
 
@@ -66,23 +70,30 @@ p + legend_right() + ggtitle("Right")
 When placing legends at the top or bottom, the legend is automatically
 oriented horizontally:
 
-```{r top-bottom, fig.show='hold', out.width='48%'}
+```{r top}
 p + legend_top() + ggtitle("Top")
+```
+
+```{r bottom}
 p + legend_bottom() + ggtitle("Bottom")
 ```
 
 ### Alignment with Titles
 
 Use the `align_to` parameter to control how the legend aligns with the plot.
-The difference is most visible when there's a y-axis label:
+The difference is most visible when there's a y-axis label. By default the
+legend aligns with the panel:
 
-```{r align-to, fig.show='hold', out.width='48%'}
+```{r align-panel}
 p_labeled <- p + labs(title = "Fuel Economy", y = "Weight (1000 lbs)")
 
-# Default: align to panel (legend aligns with the plot area)
 p_labeled + legend_top() + ggtitle("Panel alignment (default)")
+```
 
-# Align to full plot (legend spans title/axis labels too)
+With `align_to = "plot"` the legend aligns with the full plot, including the
+axis title:
+
+```{r align-plot}
 p_labeled + legend_top(align_to = "plot") + ggtitle("Plot alignment")
 ```
 
@@ -95,8 +106,11 @@ either coordinate values or named shortcuts.
 
 Available shortcuts: `"topright"`, `"topleft"`, `"bottomright"`, `"bottomleft"`, `"center"`
 
-```{r inside-shortcuts, fig.show='hold', out.width='48%'}
+```{r inside-topright}
 p + legend_inside(position = "topright") + ggtitle("Top right")
+```
+
+```{r inside-bottomleft}
 p + legend_inside(position = "bottomleft") + ggtitle("Bottom left")
 ```
 
@@ -126,8 +140,11 @@ p + legend_inside(
 
 Control legend entry direction independently of position:
 
-```{r direction, fig.show='hold', out.width='48%'}
+```{r horizontal}
 p + legend_horizontal() + ggtitle("Horizontal")
+```
+
+```{r vertical}
 p + legend_vertical() + ggtitle("Vertical")
 ```
 

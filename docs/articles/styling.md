@@ -38,7 +38,8 @@ functions are:
 
 ### Font Size
 
-Adjust the overall text size (applies to both title and labels):
+Adjust the overall text size (applies to both title and labels). The
+plot below uses the theme’s default legend text:
 
 ``` r
 
@@ -47,22 +48,38 @@ p <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
   labs(color = "Cylinders")
 
 p + ggtitle("Default size")
-p + legend_style(size = 14) + ggtitle("size = 14")
 ```
 
-![](styling_files/figure-html/style-size-1.svg)![](styling_files/figure-html/style-size-2.svg)
+![](styling_files/figure-html/style-size-default-1.svg)
+
+With `size = 18`, the legend title and labels are drawn at 18 points:
+
+``` r
+
+p + legend_style(size = 18) + ggtitle("size = 18")
+```
+
+![](styling_files/figure-html/style-size-1.svg)
 
 ### Font Family
 
-Change the font family for legend text:
+Change the font family for legend text, here to a serif font:
 
 ``` r
 
 p + legend_style(family = "serif") + ggtitle("serif")
+```
+
+![](styling_files/figure-html/style-family-serif-1.svg)
+
+and to a monospaced font:
+
+``` r
+
 p + legend_style(family = "mono") + ggtitle("mono")
 ```
 
-![](styling_files/figure-html/style-family-1.svg)![](styling_files/figure-html/style-family-2.svg)
+![](styling_files/figure-html/style-family-mono-1.svg)
 
 ### Title Emphasis
 
@@ -71,8 +88,8 @@ Make the title stand out with separate size and face settings:
 ``` r
 
 p + legend_style(
-  size = 12,
-  title_size = 14,
+  size = 14,
+  title_size = 20,
   title_face = "bold"
 )
 ```
@@ -103,22 +120,34 @@ adjusted to prevent label overlap:
 ``` r
 
 p_long + legend_style(angle = 90)
-#> legend_auto_fit: Legend (16.3cm) exceeds 95% of panel (11.4cm). Wrapping to 4 rows.
+#> legend_auto_fit: Legend (17.2cm) exceeds 95% of panel (10.7cm). Wrapping to 4 rows.
 ```
 
 ![](styling_files/figure-html/rotation-vertical-1.svg)
 
 ### Title Rotation
 
-Rotate the legend title independently:
+Rotate the legend title independently of the labels:
 
 ``` r
 
-p_long + legend_style(title_angle = 90, title_hjust = 0.5) + ggtitle("Rotated title only")
-p_long + legend_style(angle = 45, title_angle = 90) + ggtitle("Both rotated")
+p_long +
+  legend_style(title_angle = 90, title_hjust = 0.5) +
+  ggtitle("Rotated title only")
 ```
 
-![](styling_files/figure-html/rotation-title-1.svg)![](styling_files/figure-html/rotation-title-2.svg)
+![](styling_files/figure-html/rotation-title-1.svg)
+
+Title and labels can be rotated together, each by its own angle:
+
+``` r
+
+p_long +
+  legend_style(angle = 45, title_angle = 90) +
+  ggtitle("Both rotated")
+```
+
+![](styling_files/figure-html/rotation-title-labels-1.svg)
 
 ## Background and Border
 
@@ -178,8 +207,8 @@ Combine all styling options:
 ``` r
 
 p + legend_style(
-  size = 11,
-  title_size = 13,
+  size = 14,
+  title_size = 19,
   title_face = "bold",
   family = "sans",
   key_width = 1.2,
@@ -210,18 +239,7 @@ ggplot(mpg, aes(displ, hwy, color = class)) +
 
 ### By Rows
 
-``` r
-
-ggplot(mpg, aes(displ, hwy, color = class)) +
-  geom_point() +
-  legend_wrap(nrow = 2)
-```
-
-![](styling_files/figure-html/wrap-nrow-1.svg)
-
-### With Bottom Position
-
-Wrapping works well with horizontal legends:
+Rows suit a horizontal legend below or above the panel:
 
 ``` r
 
@@ -242,6 +260,8 @@ overrides the key appearance without affecting the plot.
 
 ### Enlarging Small Points
 
+Points drawn at `size = 1` give legend keys of the same size:
+
 ``` r
 
 p_small <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
@@ -249,12 +269,23 @@ p_small <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
   labs(color = "Cylinders")
 
 p_small + ggtitle("Small points in legend")
+```
+
+![](styling_files/figure-html/keys-size-default-1.svg)
+
+`legend_keys(size = 4)` enlarges the keys and leaves the points in the
+panel unchanged:
+
+``` r
+
 p_small + legend_keys(size = 4) + ggtitle("Enlarged legend keys")
 ```
 
-![](styling_files/figure-html/keys-size-1.svg)![](styling_files/figure-html/keys-size-2.svg)
+![](styling_files/figure-html/keys-size-1.svg)
 
 ### Removing Transparency
+
+Points drawn with `alpha = 0.3` give equally faint legend keys:
 
 ``` r
 
@@ -263,10 +294,18 @@ p_alpha <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
   labs(color = "Cylinders")
 
 p_alpha + ggtitle("Transparent legend keys")
+```
+
+![](styling_files/figure-html/keys-alpha-default-1.svg)
+
+`legend_keys(alpha = 1)` draws the keys opaque:
+
+``` r
+
 p_alpha + legend_keys(alpha = 1) + ggtitle("Opaque legend keys")
 ```
 
-![](styling_files/figure-html/keys-alpha-1.svg)![](styling_files/figure-html/keys-alpha-2.svg)
+![](styling_files/figure-html/keys-alpha-1.svg)
 
 ### Combining Overrides
 
@@ -302,10 +341,16 @@ Use named shapes for clarity instead of numeric codes:
 ``` r
 
 p + legend_keys(shape = "square") + ggtitle("Square")
+```
+
+![](styling_files/figure-html/keys-shape-square-1.svg)
+
+``` r
+
 p + legend_keys(shape = "diamond") + ggtitle("Diamond")
 ```
 
-![](styling_files/figure-html/keys-shape-1.svg)![](styling_files/figure-html/keys-shape-2.svg)
+![](styling_files/figure-html/keys-shape-diamond-1.svg)
 
 Available shape names include: `"circle"`, `"square"`, `"diamond"`,
 `"triangle"`, `"plus"`, `"cross"`, `"asterisk"`.
@@ -313,15 +358,22 @@ Available shape names include: `"circle"`, `"square"`, `"diamond"`,
 ### Filled Shapes with Outlines
 
 Shapes 21-25 (or names ending in `_filled`) support both outline and
-fill colors, making legends more visible against any background:
+fill colors, making legends more visible against any background. A white
+fill with a colored outline works with the color mapping alone:
 
 ``` r
 
-# White fill with colored outline - works with color mapping only
 p + legend_keys(shape = "circle_filled", fill = "white", stroke = 1.5) +
   ggtitle("White fill, colored outline")
+```
 
-# Colored fill with black outline - requires mapping BOTH color and fill
+![](styling_files/figure-html/keys-outline-white-1.svg)
+
+A colored fill with a black outline needs both `color` and `fill`
+mapped:
+
+``` r
+
 ggplot(mtcars, aes(mpg, wt, color = factor(cyl), fill = factor(cyl))) +
   geom_point(size = 3, shape = 21, stroke = 1) +
   legend_keys(colour = "black", stroke = 1) +
@@ -329,7 +381,7 @@ ggplot(mtcars, aes(mpg, wt, color = factor(cyl), fill = factor(cyl))) +
 #> Warning: Duplicated `override.aes` is ignored.
 ```
 
-![](styling_files/figure-html/keys-outline-1.svg)![](styling_files/figure-html/keys-outline-2.svg)
+![](styling_files/figure-html/keys-outline-black-1.svg)
 
 Note: For colored fills with a custom outline, you must map both `color`
 and `fill` in the plot aesthetics. This is a ggplot2
@@ -368,10 +420,16 @@ Apply functions like `rev` or `sort` to the current order:
 ``` r
 
 p + legend_order(rev) + ggtitle("Reversed")
+```
+
+![](styling_files/figure-html/order-rev-1.svg)
+
+``` r
+
 p + legend_order(sort) + ggtitle("Sorted")
 ```
 
-![](styling_files/figure-html/order-rev-1.svg)![](styling_files/figure-html/order-rev-2.svg)
+![](styling_files/figure-html/order-sort-1.svg)
 
 ### Other Aesthetics
 
@@ -409,7 +467,7 @@ ggplot(mpg, aes(displ, hwy, color = class)) +
   geom_point() +
   legend_left() +
   legend_style(
-    size = 11,
+    size = 15,
     title_face = "bold",
     background = "#FFF3E0"
   )
@@ -423,7 +481,7 @@ ggplot(mpg, aes(displ, hwy, color = class)) +
   geom_point() +
   legend_wrap(ncol = 2) +
   legend_bottom() +
-  legend_style(size = 10, title_face = "bold")
+  legend_style(size = 14, title_face = "bold")
 ```
 
 ![](styling_files/figure-html/combined-wrap-style-1.svg)
@@ -468,13 +526,25 @@ p_cont + colorbar_style(width = 10, height = 0.5, direction = "horizontal", aest
 ![](styling_files/figure-html/colorbar-horizontal-1.svg) \### Adding a
 Frame
 
+`frame = TRUE` draws a black frame:
+
 ``` r
 
-p_cont + colorbar_style(frame = TRUE, aesthetic = "fill") + ggtitle("Black frame")
-p_cont + colorbar_style(frame = "#FF9800", aesthetic = "fill") + ggtitle("Orange frame")
+p_cont + colorbar_style(frame = TRUE, aesthetic = "fill") +
+  ggtitle("Black frame")
 ```
 
-![](styling_files/figure-html/colorbar-frame-1.svg)![](styling_files/figure-html/colorbar-frame-2.svg)
+![](styling_files/figure-html/colorbar-frame-1.svg)
+
+A color string sets the frame color:
+
+``` r
+
+p_cont + colorbar_style(frame = "#FF9800", aesthetic = "fill") +
+  ggtitle("Orange frame")
+```
+
+![](styling_files/figure-html/colorbar-frame-color-1.svg)
 
 ### Removing Ticks
 
