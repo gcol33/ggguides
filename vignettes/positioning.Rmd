@@ -1,7 +1,5 @@
 ---
 title: "Legend Positioning"
-author: "Gilles Colling"
-date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Legend Positioning}
@@ -33,14 +31,7 @@ theme_set(
 )
 ```
 
-## Installation
-
-```{r, eval = FALSE}
-install.packages("ggguides")            # CRAN
-
-install.packages("pak")                 # development version
-pak::pak("gcol33/ggguides")
-```
+Installation is covered in [Getting Started with ggguides](getting-started.html).
 
 ## Overview
 
@@ -53,7 +44,7 @@ and `legend.box.just` to achieve proper alignment.
 
 ### Left and Right
 
-```{r left}
+```{r left, fig.alt = "Scatter plot of car weight against fuel economy titled Left, coloured by cylinders, with the legend on the left of the panel."}
 p <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
   geom_point(size = 3) +
   labs(color = "Cylinders")
@@ -61,7 +52,7 @@ p <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
 p + legend_left() + ggtitle("Left")
 ```
 
-```{r right}
+```{r right, fig.alt = "Scatter plot of car weight against fuel economy titled Right, coloured by cylinders, with the legend on the right of the panel."}
 p + legend_right() + ggtitle("Right")
 ```
 
@@ -70,11 +61,11 @@ p + legend_right() + ggtitle("Right")
 When placing legends at the top or bottom, the legend is automatically
 oriented horizontally:
 
-```{r top}
+```{r top, fig.alt = "Scatter plot of car weight against fuel economy titled Top, coloured by cylinders, with the legend above the panel in a row."}
 p + legend_top() + ggtitle("Top")
 ```
 
-```{r bottom}
+```{r bottom, fig.alt = "Scatter plot of car weight against fuel economy titled Bottom, coloured by cylinders, with the legend below the panel in a row."}
 p + legend_bottom() + ggtitle("Bottom")
 ```
 
@@ -84,7 +75,7 @@ Use the `align_to` parameter to control how the legend aligns with the plot.
 The difference is most visible when there's a y-axis label. By default the
 legend aligns with the panel:
 
-```{r align-panel}
+```{r align-panel, fig.alt = "Scatter plot of car weight against fuel economy titled Panel alignment, with the legend above the panel aligned to the panel's extent."}
 p_labeled <- p + labs(title = "Fuel Economy", y = "Weight (1000 lbs)")
 
 p_labeled + legend_top() + ggtitle("Panel alignment (default)")
@@ -93,7 +84,7 @@ p_labeled + legend_top() + ggtitle("Panel alignment (default)")
 With `align_to = "plot"` the legend aligns with the full plot, including the
 axis title:
 
-```{r align-plot}
+```{r align-plot, fig.alt = "Scatter plot of car weight against fuel economy titled Plot alignment, with the legend above the panel aligned to the full plot including the axis title."}
 p_labeled + legend_top(align_to = "plot") + ggtitle("Plot alignment")
 ```
 
@@ -106,11 +97,11 @@ either coordinate values or named shortcuts.
 
 Available shortcuts: `"topright"`, `"topleft"`, `"bottomright"`, `"bottomleft"`, `"center"`
 
-```{r inside-topright}
+```{r inside-topright, fig.alt = "Scatter plot of car weight against fuel economy titled Top right, with the legend inside the panel in the top-right corner."}
 p + legend_inside(position = "topright") + ggtitle("Top right")
 ```
 
-```{r inside-bottomleft}
+```{r inside-bottomleft, fig.alt = "Scatter plot of car weight against fuel economy titled Bottom left, with the legend inside the panel in the bottom-left corner."}
 p + legend_inside(position = "bottomleft") + ggtitle("Bottom left")
 ```
 
@@ -118,7 +109,7 @@ p + legend_inside(position = "bottomleft") + ggtitle("Bottom left")
 
 For precise control, specify x/y coordinates (0-1 scale) and justification:
 
-```{r inside-coords}
+```{r inside-coords, fig.alt = "Scatter plot of car weight against fuel economy, points coloured by number of cylinders, with the legend inside the panel in the top-right corner."}
 p + legend_inside(x = 0.95, y = 0.95, justification = c("right", "top"))
 ```
 
@@ -126,7 +117,7 @@ p + legend_inside(x = 0.95, y = 0.95, justification = c("right", "top"))
 
 Inside legends often need a background for readability:
 
-```{r inside-background}
+```{r inside-background, fig.alt = "Scatter plot of car weight against fuel economy, points coloured by number of cylinders, with the legend inside the panel in the top-right corner on a cream box with an orange border."}
 p + legend_inside(
   position = "topright",
   background = "#FFF3E0",
@@ -140,23 +131,23 @@ p + legend_inside(
 
 Control legend entry direction independently of position:
 
-```{r horizontal}
+```{r horizontal, fig.alt = "Scatter plot of car weight against fuel economy titled Horizontal, with the legend on the right and its keys in a row."}
 p + legend_horizontal() + ggtitle("Horizontal")
 ```
 
-```{r vertical}
+```{r vertical, fig.alt = "Scatter plot of car weight against fuel economy titled Vertical, with the legend on the right and its keys in a column."}
 p + legend_vertical() + ggtitle("Vertical")
 ```
 
 ### Combining Direction and Position
 
-```{r direction-position}
+```{r direction-position, fig.alt = "Scatter plot of car weight against fuel economy, points coloured by number of cylinders, with the legend on the right and its keys in a row."}
 p + legend_right() + legend_horizontal()
 ```
 
 ## Removing the Legend
 
-```{r legend-none}
+```{r legend-none, fig.alt = "Scatter plot of car weight against fuel economy, points coloured by number of cylinders, without a legend."}
 p + legend_none()
 ```
 

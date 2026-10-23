@@ -85,10 +85,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Multiple Legends</h1>
-                        <h4 data-toc-skip class="author">Gilles
-Colling</h4>
             
-            <h4 data-toc-skip class="date">2026-10-23</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/gcol33/ggguides/blob/HEAD/vignettes/multiple-legends.Rmd" class="external-link"><code>vignettes/multiple-legends.Rmd</code></a></small>
       <div class="d-none name"><code>multiple-legends.Rmd</code></div>
@@ -96,15 +93,8 @@ Colling</h4>
 
     
     
-<div class="section level2">
-<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
-</h2>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"ggguides"</span><span class="op">)</span>            <span class="co"># CRAN</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"pak"</span><span class="op">)</span>                 <span class="co"># development version</span></span>
-<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"gcol33/ggguides"</span><span class="op">)</span></span></code></pre></div>
-</div>
+<p>Installation is covered in <a href="getting-started.html">Getting
+Started with ggguides</a>.</p>
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
@@ -129,7 +119,7 @@ parameter on <code><a href="../reference/legend_style.html">legend_style()</a></
 <div class="section level2">
 <h2 id="example-plot">Example Plot<a class="anchor" aria-label="anchor" href="#example-plot"></a>
 </h2>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Plot with multiple aesthetics</span></span>
 <span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="va">wt</span>,</span>
 <span>                        color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span>,</span>
@@ -141,7 +131,7 @@ parameter on <code><a href="../reference/legend_style.html">legend_style()</a></
 <span></span>
 <span><span class="va">p</span></span></code></pre></div>
 <p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='360.00pt' viewBox='0 0 468.00 360.00' class="r-plt inline-svg" style="width:100%;height:auto;">
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='360.00pt' viewBox='0 0 468.00 360.00' class="r-plt inline-svg" style="width:100%;height:auto;" role="img" aria-label="Scatter plot of car weight against fuel economy, points coloured by cylinders, sized by horsepower and shaped by transmission, with three legends on the right."><title>Scatter plot of car weight against fuel economy, points coloured by cylinders, sized by horsepower and shaped by transmission, with three legends on the right.</title>
 <g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[
@@ -302,11 +292,11 @@ parameter on <code><a href="../reference/legend_style.html">legend_style()</a></
 </h2>
 <p>Use <code><a href="../reference/legend_hide.html">legend_hide()</a></code> to remove specific legends while
 keeping others:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Hide the size legend</span></span>
 <span><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="../reference/legend_hide.html">legend_hide</a></span><span class="op">(</span><span class="va">size</span><span class="op">)</span></span></code></pre></div>
 <p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='360.00pt' viewBox='0 0 468.00 360.00' class="r-plt inline-svg" style="width:100%;height:auto;">
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='360.00pt' viewBox='0 0 468.00 360.00' class="r-plt inline-svg" style="width:100%;height:auto;" role="img" aria-label="Scatter plot of car weight against fuel economy, points coloured by cylinders, sized by horsepower and shaped by transmission, with the cylinder and transmission legends and no horsepower legend."><title>Scatter plot of car weight against fuel economy, points coloured by cylinders, sized by horsepower and shaped by transmission, with the cylinder and transmission legends and no horsepower legend.</title>
 <g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[
@@ -450,12 +440,12 @@ keeping others:</p>
 </g>
 </g>
 </svg></div></p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># Hide multiple legends</span></span>
 <span><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="../reference/legend_hide.html">legend_hide</a></span><span class="op">(</span><span class="va">size</span>, <span class="va">shape</span><span class="op">)</span></span></code></pre></div>
 <p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='360.00pt' viewBox='0 0 468.00 360.00' class="r-plt inline-svg" style="width:100%;height:auto;">
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='360.00pt' viewBox='0 0 468.00 360.00' class="r-plt inline-svg" style="width:100%;height:auto;" role="img" aria-label="Scatter plot of car weight against fuel economy, points coloured by cylinders, sized by horsepower and shaped by transmission, with only the cylinder legend."><title>Scatter plot of car weight against fuel economy, points coloured by cylinders, sized by horsepower and shaped by transmission, with only the cylinder legend.</title>
 <g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[
@@ -597,11 +587,11 @@ keeping others:</p>
 </h2>
 <p>Use <code><a href="../reference/legend_select.html">legend_select()</a></code> to keep only certain legends
 (inverse of <code><a href="../reference/legend_hide.html">legend_hide()</a></code>):</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Keep only the colour legend</span></span>
 <span><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="../reference/legend_select.html">legend_select</a></span><span class="op">(</span><span class="va">colour</span><span class="op">)</span></span></code></pre></div>
 <p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='360.00pt' viewBox='0 0 468.00 360.00' class="r-plt inline-svg" style="width:100%;height:auto;">
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='360.00pt' viewBox='0 0 468.00 360.00' class="r-plt inline-svg" style="width:100%;height:auto;" role="img" aria-label="Scatter plot of car weight against fuel economy, points coloured by cylinders, sized by horsepower and shaped by transmission, with only the cylinder legend."><title>Scatter plot of car weight against fuel economy, points coloured by cylinders, sized by horsepower and shaped by transmission, with only the cylinder legend.</title>
 <g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[
@@ -737,12 +727,12 @@ keeping others:</p>
 </g>
 </g>
 </svg></div></p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># Keep colour and shape</span></span>
 <span><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="../reference/legend_select.html">legend_select</a></span><span class="op">(</span><span class="va">colour</span>, <span class="va">shape</span><span class="op">)</span></span></code></pre></div>
 <p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='360.00pt' viewBox='0 0 468.00 360.00' class="r-plt inline-svg" style="width:100%;height:auto;">
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='360.00pt' viewBox='0 0 468.00 360.00' class="r-plt inline-svg" style="width:100%;height:auto;" role="img" aria-label="Scatter plot of car weight against fuel economy, points coloured by cylinders, sized by horsepower and shaped by transmission, with the cylinder and transmission legends."><title>Scatter plot of car weight against fuel economy, points coloured by cylinders, sized by horsepower and shaped by transmission, with the cylinder and transmission legends.</title>
 <g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[
@@ -892,11 +882,11 @@ keeping others:</p>
 </h2>
 <p>By default, legends appear in an unspecified order. Use
 <code><a href="../reference/legend_order_guides.html">legend_order_guides()</a></code> to control the display order:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Default order</span></span>
 <span><span class="va">p</span></span></code></pre></div>
 <p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='360.00pt' viewBox='0 0 468.00 360.00' class="r-plt inline-svg" style="width:100%;height:auto;">
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='360.00pt' viewBox='0 0 468.00 360.00' class="r-plt inline-svg" style="width:100%;height:auto;" role="img" aria-label="Scatter plot of car weight against fuel economy, points coloured by cylinders, sized by horsepower and shaped by transmission, with the legends in the default order: cylinders, transmission, horsepower."><title>Scatter plot of car weight against fuel economy, points coloured by cylinders, sized by horsepower and shaped by transmission, with the legends in the default order: cylinders, transmission, horsepower.</title>
 <g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[
@@ -1051,12 +1041,12 @@ keeping others:</p>
 </g>
 </g>
 </svg></div></p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># Size legend first, then colour, then shape</span></span>
 <span><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="../reference/legend_order_guides.html">legend_order_guides</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span>, colour <span class="op">=</span> <span class="fl">2</span>, shape <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='360.00pt' viewBox='0 0 468.00 360.00' class="r-plt inline-svg" style="width:100%;height:auto;">
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='360.00pt' viewBox='0 0 468.00 360.00' class="r-plt inline-svg" style="width:100%;height:auto;" role="img" aria-label="Scatter plot of car weight against fuel economy, points coloured by cylinders, sized by horsepower and shaped by transmission, with the legends ordered horsepower, cylinders, transmission."><title>Scatter plot of car weight against fuel economy, points coloured by cylinders, sized by horsepower and shaped by transmission, with the legends ordered horsepower, cylinders, transmission.</title>
 <g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[
@@ -1221,7 +1211,7 @@ and matching labels. Use <code><a href="../reference/legend_merge.html">legend_m
 <div class="section level3">
 <h3 id="forcing-merge">Forcing Merge<a class="anchor" aria-label="anchor" href="#forcing-merge"></a>
 </h3>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Plot where colour and fill map to the same variable</span></span>
 <span><span class="va">p_merge</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="va">wt</span>, color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span>, fill <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">21</span>, size <span class="op">=</span> <span class="fl">4</span>, stroke <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span> <span class="op">+</span></span>
@@ -1230,7 +1220,7 @@ and matching labels. Use <code><a href="../reference/legend_merge.html">legend_m
 <span><span class="co"># Legends merge automatically when titles and labels match</span></span>
 <span><span class="va">p_merge</span></span></code></pre></div>
 <p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='360.00pt' viewBox='0 0 468.00 360.00' class="r-plt inline-svg" style="width:100%;height:auto;">
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='360.00pt' viewBox='0 0 468.00 360.00' class="r-plt inline-svg" style="width:100%;height:auto;" role="img" aria-label="Scatter plot of car weight against fuel economy with points outlined and filled by cylinders, and one merged cylinders legend."><title>Scatter plot of car weight against fuel economy with points outlined and filled by cylinders, and one merged cylinders legend.</title>
 <g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[
@@ -1366,12 +1356,12 @@ and matching labels. Use <code><a href="../reference/legend_merge.html">legend_m
 </g>
 </g>
 </svg></div></p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># Explicitly request merge (reinforces default behavior)</span></span>
 <span><span class="va">p_merge</span> <span class="op">+</span> <span class="fu"><a href="../reference/legend_merge.html">legend_merge</a></span><span class="op">(</span><span class="va">colour</span>, <span class="va">fill</span><span class="op">)</span></span></code></pre></div>
 <p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='360.00pt' viewBox='0 0 468.00 360.00' class="r-plt inline-svg" style="width:100%;height:auto;">
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='360.00pt' viewBox='0 0 468.00 360.00' class="r-plt inline-svg" style="width:100%;height:auto;" role="img" aria-label="The same scatter plot after legend_merge(), still with one merged cylinders legend."><title>The same scatter plot after legend_merge(), still with one merged cylinders legend.</title>
 <g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[
@@ -1511,11 +1501,11 @@ and matching labels. Use <code><a href="../reference/legend_merge.html">legend_m
 <div class="section level3">
 <h3 id="forcing-split">Forcing Split<a class="anchor" aria-label="anchor" href="#forcing-split"></a>
 </h3>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Force separate legends even when they could merge</span></span>
 <span><span class="va">p_merge</span> <span class="op">+</span> <span class="fu"><a href="../reference/legend_split.html">legend_split</a></span><span class="op">(</span><span class="va">colour</span>, <span class="va">fill</span><span class="op">)</span></span></code></pre></div>
 <p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='360.00pt' viewBox='0 0 468.00 360.00' class="r-plt inline-svg" style="width:100%;height:auto;">
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='360.00pt' viewBox='0 0 468.00 360.00' class="r-plt inline-svg" style="width:100%;height:auto;" role="img" aria-label="Scatter plot of car weight against fuel economy with points outlined and filled by cylinders, and two separate cylinders legends, one for outline and one for fill."><title>Scatter plot of car weight against fuel economy with points outlined and filled by cylinders, and two separate cylinders legends, one for outline and one for fill.</title>
 <g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[
@@ -1671,14 +1661,14 @@ and matching labels. Use <code><a href="../reference/legend_merge.html">legend_m
 <code><a href="../reference/legend_right.html">legend_right()</a></code>, <code><a href="../reference/legend_top.html">legend_top()</a></code>,
 <code><a href="../reference/legend_bottom.html">legend_bottom()</a></code>) accept a <code>by</code> parameter to
 position specific legends:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Place colour legend on the left, size legend at bottom</span></span>
 <span><span class="va">p</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/legend_hide.html">legend_hide</a></span><span class="op">(</span><span class="va">shape</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/legend_left.html">legend_left</a></span><span class="op">(</span>by <span class="op">=</span> <span class="st">"colour"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/legend_bottom.html">legend_bottom</a></span><span class="op">(</span>by <span class="op">=</span> <span class="st">"size"</span><span class="op">)</span></span></code></pre></div>
 <p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='360.00pt' viewBox='0 0 468.00 360.00' class="r-plt inline-svg" style="width:100%;height:auto;">
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='360.00pt' viewBox='0 0 468.00 360.00' class="r-plt inline-svg" style="width:100%;height:auto;" role="img" aria-label="Scatter plot of car weight against fuel economy, points coloured by cylinders, sized by horsepower and shaped by transmission, with the cylinder legend on the left and the horsepower legend below the panel."><title>Scatter plot of car weight against fuel economy, points coloured by cylinders, sized by horsepower and shaped by transmission, with the cylinder legend on the left and the horsepower legend below the panel.</title>
 <g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[
@@ -1826,14 +1816,14 @@ position specific legends:</p>
 </g>
 </g>
 </svg></div></p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Colour legend on top, size on right</span></span>
 <span><span class="va">p</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/legend_hide.html">legend_hide</a></span><span class="op">(</span><span class="va">shape</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/legend_top.html">legend_top</a></span><span class="op">(</span>by <span class="op">=</span> <span class="st">"colour"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/legend_right.html">legend_right</a></span><span class="op">(</span>by <span class="op">=</span> <span class="st">"size"</span><span class="op">)</span></span></code></pre></div>
 <p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='360.00pt' viewBox='0 0 468.00 360.00' class="r-plt inline-svg" style="width:100%;height:auto;">
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='360.00pt' viewBox='0 0 468.00 360.00' class="r-plt inline-svg" style="width:100%;height:auto;" role="img" aria-label="Scatter plot of car weight against fuel economy, points coloured by cylinders, sized by horsepower and shaped by transmission, with the cylinder legend above the panel and the horsepower legend on the right."><title>Scatter plot of car weight against fuel economy, points coloured by cylinders, sized by horsepower and shaped by transmission, with the cylinder legend above the panel and the horsepower legend on the right.</title>
 <g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[
@@ -1987,13 +1977,13 @@ position specific legends:</p>
 </h2>
 <p>Use the <code>by</code> parameter on <code><a href="../reference/legend_style.html">legend_style()</a></code> to
 apply different styles to different legends:</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/legend_hide.html">legend_hide</a></span><span class="op">(</span><span class="va">shape</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/legend_style.html">legend_style</a></span><span class="op">(</span>title_face <span class="op">=</span> <span class="st">"bold"</span>, background <span class="op">=</span> <span class="st">"grey95"</span>, by <span class="op">=</span> <span class="st">"colour"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/legend_style.html">legend_style</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">16</span>, by <span class="op">=</span> <span class="st">"size"</span><span class="op">)</span></span></code></pre></div>
 <p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='360.00pt' viewBox='0 0 468.00 360.00' class="r-plt inline-svg" style="width:100%;height:auto;">
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='360.00pt' viewBox='0 0 468.00 360.00' class="r-plt inline-svg" style="width:100%;height:auto;" role="img" aria-label="Scatter plot of car weight against fuel economy, points coloured by cylinders, sized by horsepower and shaped by transmission, with the cylinder legend on a light grey box with a bold title and the horsepower legend in larger text."><title>Scatter plot of car weight against fuel economy, points coloured by cylinders, sized by horsepower and shaped by transmission, with the cylinder legend on a light grey box with a bold title and the horsepower legend in larger text.</title>
 <g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[
@@ -2145,7 +2135,7 @@ apply different styles to different legends:</p>
 <h2 id="combining-multiple-controls">Combining Multiple Controls<a class="anchor" aria-label="anchor" href="#combining-multiple-controls"></a>
 </h2>
 <p>All functions work together:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Hide shape, put colour on the left with a large bold title,</span></span>
 <span><span class="co"># lay size out horizontally at the bottom</span></span>
 <span><span class="va">p</span> <span class="op">+</span></span>
@@ -2155,7 +2145,7 @@ apply different styles to different legends:</p>
 <span>  <span class="fu"><a href="../reference/legend_bottom.html">legend_bottom</a></span><span class="op">(</span>by <span class="op">=</span> <span class="st">"size"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/legend_style.html">legend_style</a></span><span class="op">(</span>direction <span class="op">=</span> <span class="st">"horizontal"</span>, by <span class="op">=</span> <span class="st">"size"</span><span class="op">)</span></span></code></pre></div>
 <p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='360.00pt' viewBox='0 0 468.00 360.00' class="r-plt inline-svg" style="width:100%;height:auto;">
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='360.00pt' viewBox='0 0 468.00 360.00' class="r-plt inline-svg" style="width:100%;height:auto;" role="img" aria-label="Scatter plot of car weight against fuel economy, points coloured by cylinders, sized by horsepower and shaped by transmission, with the cylinder legend on the left under a large bold title and the horsepower legend in a row below the panel."><title>Scatter plot of car weight against fuel economy, points coloured by cylinders, sized by horsepower and shaped by transmission, with the cylinder legend on the left under a large bold title and the horsepower legend in a row below the panel.</title>
 <g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[
@@ -2323,7 +2313,7 @@ axes:</p>
 number in <code>[0, 1]</code>). For left/right legends, it’s
 <code>"top"</code>, <code>"center"</code>, <code>"bottom"</code> (or a
 number).</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="va">wt</span>,</span>
 <span>                         colour <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span>,</span>
 <span>                         fill   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">gear</span><span class="op">)</span>,</span>
@@ -2351,7 +2341,7 @@ number).</p>
 <span>  <span class="fu"><a href="../reference/legend_style.html">legend_style</a></span><span class="op">(</span>by <span class="op">=</span> <span class="st">"size"</span>,   margin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.3</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/legend_style.html">legend_style</a></span><span class="op">(</span>by <span class="op">=</span> <span class="st">"shape"</span>,  margin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0.3</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='468.00pt' viewBox='0 0 468.00 468.00' class="r-plt inline-svg" style="width:100%;height:auto;">
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='468.00pt' viewBox='0 0 468.00 468.00' class="r-plt inline-svg" style="width:100%;height:auto;" role="img" aria-label="Scatter plot of car weight against fuel economy with four legends: cylinders above the panel at the left, gear below at the right, horsepower on the left at the top and transmission on the right at the bottom."><title>Scatter plot of car weight against fuel economy with four legends: cylinders above the panel at the left, gear below at the right, horsepower on the left at the top and transmission on the right at the bottom.</title>
 <g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[
@@ -2538,7 +2528,7 @@ order it resolves them, and ggguides lets you pick which legend goes
 where, slide it along the rail, and style it without touching the
 others. The plot below has <strong>six</strong> legends: two on top, two
 on the right, one on the bottom, one on the left.</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p6</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="va">wt</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html" class="external-link">geom_smooth</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>linetype <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">vs</span><span class="op">)</span><span class="op">)</span>, method <span class="op">=</span> <span class="st">"lm"</span>, se <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>              colour <span class="op">=</span> <span class="st">"grey40"</span><span class="op">)</span> <span class="op">+</span></span>
@@ -2591,7 +2581,7 @@ on the right, one on the bottom, one on the left.</p>
 <span>  <span class="fu"><a href="../reference/legend_style.html">legend_style</a></span><span class="op">(</span>by <span class="op">=</span> <span class="st">"linetype"</span>, margin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.3</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; `geom_smooth()` using formula = 'y ~ x'</span></span></code></pre></div>
 <p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='468.00pt' viewBox='0 0 468.00 468.00' class="r-plt inline-svg" style="width:100%;height:auto;">
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='468.00pt' viewBox='0 0 468.00 468.00' class="r-plt inline-svg" style="width:100%;height:auto;" role="img" aria-label="Scatter plot of car weight against fuel economy with six legends: colour and fill above the panel, size and transparency on the right, shape below and line type on the left."><title>Scatter plot of car weight against fuel economy with six legends: colour and fill above the panel, size and transparency on the right, shape below and line type on the left.</title>
 <g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[

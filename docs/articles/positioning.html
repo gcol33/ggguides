@@ -85,10 +85,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Legend Positioning</h1>
-                        <h4 data-toc-skip class="author">Gilles
-Colling</h4>
             
-            <h4 data-toc-skip class="date">2026-10-23</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/gcol33/ggguides/blob/HEAD/vignettes/positioning.Rmd" class="external-link"><code>vignettes/positioning.Rmd</code></a></small>
       <div class="d-none name"><code>positioning.Rmd</code></div>
@@ -96,15 +93,8 @@ Colling</h4>
 
     
     
-<div class="section level2">
-<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
-</h2>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"ggguides"</span><span class="op">)</span>            <span class="co"># CRAN</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"pak"</span><span class="op">)</span>                 <span class="co"># development version</span></span>
-<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"gcol33/ggguides"</span><span class="op">)</span></span></code></pre></div>
-</div>
+<p>Installation is covered in <a href="getting-started.html">Getting
+Started with ggguides</a>.</p>
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
@@ -120,14 +110,14 @@ achieve proper alignment.</p>
 <div class="section level3">
 <h3 id="left-and-right">Left and Right<a class="anchor" aria-label="anchor" href="#left-and-right"></a>
 </h3>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="va">wt</span>, color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"Cylinders"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="../reference/legend_left.html">legend_left</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Left"</span><span class="op">)</span></span></code></pre></div>
 <p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='324.00pt' viewBox='0 0 468.00 324.00' class="r-plt inline-svg" style="width:100%;height:auto;">
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='324.00pt' viewBox='0 0 468.00 324.00' class="r-plt inline-svg" style="width:100%;height:auto;" role="img" aria-label="Scatter plot of car weight against fuel economy titled Left, coloured by cylinders, with the legend on the left of the panel."><title>Scatter plot of car weight against fuel economy titled Left, coloured by cylinders, with the legend on the left of the panel.</title>
 <g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[
@@ -264,10 +254,10 @@ achieve proper alignment.</p>
 </g>
 </g>
 </svg></div></p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="../reference/legend_right.html">legend_right</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Right"</span><span class="op">)</span></span></code></pre></div>
 <p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='324.00pt' viewBox='0 0 468.00 324.00' class="r-plt inline-svg" style="width:100%;height:auto;">
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='324.00pt' viewBox='0 0 468.00 324.00' class="r-plt inline-svg" style="width:100%;height:auto;" role="img" aria-label="Scatter plot of car weight against fuel economy titled Right, coloured by cylinders, with the legend on the right of the panel."><title>Scatter plot of car weight against fuel economy titled Right, coloured by cylinders, with the legend on the right of the panel.</title>
 <g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[
@@ -410,10 +400,10 @@ achieve proper alignment.</p>
 </h3>
 <p>When placing legends at the top or bottom, the legend is
 automatically oriented horizontally:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="../reference/legend_top.html">legend_top</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Top"</span><span class="op">)</span></span></code></pre></div>
 <p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='324.00pt' viewBox='0 0 468.00 324.00' class="r-plt inline-svg" style="width:100%;height:auto;">
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='324.00pt' viewBox='0 0 468.00 324.00' class="r-plt inline-svg" style="width:100%;height:auto;" role="img" aria-label="Scatter plot of car weight against fuel economy titled Top, coloured by cylinders, with the legend above the panel in a row."><title>Scatter plot of car weight against fuel economy titled Top, coloured by cylinders, with the legend above the panel in a row.</title>
 <g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[
@@ -550,10 +540,10 @@ automatically oriented horizontally:</p>
 </g>
 </g>
 </svg></div></p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="../reference/legend_bottom.html">legend_bottom</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Bottom"</span><span class="op">)</span></span></code></pre></div>
 <p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='324.00pt' viewBox='0 0 468.00 324.00' class="r-plt inline-svg" style="width:100%;height:auto;">
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='324.00pt' viewBox='0 0 468.00 324.00' class="r-plt inline-svg" style="width:100%;height:auto;" role="img" aria-label="Scatter plot of car weight against fuel economy titled Bottom, coloured by cylinders, with the legend below the panel in a row."><title>Scatter plot of car weight against fuel economy titled Bottom, coloured by cylinders, with the legend below the panel in a row.</title>
 <g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[
@@ -697,12 +687,12 @@ automatically oriented horizontally:</p>
 <p>Use the <code>align_to</code> parameter to control how the legend
 aligns with the plot. The difference is most visible when there’s a
 y-axis label. By default the legend aligns with the panel:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p_labeled</span> <span class="op">&lt;-</span> <span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Fuel Economy"</span>, y <span class="op">=</span> <span class="st">"Weight (1000 lbs)"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">p_labeled</span> <span class="op">+</span> <span class="fu"><a href="../reference/legend_top.html">legend_top</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Panel alignment (default)"</span><span class="op">)</span></span></code></pre></div>
 <p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='324.00pt' viewBox='0 0 468.00 324.00' class="r-plt inline-svg" style="width:100%;height:auto;">
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='324.00pt' viewBox='0 0 468.00 324.00' class="r-plt inline-svg" style="width:100%;height:auto;" role="img" aria-label="Scatter plot of car weight against fuel economy titled Panel alignment, with the legend above the panel aligned to the panel's extent."><title>Scatter plot of car weight against fuel economy titled Panel alignment, with the legend above the panel aligned to the panel's extent.</title>
 <g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[
@@ -841,10 +831,10 @@ y-axis label. By default the legend aligns with the panel:</p>
 </svg></div></p>
 <p>With <code>align_to = "plot"</code> the legend aligns with the full
 plot, including the axis title:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p_labeled</span> <span class="op">+</span> <span class="fu"><a href="../reference/legend_top.html">legend_top</a></span><span class="op">(</span>align_to <span class="op">=</span> <span class="st">"plot"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Plot alignment"</span><span class="op">)</span></span></code></pre></div>
 <p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='324.00pt' viewBox='0 0 468.00 324.00' class="r-plt inline-svg" style="width:100%;height:auto;">
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='324.00pt' viewBox='0 0 468.00 324.00' class="r-plt inline-svg" style="width:100%;height:auto;" role="img" aria-label="Scatter plot of car weight against fuel economy titled Plot alignment, with the legend above the panel aligned to the full plot including the axis title."><title>Scatter plot of car weight against fuel economy titled Plot alignment, with the legend above the panel aligned to the full plot including the axis title.</title>
 <g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[
@@ -994,10 +984,10 @@ You can use either coordinate values or named shortcuts.</p>
 <p>Available shortcuts: <code>"topright"</code>, <code>"topleft"</code>,
 <code>"bottomright"</code>, <code>"bottomleft"</code>,
 <code>"center"</code></p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="../reference/legend_inside.html">legend_inside</a></span><span class="op">(</span>position <span class="op">=</span> <span class="st">"topright"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Top right"</span><span class="op">)</span></span></code></pre></div>
 <p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='324.00pt' viewBox='0 0 468.00 324.00' class="r-plt inline-svg" style="width:100%;height:auto;">
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='324.00pt' viewBox='0 0 468.00 324.00' class="r-plt inline-svg" style="width:100%;height:auto;" role="img" aria-label="Scatter plot of car weight against fuel economy titled Top right, with the legend inside the panel in the top-right corner."><title>Scatter plot of car weight against fuel economy titled Top right, with the legend inside the panel in the top-right corner.</title>
 <g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[
@@ -1134,10 +1124,10 @@ You can use either coordinate values or named shortcuts.</p>
 </g>
 </g>
 </svg></div></p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="../reference/legend_inside.html">legend_inside</a></span><span class="op">(</span>position <span class="op">=</span> <span class="st">"bottomleft"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Bottom left"</span><span class="op">)</span></span></code></pre></div>
 <p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='324.00pt' viewBox='0 0 468.00 324.00' class="r-plt inline-svg" style="width:100%;height:auto;">
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='324.00pt' viewBox='0 0 468.00 324.00' class="r-plt inline-svg" style="width:100%;height:auto;" role="img" aria-label="Scatter plot of car weight against fuel economy titled Bottom left, with the legend inside the panel in the bottom-left corner."><title>Scatter plot of car weight against fuel economy titled Bottom left, with the legend inside the panel in the bottom-left corner.</title>
 <g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[
@@ -1280,10 +1270,10 @@ You can use either coordinate values or named shortcuts.</p>
 </h3>
 <p>For precise control, specify x/y coordinates (0-1 scale) and
 justification:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="../reference/legend_inside.html">legend_inside</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">0.95</span>, y <span class="op">=</span> <span class="fl">0.95</span>, justification <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"right"</span>, <span class="st">"top"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='324.00pt' viewBox='0 0 468.00 324.00' class="r-plt inline-svg" style="width:100%;height:auto;">
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='324.00pt' viewBox='0 0 468.00 324.00' class="r-plt inline-svg" style="width:100%;height:auto;" role="img" aria-label="Scatter plot of car weight against fuel economy, points coloured by number of cylinders, with the legend inside the panel in the top-right corner."><title>Scatter plot of car weight against fuel economy, points coloured by number of cylinders, with the legend inside the panel in the top-right corner.</title>
 <g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[
@@ -1424,14 +1414,14 @@ justification:</p>
 <h3 id="adding-background">Adding Background<a class="anchor" aria-label="anchor" href="#adding-background"></a>
 </h3>
 <p>Inside legends often need a background for readability:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="../reference/legend_inside.html">legend_inside</a></span><span class="op">(</span></span>
 <span>  position <span class="op">=</span> <span class="st">"topright"</span>,</span>
 <span>  background <span class="op">=</span> <span class="st">"#FFF3E0"</span>,</span>
 <span>  border <span class="op">=</span> <span class="st">"#FF9800"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='324.00pt' viewBox='0 0 468.00 324.00' class="r-plt inline-svg" style="width:100%;height:auto;">
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='324.00pt' viewBox='0 0 468.00 324.00' class="r-plt inline-svg" style="width:100%;height:auto;" role="img" aria-label="Scatter plot of car weight against fuel economy, points coloured by number of cylinders, with the legend inside the panel in the top-right corner on a cream box with an orange border."><title>Scatter plot of car weight against fuel economy, points coloured by number of cylinders, with the legend inside the panel in the top-right corner on a cream box with an orange border.</title>
 <g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[
@@ -1576,10 +1566,10 @@ justification:</p>
 <h3 id="horizontal-and-vertical">Horizontal and Vertical<a class="anchor" aria-label="anchor" href="#horizontal-and-vertical"></a>
 </h3>
 <p>Control legend entry direction independently of position:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="../reference/legend_horizontal.html">legend_horizontal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Horizontal"</span><span class="op">)</span></span></code></pre></div>
 <p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='324.00pt' viewBox='0 0 468.00 324.00' class="r-plt inline-svg" style="width:100%;height:auto;">
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='324.00pt' viewBox='0 0 468.00 324.00' class="r-plt inline-svg" style="width:100%;height:auto;" role="img" aria-label="Scatter plot of car weight against fuel economy titled Horizontal, with the legend on the right and its keys in a row."><title>Scatter plot of car weight against fuel economy titled Horizontal, with the legend on the right and its keys in a row.</title>
 <g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[
@@ -1716,10 +1706,10 @@ justification:</p>
 </g>
 </g>
 </svg></div></p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="../reference/legend_vertical.html">legend_vertical</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Vertical"</span><span class="op">)</span></span></code></pre></div>
 <p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='324.00pt' viewBox='0 0 468.00 324.00' class="r-plt inline-svg" style="width:100%;height:auto;">
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='324.00pt' viewBox='0 0 468.00 324.00' class="r-plt inline-svg" style="width:100%;height:auto;" role="img" aria-label="Scatter plot of car weight against fuel economy titled Vertical, with the legend on the right and its keys in a column."><title>Scatter plot of car weight against fuel economy titled Vertical, with the legend on the right and its keys in a column.</title>
 <g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[
@@ -1860,10 +1850,10 @@ justification:</p>
 <div class="section level3">
 <h3 id="combining-direction-and-position">Combining Direction and Position<a class="anchor" aria-label="anchor" href="#combining-direction-and-position"></a>
 </h3>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="../reference/legend_right.html">legend_right</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/legend_horizontal.html">legend_horizontal</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='324.00pt' viewBox='0 0 468.00 324.00' class="r-plt inline-svg" style="width:100%;height:auto;">
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='324.00pt' viewBox='0 0 468.00 324.00' class="r-plt inline-svg" style="width:100%;height:auto;" role="img" aria-label="Scatter plot of car weight against fuel economy, points coloured by number of cylinders, with the legend on the right and its keys in a row."><title>Scatter plot of car weight against fuel economy, points coloured by number of cylinders, with the legend on the right and its keys in a row.</title>
 <g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[
@@ -2004,10 +1994,10 @@ justification:</p>
 <div class="section level2">
 <h2 id="removing-the-legend">Removing the Legend<a class="anchor" aria-label="anchor" href="#removing-the-legend"></a>
 </h2>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="../reference/legend_none.html">legend_none</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='324.00pt' viewBox='0 0 468.00 324.00' class="r-plt inline-svg" style="width:100%;height:auto;">
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='324.00pt' viewBox='0 0 468.00 324.00' class="r-plt inline-svg" style="width:100%;height:auto;" role="img" aria-label="Scatter plot of car weight against fuel economy, points coloured by number of cylinders, without a legend."><title>Scatter plot of car weight against fuel economy, points coloured by number of cylinders, without a legend.</title>
 <g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[

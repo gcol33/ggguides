@@ -1,14 +1,9 @@
 # Patchwork Integration
 
-## Installation
-
-``` r
-
-install.packages("ggguides")            # CRAN
-
-install.packages("pak")                 # development version
-pak::pak("gcol33/ggguides")
-```
+Installation is covered in [Getting Started with
+ggguides](https://gcol33.github.io/ggguides/articles/getting-started.md).
+The examples also need
+[patchwork](https://patchwork.data-imaginist.com).
 
 ## Overview
 
@@ -48,7 +43,9 @@ p2 <- ggplot(mtcars, aes(mpg, hp, color = factor(cyl))) +
 p1 | p2
 ```
 
-![](patchwork_files/figure-html/problem-1.svg)
+![Two scatter plots side by side, Plot 1 of weight and Plot 2 of
+horsepower against fuel economy, coloured by cylinders, each plot with
+its own cylinders legend.](patchwork_files/figure-html/problem-1.svg)
 
 ## Basic Legend Collection
 
@@ -61,7 +58,10 @@ to gather legends from all plots in a composition:
 collect_legends(p1 | p2)
 ```
 
-![](patchwork_files/figure-html/collect-basic-1.svg)
+![Two scatter plots side by side, Plot 1 of weight and Plot 2 of
+horsepower against fuel economy, coloured by cylinders, with one shared
+cylinders legend on the
+right.](patchwork_files/figure-html/collect-basic-1.svg)
 
 ### Position Options
 
@@ -72,14 +72,20 @@ Control where the collected legend appears:
 collect_legends(p1 | p2, position = "bottom")
 ```
 
-![](patchwork_files/figure-html/collect-bottom-1.svg)
+![Two scatter plots side by side, Plot 1 of weight and Plot 2 of
+horsepower against fuel economy, coloured by cylinders, with one shared
+cylinders legend below both
+plots.](patchwork_files/figure-html/collect-bottom-1.svg)
 
 ``` r
 
 collect_legends(p1 | p2, position = "left")
 ```
 
-![](patchwork_files/figure-html/collect-left-1.svg)
+![Two scatter plots side by side, Plot 1 of weight and Plot 2 of
+horsepower against fuel economy, coloured by cylinders, with one shared
+cylinders legend on the
+left.](patchwork_files/figure-html/collect-left-1.svg)
 
 ## Stacked Plots
 
@@ -100,7 +106,10 @@ stacked <- (p1 / p2 / p3) + plot_layout(heights = c(2, 1.5, 1))
 collect_legends(stacked, position = "right")
 ```
 
-![](patchwork_files/figure-html/stacked-default-1.svg)
+![Three scatter plots stacked with decreasing heights, of weight,
+horsepower and displacement against fuel economy, with one cylinders
+legend on the right centred on the full
+height.](patchwork_files/figure-html/stacked-default-1.svg)
 
 ### Spanning Full Height
 
@@ -112,7 +121,10 @@ gt <- collect_legends(stacked, position = "right", span = TRUE)
 grid::grid.draw(gt)
 ```
 
-![](patchwork_files/figure-html/stacked-span-1.svg)
+![Three scatter plots stacked with decreasing heights, of weight,
+horsepower and displacement against fuel economy, with one cylinders
+legend on the right spanning the full
+height.](patchwork_files/figure-html/stacked-span-1.svg)
 
 ### Attaching to Specific Rows
 
@@ -125,7 +137,10 @@ gt <- collect_legends(stacked, position = "right", span = 1)
 grid::grid.draw(gt)
 ```
 
-![](patchwork_files/figure-html/span-row1-1.svg)
+![Three scatter plots stacked with decreasing heights, of weight,
+horsepower and displacement against fuel economy, with the cylinders
+legend beside the top plot
+only.](patchwork_files/figure-html/span-row1-1.svg)
 
 ``` r
 
@@ -134,7 +149,10 @@ gt <- collect_legends(stacked, position = "right", span = 1:2)
 grid::grid.draw(gt)
 ```
 
-![](patchwork_files/figure-html/span-row12-1.svg)
+![Three scatter plots stacked with decreasing heights, of weight,
+horsepower and displacement against fuel economy, with the cylinders
+legend beside the top two
+plots.](patchwork_files/figure-html/span-row12-1.svg)
 
 ## Collecting Duplicate Axes
 
@@ -155,7 +173,9 @@ p_bottom <- ggplot(mtcars, aes(mpg, disp)) +
 p_top / p_bottom
 ```
 
-![](patchwork_files/figure-html/collect-axes-1.svg)
+![Two scatter plots stacked, of weight and displacement against fuel
+economy, each with its own fuel economy
+axis.](patchwork_files/figure-html/collect-axes-1.svg)
 
 ``` r
 
@@ -163,7 +183,9 @@ p_top / p_bottom
 collect_axes(p_top / p_bottom)
 ```
 
-![](patchwork_files/figure-html/collect-axes-fixed-1.svg)
+![The same two stacked scatter plots with the top plot's fuel economy
+axis removed, leaving one shared axis at the
+bottom.](patchwork_files/figure-html/collect-axes-fixed-1.svg)
 
 ## Combining with Styling
 
@@ -177,7 +199,10 @@ p2_styled <- p2 + legend_style(size = 15, title_face = "bold")
 collect_legends(p1_styled | p2_styled, position = "right")
 ```
 
-![](patchwork_files/figure-html/combined-1.svg)
+![Two scatter plots side by side, Plot 1 of weight and Plot 2 of
+horsepower against fuel economy, coloured by cylinders, with one shared
+cylinders legend on the right, its title in
+bold.](patchwork_files/figure-html/combined-1.svg)
 
 ## Complex Layouts
 
@@ -193,7 +218,9 @@ layout <- (p1 | p2) / (p3 | p4)
 collect_legends(layout, position = "right")
 ```
 
-![](patchwork_files/figure-html/complex-1.svg)
+![Four scatter plots in a two by two grid, coloured by cylinders, with
+one shared cylinders legend on the
+right.](patchwork_files/figure-html/complex-1.svg)
 
 ## cowplot / Grid Users
 
@@ -212,7 +239,8 @@ grid::grid.newpage()
 grid::grid.draw(leg)
 ```
 
-![](patchwork_files/figure-html/get-legend-1.svg)
+![A cylinders legend drawn on its own, without a
+plot.](patchwork_files/figure-html/get-legend-1.svg)
 
 ### `shared_legend()` - Combine Plots with Shared Legend
 
@@ -224,7 +252,10 @@ grid::grid.newpage()
 grid::grid.draw(gt)
 ```
 
-![](patchwork_files/figure-html/shared-legend-side-1.svg)
+![Two scatter plots side by side, Plot 1 of weight and Plot 2 of
+horsepower against fuel economy, coloured by cylinders, arranged without
+patchwork, with one shared cylinders legend on the
+right.](patchwork_files/figure-html/shared-legend-side-1.svg)
 
 ``` r
 
@@ -234,7 +265,9 @@ grid::grid.newpage()
 grid::grid.draw(gt)
 ```
 
-![](patchwork_files/figure-html/shared-legend-stacked-1.svg)
+![Three scatter plots stacked, of weight, horsepower and displacement
+against fuel economy, with one shared cylinders legend below
+them.](patchwork_files/figure-html/shared-legend-stacked-1.svg)
 
 ``` r
 
@@ -244,7 +277,9 @@ grid::grid.newpage()
 grid::grid.draw(gt)
 ```
 
-![](patchwork_files/figure-html/shared-legend-grid-1.svg)
+![Four scatter plots in a two by two grid, arranged without patchwork,
+with one shared cylinders legend on the
+right.](patchwork_files/figure-html/shared-legend-grid-1.svg)
 
 All ggguides styling functions
 ([`legend_style()`](https://gcol33.github.io/ggguides/reference/legend_style.md),

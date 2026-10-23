@@ -235,15 +235,18 @@ svg.inline-svg .svglite rect.legend-bg[style*="stroke: #f5f6f8"] {
 }
 
 /* Grid lines */
-/* White grid lines need to become dark in light mode, stay light in dark mode */
-/* Light mode: dark grid on light bg */
+/* White grid lines are theme_grey() gridlines meant for a grey panel; on a
+   transparent panel they take the theme border colour, like theme_minimal()
+   gridlines, so they stay a subtle guide in both modes */
 svg.inline-svg .svglite polyline[style*="stroke: #FFFFFF"]:not(.preserve-color),
 svg.inline-svg .svglite polyline[style*="stroke: #ffffff"]:not(.preserve-color) {
-  stroke: #3E3F3A !important;
+  stroke: #DFD7CA !important;
 }
-/* Dark mode: light grid on dark bg */
 [data-bs-theme="dark"] svg.inline-svg .svglite polyline[style*="stroke: #FFFFFF"]:not(.preserve-color),
-[data-bs-theme="dark"] svg.inline-svg .svglite polyline[style*="stroke: #ffffff"]:not(.preserve-color),
+[data-bs-theme="dark"] svg.inline-svg .svglite polyline[style*="stroke: #ffffff"]:not(.preserve-color) {
+  stroke: #495057 !important;
+}
+/* Polylines in the light-mode text colour (data lines, axes) turn light */
 [data-bs-theme="dark"] svg.inline-svg .svglite polyline[style*="stroke: #3E3F3A"]:not(.preserve-color),
 [data-bs-theme="dark"] svg.inline-svg .svglite polyline[style*="stroke: #3e3f3a"]:not(.preserve-color) {
   stroke: #DFD7CA !important;

@@ -1,7 +1,5 @@
 ---
 title: "Styling & Customization"
-author: "Gilles Colling"
-date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Styling & Customization}
@@ -33,14 +31,7 @@ theme_set(
 )
 ```
 
-## Installation
-
-```{r, eval = FALSE}
-install.packages("ggguides")            # CRAN
-
-install.packages("pak")                 # development version
-pak::pak("gcol33/ggguides")
-```
+Installation is covered in [Getting Started with ggguides](getting-started.html).
 
 ## Overview
 
@@ -66,7 +57,7 @@ diving into ggplot2's theme element hierarchy. The main functions are:
 Adjust the overall text size (applies to both title and labels). The
 plot below uses the theme's default legend text:
 
-```{r style-size-default}
+```{r style-size-default, fig.alt = "Scatter plot of car weight against fuel economy titled Default size, coloured by cylinders, with the legend in the default text size."}
 p <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
   geom_point(size = 3) +
   labs(color = "Cylinders")
@@ -76,7 +67,7 @@ p + ggtitle("Default size")
 
 With `size = 18`, the legend title and labels are drawn at 18 points:
 
-```{r style-size}
+```{r style-size, fig.alt = "Scatter plot of car weight against fuel economy titled size = 18, coloured by cylinders, with the legend title and labels drawn larger."}
 p + legend_style(size = 18) + ggtitle("size = 18")
 ```
 
@@ -84,13 +75,13 @@ p + legend_style(size = 18) + ggtitle("size = 18")
 
 Change the font family for legend text, here to a serif font:
 
-```{r style-family-serif}
+```{r style-family-serif, fig.alt = "Scatter plot of car weight against fuel economy titled serif, with the legend text in a serif font."}
 p + legend_style(family = "serif") + ggtitle("serif")
 ```
 
 and to a monospaced font:
 
-```{r style-family-mono}
+```{r style-family-mono, fig.alt = "Scatter plot of car weight against fuel economy titled mono, with the legend text in a monospaced font."}
 p + legend_style(family = "mono") + ggtitle("mono")
 ```
 
@@ -98,7 +89,7 @@ p + legend_style(family = "mono") + ggtitle("mono")
 
 Make the title stand out with separate size and face settings:
 
-```{r style-title}
+```{r style-title, fig.alt = "Scatter plot of car weight against fuel economy, points coloured by number of cylinders, with a large bold legend title above smaller labels."}
 p + legend_style(
   size = 14,
   title_size = 20,
@@ -112,7 +103,7 @@ For legends with long category names, rotate the labels to save space:
 
 ### Basic Rotation
 
-```{r rotation-basic, fig.height = 6}
+```{r rotation-basic, fig.alt = "Scatter plot of highway mileage against engine displacement, points coloured by the seven car classes, with the legend labels rotated 45 degrees.", fig.height = 6}
 p_long <- ggplot(mpg, aes(displ, hwy, color = class)) +
   geom_point()
 
@@ -124,7 +115,7 @@ p_long + legend_style(angle = 45)
 Use 90 degrees for fully vertical text. Key height is automatically adjusted to
 prevent label overlap:
 
-```{r rotation-vertical, fig.height = 6}
+```{r rotation-vertical, fig.alt = "Scatter plot of highway mileage against engine displacement, points coloured by the seven car classes, with the legend labels rotated to vertical.", fig.height = 6}
 p_long + legend_style(angle = 90)
 ```
 
@@ -132,7 +123,7 @@ p_long + legend_style(angle = 90)
 
 Rotate the legend title independently of the labels:
 
-```{r rotation-title, fig.height = 6}
+```{r rotation-title, fig.alt = "Scatter plot of highway mileage against engine displacement, points coloured by the seven car classes, titled Rotated title only, with the legend title rotated to vertical and the labels horizontal.", fig.height = 6}
 p_long +
   legend_style(title_angle = 90, title_hjust = 0.5) +
   ggtitle("Rotated title only")
@@ -140,7 +131,7 @@ p_long +
 
 Title and labels can be rotated together, each by its own angle:
 
-```{r rotation-title-labels, fig.height = 6}
+```{r rotation-title-labels, fig.alt = "Scatter plot of highway mileage against engine displacement, points coloured by the seven car classes, titled Both rotated, with the legend title vertical and the labels at 45 degrees.", fig.height = 6}
 p_long +
   legend_style(angle = 45, title_angle = 90) +
   ggtitle("Both rotated")
@@ -150,13 +141,13 @@ p_long +
 
 Add visual containers around the legend:
 
-```{r style-background}
+```{r style-background, fig.alt = "Scatter plot of car weight against fuel economy, points coloured by number of cylinders, with the legend on a cream box."}
 p + legend_style(
   background = "#FFF3E0"
 )
 ```
 
-```{r style-border}
+```{r style-border, fig.alt = "Scatter plot of car weight against fuel economy, points coloured by number of cylinders, with the legend on a cream box with an orange border."}
 p + legend_style(
   background = "#FFF3E0",
   background_color = "#FF9800"
@@ -167,7 +158,7 @@ p + legend_style(
 
 Adjust the size of legend keys (color swatches):
 
-```{r style-key}
+```{r style-key, fig.alt = "Scatter plot of car weight against fuel economy, points coloured by number of cylinders, with larger legend keys spaced further apart."}
 p + legend_style(
   key_width = 1.5,
   key_height = 1.5
@@ -178,7 +169,7 @@ p + legend_style(
 
 Control spacing around the legend:
 
-```{r style-margin}
+```{r style-margin, fig.alt = "Scatter plot of car weight against fuel economy, points coloured by number of cylinders, with the legend on a cream box with extra space around it."}
 p + legend_style(
   background = "#FFF3E0",
   margin = 0.5
@@ -189,7 +180,7 @@ p + legend_style(
 
 Combine all styling options:
 
-```{r style-full}
+```{r style-full, fig.alt = "Scatter plot of car weight against fuel economy, points coloured by number of cylinders, with a bold legend title on a cream box with an orange border."}
 p + legend_style(
   size = 14,
   title_size = 19,
@@ -209,7 +200,7 @@ multi-row layouts.
 
 ### By Columns
 
-```{r wrap-ncol}
+```{r wrap-ncol, fig.alt = "Scatter plot of highway mileage against engine displacement, points coloured by the seven car classes, with the legend keys in two columns on the right."}
 ggplot(mpg, aes(displ, hwy, color = class)) +
   geom_point() +
   legend_wrap(ncol = 2)
@@ -219,7 +210,7 @@ ggplot(mpg, aes(displ, hwy, color = class)) +
 
 Rows suit a horizontal legend below or above the panel:
 
-```{r wrap-bottom}
+```{r wrap-bottom, fig.alt = "Scatter plot of highway mileage against engine displacement, points coloured by the seven car classes, with the legend below the panel and its keys in two rows."}
 ggplot(mpg, aes(displ, hwy, color = class)) +
   geom_point() +
   legend_wrap(nrow = 2) +
@@ -236,7 +227,7 @@ affecting the plot.
 
 Points drawn at `size = 1` give legend keys of the same size:
 
-```{r keys-size-default}
+```{r keys-size-default, fig.alt = "Scatter plot of car weight against fuel economy titled Small points in legend, with small points and equally small legend keys."}
 p_small <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
   geom_point(size = 1) +
   labs(color = "Cylinders")
@@ -247,7 +238,7 @@ p_small + ggtitle("Small points in legend")
 `legend_keys(size = 4)` enlarges the keys and leaves the points in the panel
 unchanged:
 
-```{r keys-size}
+```{r keys-size, fig.alt = "Scatter plot of car weight against fuel economy titled Enlarged legend keys, with small points and large legend keys."}
 p_small + legend_keys(size = 4) + ggtitle("Enlarged legend keys")
 ```
 
@@ -255,7 +246,7 @@ p_small + legend_keys(size = 4) + ggtitle("Enlarged legend keys")
 
 Points drawn with `alpha = 0.3` give equally faint legend keys:
 
-```{r keys-alpha-default}
+```{r keys-alpha-default, fig.alt = "Scatter plot of car weight against fuel economy titled Transparent legend keys, with faint points and equally faint legend keys."}
 p_alpha <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
   geom_point(alpha = 0.3, size = 3) +
   labs(color = "Cylinders")
@@ -265,13 +256,13 @@ p_alpha + ggtitle("Transparent legend keys")
 
 `legend_keys(alpha = 1)` draws the keys opaque:
 
-```{r keys-alpha}
+```{r keys-alpha, fig.alt = "Scatter plot of car weight against fuel economy titled Opaque legend keys, with faint points and opaque legend keys."}
 p_alpha + legend_keys(alpha = 1) + ggtitle("Opaque legend keys")
 ```
 
 ### Combining Overrides
 
-```{r keys-combined}
+```{r keys-combined, fig.alt = "Scatter plot of car weight against fuel economy, points coloured by number of cylinders, with small faint points and large opaque legend keys."}
 ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
   geom_point(alpha = 0.3, size = 1) +
   legend_keys(size = 4, alpha = 1)
@@ -282,7 +273,7 @@ ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
 By default, `legend_keys()` applies to both colour and fill legends.
 Target specific aesthetics with the `aesthetic` parameter:
 
-```{r keys-fill}
+```{r keys-fill, fig.alt = "Box plots of fuel economy for four, six and eight cylinders, filled translucent by cylinders, with opaque legend keys."}
 ggplot(mtcars, aes(factor(cyl), mpg, fill = factor(cyl))) +
   geom_boxplot(alpha = 0.5) +
   legend_keys(alpha = 1, aesthetic = "fill")
@@ -292,11 +283,11 @@ ggplot(mtcars, aes(factor(cyl), mpg, fill = factor(cyl))) +
 
 Use named shapes for clarity instead of numeric codes:
 
-```{r keys-shape-square}
+```{r keys-shape-square, fig.alt = "Scatter plot of car weight against fuel economy titled Square, with square legend keys."}
 p + legend_keys(shape = "square") + ggtitle("Square")
 ```
 
-```{r keys-shape-diamond}
+```{r keys-shape-diamond, fig.alt = "Scatter plot of car weight against fuel economy titled Diamond, with diamond legend keys."}
 p + legend_keys(shape = "diamond") + ggtitle("Diamond")
 ```
 
@@ -309,14 +300,14 @@ Shapes 21-25 (or names ending in `_filled`) support both outline and fill colors
 making legends more visible against any background. A white fill with a
 colored outline works with the color mapping alone:
 
-```{r keys-outline-white}
+```{r keys-outline-white, fig.alt = "Scatter plot of car weight against fuel economy titled White fill, colored outline, with legend keys drawn as white circles with coloured outlines."}
 p + legend_keys(shape = "circle_filled", fill = "white", stroke = 1.5) +
   ggtitle("White fill, colored outline")
 ```
 
 A colored fill with a black outline needs both `color` and `fill` mapped:
 
-```{r keys-outline-black}
+```{r keys-outline-black, fig.alt = "Scatter plot of car weight against fuel economy titled Colored fill, black outline, with legend keys drawn as coloured circles with black outlines."}
 ggplot(mtcars, aes(mpg, wt, color = factor(cyl), fill = factor(cyl))) +
   geom_point(size = 3, shape = 21, stroke = 1) +
   legend_keys(colour = "black", stroke = 1) +
@@ -344,7 +335,7 @@ factor levels in your data.
 
 Specify the exact order you want:
 
-```{r order-explicit}
+```{r order-explicit, fig.alt = "Scatter plot of car weight against fuel economy, points coloured by number of cylinders, with the legend entries ordered 8, 6, 4."}
 p + legend_order(c("8", "6", "4"))
 ```
 
@@ -352,11 +343,11 @@ p + legend_order(c("8", "6", "4"))
 
 Apply functions like `rev` or `sort` to the current order:
 
-```{r order-rev}
+```{r order-rev, fig.alt = "Scatter plot of car weight against fuel economy titled Reversed, with the legend entries ordered 8, 6, 4."}
 p + legend_order(rev) + ggtitle("Reversed")
 ```
 
-```{r order-sort}
+```{r order-sort, fig.alt = "Scatter plot of car weight against fuel economy titled Sorted, with the legend entries ordered 4, 6, 8."}
 p + legend_order(sort) + ggtitle("Sorted")
 ```
 
@@ -364,7 +355,7 @@ p + legend_order(sort) + ggtitle("Sorted")
 
 Reorder legends for fill, shape, or other aesthetics:
 
-```{r order-fill}
+```{r order-fill, fig.alt = "Bar chart of car counts for four, six and eight cylinders, with the fill legend ordered 8, 4, 6."}
 ggplot(mtcars, aes(factor(cyl), fill = factor(cyl))) +
   geom_bar() +
   legend_order(c("8", "4", "6"), aesthetic = "fill")
@@ -374,7 +365,7 @@ ggplot(mtcars, aes(factor(cyl), fill = factor(cyl))) +
 
 For simple reversal, `legend_reverse()` is a convenient shorthand:
 
-```{r reverse}
+```{r reverse, fig.alt = "Scatter plot of car weight against fuel economy, points coloured by number of cylinders, with the legend entries in reversed order 8, 6, 4."}
 p + legend_reverse()
 ```
 
@@ -382,7 +373,7 @@ p + legend_reverse()
 
 All ggguides functions compose with `+`:
 
-```{r combined-styling}
+```{r combined-styling, fig.alt = "Scatter plot of highway mileage against engine displacement, points coloured by the seven car classes, with the legend on the left on a cream box, its title in bold."}
 ggplot(mpg, aes(displ, hwy, color = class)) +
   geom_point() +
   legend_left() +
@@ -393,7 +384,7 @@ ggplot(mpg, aes(displ, hwy, color = class)) +
   )
 ```
 
-```{r combined-wrap-style}
+```{r combined-wrap-style, fig.alt = "Scatter plot of highway mileage against engine displacement, points coloured by the seven car classes, with the legend below the panel in two columns under a bold title."}
 ggplot(mpg, aes(displ, hwy, color = class)) +
   geom_point() +
   legend_wrap(ncol = 2) +
@@ -407,7 +398,7 @@ For continuous scales, `colorbar_style()` customizes the color bar appearance.
 
 ### Basic Usage
 
-```{r colorbar-basic}
+```{r colorbar-basic, fig.alt = "Heat map of Old Faithful eruption duration against waiting time, filled by density, with a colour bar on the right."}
 p_cont <- ggplot(faithfuld, aes(waiting, eruptions, fill = density)) +
   geom_tile()
 
@@ -418,13 +409,13 @@ p_cont
 
 Create taller, thinner bars:
 
-```{r colorbar-size}
+```{r colorbar-size, fig.alt = "Heat map of Old Faithful eruption duration against waiting time, filled by density, with a colour bar; the colour bar is tall and thin."}
 p_cont + colorbar_style(width = 0.5, height = 10, aesthetic = "fill")
 ```
 
 ### Horizontal Orientation
 
-```{r colorbar-horizontal}
+```{r colorbar-horizontal, fig.alt = "Heat map of Old Faithful eruption duration against waiting time, filled by density, with a colour bar; the colour bar is horizontal below the panel."}
 p_cont + colorbar_style(width = 10, height = 0.5, direction = "horizontal", aesthetic = "fill") +
   legend_bottom()
 ```
@@ -432,27 +423,27 @@ p_cont + colorbar_style(width = 10, height = 0.5, direction = "horizontal", aest
 
 `frame = TRUE` draws a black frame:
 
-```{r colorbar-frame}
+```{r colorbar-frame, fig.alt = "Heat map of Old Faithful eruption duration against waiting time, filled by density, with a colour bar, titled Black frame; the colour bar has a frame."}
 p_cont + colorbar_style(frame = TRUE, aesthetic = "fill") +
   ggtitle("Black frame")
 ```
 
 A color string sets the frame color:
 
-```{r colorbar-frame-color}
+```{r colorbar-frame-color, fig.alt = "Heat map of Old Faithful eruption duration against waiting time, filled by density, with a colour bar, titled Orange frame; the colour bar has an orange frame."}
 p_cont + colorbar_style(frame = "#FF9800", aesthetic = "fill") +
   ggtitle("Orange frame")
 ```
 
 ### Removing Ticks
 
-```{r colorbar-noticks}
+```{r colorbar-noticks, fig.alt = "Heat map of Old Faithful eruption duration against waiting time, filled by density, with a colour bar; the colour bar has an orange frame and no tick marks."}
 p_cont + colorbar_style(ticks = FALSE, frame = "#FF9800", aesthetic = "fill")
 ```
 
 ### Combined Customization
 
-```{r colorbar-full}
+```{r colorbar-full, fig.alt = "Heat map of Old Faithful eruption duration against waiting time, filled by density, with a colour bar; the colour bar is tall and thin with a dark orange frame and long ticks."}
 p_cont + colorbar_style(
   width = 0.5,
   height = 8,

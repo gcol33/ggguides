@@ -1,7 +1,5 @@
 ---
 title: "Getting Started with ggguides"
-author: "Gilles Colling"
-date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Getting Started with ggguides}
@@ -65,7 +63,7 @@ functions to position, style, and manage legends.
 ## Basic Usage
 
 Let's create a simple plot to demonstrate the legend helpers:
-```{r base-plot}
+```{r base-plot, fig.alt = "Scatter plot of car weight against fuel economy, points coloured by number of cylinders, with the cylinders legend on the right."}
 p <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
   geom_point(size = 3) +
   labs(color = "Cylinders")
@@ -77,11 +75,11 @@ p
 
 Position the legend on any side with a single function call:
 
-```{r position-left}
+```{r position-left, fig.alt = "Scatter plot of car weight against fuel economy, points coloured by number of cylinders, with the legend on the left of the panel."}
 p + legend_left()
 ```
 
-```{r position-bottom}
+```{r position-bottom, fig.alt = "Scatter plot of car weight against fuel economy, points coloured by number of cylinders, with the legend below the panel and its keys in a row."}
 p + legend_bottom()
 ```
 
@@ -89,17 +87,17 @@ p + legend_bottom()
 
 Place the legend inside the plot area using coordinates or shortcuts:
 
-```{r inside-topright}
+```{r inside-topright, fig.alt = "Scatter plot of car weight against fuel economy, points coloured by number of cylinders, with the legend inside the panel in the top-right corner."}
 p + legend_inside(position = "topright")
 ```
 
-```{r inside-coords}
+```{r inside-coords, fig.alt = "Scatter plot of car weight against fuel economy, points coloured by number of cylinders, with the legend inside the panel in the top-left corner."}
 p + legend_inside(x = 0.02, y = 0.98, justification = c("left", "top"))
 ```
 
 ### Removing the Legend
 
-```{r legend-none}
+```{r legend-none, fig.alt = "Scatter plot of car weight against fuel economy, points coloured by number of cylinders, without a legend."}
 p + legend_none()
 ```
 
@@ -107,11 +105,11 @@ p + legend_none()
 
 Use `legend_style()` to customize the legend appearance:
 
-```{r style-size}
+```{r style-size, fig.alt = "Scatter plot of car weight against fuel economy, points coloured by number of cylinders, with the legend title and labels drawn larger."}
 p + legend_style(size = 18)
 ```
 
-```{r style-full}
+```{r style-full, fig.alt = "Scatter plot of car weight against fuel economy, points coloured by number of cylinders, with a bold legend title and the legend on a cream box with an orange border."}
 p + legend_style(
   size = 15,
   title_size = 20,
@@ -125,7 +123,7 @@ p + legend_style(
 
 For legends with many entries, use `legend_wrap()` to create multi-column layouts:
 
-```{r wrap-example}
+```{r wrap-example, fig.alt = "Scatter plot of highway mileage against engine displacement, points coloured by the seven car classes, with the legend keys in two columns on the right."}
 ggplot(mpg, aes(displ, hwy, color = class)) +
   geom_point() +
   legend_wrap(ncol = 2)
@@ -135,14 +133,14 @@ ggplot(mpg, aes(displ, hwy, color = class)) +
 
 ggguides functions compose naturally with the `+` operator:
 
-```{r combined}
+```{r combined, fig.alt = "Scatter plot of highway mileage against engine displacement, points coloured by the seven car classes, with the legend on the left on a cream box, its title in bold."}
 ggplot(mpg, aes(displ, hwy, color = class)) +
   geom_point() +
   legend_left() +
   legend_style(size = 15, title_face = "bold", background = "#FFF3E0")
 ```
 
-```{r combined-wrap}
+```{r combined-wrap, fig.alt = "Scatter plot of highway mileage against engine displacement, points coloured by the seven car classes, with the legend below the panel and its keys in two columns."}
 ggplot(mpg, aes(displ, hwy, color = class)) +
   geom_point() +
   legend_wrap(ncol = 2) +

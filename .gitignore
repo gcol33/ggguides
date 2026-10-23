@@ -43,3 +43,7 @@ dev_notes/
 
 # Local run scripts
 .run*
+
+# Previous extra.css kept by the pkgdown build script
+pkgdown/extra.css.backup
+docs/extra.css.backup

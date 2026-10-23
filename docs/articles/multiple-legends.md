@@ -1,14 +1,7 @@
 # Multiple Legends
 
-## Installation
-
-``` r
-
-install.packages("ggguides")            # CRAN
-
-install.packages("pak")                 # development version
-pak::pak("gcol33/ggguides")
-```
+Installation is covered in [Getting Started with
+ggguides](https://gcol33.github.io/ggguides/articles/getting-started.md).
 
 ## Overview
 
@@ -52,7 +45,10 @@ p <- ggplot(mtcars, aes(mpg, wt,
 p
 ```
 
-![](multiple-legends_files/figure-html/example-plot-1.svg)
+![Scatter plot of car weight against fuel economy, points coloured by
+cylinders, sized by horsepower and shaped by transmission, with three
+legends on the
+right.](multiple-legends_files/figure-html/example-plot-1.svg)
 
 ## Hiding Legends
 
@@ -66,7 +62,10 @@ to remove specific legends while keeping others:
 p + legend_hide(size)
 ```
 
-![](multiple-legends_files/figure-html/hide-legends-1.svg)
+![Scatter plot of car weight against fuel economy, points coloured by
+cylinders, sized by horsepower and shaped by transmission, with the
+cylinder and transmission legends and no horsepower
+legend.](multiple-legends_files/figure-html/hide-legends-1.svg)
 
 ``` r
 
@@ -75,7 +74,9 @@ p + legend_hide(size)
 p + legend_hide(size, shape)
 ```
 
-![](multiple-legends_files/figure-html/hide-legends-2.svg)
+![Scatter plot of car weight against fuel economy, points coloured by
+cylinders, sized by horsepower and shaped by transmission, with only the
+cylinder legend.](multiple-legends_files/figure-html/hide-legends-2.svg)
 
 ## Selecting Legends
 
@@ -90,7 +91,10 @@ to keep only certain legends (inverse of
 p + legend_select(colour)
 ```
 
-![](multiple-legends_files/figure-html/select-legends-1.svg)
+![Scatter plot of car weight against fuel economy, points coloured by
+cylinders, sized by horsepower and shaped by transmission, with only the
+cylinder
+legend.](multiple-legends_files/figure-html/select-legends-1.svg)
 
 ``` r
 
@@ -99,7 +103,10 @@ p + legend_select(colour)
 p + legend_select(colour, shape)
 ```
 
-![](multiple-legends_files/figure-html/select-legends-2.svg)
+![Scatter plot of car weight against fuel economy, points coloured by
+cylinders, sized by horsepower and shaped by transmission, with the
+cylinder and transmission
+legends.](multiple-legends_files/figure-html/select-legends-2.svg)
 
 ## Controlling Legend Order
 
@@ -113,7 +120,10 @@ to control the display order:
 p
 ```
 
-![](multiple-legends_files/figure-html/order-legends-1.svg)
+![Scatter plot of car weight against fuel economy, points coloured by
+cylinders, sized by horsepower and shaped by transmission, with the
+legends in the default order: cylinders, transmission,
+horsepower.](multiple-legends_files/figure-html/order-legends-1.svg)
 
 ``` r
 
@@ -122,7 +132,10 @@ p
 p + legend_order_guides(size = 1, colour = 2, shape = 3)
 ```
 
-![](multiple-legends_files/figure-html/order-legends-2.svg)
+![Scatter plot of car weight against fuel economy, points coloured by
+cylinders, sized by horsepower and shaped by transmission, with the
+legends ordered horsepower, cylinders,
+transmission.](multiple-legends_files/figure-html/order-legends-2.svg)
 
 ## Merging and Splitting Legends
 
@@ -146,7 +159,9 @@ p_merge <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl), fill = factor(cyl)))
 p_merge
 ```
 
-![](multiple-legends_files/figure-html/merge-legends-1.svg)
+![Scatter plot of car weight against fuel economy with points outlined
+and filled by cylinders, and one merged cylinders
+legend.](multiple-legends_files/figure-html/merge-legends-1.svg)
 
 ``` r
 
@@ -155,7 +170,9 @@ p_merge
 p_merge + legend_merge(colour, fill)
 ```
 
-![](multiple-legends_files/figure-html/merge-legends-2.svg)
+![The same scatter plot after legend_merge(), still with one merged
+cylinders
+legend.](multiple-legends_files/figure-html/merge-legends-2.svg)
 
 ### Forcing Split
 
@@ -165,7 +182,10 @@ p_merge + legend_merge(colour, fill)
 p_merge + legend_split(colour, fill)
 ```
 
-![](multiple-legends_files/figure-html/split-legends-1.svg)
+![Scatter plot of car weight against fuel economy with points outlined
+and filled by cylinders, and two separate cylinders legends, one for
+outline and one for
+fill.](multiple-legends_files/figure-html/split-legends-1.svg)
 
 ## Positioning Legends Separately
 
@@ -185,7 +205,10 @@ p +
   legend_bottom(by = "size")
 ```
 
-![](multiple-legends_files/figure-html/position-separately-1.svg)
+![Scatter plot of car weight against fuel economy, points coloured by
+cylinders, sized by horsepower and shaped by transmission, with the
+cylinder legend on the left and the horsepower legend below the
+panel.](multiple-legends_files/figure-html/position-separately-1.svg)
 
 ``` r
 
@@ -196,7 +219,10 @@ p +
   legend_right(by = "size")
 ```
 
-![](multiple-legends_files/figure-html/position-top-right-1.svg)
+![Scatter plot of car weight against fuel economy, points coloured by
+cylinders, sized by horsepower and shaped by transmission, with the
+cylinder legend above the panel and the horsepower legend on the
+right.](multiple-legends_files/figure-html/position-top-right-1.svg)
 
 ## Styling Legends Separately
 
@@ -212,7 +238,11 @@ p +
   legend_style(size = 16, by = "size")
 ```
 
-![](multiple-legends_files/figure-html/style-separately-1.svg)
+![Scatter plot of car weight against fuel economy, points coloured by
+cylinders, sized by horsepower and shaped by transmission, with the
+cylinder legend on a light grey box with a bold title and the horsepower
+legend in larger
+text.](multiple-legends_files/figure-html/style-separately-1.svg)
 
 ## Combining Multiple Controls
 
@@ -230,7 +260,11 @@ p +
   legend_style(direction = "horizontal", by = "size")
 ```
 
-![](multiple-legends_files/figure-html/combined-1.svg)
+![Scatter plot of car weight against fuel economy, points coloured by
+cylinders, sized by horsepower and shaped by transmission, with the
+cylinder legend on the left under a large bold title and the horsepower
+legend in a row below the
+panel.](multiple-legends_files/figure-html/combined-1.svg)
 
 ## Four Legends, One per Side
 
@@ -279,7 +313,10 @@ p4 +
   legend_style(by = "shape",  margin = c(0, 0, 0, 0.3))
 ```
 
-![](multiple-legends_files/figure-html/four-sides-1.svg)
+![Scatter plot of car weight against fuel economy with four legends:
+cylinders above the panel at the left, gear below at the right,
+horsepower on the left at the top and transmission on the right at the
+bottom.](multiple-legends_files/figure-html/four-sides-1.svg)
 
 Each `legend_style(by = ...)` call is additive — you can chain as many
 as you need to tune one legend at a time without affecting the others.
@@ -347,7 +384,10 @@ p6 +
 #> `geom_smooth()` using formula = 'y ~ x'
 ```
 
-![](multiple-legends_files/figure-html/six-legends-1.svg)
+![Scatter plot of car weight against fuel economy with six legends:
+colour and fill above the panel, size and transparency on the right,
+shape below and line type on the
+left.](multiple-legends_files/figure-html/six-legends-1.svg)
 
 ### What each step is doing
 

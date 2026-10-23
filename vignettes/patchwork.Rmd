@@ -1,7 +1,5 @@
 ---
 title: "Patchwork Integration"
-author: "Gilles Colling"
-date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Patchwork Integration}
@@ -33,14 +31,7 @@ theme_set(
 )
 ```
 
-## Installation
-
-```{r, eval = FALSE}
-install.packages("ggguides")            # CRAN
-
-install.packages("pak")                 # development version
-pak::pak("gcol33/ggguides")
-```
+Installation is covered in [Getting Started with ggguides](getting-started.html). The examples also need [patchwork](https://patchwork.data-imaginist.com).
 
 ## Overview
 
@@ -59,7 +50,7 @@ ggguides provides `collect_legends()` and `collect_axes()` to address these chal
 Plots placed side by side get narrow panels, so the examples use three
 x-axis breaks (`x_breaks`) to keep the tick labels apart.
 
-```{r problem, fig.height=4}
+```{r problem, fig.alt = "Two scatter plots side by side, Plot 1 of weight and Plot 2 of horsepower against fuel economy, coloured by cylinders, each plot with its own cylinders legend.", fig.height=4}
 library(patchwork)
 
 x_breaks <- scale_x_continuous(breaks = c(10, 20, 30))
@@ -77,7 +68,7 @@ p1 | p2
 
 Use `collect_legends()` to gather legends from all plots in a composition:
 
-```{r collect-basic, fig.height=4}
+```{r collect-basic, fig.alt = "Two scatter plots side by side, Plot 1 of weight and Plot 2 of horsepower against fuel economy, coloured by cylinders, with one shared cylinders legend on the right.", fig.height=4}
 collect_legends(p1 | p2)
 ```
 
@@ -85,11 +76,11 @@ collect_legends(p1 | p2)
 
 Control where the collected legend appears:
 
-```{r collect-bottom, fig.height=5}
+```{r collect-bottom, fig.alt = "Two scatter plots side by side, Plot 1 of weight and Plot 2 of horsepower against fuel economy, coloured by cylinders, with one shared cylinders legend below both plots.", fig.height=5}
 collect_legends(p1 | p2, position = "bottom")
 ```
 
-```{r collect-left, fig.height=4}
+```{r collect-left, fig.alt = "Two scatter plots side by side, Plot 1 of weight and Plot 2 of horsepower against fuel economy, coloured by cylinders, with one shared cylinders legend on the left.", fig.height=4}
 collect_legends(p1 | p2, position = "left")
 ```
 
@@ -100,7 +91,7 @@ Using different plot heights makes the spanning behavior more visible.
 
 ### Default: Centered
 
-```{r stacked-default, fig.height=8}
+```{r stacked-default, fig.alt = "Three scatter plots stacked with decreasing heights, of weight, horsepower and displacement against fuel economy, with one cylinders legend on the right centred on the full height.", fig.height=8}
 # Create plots with different heights using plot_layout
 p3 <- ggplot(mtcars, aes(mpg, disp, color = factor(cyl))) +
   geom_point() + x_breaks + labs(title = "Plot 3", color = "Cylinders")
@@ -114,7 +105,7 @@ collect_legends(stacked, position = "right")
 
 Use `span = TRUE` to make the legend fill the full height:
 
-```{r stacked-span, fig.height=8}
+```{r stacked-span, fig.alt = "Three scatter plots stacked with decreasing heights, of weight, horsepower and displacement against fuel economy, with one cylinders legend on the right spanning the full height.", fig.height=8}
 gt <- collect_legends(stacked, position = "right", span = TRUE)
 grid::grid.draw(gt)
 ```
@@ -123,12 +114,12 @@ grid::grid.draw(gt)
 
 Attach the legend to specific row(s) instead of spanning all:
 
-```{r span-row1, fig.height=8}
+```{r span-row1, fig.alt = "Three scatter plots stacked with decreasing heights, of weight, horsepower and displacement against fuel economy, with the cylinders legend beside the top plot only.", fig.height=8}
 # Legend attached to row 1 only (the tallest plot)
 gt <- collect_legends(stacked, position = "right", span = 1)
 grid::grid.draw(gt)
 ```
-```{r span-row12, fig.height=8}
+```{r span-row12, fig.alt = "Three scatter plots stacked with decreasing heights, of weight, horsepower and displacement against fuel economy, with the cylinders legend beside the top two plots.", fig.height=8}
 # Legend attached to rows 1 and 2
 gt <- collect_legends(stacked, position = "right", span = 1:2)
 grid::grid.draw(gt)
@@ -139,7 +130,7 @@ grid::grid.draw(gt)
 When stacking plots vertically, the x-axis may be duplicated. Use `collect_axes()`
 to remove redundant axes:
 
-```{r collect-axes, fig.height=5}
+```{r collect-axes, fig.alt = "Two scatter plots stacked, of weight and displacement against fuel economy, each with its own fuel economy axis.", fig.height=5}
 # Plots stacked vertically - x-axis is duplicated
 p_top <- ggplot(mtcars, aes(mpg, wt)) +
   geom_point() + labs(y = "Weight")
@@ -151,7 +142,7 @@ p_bottom <- ggplot(mtcars, aes(mpg, disp)) +
 p_top / p_bottom
 ```
 
-```{r collect-axes-fixed, fig.height=5}
+```{r collect-axes-fixed, fig.alt = "The same two stacked scatter plots with the top plot's fuel economy axis removed, leaving one shared axis at the bottom.", fig.height=5}
 # With axis collection (removes redundant x-axis from top)
 collect_axes(p_top / p_bottom)
 ```
@@ -160,7 +151,7 @@ collect_axes(p_top / p_bottom)
 
 ggguides functions work together:
 
-```{r combined, fig.height=5}
+```{r combined, fig.alt = "Two scatter plots side by side, Plot 1 of weight and Plot 2 of horsepower against fuel economy, coloured by cylinders, with one shared cylinders legend on the right, its title in bold.", fig.height=5}
 p1_styled <- p1 + legend_style(size = 15, title_face = "bold")
 p2_styled <- p2 + legend_style(size = 15, title_face = "bold")
 
@@ -171,7 +162,7 @@ collect_legends(p1_styled | p2_styled, position = "right")
 
 Handle more complex patchwork layouts:
 
-```{r complex, fig.height=6}
+```{r complex, fig.alt = "Four scatter plots in a two by two grid, coloured by cylinders, with one shared cylinders legend on the right.", fig.height=6}
 p4 <- ggplot(mtcars, aes(qsec, wt, color = factor(cyl))) +
   geom_point() + labs(title = "Plot 4", color = "Cylinders")
 
@@ -198,7 +189,7 @@ cp4 <- ggplot(mtcars, aes(qsec, wt, color = factor(cyl))) +
 
 ### `get_legend()` - Extract Legend
 
-```{r get-legend}
+```{r get-legend, fig.alt = "A cylinders legend drawn on its own, without a plot."}
 # Extract legend from a plot
 leg <- get_legend(cp1)
 
@@ -209,21 +200,21 @@ grid::grid.draw(leg)
 
 ### `shared_legend()` - Combine Plots with Shared Legend
 
-```{r shared-legend-side, fig.height=4}
+```{r shared-legend-side, fig.alt = "Two scatter plots side by side, Plot 1 of weight and Plot 2 of horsepower against fuel economy, coloured by cylinders, arranged without patchwork, with one shared cylinders legend on the right.", fig.height=4}
 # Side-by-side with shared legend on right
 gt <- shared_legend(cp1, cp2, ncol = 2, position = "right")
 grid::grid.newpage()
 grid::grid.draw(gt)
 ```
 
-```{r shared-legend-stacked, fig.height=10}
+```{r shared-legend-stacked, fig.alt = "Three scatter plots stacked, of weight, horsepower and displacement against fuel economy, with one shared cylinders legend below them.", fig.height=10}
 # Stacked with legend at bottom
 gt <- shared_legend(cp1, cp2, cp3, ncol = 1, position = "bottom")
 grid::grid.newpage()
 grid::grid.draw(gt)
 ```
 
-```{r shared-legend-grid, fig.height=5}
+```{r shared-legend-grid, fig.alt = "Four scatter plots in a two by two grid, arranged without patchwork, with one shared cylinders legend on the right.", fig.height=5}
 # 2x2 grid
 gt <- shared_legend(cp1, cp2, cp3, cp4, ncol = 2, nrow = 2, position = "right")
 grid::grid.newpage()

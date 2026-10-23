@@ -54,7 +54,9 @@ p <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
 p
 ```
 
-![](getting-started_files/figure-html/base-plot-1.svg)
+![Scatter plot of car weight against fuel economy, points coloured by
+number of cylinders, with the cylinders legend on the
+right.](getting-started_files/figure-html/base-plot-1.svg)
 
 ### Moving the Legend
 
@@ -65,14 +67,18 @@ Position the legend on any side with a single function call:
 p + legend_left()
 ```
 
-![](getting-started_files/figure-html/position-left-1.svg)
+![Scatter plot of car weight against fuel economy, points coloured by
+number of cylinders, with the legend on the left of the
+panel.](getting-started_files/figure-html/position-left-1.svg)
 
 ``` r
 
 p + legend_bottom()
 ```
 
-![](getting-started_files/figure-html/position-bottom-1.svg)
+![Scatter plot of car weight against fuel economy, points coloured by
+number of cylinders, with the legend below the panel and its keys in a
+row.](getting-started_files/figure-html/position-bottom-1.svg)
 
 ### Inside Positioning
 
@@ -83,14 +89,18 @@ Place the legend inside the plot area using coordinates or shortcuts:
 p + legend_inside(position = "topright")
 ```
 
-![](getting-started_files/figure-html/inside-topright-1.svg)
+![Scatter plot of car weight against fuel economy, points coloured by
+number of cylinders, with the legend inside the panel in the top-right
+corner.](getting-started_files/figure-html/inside-topright-1.svg)
 
 ``` r
 
 p + legend_inside(x = 0.02, y = 0.98, justification = c("left", "top"))
 ```
 
-![](getting-started_files/figure-html/inside-coords-1.svg)
+![Scatter plot of car weight against fuel economy, points coloured by
+number of cylinders, with the legend inside the panel in the top-left
+corner.](getting-started_files/figure-html/inside-coords-1.svg)
 
 ### Removing the Legend
 
@@ -99,7 +109,9 @@ p + legend_inside(x = 0.02, y = 0.98, justification = c("left", "top"))
 p + legend_none()
 ```
 
-![](getting-started_files/figure-html/legend-none-1.svg)
+![Scatter plot of car weight against fuel economy, points coloured by
+number of cylinders, without a
+legend.](getting-started_files/figure-html/legend-none-1.svg)
 
 ## Styling Legends
 
@@ -112,7 +124,9 @@ to customize the legend appearance:
 p + legend_style(size = 18)
 ```
 
-![](getting-started_files/figure-html/style-size-1.svg)
+![Scatter plot of car weight against fuel economy, points coloured by
+number of cylinders, with the legend title and labels drawn
+larger.](getting-started_files/figure-html/style-size-1.svg)
 
 ``` r
 
@@ -125,7 +139,10 @@ p + legend_style(
 )
 ```
 
-![](getting-started_files/figure-html/style-full-1.svg)
+![Scatter plot of car weight against fuel economy, points coloured by
+number of cylinders, with a bold legend title and the legend on a cream
+box with an orange
+border.](getting-started_files/figure-html/style-full-1.svg)
 
 ## Wrapping Legend Entries
 
@@ -140,7 +157,9 @@ ggplot(mpg, aes(displ, hwy, color = class)) +
   legend_wrap(ncol = 2)
 ```
 
-![](getting-started_files/figure-html/wrap-example-1.svg)
+![Scatter plot of highway mileage against engine displacement, points
+coloured by the seven car classes, with the legend keys in two columns
+on the right.](getting-started_files/figure-html/wrap-example-1.svg)
 
 ## Combining Functions
 
@@ -154,7 +173,10 @@ ggplot(mpg, aes(displ, hwy, color = class)) +
   legend_style(size = 15, title_face = "bold", background = "#FFF3E0")
 ```
 
-![](getting-started_files/figure-html/combined-1.svg)
+![Scatter plot of highway mileage against engine displacement, points
+coloured by the seven car classes, with the legend on the left on a
+cream box, its title in
+bold.](getting-started_files/figure-html/combined-1.svg)
 
 ``` r
 
@@ -164,7 +186,10 @@ ggplot(mpg, aes(displ, hwy, color = class)) +
   legend_bottom()
 ```
 
-![](getting-started_files/figure-html/combined-wrap-1.svg)
+![Scatter plot of highway mileage against engine displacement, points
+coloured by the seven car classes, with the legend below the panel and
+its keys in two
+columns.](getting-started_files/figure-html/combined-wrap-1.svg)
 
 ## What’s Next
 

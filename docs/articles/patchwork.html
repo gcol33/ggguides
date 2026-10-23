@@ -85,10 +85,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Patchwork Integration</h1>
-                        <h4 data-toc-skip class="author">Gilles
-Colling</h4>
             
-            <h4 data-toc-skip class="date">2026-10-23</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/gcol33/ggguides/blob/HEAD/vignettes/patchwork.Rmd" class="external-link"><code>vignettes/patchwork.Rmd</code></a></small>
       <div class="d-none name"><code>patchwork.Rmd</code></div>
@@ -96,15 +93,8 @@ Colling</h4>
 
     
     
-<div class="section level2">
-<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
-</h2>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"ggguides"</span><span class="op">)</span>            <span class="co"># CRAN</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"pak"</span><span class="op">)</span>                 <span class="co"># development version</span></span>
-<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"gcol33/ggguides"</span><span class="op">)</span></span></code></pre></div>
-</div>
+<p>Installation is covered in <a href="getting-started.html">Getting
+Started with ggguides</a>. The examples also need <a href="https://patchwork.data-imaginist.com" class="external-link">patchwork</a>.</p>
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
@@ -127,7 +117,7 @@ multiple rows</p></li>
 <p>Plots placed side by side get narrow panels, so the examples use
 three x-axis breaks (<code>x_breaks</code>) to keep the tick labels
 apart.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com" class="external-link">patchwork</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">x_breaks</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">20</span>, <span class="fl">30</span><span class="op">)</span><span class="op">)</span></span>
@@ -140,7 +130,7 @@ apart.</p>
 <span><span class="co"># Default patchwork: duplicate legends</span></span>
 <span><span class="va">p1</span> <span class="op">|</span> <span class="va">p2</span></span></code></pre></div>
 <p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='288.00pt' viewBox='0 0 468.00 288.00' class="r-plt inline-svg" style="width:100%;height:auto;">
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='288.00pt' viewBox='0 0 468.00 288.00' class="r-plt inline-svg" style="width:100%;height:auto;" role="img" aria-label="Two scatter plots side by side, Plot 1 of weight and Plot 2 of horsepower against fuel economy, coloured by cylinders, each plot with its own cylinders legend."><title>Two scatter plots side by side, Plot 1 of weight and Plot 2 of horsepower against fuel economy, coloured by cylinders, each plot with its own cylinders legend.</title>
 <g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[
@@ -382,10 +372,10 @@ apart.</p>
 </h2>
 <p>Use <code><a href="../reference/collect_legends.html">collect_legends()</a></code> to gather legends from all plots
 in a composition:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/collect_legends.html">collect_legends</a></span><span class="op">(</span><span class="va">p1</span> <span class="op">|</span> <span class="va">p2</span><span class="op">)</span></span></code></pre></div>
 <p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='288.00pt' viewBox='0 0 468.00 288.00' class="r-plt inline-svg" style="width:100%;height:auto;">
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='288.00pt' viewBox='0 0 468.00 288.00' class="r-plt inline-svg" style="width:100%;height:auto;" role="img" aria-label="Two scatter plots side by side, Plot 1 of weight and Plot 2 of horsepower against fuel economy, coloured by cylinders, with one shared cylinders legend on the right."><title>Two scatter plots side by side, Plot 1 of weight and Plot 2 of horsepower against fuel economy, coloured by cylinders, with one shared cylinders legend on the right.</title>
 <g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[
@@ -613,10 +603,10 @@ in a composition:</p>
 <h3 id="position-options">Position Options<a class="anchor" aria-label="anchor" href="#position-options"></a>
 </h3>
 <p>Control where the collected legend appears:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/collect_legends.html">collect_legends</a></span><span class="op">(</span><span class="va">p1</span> <span class="op">|</span> <span class="va">p2</span>, position <span class="op">=</span> <span class="st">"bottom"</span><span class="op">)</span></span></code></pre></div>
 <p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='360.00pt' viewBox='0 0 468.00 360.00' class="r-plt inline-svg" style="width:100%;height:auto;">
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='360.00pt' viewBox='0 0 468.00 360.00' class="r-plt inline-svg" style="width:100%;height:auto;" role="img" aria-label="Two scatter plots side by side, Plot 1 of weight and Plot 2 of horsepower against fuel economy, coloured by cylinders, with one shared cylinders legend below both plots."><title>Two scatter plots side by side, Plot 1 of weight and Plot 2 of horsepower against fuel economy, coloured by cylinders, with one shared cylinders legend below both plots.</title>
 <g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[
@@ -840,10 +830,10 @@ in a composition:</p>
 </g>
 </g>
 </svg></div></p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/collect_legends.html">collect_legends</a></span><span class="op">(</span><span class="va">p1</span> <span class="op">|</span> <span class="va">p2</span>, position <span class="op">=</span> <span class="st">"left"</span><span class="op">)</span></span></code></pre></div>
 <p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='288.00pt' viewBox='0 0 468.00 288.00' class="r-plt inline-svg" style="width:100%;height:auto;">
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='288.00pt' viewBox='0 0 468.00 288.00' class="r-plt inline-svg" style="width:100%;height:auto;" role="img" aria-label="Two scatter plots side by side, Plot 1 of weight and Plot 2 of horsepower against fuel economy, coloured by cylinders, with one shared cylinders legend on the left."><title>Two scatter plots side by side, Plot 1 of weight and Plot 2 of horsepower against fuel economy, coloured by cylinders, with one shared cylinders legend on the left.</title>
 <g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[
@@ -1078,7 +1068,7 @@ more visible.</p>
 <div class="section level3">
 <h3 id="default-centered">Default: Centered<a class="anchor" aria-label="anchor" href="#default-centered"></a>
 </h3>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create plots with different heights using plot_layout</span></span>
 <span><span class="va">p3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="va">disp</span>, color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="va">x_breaks</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Plot 3"</span>, color <span class="op">=</span> <span class="st">"Cylinders"</span><span class="op">)</span></span>
@@ -1087,7 +1077,7 @@ more visible.</p>
 <span><span class="va">stacked</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">p1</span> <span class="op">/</span> <span class="va">p2</span> <span class="op">/</span> <span class="va">p3</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_layout.html" class="external-link">plot_layout</a></span><span class="op">(</span>heights <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1.5</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/collect_legends.html">collect_legends</a></span><span class="op">(</span><span class="va">stacked</span>, position <span class="op">=</span> <span class="st">"right"</span><span class="op">)</span></span></code></pre></div>
 <p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='576.00pt' viewBox='0 0 468.00 576.00' class="r-plt inline-svg" style="width:100%;height:auto;">
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='576.00pt' viewBox='0 0 468.00 576.00' class="r-plt inline-svg" style="width:100%;height:auto;" role="img" aria-label="Three scatter plots stacked with decreasing heights, of weight, horsepower and displacement against fuel economy, with one cylinders legend on the right centred on the full height."><title>Three scatter plots stacked with decreasing heights, of weight, horsepower and displacement against fuel economy, with one cylinders legend on the right centred on the full height.</title>
 <g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[
@@ -1400,11 +1390,11 @@ more visible.</p>
 </h3>
 <p>Use <code>span = TRUE</code> to make the legend fill the full
 height:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/collect_legends.html">collect_legends</a></span><span class="op">(</span><span class="va">stacked</span>, position <span class="op">=</span> <span class="st">"right"</span>, span <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/grid.draw.html" class="external-link">grid.draw</a></span><span class="op">(</span><span class="va">gt</span><span class="op">)</span></span></code></pre></div>
 <p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='576.00pt' viewBox='0 0 468.00 576.00' class="r-plt inline-svg" style="width:100%;height:auto;">
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='576.00pt' viewBox='0 0 468.00 576.00' class="r-plt inline-svg" style="width:100%;height:auto;" role="img" aria-label="Three scatter plots stacked with decreasing heights, of weight, horsepower and displacement against fuel economy, with one cylinders legend on the right spanning the full height."><title>Three scatter plots stacked with decreasing heights, of weight, horsepower and displacement against fuel economy, with one cylinders legend on the right spanning the full height.</title>
 <g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[
@@ -1716,12 +1706,12 @@ height:</p>
 <h3 id="attaching-to-specific-rows">Attaching to Specific Rows<a class="anchor" aria-label="anchor" href="#attaching-to-specific-rows"></a>
 </h3>
 <p>Attach the legend to specific row(s) instead of spanning all:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Legend attached to row 1 only (the tallest plot)</span></span>
 <span><span class="va">gt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/collect_legends.html">collect_legends</a></span><span class="op">(</span><span class="va">stacked</span>, position <span class="op">=</span> <span class="st">"right"</span>, span <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/grid.draw.html" class="external-link">grid.draw</a></span><span class="op">(</span><span class="va">gt</span><span class="op">)</span></span></code></pre></div>
 <p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='576.00pt' viewBox='0 0 468.00 576.00' class="r-plt inline-svg" style="width:100%;height:auto;">
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='576.00pt' viewBox='0 0 468.00 576.00' class="r-plt inline-svg" style="width:100%;height:auto;" role="img" aria-label="Three scatter plots stacked with decreasing heights, of weight, horsepower and displacement against fuel economy, with the cylinders legend beside the top plot only."><title>Three scatter plots stacked with decreasing heights, of weight, horsepower and displacement against fuel economy, with the cylinders legend beside the top plot only.</title>
 <g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[
@@ -2028,12 +2018,12 @@ height:</p>
 </g>
 </g>
 </svg></div></p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Legend attached to rows 1 and 2</span></span>
 <span><span class="va">gt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/collect_legends.html">collect_legends</a></span><span class="op">(</span><span class="va">stacked</span>, position <span class="op">=</span> <span class="st">"right"</span>, span <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span></span>
 <span><span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/grid.draw.html" class="external-link">grid.draw</a></span><span class="op">(</span><span class="va">gt</span><span class="op">)</span></span></code></pre></div>
 <p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='576.00pt' viewBox='0 0 468.00 576.00' class="r-plt inline-svg" style="width:100%;height:auto;">
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='576.00pt' viewBox='0 0 468.00 576.00' class="r-plt inline-svg" style="width:100%;height:auto;" role="img" aria-label="Three scatter plots stacked with decreasing heights, of weight, horsepower and displacement against fuel economy, with the cylinders legend beside the top two plots."><title>Three scatter plots stacked with decreasing heights, of weight, horsepower and displacement against fuel economy, with the cylinders legend beside the top two plots.</title>
 <g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[
@@ -2347,7 +2337,7 @@ height:</p>
 </h2>
 <p>When stacking plots vertically, the x-axis may be duplicated. Use
 <code><a href="../reference/collect_axes.html">collect_axes()</a></code> to remove redundant axes:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Plots stacked vertically - x-axis is duplicated</span></span>
 <span><span class="va">p_top</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="va">wt</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"Weight"</span><span class="op">)</span></span>
@@ -2358,7 +2348,7 @@ height:</p>
 <span><span class="co"># Without axis collection (both have x-axis)</span></span>
 <span><span class="va">p_top</span> <span class="op">/</span> <span class="va">p_bottom</span></span></code></pre></div>
 <p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='360.00pt' viewBox='0 0 468.00 360.00' class="r-plt inline-svg" style="width:100%;height:auto;">
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='360.00pt' viewBox='0 0 468.00 360.00' class="r-plt inline-svg" style="width:100%;height:auto;" role="img" aria-label="Two scatter plots stacked, of weight and displacement against fuel economy, each with its own fuel economy axis."><title>Two scatter plots stacked, of weight and displacement against fuel economy, each with its own fuel economy axis.</title>
 <g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[
@@ -2594,11 +2584,11 @@ height:</p>
 </g>
 </g>
 </svg></div></p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># With axis collection (removes redundant x-axis from top)</span></span>
 <span><span class="fu"><a href="../reference/collect_axes.html">collect_axes</a></span><span class="op">(</span><span class="va">p_top</span> <span class="op">/</span> <span class="va">p_bottom</span><span class="op">)</span></span></code></pre></div>
 <p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='360.00pt' viewBox='0 0 468.00 360.00' class="r-plt inline-svg" style="width:100%;height:auto;">
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='360.00pt' viewBox='0 0 468.00 360.00' class="r-plt inline-svg" style="width:100%;height:auto;" role="img" aria-label="The same two stacked scatter plots with the top plot's fuel economy axis removed, leaving one shared axis at the bottom."><title>The same two stacked scatter plots with the top plot's fuel economy axis removed, leaving one shared axis at the bottom.</title>
 <g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[
@@ -2826,13 +2816,13 @@ height:</p>
 <h2 id="combining-with-styling">Combining with Styling<a class="anchor" aria-label="anchor" href="#combining-with-styling"></a>
 </h2>
 <p>ggguides functions work together:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p1_styled</span> <span class="op">&lt;-</span> <span class="va">p1</span> <span class="op">+</span> <span class="fu"><a href="../reference/legend_style.html">legend_style</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">15</span>, title_face <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span></span>
 <span><span class="va">p2_styled</span> <span class="op">&lt;-</span> <span class="va">p2</span> <span class="op">+</span> <span class="fu"><a href="../reference/legend_style.html">legend_style</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">15</span>, title_face <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/collect_legends.html">collect_legends</a></span><span class="op">(</span><span class="va">p1_styled</span> <span class="op">|</span> <span class="va">p2_styled</span>, position <span class="op">=</span> <span class="st">"right"</span><span class="op">)</span></span></code></pre></div>
 <p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='360.00pt' viewBox='0 0 468.00 360.00' class="r-plt inline-svg" style="width:100%;height:auto;">
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='360.00pt' viewBox='0 0 468.00 360.00' class="r-plt inline-svg" style="width:100%;height:auto;" role="img" aria-label="Two scatter plots side by side, Plot 1 of weight and Plot 2 of horsepower against fuel economy, coloured by cylinders, with one shared cylinders legend on the right, its title in bold."><title>Two scatter plots side by side, Plot 1 of weight and Plot 2 of horsepower against fuel economy, coloured by cylinders, with one shared cylinders legend on the right, its title in bold.</title>
 <g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[
@@ -3061,7 +3051,7 @@ height:</p>
 <h2 id="complex-layouts">Complex Layouts<a class="anchor" aria-label="anchor" href="#complex-layouts"></a>
 </h2>
 <p>Handle more complex patchwork layouts:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">qsec</span>, <span class="va">wt</span>, color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Plot 4"</span>, color <span class="op">=</span> <span class="st">"Cylinders"</span><span class="op">)</span></span>
 <span></span>
@@ -3069,7 +3059,7 @@ height:</p>
 <span><span class="va">layout</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">p1</span> <span class="op">|</span> <span class="va">p2</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="va">p3</span> <span class="op">|</span> <span class="va">p4</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/collect_legends.html">collect_legends</a></span><span class="op">(</span><span class="va">layout</span>, position <span class="op">=</span> <span class="st">"right"</span><span class="op">)</span></span></code></pre></div>
 <p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='432.00pt' viewBox='0 0 468.00 432.00' class="r-plt inline-svg" style="width:100%;height:auto;">
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='432.00pt' viewBox='0 0 468.00 432.00' class="r-plt inline-svg" style="width:100%;height:auto;" role="img" aria-label="Four scatter plots in a two by two grid, coloured by cylinders, with one shared cylinders legend on the right."><title>Four scatter plots in a two by two grid, coloured by cylinders, with one shared cylinders legend on the right.</title>
 <g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[
@@ -3501,7 +3491,7 @@ patchwork:</p>
 <h3 id="get_legend---extract-legend">
 <code>get_legend()</code> - Extract Legend<a class="anchor" aria-label="anchor" href="#get_legend---extract-legend"></a>
 </h3>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Extract legend from a plot</span></span>
 <span><span class="va">leg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_legend.html">get_legend</a></span><span class="op">(</span><span class="va">cp1</span><span class="op">)</span></span>
 <span></span>
@@ -3509,7 +3499,7 @@ patchwork:</p>
 <span><span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/grid.newpage.html" class="external-link">grid.newpage</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/grid.draw.html" class="external-link">grid.draw</a></span><span class="op">(</span><span class="va">leg</span><span class="op">)</span></span></code></pre></div>
 <p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='360.00pt' viewBox='0 0 468.00 360.00' class="r-plt inline-svg" style="width:100%;height:auto;">
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='360.00pt' viewBox='0 0 468.00 360.00' class="r-plt inline-svg" style="width:100%;height:auto;" role="img" aria-label="A cylinders legend drawn on its own, without a plot."><title>A cylinders legend drawn on its own, without a plot.</title>
 <g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[
@@ -3565,13 +3555,13 @@ patchwork:</p>
 <h3 id="shared_legend---combine-plots-with-shared-legend">
 <code>shared_legend()</code> - Combine Plots with Shared Legend<a class="anchor" aria-label="anchor" href="#shared_legend---combine-plots-with-shared-legend"></a>
 </h3>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Side-by-side with shared legend on right</span></span>
 <span><span class="va">gt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/shared_legend.html">shared_legend</a></span><span class="op">(</span><span class="va">cp1</span>, <span class="va">cp2</span>, ncol <span class="op">=</span> <span class="fl">2</span>, position <span class="op">=</span> <span class="st">"right"</span><span class="op">)</span></span>
 <span><span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/grid.newpage.html" class="external-link">grid.newpage</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/grid.draw.html" class="external-link">grid.draw</a></span><span class="op">(</span><span class="va">gt</span><span class="op">)</span></span></code></pre></div>
 <p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='288.00pt' viewBox='0 0 468.00 288.00' class="r-plt inline-svg" style="width:100%;height:auto;">
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='288.00pt' viewBox='0 0 468.00 288.00' class="r-plt inline-svg" style="width:100%;height:auto;" role="img" aria-label="Two scatter plots side by side, Plot 1 of weight and Plot 2 of horsepower against fuel economy, coloured by cylinders, arranged without patchwork, with one shared cylinders legend on the right."><title>Two scatter plots side by side, Plot 1 of weight and Plot 2 of horsepower against fuel economy, coloured by cylinders, arranged without patchwork, with one shared cylinders legend on the right.</title>
 <g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[
@@ -3785,13 +3775,13 @@ patchwork:</p>
 </g>
 </g>
 </svg></div></p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Stacked with legend at bottom</span></span>
 <span><span class="va">gt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/shared_legend.html">shared_legend</a></span><span class="op">(</span><span class="va">cp1</span>, <span class="va">cp2</span>, <span class="va">cp3</span>, ncol <span class="op">=</span> <span class="fl">1</span>, position <span class="op">=</span> <span class="st">"bottom"</span><span class="op">)</span></span>
 <span><span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/grid.newpage.html" class="external-link">grid.newpage</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/grid.draw.html" class="external-link">grid.draw</a></span><span class="op">(</span><span class="va">gt</span><span class="op">)</span></span></code></pre></div>
 <p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='720.00pt' viewBox='0 0 468.00 720.00' class="r-plt inline-svg" style="width:100%;height:auto;">
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='720.00pt' viewBox='0 0 468.00 720.00' class="r-plt inline-svg" style="width:100%;height:auto;" role="img" aria-label="Three scatter plots stacked, of weight, horsepower and displacement against fuel economy, with one shared cylinders legend below them."><title>Three scatter plots stacked, of weight, horsepower and displacement against fuel economy, with one shared cylinders legend below them.</title>
 <g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[
@@ -4088,13 +4078,13 @@ patchwork:</p>
 </g>
 </g>
 </svg></div></p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 2x2 grid</span></span>
 <span><span class="va">gt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/shared_legend.html">shared_legend</a></span><span class="op">(</span><span class="va">cp1</span>, <span class="va">cp2</span>, <span class="va">cp3</span>, <span class="va">cp4</span>, ncol <span class="op">=</span> <span class="fl">2</span>, nrow <span class="op">=</span> <span class="fl">2</span>, position <span class="op">=</span> <span class="st">"right"</span><span class="op">)</span></span>
 <span><span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/grid.newpage.html" class="external-link">grid.newpage</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/grid.draw.html" class="external-link">grid.draw</a></span><span class="op">(</span><span class="va">gt</span><span class="op">)</span></span></code></pre></div>
 <p><div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='360.00pt' viewBox='0 0 468.00 360.00' class="r-plt inline-svg" style="width:100%;height:auto;">
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='468.00pt' height='360.00pt' viewBox='0 0 468.00 360.00' class="r-plt inline-svg" style="width:100%;height:auto;" role="img" aria-label="Four scatter plots in a two by two grid, arranged without patchwork, with one shared cylinders legend on the right."><title>Four scatter plots in a two by two grid, arranged without patchwork, with one shared cylinders legend on the right.</title>
 <g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[

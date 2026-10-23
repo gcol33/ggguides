@@ -1,14 +1,7 @@
 # Legend Positioning
 
-## Installation
-
-``` r
-
-install.packages("ggguides")            # CRAN
-
-install.packages("pak")                 # development version
-pak::pak("gcol33/ggguides")
-```
+Installation is covered in [Getting Started with
+ggguides](https://gcol33.github.io/ggguides/articles/getting-started.md).
 
 ## Overview
 
@@ -30,14 +23,18 @@ p <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
 p + legend_left() + ggtitle("Left")
 ```
 
-![](positioning_files/figure-html/left-1.svg)
+![Scatter plot of car weight against fuel economy titled Left, coloured
+by cylinders, with the legend on the left of the
+panel.](positioning_files/figure-html/left-1.svg)
 
 ``` r
 
 p + legend_right() + ggtitle("Right")
 ```
 
-![](positioning_files/figure-html/right-1.svg)
+![Scatter plot of car weight against fuel economy titled Right, coloured
+by cylinders, with the legend on the right of the
+panel.](positioning_files/figure-html/right-1.svg)
 
 ### Top and Bottom
 
@@ -49,14 +46,18 @@ oriented horizontally:
 p + legend_top() + ggtitle("Top")
 ```
 
-![](positioning_files/figure-html/top-1.svg)
+![Scatter plot of car weight against fuel economy titled Top, coloured
+by cylinders, with the legend above the panel in a
+row.](positioning_files/figure-html/top-1.svg)
 
 ``` r
 
 p + legend_bottom() + ggtitle("Bottom")
 ```
 
-![](positioning_files/figure-html/bottom-1.svg)
+![Scatter plot of car weight against fuel economy titled Bottom,
+coloured by cylinders, with the legend below the panel in a
+row.](positioning_files/figure-html/bottom-1.svg)
 
 ### Alignment with Titles
 
@@ -71,7 +72,9 @@ p_labeled <- p + labs(title = "Fuel Economy", y = "Weight (1000 lbs)")
 p_labeled + legend_top() + ggtitle("Panel alignment (default)")
 ```
 
-![](positioning_files/figure-html/align-panel-1.svg)
+![Scatter plot of car weight against fuel economy titled Panel
+alignment, with the legend above the panel aligned to the panel's
+extent.](positioning_files/figure-html/align-panel-1.svg)
 
 With `align_to = "plot"` the legend aligns with the full plot, including
 the axis title:
@@ -81,7 +84,9 @@ the axis title:
 p_labeled + legend_top(align_to = "plot") + ggtitle("Plot alignment")
 ```
 
-![](positioning_files/figure-html/align-plot-1.svg)
+![Scatter plot of car weight against fuel economy titled Plot alignment,
+with the legend above the panel aligned to the full plot including the
+axis title.](positioning_files/figure-html/align-plot-1.svg)
 
 ## Inside Positioning
 
@@ -99,14 +104,18 @@ Available shortcuts: `"topright"`, `"topleft"`, `"bottomright"`,
 p + legend_inside(position = "topright") + ggtitle("Top right")
 ```
 
-![](positioning_files/figure-html/inside-topright-1.svg)
+![Scatter plot of car weight against fuel economy titled Top right, with
+the legend inside the panel in the top-right
+corner.](positioning_files/figure-html/inside-topright-1.svg)
 
 ``` r
 
 p + legend_inside(position = "bottomleft") + ggtitle("Bottom left")
 ```
 
-![](positioning_files/figure-html/inside-bottomleft-1.svg)
+![Scatter plot of car weight against fuel economy titled Bottom left,
+with the legend inside the panel in the bottom-left
+corner.](positioning_files/figure-html/inside-bottomleft-1.svg)
 
 ### Using Coordinates
 
@@ -118,7 +127,9 @@ justification:
 p + legend_inside(x = 0.95, y = 0.95, justification = c("right", "top"))
 ```
 
-![](positioning_files/figure-html/inside-coords-1.svg)
+![Scatter plot of car weight against fuel economy, points coloured by
+number of cylinders, with the legend inside the panel in the top-right
+corner.](positioning_files/figure-html/inside-coords-1.svg)
 
 ### Adding Background
 
@@ -133,7 +144,10 @@ p + legend_inside(
 )
 ```
 
-![](positioning_files/figure-html/inside-background-1.svg)
+![Scatter plot of car weight against fuel economy, points coloured by
+number of cylinders, with the legend inside the panel in the top-right
+corner on a cream box with an orange
+border.](positioning_files/figure-html/inside-background-1.svg)
 
 ## Direction Control
 
@@ -146,14 +160,18 @@ Control legend entry direction independently of position:
 p + legend_horizontal() + ggtitle("Horizontal")
 ```
 
-![](positioning_files/figure-html/horizontal-1.svg)
+![Scatter plot of car weight against fuel economy titled Horizontal,
+with the legend on the right and its keys in a
+row.](positioning_files/figure-html/horizontal-1.svg)
 
 ``` r
 
 p + legend_vertical() + ggtitle("Vertical")
 ```
 
-![](positioning_files/figure-html/vertical-1.svg)
+![Scatter plot of car weight against fuel economy titled Vertical, with
+the legend on the right and its keys in a
+column.](positioning_files/figure-html/vertical-1.svg)
 
 ### Combining Direction and Position
 
@@ -162,7 +180,9 @@ p + legend_vertical() + ggtitle("Vertical")
 p + legend_right() + legend_horizontal()
 ```
 
-![](positioning_files/figure-html/direction-position-1.svg)
+![Scatter plot of car weight against fuel economy, points coloured by
+number of cylinders, with the legend on the right and its keys in a
+row.](positioning_files/figure-html/direction-position-1.svg)
 
 ## Removing the Legend
 
@@ -171,7 +191,9 @@ p + legend_right() + legend_horizontal()
 p + legend_none()
 ```
 
-![](positioning_files/figure-html/legend-none-1.svg)
+![Scatter plot of car weight against fuel economy, points coloured by
+number of cylinders, without a
+legend.](positioning_files/figure-html/legend-none-1.svg)
 
 ## Summary
 

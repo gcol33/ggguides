@@ -1,7 +1,5 @@
 ---
 title: "Multiple Legends"
-author: "Gilles Colling"
-date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Multiple Legends}
@@ -33,14 +31,7 @@ theme_set(
 )
 ```
 
-## Installation
-
-```{r, eval = FALSE}
-install.packages("ggguides")            # CRAN
-
-install.packages("pak")                 # development version
-pak::pak("gcol33/ggguides")
-```
+Installation is covered in [Getting Started with ggguides](getting-started.html).
 
 ## Overview
 
@@ -60,7 +51,7 @@ When a plot maps multiple aesthetics (colour, size, shape, etc.), ggplot2 create
 
 ## Example Plot
 
-```{r example-plot}
+```{r example-plot, fig.alt = "Scatter plot of car weight against fuel economy, points coloured by cylinders, sized by horsepower and shaped by transmission, with three legends on the right."}
 # Plot with multiple aesthetics
 p <- ggplot(mtcars, aes(mpg, wt,
                         color = factor(cyl),
@@ -77,7 +68,7 @@ p
 
 Use `legend_hide()` to remove specific legends while keeping others:
 
-```{r hide-legends}
+```{r hide-legends, fig.alt = c("Scatter plot of car weight against fuel economy, points coloured by cylinders, sized by horsepower and shaped by transmission, with the cylinder and transmission legends and no horsepower legend.", "Scatter plot of car weight against fuel economy, points coloured by cylinders, sized by horsepower and shaped by transmission, with only the cylinder legend.")}
 # Hide the size legend
 p + legend_hide(size)
 
@@ -89,7 +80,7 @@ p + legend_hide(size, shape)
 
 Use `legend_select()` to keep only certain legends (inverse of `legend_hide()`):
 
-```{r select-legends}
+```{r select-legends, fig.alt = c("Scatter plot of car weight against fuel economy, points coloured by cylinders, sized by horsepower and shaped by transmission, with only the cylinder legend.", "Scatter plot of car weight against fuel economy, points coloured by cylinders, sized by horsepower and shaped by transmission, with the cylinder and transmission legends.")}
 # Keep only the colour legend
 p + legend_select(colour)
 
@@ -101,7 +92,7 @@ p + legend_select(colour, shape)
 
 By default, legends appear in an unspecified order. Use `legend_order_guides()` to control the display order:
 
-```{r order-legends}
+```{r order-legends, fig.alt = c("Scatter plot of car weight against fuel economy, points coloured by cylinders, sized by horsepower and shaped by transmission, with the legends in the default order: cylinders, transmission, horsepower.", "Scatter plot of car weight against fuel economy, points coloured by cylinders, sized by horsepower and shaped by transmission, with the legends ordered horsepower, cylinders, transmission.")}
 # Default order
 p
 
@@ -115,7 +106,7 @@ ggplot2 automatically merges legends when they have the same title and matching 
 
 ### Forcing Merge
 
-```{r merge-legends}
+```{r merge-legends, fig.alt = c("Scatter plot of car weight against fuel economy with points outlined and filled by cylinders, and one merged cylinders legend.", "The same scatter plot after legend_merge(), still with one merged cylinders legend.")}
 # Plot where colour and fill map to the same variable
 p_merge <- ggplot(mtcars, aes(mpg, wt, color = factor(cyl), fill = factor(cyl))) +
   geom_point(shape = 21, size = 4, stroke = 1.5) +
@@ -130,7 +121,7 @@ p_merge + legend_merge(colour, fill)
 
 ### Forcing Split
 
-```{r split-legends}
+```{r split-legends, fig.alt = "Scatter plot of car weight against fuel economy with points outlined and filled by cylinders, and two separate cylinders legends, one for outline and one for fill."}
 # Force separate legends even when they could merge
 p_merge + legend_split(colour, fill)
 ```
@@ -139,7 +130,7 @@ p_merge + legend_split(colour, fill)
 
 Position functions (`legend_left()`, `legend_right()`, `legend_top()`, `legend_bottom()`) accept a `by` parameter to position specific legends:
 
-```{r position-separately}
+```{r position-separately, fig.alt = "Scatter plot of car weight against fuel economy, points coloured by cylinders, sized by horsepower and shaped by transmission, with the cylinder legend on the left and the horsepower legend below the panel."}
 # Place colour legend on the left, size legend at bottom
 p +
   legend_hide(shape) +
@@ -147,7 +138,7 @@ p +
   legend_bottom(by = "size")
 ```
 
-```{r position-top-right}
+```{r position-top-right, fig.alt = "Scatter plot of car weight against fuel economy, points coloured by cylinders, sized by horsepower and shaped by transmission, with the cylinder legend above the panel and the horsepower legend on the right."}
 # Colour legend on top, size on right
 p +
   legend_hide(shape) +
@@ -159,7 +150,7 @@ p +
 
 Use the `by` parameter on `legend_style()` to apply different styles to different legends:
 
-```{r style-separately}
+```{r style-separately, fig.alt = "Scatter plot of car weight against fuel economy, points coloured by cylinders, sized by horsepower and shaped by transmission, with the cylinder legend on a light grey box with a bold title and the horsepower legend in larger text."}
 p +
   legend_hide(shape) +
   legend_style(title_face = "bold", background = "grey95", by = "colour") +
@@ -170,7 +161,7 @@ p +
 
 All functions work together:
 
-```{r combined}
+```{r combined, fig.alt = "Scatter plot of car weight against fuel economy, points coloured by cylinders, sized by horsepower and shaped by transmission, with the cylinder legend on the left under a large bold title and the horsepower legend in a row below the panel."}
 # Hide shape, put colour on the left with a large bold title,
 # lay size out horizontally at the bottom
 p +
@@ -193,7 +184,7 @@ When a plot has four legends and you want one on each side (top, bottom, left, r
 
 For top/bottom legends, `justification` is `"left"`, `"center"`, `"right"` (or a number in `[0, 1]`). For left/right legends, it's `"top"`, `"center"`, `"bottom"` (or a number).
 
-```{r four-sides, fig.height = 6.5}
+```{r four-sides, fig.alt = "Scatter plot of car weight against fuel economy with four legends: cylinders above the panel at the left, gear below at the right, horsepower on the left at the top and transmission on the right at the bottom.", fig.height = 6.5}
 p4 <- ggplot(mtcars, aes(mpg, wt,
                          colour = factor(cyl),
                          fill   = factor(gear),
@@ -228,7 +219,7 @@ Each `legend_style(by = ...)` call is additive — you can chain as many as you 
 
 More than one legend can share a side. ggplot2 stacks them in the order it resolves them, and ggguides lets you pick which legend goes where, slide it along the rail, and style it without touching the others. The plot below has **six** legends: two on top, two on the right, one on the bottom, one on the left.
 
-```{r six-legends, fig.height = 6.5}
+```{r six-legends, fig.alt = "Scatter plot of car weight against fuel economy with six legends: colour and fill above the panel, size and transparency on the right, shape below and line type on the left.", fig.height = 6.5}
 p6 <- ggplot(mtcars, aes(mpg, wt)) +
   geom_smooth(aes(linetype = factor(vs)), method = "lm", se = FALSE,
               colour = "grey40") +
