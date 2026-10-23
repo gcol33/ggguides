@@ -12,6 +12,10 @@ coverage](https://codecov.io/gh/gcol33/ggguides/graph/badge.svg)](https://app.co
 MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/ggguides)](https://CRAN.R-project.org/package=ggguides)
+[![CRAN
+downloads](https://cranlogs.r-pkg.org/badges/grand-total/ggguides)](https://cran.r-project.org/package=ggguides)
+[![Monthly
+downloads](https://cranlogs.r-pkg.org/badges/ggguides)](https://cran.r-project.org/package=ggguides)
 <!-- badges: end -->
 
 ggguides places, styles and combines the legends of
