@@ -3,19 +3,18 @@
 *rearranging the legends on a ggplot*
 
 ggguides places, styles and combines the legends of
-[ggplot2](https://ggplot2.tidyverse.org) plots with named functions,
-such as
+[ggplot2](https://ggplot2.tidyverse.org) plots with named functions such
+as
 [`legend_left()`](https://gcol33.github.io/ggguides/reference/legend_left.md),
-[`legend_inside()`](https://gcol33.github.io/ggguides/reference/legend_inside.md)
-or
-[`legend_style()`](https://gcol33.github.io/ggguides/reference/legend_style.md),
 each added to a plot with `+`.
 
-Each function sets the ggplot2 theme and guide options that belong to
-one change together, for a legend on the left its position, its
-justification and the alignment of the legend boxes, and returns an
-ordinary ggplot2 component that combines with the rest of the plot’s
-theme. For layouts of several plots,
+ggplot2 controls legends through its theme and guide settings, and a
+single change often touches several of them. Each ggguides function sets
+the settings that belong to one change together: for a legend on the
+left, its position, its justification along the edge and the alignment
+of the legend boxes. The result is an ordinary ggplot2 component, so it
+combines with the rest of the plot’s theme. For layouts of several
+plots,
 [`collect_legends()`](https://gcol33.github.io/ggguides/reference/collect_legends.md)
 and
 [`shared_legend()`](https://gcol33.github.io/ggguides/reference/shared_legend.md)
@@ -66,14 +65,22 @@ supports:
   extracts a legend for [cowplot](https://wilkelab.org/cowplot/) or
   grid.
 
+Placing two legends at different points of the same edge edits ggplot2’s
+legend layout when the plot is drawn. The package checks that layout
+against the ggplot2 version it was verified with (4.0.3); if a later
+ggplot2 arranges legends differently, it warns once and falls back to
+ggplot2’s whole-plot setting, so the plot still draws.
+
 ## Installation
+
+Install the released version from CRAN:
 
 ``` r
 
 install.packages("ggguides")
 ```
 
-Development version:
+Or install the development version from GitHub:
 
 ``` r
 

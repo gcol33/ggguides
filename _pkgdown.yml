@@ -40,25 +40,12 @@ navbar:
     - news
     right:
     - search
-    - lightswitch
     - github
+    - lightswitch
   components:
     intro:
-      text: Get Started
+      text: Get started
       href: articles/getting-started.html
-    articles:
-      text: Articles
-      menu:
-      - text: Getting Started
-        href: articles/getting-started.html
-      - text: Legend Positioning
-        href: articles/positioning.html
-      - text: Styling & Customization
-        href: articles/styling.html
-      - text: Multiple Legends
-        href: articles/multiple-legends.html
-      - text: Patchwork Integration
-        href: articles/patchwork.html
     github:
       icon: fab fa-github
       href: https://github.com/gcol33/ggguides
@@ -105,11 +92,11 @@ reference:
   - get_legend
   - shared_legend
 articles:
-- title: Getting Started
-  navbar: ~
-  contents: getting-started
+- title: Get started
+  contents:
+  - getting-started
 - title: Guides
-  navbar: ~
+  navbar: Guides
   contents:
   - positioning
   - styling
