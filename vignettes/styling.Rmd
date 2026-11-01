@@ -38,7 +38,7 @@ Installation is covered in [Getting Started with ggguides](getting-started.html)
 ggguides provides styling functions to customize legend appearance without
 diving into ggplot2's theme element hierarchy. The main functions are:
 
-- `legend_style()` - Comprehensive styling (fonts, backgrounds, borders)
+- `legend_style()` - Set fonts, backgrounds and borders
 
 - `legend_keys()` - Override key appearance (size, alpha, shape)
 

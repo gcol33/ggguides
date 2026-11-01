@@ -10,7 +10,7 @@ without diving into ggplot2’s theme element hierarchy. The main
 functions are:
 
 - [`legend_style()`](https://gcol33.github.io/ggguides/reference/legend_style.md) -
-  Comprehensive styling (fonts, backgrounds, borders)
+  Set fonts, backgrounds and borders
 
 - [`legend_keys()`](https://gcol33.github.io/ggguides/reference/legend_keys.md) -
   Override key appearance (size, alpha, shape)
