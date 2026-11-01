@@ -1,7 +1,7 @@
 # Legend Positioning
 
 Installation is covered in [Getting Started with
-ggguides](https://gcol33.github.io/ggguides/articles/getting-started.md).
+ggguides](https://gcol33.github.io/ggguides/articles/ggguides.md).
 
 ## Overview
 

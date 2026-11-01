@@ -31,7 +31,7 @@ theme_set(
 )
 ```
 
-Installation is covered in [Getting Started with ggguides](getting-started.html). The examples also need [patchwork](https://patchwork.data-imaginist.com).
+Installation is covered in [Getting Started with ggguides](ggguides.html). The examples also need [patchwork](https://patchwork.data-imaginist.com).
 
 ## Overview
 

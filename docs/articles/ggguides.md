@@ -56,7 +56,7 @@ p
 
 ![Scatter plot of car weight against fuel economy, points coloured by
 number of cylinders, with the cylinders legend on the
-right.](getting-started_files/figure-html/base-plot-1.svg)
+right.](ggguides_files/figure-html/base-plot-1.svg)
 
 ### Moving the Legend
 
@@ -69,7 +69,7 @@ p + legend_left()
 
 ![Scatter plot of car weight against fuel economy, points coloured by
 number of cylinders, with the legend on the left of the
-panel.](getting-started_files/figure-html/position-left-1.svg)
+panel.](ggguides_files/figure-html/position-left-1.svg)
 
 ``` r
 
@@ -78,7 +78,7 @@ p + legend_bottom()
 
 ![Scatter plot of car weight against fuel economy, points coloured by
 number of cylinders, with the legend below the panel and its keys in a
-row.](getting-started_files/figure-html/position-bottom-1.svg)
+row.](ggguides_files/figure-html/position-bottom-1.svg)
 
 ### Inside Positioning
 
@@ -91,7 +91,7 @@ p + legend_inside(position = "topright")
 
 ![Scatter plot of car weight against fuel economy, points coloured by
 number of cylinders, with the legend inside the panel in the top-right
-corner.](getting-started_files/figure-html/inside-topright-1.svg)
+corner.](ggguides_files/figure-html/inside-topright-1.svg)
 
 ``` r
 
@@ -100,7 +100,7 @@ p + legend_inside(x = 0.02, y = 0.98, justification = c("left", "top"))
 
 ![Scatter plot of car weight against fuel economy, points coloured by
 number of cylinders, with the legend inside the panel in the top-left
-corner.](getting-started_files/figure-html/inside-coords-1.svg)
+corner.](ggguides_files/figure-html/inside-coords-1.svg)
 
 ### Removing the Legend
 
@@ -111,7 +111,7 @@ p + legend_none()
 
 ![Scatter plot of car weight against fuel economy, points coloured by
 number of cylinders, without a
-legend.](getting-started_files/figure-html/legend-none-1.svg)
+legend.](ggguides_files/figure-html/legend-none-1.svg)
 
 ## Styling Legends
 
@@ -126,7 +126,7 @@ p + legend_style(size = 18)
 
 ![Scatter plot of car weight against fuel economy, points coloured by
 number of cylinders, with the legend title and labels drawn
-larger.](getting-started_files/figure-html/style-size-1.svg)
+larger.](ggguides_files/figure-html/style-size-1.svg)
 
 ``` r
 
@@ -141,8 +141,7 @@ p + legend_style(
 
 ![Scatter plot of car weight against fuel economy, points coloured by
 number of cylinders, with a bold legend title and the legend on a cream
-box with an orange
-border.](getting-started_files/figure-html/style-full-1.svg)
+box with an orange border.](ggguides_files/figure-html/style-full-1.svg)
 
 ## Wrapping Legend Entries
 
@@ -159,7 +158,7 @@ ggplot(mpg, aes(displ, hwy, color = class)) +
 
 ![Scatter plot of highway mileage against engine displacement, points
 coloured by the seven car classes, with the legend keys in two columns
-on the right.](getting-started_files/figure-html/wrap-example-1.svg)
+on the right.](ggguides_files/figure-html/wrap-example-1.svg)
 
 ## Combining Functions
 
@@ -176,7 +175,7 @@ ggplot(mpg, aes(displ, hwy, color = class)) +
 ![Scatter plot of highway mileage against engine displacement, points
 coloured by the seven car classes, with the legend on the left on a
 cream box, its title in
-bold.](getting-started_files/figure-html/combined-1.svg)
+bold.](ggguides_files/figure-html/combined-1.svg)
 
 ``` r
 
@@ -189,7 +188,7 @@ ggplot(mpg, aes(displ, hwy, color = class)) +
 ![Scatter plot of highway mileage against engine displacement, points
 coloured by the seven car classes, with the legend below the panel and
 its keys in two
-columns.](getting-started_files/figure-html/combined-wrap-1.svg)
+columns.](ggguides_files/figure-html/combined-wrap-1.svg)
 
 ## What’s Next
 

@@ -160,7 +160,7 @@ With `span = 1:2` the legend sits beside rows 1 and 2 only. Without patchwork, `
 
 ## Documentation
 
-Start with [Getting Started with ggguides](https://gillescolling.com/ggguides/articles/getting-started.html): placing, styling and wrapping a legend, and combining the functions on one plot.
+Start with [Getting Started with ggguides](https://gillescolling.com/ggguides/articles/ggguides.html): placing, styling and wrapping a legend, and combining the functions on one plot.
 
 - [Legend Positioning](https://gillescolling.com/ggguides/articles/positioning.html): the four sides, positions inside the panel, direction and removing the legend.
 - [Styling & Customization](https://gillescolling.com/ggguides/articles/styling.html): fonts, text rotation, backgrounds, borders, key size, wrapping, entry order and colour bars.

@@ -1,9 +1,8 @@
 # Patchwork Integration
 
 Installation is covered in [Getting Started with
-ggguides](https://gcol33.github.io/ggguides/articles/getting-started.md).
-The examples also need
-[patchwork](https://patchwork.data-imaginist.com).
+ggguides](https://gcol33.github.io/ggguides/articles/ggguides.md). The
+examples also need [patchwork](https://patchwork.data-imaginist.com).
 
 ## Overview
 

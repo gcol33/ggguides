@@ -1,10 +1,5 @@
 # Articles
 
-### Get started
-
-- [Getting Started with
-  ggguides](https://gcol33.github.io/ggguides/articles/getting-started.md):
-
 ### Guides
 
 - [Legend

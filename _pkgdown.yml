@@ -43,9 +43,6 @@ navbar:
     - github
     - lightswitch
   components:
-    intro:
-      text: Get started
-      href: articles/getting-started.html
     github:
       icon: fab fa-github
       href: https://github.com/gcol33/ggguides
@@ -92,9 +89,6 @@ reference:
   - get_legend
   - shared_legend
 articles:
-- title: Get started
-  contents:
-  - getting-started
 - title: Guides
   navbar: Guides
   contents:
@@ -106,3 +100,5 @@ footer:
   structure:
     left: developed_by
     right: built_with
+redirects:
+- ["articles/getting-started.html", "articles/ggguides.html"]

@@ -205,7 +205,7 @@ covers both, along with collected axes and cowplot.
 ## Documentation
 
 Start with [Getting Started with
-ggguides](https://gillescolling.com/ggguides/articles/getting-started.html):
+ggguides](https://gillescolling.com/ggguides/articles/ggguides.html):
 placing, styling and wrapping a legend, and combining the functions on
 one plot.
 

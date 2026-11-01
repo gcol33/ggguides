@@ -31,7 +31,7 @@ theme_set(
 )
 ```
 
-Installation is covered in [Getting Started with ggguides](getting-started.html).
+Installation is covered in [Getting Started with ggguides](ggguides.html).
 
 ## Overview
 
