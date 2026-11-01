@@ -5,33 +5,33 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/gcol33/ggguides/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/gcol33/ggguides/actions/workflows/R-CMD-check.yaml)
-[![Codecov test
-coverage](https://codecov.io/gh/gcol33/ggguides/graph/badge.svg)](https://app.codecov.io/gh/gcol33/ggguides)
-[![License:
-MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/ggguides)](https://CRAN.R-project.org/package=ggguides)
 [![CRAN
 downloads](https://cranlogs.r-pkg.org/badges/grand-total/ggguides)](https://cran.r-project.org/package=ggguides)
 [![Monthly
 downloads](https://cranlogs.r-pkg.org/badges/ggguides)](https://cran.r-project.org/package=ggguides)
+[![R-CMD-check](https://github.com/gcol33/ggguides/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/gcol33/ggguides/actions/workflows/R-CMD-check.yaml)
+[![Codecov test
+coverage](https://codecov.io/gh/gcol33/ggguides/graph/badge.svg)](https://app.codecov.io/gh/gcol33/ggguides)
+[![License:
+MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 <!-- badges: end -->
 
 ggguides places, styles and combines the legends of
-[ggplot2](https://ggplot2.tidyverse.org) plots with named functions,
-such as `legend_left()`, `legend_inside()` or `legend_style()`, each
-added to a plot with `+`.
+[ggplot2](https://ggplot2.tidyverse.org) plots with named functions such
+as `legend_left()`, each added to a plot with `+`.
 
-Each function sets the ggplot2 theme and guide options that belong to
-one change together, for a legend on the left its position, its
-justification and the alignment of the legend boxes, and returns an
-ordinary ggplot2 component that combines with the rest of the plot’s
-theme. For layouts of several plots, `collect_legends()` and
-`shared_legend()` edit the gtable, the table of graphical objects that
-ggplot2 draws, so that one legend remains. You choose where each legend
-goes and how it looks, one aesthetic at a time when a plot has several.
-ggguides supports:
+ggplot2 controls legends through its theme and guide settings, and a
+single change often touches several of them. Each ggguides function sets
+the settings that belong to one change together: for a legend on the
+left, its position, its justification along the edge and the alignment
+of the legend boxes. The result is an ordinary ggplot2 component, so it
+combines with the rest of the plot’s theme. For layouts of several
+plots, `collect_legends()` and `shared_legend()` edit the gtable, the
+table of graphical objects that ggplot2 draws, so that one legend
+remains. You choose where each legend goes and how it looks, one
+aesthetic at a time when a plot has several. ggguides supports:
 
 - **Placement.** `legend_left()`, `legend_right()`, `legend_top()` and
   `legend_bottom()` move the legend to a side,
@@ -55,13 +55,21 @@ ggguides supports:
   and `get_legend()` extracts a legend for
   [cowplot](https://wilkelab.org/cowplot/) or grid.
 
+Placing two legends at different points of the same edge edits ggplot2’s
+legend layout when the plot is drawn. The package checks that layout
+against the ggplot2 version it was verified with (4.0.3); if a later
+ggplot2 arranges legends differently, it warns once and falls back to
+ggplot2’s whole-plot setting, so the plot still draws.
+
 ## Installation
+
+Install the released version from CRAN:
 
 ``` r
 install.packages("ggguides")
 ```
 
-Development version:
+Or install the development version from GitHub:
 
 ``` r
 # install.packages("pak")
